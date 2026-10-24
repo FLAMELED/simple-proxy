@@ -131,23 +131,16 @@ class EEPROM {
   }
 }
 
-const RTC_BYTES = [0, 0, 7, 0, 1, 0, 3, 0];
-
 class Cart {
   constructor(gba) {
     this.gba = gba;
     this.save = null;
     this.eeprom = null;
     this.saveType = 'none';
-    this.gpioReadable = false;
-    this.resetGpio();
+    this.gpio = new GpioRtc();
   }
 
-  resetGpio() {
-    this.gpioReadable = false;
-    this.pinState = 0; this.direction = 0;
-    this.rtc = { transferStep: 0, bits: 0, bitsRead: 0, command: 0, commandActive: false, bytesRemaining: 0, control: 0x40, time: new Uint8Array(7) };
-  }
+  resetGpio() { this.gpio.reset(); }
 
   load(rom) {
     this.title = String.fromCharCode(...rom.subarray(0xA0, 0xAC)).replace(/\0/g, '').trim();
@@ -180,113 +173,11 @@ class Cart {
     this.save.write8(addr, val);
   }
 
-  // ---------- GPIO / RTC (Seiko S-3511) ----------
+  // ---------- GPIO / RTC: implemented in mpl/gpio-rtc.js (MPL-2.0 Covered File) ----------
 
-  gpioRead(off) {
-    switch (off) {
-      case 0xC4: return this.pinState & ~this.direction & 0xF | (this.pinState & this.direction & 0xF);
-      case 0xC6: return this.direction;
-      case 0xC8: return this.gpioReadable ? 1 : 0;
-    }
-    return 0;
-  }
-
-  gpioWrite(off, val) {
-    switch (off) {
-      case 0xC4:
-        this.pinState = (this.pinState & ~this.direction) | (val & this.direction & 0xF);
-        this.rtcReadPins();
-        break;
-      case 0xC6: this.direction = val & 0xF; break;
-      case 0xC8: this.gpioReadable = !!(val & 1); break;
-    }
-  }
-
-  outputPins(pins) {
-    this.pinState = (this.pinState & this.direction) | (pins & ~this.direction & 0xF);
-  }
-
-  rtcReadPins() {
-    const rtc = this.rtc, p = this.pinState;
-    switch (rtc.transferStep) {
-      case 0:
-        if ((p & 5) === 1) rtc.transferStep = 1;
-        break;
-      case 1:
-        if ((p & 5) === 5) rtc.transferStep = 2;
-        else if ((p & 5) !== 1) rtc.transferStep = 0;
-        break;
-      case 2:
-        if (!(p & 1)) {
-          rtc.bits &= ~(1 << rtc.bitsRead);
-          rtc.bits |= ((p & 2) >>> 1) << rtc.bitsRead;
-        } else if (p & 4) {
-          const reading = rtc.command & 0x80;
-          if (!reading) {
-            rtc.bitsRead++;
-            if (rtc.bitsRead === 8) this.rtcProcessByte();
-          } else {
-            this.outputPins(5 | (this.rtcOutput() << 1));
-            rtc.bitsRead++;
-            if (rtc.bitsRead === 8) {
-              rtc.bytesRemaining--;
-              if (rtc.bytesRemaining <= 0) { rtc.commandActive = false; rtc.command = 0; }
-              rtc.bitsRead = 0;
-            }
-          }
-        } else {
-          rtc.bitsRead = 0; rtc.bytesRemaining = 0; rtc.commandActive = false; rtc.command = 0;
-          rtc.transferStep = p & 1;
-          this.outputPins(1);
-        }
-        break;
-    }
-  }
-
-  rtcProcessByte() {
-    const rtc = this.rtc;
-    rtc.bytesRemaining--;
-    if (!rtc.commandActive) {
-      const command = rtc.bits;
-      if ((command & 0xF) === 0x6) {
-        rtc.command = command;
-        const cmd = (command >>> 4) & 7;
-        rtc.bytesRemaining = RTC_BYTES[cmd];
-        rtc.commandActive = rtc.bytesRemaining > 0;
-        if (cmd === 0) rtc.control = 0;
-        else if (cmd === 2 || cmd === 6) this.rtcUpdateClock();
-      }
-    } else {
-      const cmd = (rtc.command >>> 4) & 7;
-      if (cmd === 4) rtc.control = rtc.bits;
-    }
-    rtc.bits = 0;
-    rtc.bitsRead = 0;
-    if (!rtc.bytesRemaining) { rtc.commandActive = false; rtc.command = 0; }
-  }
-
-  rtcOutput() {
-    const rtc = this.rtc;
-    if (!rtc.commandActive) return 0;
-    let out = 0;
-    const cmd = (rtc.command >>> 4) & 7;
-    if (cmd === 4) out = rtc.control;
-    else if (cmd === 2 || cmd === 6) out = rtc.time[7 - rtc.bytesRemaining];
-    return (out >>> rtc.bitsRead) & 1;
-  }
-
-  rtcUpdateClock() {
-    const d = new Date();
-    const bcd = v => ((Math.floor(v / 10) % 10) << 4) | (v % 10);
-    const t = this.rtc.time;
-    t[0] = bcd(d.getFullYear() % 100);
-    t[1] = bcd(d.getMonth() + 1);
-    t[2] = bcd(d.getDate());
-    t[3] = bcd(d.getDay());
-    t[4] = (this.rtc.control & 0x40) ? bcd(d.getHours()) : bcd(d.getHours() % 12) | (d.getHours() >= 12 ? 0x80 : 0);
-    t[5] = bcd(d.getMinutes());
-    t[6] = bcd(d.getSeconds());
-  }
+  get gpioReadable() { return this.gpio.gpioReadable; }
+  gpioRead(off) { return this.gpio.read(off); }
+  gpioWrite(off, val) { this.gpio.write(off, val); }
 
   // ---------- persistence ----------
 
@@ -308,8 +199,7 @@ class Cart {
   clearDirty() { if (this.save) this.save.dirty = false; }
 
   getState(light) {
-    const s = { pinState: this.pinState, direction: this.direction, gpioReadable: this.gpioReadable,
-      rtc: Object.assign({}, this.rtc, { time: this.rtc.time.slice() }) };
+    const s = this.gpio.getState();
     if (this.save && !light) {
       s.save = this.save.data.slice();
       if (this.save instanceof Flash) s.flash = { bank: this.save.bank, state: this.save.state, idMode: this.save.idMode };
@@ -318,8 +208,7 @@ class Cart {
   }
 
   setState(s) {
-    this.pinState = s.pinState; this.direction = s.direction; this.gpioReadable = s.gpioReadable;
-    Object.assign(this.rtc, s.rtc);
+    this.gpio.setState(s);
     if (this.save && s.save) {
       this.save.data.set(s.save.subarray(0, this.save.data.length));
       this.save.dirty = true;

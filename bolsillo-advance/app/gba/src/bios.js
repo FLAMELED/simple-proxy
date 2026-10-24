@@ -1,13 +1,5 @@
-// High-level emulation of the GBA BIOS (no copyrighted BIOS image needed)
-
-const BIOS_IRQ_HANDLER = [
-  0xE92D500F, // 0x18 stmfd sp!, {r0-r3, r12, lr}
-  0xE3A00301, // 0x1C mov r0, #0x04000000
-  0xE28FE000, // 0x20 add lr, pc, #0
-  0xE510F004, // 0x24 ldr pc, [r0, #-4]
-  0xE8BD500F, // 0x28 ldmfd sp!, {r0-r3, r12, lr}
-  0xE25EF004, // 0x2C subs pc, lr, #4
-];
+// High-level emulation of the GBA BIOS (no copyrighted BIOS image needed).
+// Div, ArcTan, ArcTan2, ObjAffineSet and the IRQ handler live in mpl/bios-hle.js (MPL-2.0 Covered File).
 
 const SINE_TABLE = new Int16Array(256);
 for (let i = 0; i < 256; i++) SINE_TABLE[i] = Math.round(Math.sin(i * Math.PI / 128) * 0x4000);
@@ -18,8 +10,7 @@ class BIOS {
     const b = gba.bus.bios32;
     b[0] = 0xEA000000 | 0; // reset vector (unused)
     b[2] = 0xE1B0F00E | 0; // swi vector: movs pc, lr (unused, swi is HLE)
-    for (let i = 0; i < BIOS_IRQ_HANDLER.length; i++) b[6 + i] = BIOS_IRQ_HANDLER[i] | 0;
-    b[0x34 >>> 2] = 0xE55EC002 | 0; // value seen on the bus after returning from an IRQ
+    this.installIrqHandler(b);
   }
 
   call(n) {
@@ -36,7 +27,7 @@ class BIOS {
       case 0x06: this.div(r[0], r[1]); break;
       case 0x07: this.div(r[1], r[0]); break;
       case 0x08: r[0] = Math.floor(Math.sqrt(r[0] >>> 0)); break;
-      case 0x09: r[0] = this.arctan(r[0]); r[3] = this.atanB; break;
+      case 0x09: this.arcTanSwi(); break;
       case 0x0A: r[0] = this.arctan2(r[0], r[1]); break;
       case 0x0B: this.cpuSet(r[0], r[1], r[2]); break;
       case 0x0C: this.cpuFastSet(r[0], r[1], r[2]); break;
@@ -108,53 +99,6 @@ class BIOS {
     cpu.branched = true; // PC is left pointing at this SWI
   }
 
-  div(num, den) {
-    const r = this.gba.cpu.r;
-    if (den === 0) {
-      r[0] = num < 0 ? -1 : 1; r[1] = num; r[3] = 1;
-      return;
-    }
-    const q = (num / den) | 0;
-    r[0] = q; r[1] = (num - Math.imul(q, den)) | 0; r[3] = Math.abs(q) | 0;
-  }
-
-  arctan(i) {
-    const a = -(Math.imul(i, i) >> 14);
-    let b = (Math.imul(0xA9, a) >> 14) + 0x390;
-    b = (Math.imul(b, a) >> 14) + 0x91C;
-    b = (Math.imul(b, a) >> 14) + 0xFB6;
-    b = (Math.imul(b, a) >> 14) + 0x16AA;
-    b = (Math.imul(b, a) >> 14) + 0x2081;
-    b = (Math.imul(b, a) >> 14) + 0x3651;
-    b = (Math.imul(b, a) >> 14) + 0xA2F9;
-    this.gba.cpu.r[1] = a;
-    this.atanB = b;
-    return ((Math.imul(i, b) >> 16) << 16) >> 16;
-  }
-
-  arctan2(x, y) {
-    const at = v => this.arctan(v);
-    const q = (n, d) => (n / d) | 0;
-    let res;
-    if (!y) res = x >= 0 ? 0 : 0x8000;
-    else if (!x) res = y >= 0 ? 0x4000 : 0xC000;
-    else if (y >= 0) {
-      if (x >= 0) {
-        if (x >= y) res = at(q(y << 14, x));
-        else res = 0x4000 - at(q(x << 14, y));
-      } else if (-x >= y) res = at(q(y << 14, x)) + 0x8000;
-      else res = 0x4000 - at(q(x << 14, y));
-    } else {
-      if (x <= 0) {
-        if (-x > -y) res = at(q(y << 14, x)) + 0x8000;
-        else res = 0xC000 - at(q(x << 14, y));
-      } else if (x >= -y) res = at(q(y << 14, x)) + 0x10000;
-      else res = 0xC000 - at(q(x << 14, y));
-    }
-    this.gba.cpu.r[3] = 0x170;
-    return res & 0xFFFF;
-  }
-
   cpuSet(src, dst, cnt) {
     const bus = this.gba.bus;
     const count = cnt & 0x1FFFFF;
@@ -198,21 +142,6 @@ class BIOS {
       bus.write32(dst + 8, (ox - Math.imul(a, cx) - Math.imul(b, cy)) | 0);
       bus.write32(dst + 12, (oy - Math.imul(c, cx) - Math.imul(d, cy)) | 0);
       dst += 16;
-    }
-  }
-
-  objAffineSet(src, dst, count, diff) {
-    const bus = this.gba.bus;
-    for (let i = 0; i < count; i++) {
-      const sx = ((bus.read16(src) << 16) >> 16) / 256, sy = ((bus.read16(src + 2) << 16) >> 16) / 256;
-      const theta = (bus.read16(src + 4) >>> 8) / 128 * Math.PI;
-      src += 8;
-      const cos = Math.cos(theta), sin = Math.sin(theta);
-      bus.write16(dst, (cos * sx * 256) & 0xFFFF);
-      bus.write16(dst + diff, (-sin * sx * 256) & 0xFFFF);
-      bus.write16(dst + diff * 2, (sin * sy * 256) & 0xFFFF);
-      bus.write16(dst + diff * 3, (cos * sy * 256) & 0xFFFF);
-      dst += diff * 4;
     }
   }
 
@@ -354,3 +283,4 @@ class BIOS {
     return Math.floor(freq / Math.pow(2, (180 - mk - fp / 256) / 12)) | 0;
   }
 }
+Object.assign(BIOS.prototype, MPL_BIOS_HLE);

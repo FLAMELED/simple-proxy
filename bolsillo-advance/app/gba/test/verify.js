@@ -7,9 +7,10 @@ const path = require('path');
 const crypto = require('crypto');
 const { writePNG } = require('./run.js');
 
-const SRC = ['cpu.js', 'bus.js', 'ppu.js', 'apu.js', 'bios.js', 'cart.js', 'gba.js'];
+// MPL Covered Files load first, as in the app (older versions under --ref do not have them)
+const SRC = ['mpl/gpio-rtc.js', 'mpl/bios-hle.js', 'cpu.js', 'bus.js', 'ppu.js', 'apu.js', 'bios.js', 'cart.js', 'gba.js'];
 function loadCore(dir) {
-  const code = SRC.map(f => fs.readFileSync(path.join(dir, f), 'utf8')).join('\n');
+  const code = SRC.filter(f => fs.existsSync(path.join(dir, f))).map(f => fs.readFileSync(path.join(dir, f), 'utf8')).join('\n');
   return new Function(code + '\nreturn { GBA };')();
 }
 
@@ -23,6 +24,7 @@ fs.mkdirSync(OUT, { recursive: true });
 
 let failures = 0;
 const results = [];
+const known = []; // known failures and limits: reported, never counted as passing checks
 function check(group, name, ok, detail = '') {
   results.push({ group, name, ok, detail });
   if (!ok) failures++;
@@ -133,17 +135,62 @@ for (const [t, type] of [['save/flash64', 'flash64'], ['save/flash128', 'flash12
   const t12 = readTime(), h = now.getHours();
   check('RTC', 'modo 12 h con indicador PM', t12[4] === (bcd(h % 12) | (h >= 12 ? 0x80 : 0)), '0x' + t12[4].toString(16));
   const s = c.getState(true), g2 = boot(NEW, new Uint8Array(0x200)); g2.cart.setState(s);
-  check('RTC', 'estado del RTC se conserva en un estado guardado', g2.cart.rtc.control === 0x00 && g2.cart.rtc.transferStep === c.rtc.transferStep);
+  check('RTC', 'estado del RTC se conserva en un estado guardado', g2.cart.gpio.rtc.control === 0x00 && g2.cart.gpio.rtc.transferStep === c.gpio.rtc.transferStep);
 }
 
 // ---------- 4. BIOS HLE ----------
 const BIOS_DIR = 'PL/BIOS';
 const plRoms = dir => fs.readdirSync(path.join(ROMS, dir), { recursive: true }).filter(f => f.endsWith('.gba')).sort().map(f => path.join(dir, f));
+// PeterLemon's BIOS tests print one result row per output: green PASS or red FAIL at x 190-240.
+// The "OUTPUT TIMER0" rows compare cycle counts of the real BIOS, which an HLE BIOS does not reproduce;
+// they are recognised by their label (the most common row picture) and reported as known failures.
+function plRows(f) {
+  const band = [];
+  for (let y = 0; y < 160; y++) {
+    let r = 0, gr = 0;
+    for (let x = 190; x < 240; x++) { const v = f[y * 240 + x] >>> 0; if (v === 0xFF0000FF) r++; else if (v === 0xFF00FF00) gr++; }
+    band.push([r, gr]);
+  }
+  const rows = [];
+  for (let y = 0; y < 160;) {
+    if (!(band[y][0] + band[y][1])) { y++; continue; }
+    let y1 = y, r = 0, gr = 0;
+    while (y1 < 160 && band[y1][0] + band[y1][1]) { r += band[y1][0]; gr += band[y1][1]; y1++; }
+    if (y1 - y >= 5) { // text rows; 1-2 px rows are the dashed separators
+      let label = '';
+      for (let yy = y; yy < y + 7; yy++) for (let x = 0; x < 110; x++) label += f[yy * 240 + x] === f[0] ? 0 : 1;
+      rows.push({ ok: gr > r, label });
+    }
+    y = y1;
+  }
+  return rows;
+}
+const KNOWN_DATA_FAILURES = ['BIOSSoundGetJumpList.gba']; // HLE returns no real jump table
+const plResults = [];
 for (const f of plRoms(BIOS_DIR)) {
   const rom = read(f), g = runFrames(boot(NEW, rom), 120);
   snap(g, 'pl-' + path.basename(f, '.gba'));
   check('BIOS', `${path.basename(f)} se ejecuta y dibuja`, new Set(g.ppu.frame).size > 1);
   compareWithRef('BIOS', path.basename(f), rom, 120);
+  plResults.push({ rom: path.basename(f), rows: plRows(g.ppu.frame) });
+}
+{
+  const count = {};
+  for (const p of plResults) for (const r of p.rows) count[r.label] = (count[r.label] || 0) + 1;
+  const timerLabel = Object.keys(count).sort((a, b) => count[b] - count[a])[0];
+  const summary = plResults.map(p => {
+    const data = p.rows.filter(r => r.label !== timerLabel), timer = p.rows.filter(r => r.label === timerLabel);
+    return { rom: p.rom, dataPass: data.filter(r => r.ok).length, dataFail: data.filter(r => !r.ok).length,
+      timerPass: timer.filter(r => r.ok).length, timerFail: timer.filter(r => !r.ok).length };
+  });
+  check('BIOS', 'cada ROM de BIOS muestra filas de resultado legibles', summary.every(s => s.dataPass + s.dataFail + s.timerPass + s.timerFail > 0));
+  const timerOnly = summary.filter(s => !(s.dataPass + s.dataFail)).map(s => s.rom);
+  const dataFails = summary.filter(s => s.dataFail).map(s => s.rom);
+  check('BIOS', 'filas de DATOS: solo fallan las conocidas (' + KNOWN_DATA_FAILURES.join(', ') + ')', JSON.stringify(dataFails) === JSON.stringify(KNOWN_DATA_FAILURES), dataFails.join(', '));
+  const t = summary.reduce((a, s) => [a[0] + s.dataPass, a[1] + s.dataFail, a[2] + s.timerPass, a[3] + s.timerFail], [0, 0, 0, 0]);
+  known.push(`PeterLemon BIOS: filas de datos ${t[0]} PASS / ${t[1]} FAIL (${KNOWN_DATA_FAILURES.join(', ')}); filas TIMER0 ${t[2]} PASS / ${t[3]} FAIL (ciclos de la BIOS real, no emulados)`);
+  known.push(`  ${timerOnly.length} ROMs solo muestran TIMER0, así que no comprueban datos: ${timerOnly.join(', ')}`);
+  for (const s of summary) known.push(`  ${s.rom.padEnd(28)} datos ${s.dataPass} PASS ${s.dataFail} FAIL · TIMER0 ${s.timerPass} PASS ${s.timerFail} FAIL`);
 }
 if (REF) {
   // direct calls over a sweep of inputs: Div (incl. division by zero), Sqrt, ArcTan, ArcTan2
@@ -154,6 +201,19 @@ if (REF) {
     for (const swi of [0x06, 0x08, 0x09, 0x0A]) { n++; if (call(a, swi, i * 977, j * 131) !== call(b, swi, i * 977, j * 131)) diff++; }
   }
   check('BIOS', `Div/Sqrt/ArcTan/ArcTan2: ${n} llamadas idénticas a la referencia`, diff === 0, diff + ' diferencias');
+}
+
+// ---------- 4b. Save states written by the earlier version still load ----------
+if (REF) {
+  const rom = read('PL/LCD/BG/BGMode7/BGMode7.gba');
+  const a = runFrames(boot(REF, rom), 60);
+  Object.assign(a.cart.rtc, { transferStep: 2, bits: 0x65, bitsRead: 3, command: 0x65, commandActive: true, bytesRemaining: 5, control: 0 });
+  const st = a.getState();
+  const b = boot(NEW, rom); b.setState(st);
+  runFrames(a, 60); runFrames(b, 60);
+  check('Estados', 'un estado guardado con la versión anterior carga y sigue igual', sha(a.ppu.frame) === sha(b.ppu.frame));
+  const r = b.cart.gpio.rtc;
+  check('Estados', 'el estado del RTC de la versión anterior se conserva', r.command === 0x65 && r.bytesRemaining === 5 && r.control === 0 && r.transferStep === 2);
 }
 
 // ---------- 5. Graphics ----------
@@ -191,6 +251,9 @@ for (const f of gfx) {
   s.ppu.setColorCorrection(false); s.runFrame(); snap(s, 'color-raw-BGMode7');
 }
 
-fs.writeFileSync(path.join(OUT, 'results.json'), JSON.stringify({ date: new Date().toISOString(), ref: !!REF, failures, results }, null, 1));
-console.log(`\n${results.length - failures}/${results.length} comprobaciones correctas`);
+fs.writeFileSync(path.join(OUT, 'results.json'), JSON.stringify({ date: new Date().toISOString(), ref: !!REF, failures, results, known }, null, 1));
+console.log('\nFALLOS CONOCIDOS (no cuentan como comprobaciones superadas):');
+for (const k of known) console.log('  ' + k);
+console.log(`\n${results.length - failures}/${results.length} comprobaciones automáticas correctas${REF ? '' : ' (sin --ref: no se comparó con otra versión)'}.`);
+console.log('Son pruebas de regresión y de componentes con ROMs de prueba; no miden la compatibilidad con juegos comerciales.');
 process.exit(failures ? 1 : 0);

@@ -1,49 +1,50 @@
-BOLSILLO ADVANCE: AVISOS DE TERCEROS
-====================================
+BOLSILLO ADVANCE: AVISOS DE TERCEROS Y CÓDIGO FUENTE
+====================================================
 
-Este archivo acompaña a la aplicación (APK y versión web). Recoge las atribuciones y las licencias de terceros que, según la auditoría de procedencia del 2026-10-24, pueden aplicarse a partes del código distribuido. Esas clasificaciones son provisionales y están pendientes de revisión legal. Detalle completo en bolsillo-advance/audit/ del repositorio del proyecto.
+Versión: {{VERSION}}
+Código fuente de esta versión: {{SOURCE_URL}}
+Lista de archivos cubiertos por la MPL-2.0: {{COVERED_URL}}
 
-Este aviso no concede una licencia sobre el resto de la aplicación.
+Este aviso no concede ninguna licencia sobre el resto de la aplicación.
 
 
-1. mGBA, Copyright (c) 2013-2021 Jeffrey Pfau
-   Licencia: Mozilla Public License, v. 2.0 (texto completo en el apartado A)
-   https://github.com/mgba-emu/mgba (comparado con el tag 0.10.5, commit 26b7884bc25a5933960f3cdcd98bac1ae14d42e2)
-   ------------------------------------------------------------------
-   Las partes siguientes pueden contener código adaptado de mGBA:
-     - Reloj del cartucho (RTC Seiko S-3511 por GPIO): gba/src/cart.js,
-       funciones resetGpio, outputPins, rtcReadPins, rtcProcessByte y rtcOutput,
-       y la tabla RTC_BYTES. Referencia: src/gba/cart/gpio.c.
-     - Funciones de la BIOS emulada: gba/src/bios.js, funciones arctan, arctan2,
-       div y objAffineSet. Referencia: src/gba/bios.c.
-     - Manejador de IRQ de la BIOS emulada: gba/src/bios.js, BIOS_IRQ_HANDLER.
-       Referencia: src/gba/hle-bios.s.
+1. Código bajo la Mozilla Public License 2.0 (texto completo en el apartado A)
+   ----------------------------------------------------------------------
+   Los dos archivos siguientes son "Covered Files" de la MPL-2.0. Pueden contener código adaptado de mGBA (https://github.com/mgba-emu/mgba, tag 0.10.5), Copyright (c) 2013-2021 Jeffrey Pfau, modificado para Bolsillo Advance:
 
-   Para esos archivos se aplica el aviso del Exhibit A de la MPL-2.0:
+     mpl/gpio-rtc.js  puerto GPIO del cartucho y reloj Seiko S-3511
+                      (basado en mGBA src/gba/cart/gpio.c)
+     mpl/bios-hle.js  rutinas BIOS Div, ArcTan, ArcTan2, ObjAffineSet y el
+                      manejador de IRQ (basado en mGBA src/gba/bios.c y
+                      src/gba/hle-bios.s)
+
+   La MPL-2.0 se aplica a estos dos archivos. El resto de la aplicación es una "Larger Work" (MPL-2.0 §3.3) y la MPL no la cubre. La clasificación como derivado de mGBA es provisional: sale de una auditoría de similitud, no de una constancia de copia.
+
      This Source Code Form is subject to the terms of the Mozilla Public
      License, v. 2.0. If a copy of the MPL was not distributed with this
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-   Forma de código fuente: la aplicación incluye el código JavaScript sin minificar dentro de assets/www/index.html. Los archivos originales separados (gba/src/cart.js y gba/src/bios.js) se incluyen en assets/source/ y también están en el repositorio del proyecto, carpeta bolsillo-advance/app/gba/src/.
+   Forma de código fuente: los dos archivos van en la aplicación, sin minificar, tal como se ejecutan. En el APK están en assets/www/mpl/. También se pueden descargar en la dirección de "Código fuente de esta versión", carpeta bolsillo-advance/app/gba/src/mpl/.
 
 
 2. GBA.js, Copyright (c) 2012, Jeffrey Pfau
    Licencia: BSD-2-Clause (texto completo en el apartado B)
    https://github.com/endrift/gbajs (commit 0cf0ac7d624eaae032e19ba2f154e0ae1ce73796)
-   ------------------------------------------------------------------
-   Diseño antecesor del RTC (js/gpio.js) y algoritmo equivalente de ObjAffineSet (js/irq.js). Se incluye por precaución.
+   ----------------------------------------------------------------------
+   Diseño antecesor del RTC (js/gpio.js) y algoritmo equivalente de ObjAffineSet (js/irq.js). Las partes correspondientes están en los archivos del apartado 1. Se atribuye por precaución.
 
 
 3. Tipografías Silkscreen y Rubik (no incluidas en la aplicación)
-   ------------------------------------------------------------------
-   La interfaz las descarga al ejecutarse desde Google Fonts (fonts.googleapis.com). No se redistribuyen.
+   ----------------------------------------------------------------------
+   La interfaz las descarga de Google Fonts (fonts.googleapis.com) al ejecutarse; no se redistribuyen.
      - Silkscreen: Copyright 2001 The Silkscreen Project Authors. SIL Open Font License 1.1.
      - Rubik: Copyright 2015 The Rubik Project Authors. SIL Open Font License 1.1.
+   Sin conexión se usa la tipografía del sistema.
 
 
 4. Corrección de color
-   ------------------------------------------------------------------
-   La versión auditada usaba parámetros que coincidían con higan (GPLv3 o posterior). Se han retirado. La opción "Colores: Suaves (LCD)" usa ahora una fórmula propia, basada en la función de transferencia sRGB (IEC 61966-2-1) y en los pesos de luma BT.709 (ITU-R). No incorpora código de terceros. Ver bolsillo-advance/audit/COLOR-REEMPLAZO.md.
+   ----------------------------------------------------------------------
+   La opción "Colores: Suaves (LCD)" usa la función de transferencia sRGB (IEC 61966-2-1) y los pesos de luma BT.709 (ITU-R), con dos parámetros propios. No incorpora código de terceros.
 
 
 Marcas: Game Boy Advance es una marca de Nintendo. Este proyecto no tiene relación con Nintendo ni está autorizado por Nintendo. La aplicación no incluye juegos ni la BIOS original.

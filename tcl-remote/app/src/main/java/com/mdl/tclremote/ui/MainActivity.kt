@@ -77,6 +77,7 @@ private data class Tab(val label: String, val icon: Int)
 
 private val tabs = listOf(
     Tab("Mando", R.drawable.ic_remote),
+    Tab("Imagen", R.drawable.ic_tune),
     Tab("Escenas", R.drawable.ic_scenes),
     Tab("Horarios", R.drawable.ic_auto),
     Tab("Ajustes", R.drawable.ic_tv),
@@ -109,9 +110,10 @@ private fun App() {
     ) { padding ->
         Box(Modifier.fillMaxSize().padding(padding)) {
             when (tab) {
-                0 -> RemoteScreen(onOpenSettings = { tab = 3 })
-                1 -> ScenesScreen()
-                2 -> SchedulesScreen()
+                0 -> RemoteScreen(onOpenSettings = { tab = 4 })
+                1 -> PictureSoundScreen()
+                2 -> ScenesScreen()
+                3 -> SchedulesScreen()
                 else -> SettingsScreen()
             }
         }

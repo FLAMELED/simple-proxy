@@ -37,6 +37,14 @@ data class Schedule(
 
 data class AppShortcut(val name: String, val link: String)
 
+enum class AvKind { PICTURE, SOUND }
+
+/** Atajo de modo de imagen o sonido: teclas grabadas recorriendo el menú de la TV. */
+data class AvShortcut(val id: String, val kind: AvKind, val name: String, val steps: List<Step>) {
+    val isRecorded get() = steps.isNotEmpty()
+    fun asScene() = Scene(id, name, steps)
+}
+
 fun newId(): String = UUID.randomUUID().toString()
 
 /** Guarda la configuración en SharedPreferences y la expone como StateFlow para la interfaz. */
@@ -57,6 +65,8 @@ object Store {
     val irCode: StateFlow<String> = _irCode
     private val _widgetScenes = MutableStateFlow<List<String>>(emptyList())
     val widgetScenes: StateFlow<List<String>> = _widgetScenes
+    private val _avShortcuts = MutableStateFlow<List<AvShortcut>>(emptyList())
+    val avShortcuts: StateFlow<List<AvShortcut>> = _avShortcuts
 
     fun init(context: Context) {
         if (::prefs.isInitialized) return
@@ -70,6 +80,49 @@ object Store {
         _widgetScenes.value = prefs.getString("widget_scenes", null)?.let { s ->
             JSONArray(s).let { a -> List(a.length()) { a.getString(it) } }
         } ?: _scenes.value.take(2).map { it.id }
+        _avShortcuts.value = prefs.getString("av_shortcuts", null)?.let(::parseAvShortcuts) ?: defaultAvShortcuts()
+    }
+
+    fun saveAvShortcut(shortcut: AvShortcut) {
+        val list = _avShortcuts.value.toMutableList()
+        val i = list.indexOfFirst { it.id == shortcut.id }
+        if (i >= 0) list[i] = shortcut else list += shortcut
+        _avShortcuts.value = list
+        persistAvShortcuts()
+    }
+
+    fun deleteAvShortcut(id: String) {
+        _avShortcuts.value = _avShortcuts.value.filterNot { it.id == id }
+        persistAvShortcuts()
+    }
+
+    private fun persistAvShortcuts() {
+        prefs.edit().putString("av_shortcuts", JSONArray(_avShortcuts.value.map {
+            JSONObject().put("id", it.id).put("kind", it.kind.name).put("name", it.name).put("steps", stepsToJson(it.steps))
+        }).toString()).apply()
+    }
+
+    private fun parseAvShortcuts(json: String): List<AvShortcut> = JSONArray(json).objects().mapNotNull { o ->
+        val kind = runCatching { AvKind.valueOf(o.getString("kind")) }.getOrNull() ?: return@mapNotNull null
+        AvShortcut(o.getString("id"), kind, o.getString("name"), parseSteps(o.getJSONArray("steps")))
+    }
+
+    private fun defaultAvShortcuts() = (
+        listOf("Estándar", "Vívido", "Película", "Deporte", "Juego", "Inteligente").map {
+            AvShortcut(newId(), AvKind.PICTURE, it, emptyList())
+        } + listOf("Estándar", "Película", "Música", "Voz", "Deporte", "Juego").map {
+            AvShortcut(newId(), AvKind.SOUND, it, emptyList())
+        }
+    ).also { _avShortcuts.value = it; persistAvShortcuts() }
+
+    private fun stepsToJson(steps: List<Step>) = JSONArray(steps.map {
+        JSONObject().put("type", it.type.name).put("value", it.value).put("count", it.count)
+    })
+
+    private fun parseSteps(array: JSONArray): List<Step> = array.objects().mapNotNull { s ->
+        runCatching { StepType.valueOf(s.getString("type")) }.getOrNull()?.let {
+            Step(it, s.optString("value"), s.optInt("count", 1))
+        }
     }
 
     fun setHost(value: String) {
@@ -135,9 +188,7 @@ object Store {
 
     private fun persistScenes() {
         prefs.edit().putString("scenes", JSONArray(_scenes.value.map { scene ->
-            JSONObject().put("id", scene.id).put("name", scene.name).put("steps", JSONArray(scene.steps.map {
-                JSONObject().put("type", it.type.name).put("value", it.value).put("count", it.count)
-            }))
+            JSONObject().put("id", scene.id).put("name", scene.name).put("steps", stepsToJson(scene.steps))
         }).toString()).apply()
     }
 
@@ -149,11 +200,7 @@ object Store {
     }
 
     private fun parseScenes(json: String): List<Scene> = JSONArray(json).objects().map { o ->
-        Scene(o.getString("id"), o.getString("name"), o.getJSONArray("steps").objects().mapNotNull { s ->
-            runCatching { StepType.valueOf(s.getString("type")) }.getOrNull()?.let {
-                Step(it, s.optString("value"), s.optInt("count", 1))
-            }
-        })
+        Scene(o.getString("id"), o.getString("name"), parseSteps(o.getJSONArray("steps")))
     }
 
     private fun parseSchedules(json: String): List<Schedule> = JSONArray(json).objects().map { o ->

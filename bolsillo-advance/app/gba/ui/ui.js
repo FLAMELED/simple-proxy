@@ -107,7 +107,7 @@
   // ---------- audio ----------
   const Audio = {
     ctx: null, node: null, gain: null, frac: 0, lastL: 0, lastR: 0,
-    lpL: 0, lpR: 0, hxL: 0, hxR: 0, hyL: 0, hyR: 0,
+    lpL: 0, lpR: 0, hxL: 0, hxR: 0, hyL: 0, hyR: 0, calls: 0, peak: 0,
     start() {
       if (this.ctx) { if (this.ctx.state === 'suspended') this.ctx.resume(); return; }
       try {
@@ -130,6 +130,7 @@
       if (adj > 1) adj = 1; else if (adj < -1) adj = -1;
       const step = SAMPLE_RATE / this.ctx.sampleRate * (1 + adj * 0.006);
       const lpA = 1 - Math.exp(-2 * Math.PI * 11000 / this.ctx.sampleRate);
+      let peak = 0;
       for (let i = 0; i < L.length; i++) {
         let l, r;
         if (!running || rewinding || apu.available() < 2) {
@@ -148,7 +149,10 @@
         const yl = this.lpL - this.hxL + 0.996 * this.hyL, yr = this.lpR - this.hxR + 0.996 * this.hyR;
         this.hxL = this.lpL; this.hxR = this.lpR; this.hyL = yl; this.hyR = yr;
         L[i] = yl; R[i] = yr;
+        const a = yl < 0 ? -yl : yl;
+        if (a > peak) peak = a;
       }
+      this.calls++; this.peak = peak; // read by __diag
     },
     apply() { if (this.gain) this.gain.gain.value = gainFor(); },
   };
@@ -1060,6 +1064,15 @@
     flushSave(); autoSave('hide');
     if (running) { pause(); showResume('Pausa', 'Toca para seguir jugando.'); }
     try { if (Audio.ctx && Audio.ctx.state === 'running') Audio.ctx.suspend(); } catch (e) {}
+  };
+  // read-only snapshot of the emulator state, used by the Android device tests and for support
+  window.__diag = () => {
+    const f = gba.ppu.frame;
+    let h = 0;
+    for (let i = 0; i < f.length; i += 7) h = (Math.imul(h, 31) + f[i]) | 0;
+    return { loaded: !!gba.loaded, title: gba.loaded ? gba.cart.title : '', saveType: gba.cart.saveType, running,
+      frameHash: h >>> 0, keys: (~gba.bus.keyinput) & 0x3FF,
+      audio: Audio.ctx ? { state: Audio.ctx.state, calls: Audio.calls, peak: Audio.peak } : null };
   };
   window.__back = () => {
     if (!$('askBack').hidden) return true;

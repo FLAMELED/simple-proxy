@@ -74,13 +74,14 @@ jobs:
             { echo "BOLSILLO_KEYSTORE_PASSWORD=testkey"; echo "BOLSILLO_KEY_ALIAS=test"; echo "BOLSILLO_KEY_PASSWORD=testkey"; echo "KEY_KIND=test"; } >> "$GITHUB_ENV"
           fi
           echo "BOLSILLO_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
-      - name: Build AAB (bundleRelease)
-        run: gradle -p bolsillo-advance/android --no-daemon bundleRelease
+      - name: Build AAB (bundleRelease) and the debug APK used by the device test
+        run: gradle -p bolsillo-advance/android --no-daemon bundleRelease assembleDebug
       - name: Universal APK from the bundle (bundletool)
         run: |
           curl -fsSL -o "$RUNNER_TEMP/bundletool.jar" https://github.com/google/bundletool/releases/download/1.18.1/bundletool-all-1.18.1.jar
           mkdir -p out
           cp bolsillo-advance/android/app/build/outputs/bundle/release/app-release.aab out/bolsillo-advance.aab
+          cp bolsillo-advance/android/app/build/outputs/apk/debug/app-debug.apk out/bolsillo-advance-debug.apk
           java -jar "$RUNNER_TEMP/bundletool.jar" build-apks --bundle out/bolsillo-advance.aab --output "$RUNNER_TEMP/app.apks" --mode universal \
             --ks "$BOLSILLO_KEYSTORE" --ks-pass "pass:$BOLSILLO_KEYSTORE_PASSWORD" --ks-key-alias "$BOLSILLO_KEY_ALIAS" --key-pass "pass:$BOLSILLO_KEY_PASSWORD"
           unzip -p "$RUNNER_TEMP/app.apks" universal.apk > out/bolsillo-advance-universal.apk
@@ -116,7 +117,7 @@ jobs:
           mkdir -p roms
           cp testroms/PL/LCD/BG/BGMode7/BGMode7.gba testroms/PL/Sound/PCM/Stereo/SoundPCMStereo.gba testroms/gba-tests/save/sram.gba roms/
           node bolsillo-advance/android/tests/expected_sav.js roms/sram.gba roms/sram-expected.sav
-          pip install --quiet pillow
+          pip install --quiet pillow websocket-client
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -131,7 +132,7 @@ jobs:
           profile: pixel_6
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -no-boot-anim -camera-back none
-          script: python3 bolsillo-advance/android/tests/device_test.py bundle/bolsillo-advance-universal.apk roms roms/sram-expected.sav out/device-${{ matrix.api }}
+          script: python3 bolsillo-advance/android/tests/device_test.py bundle/bolsillo-advance-debug.apk bundle/bolsillo-advance-universal.apk roms roms/sram-expected.sav out/device-${{ matrix.api }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:

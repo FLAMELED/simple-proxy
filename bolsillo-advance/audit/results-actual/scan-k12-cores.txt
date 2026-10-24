@@ -1,0 +1,204 @@
+== apu.js: 43 of 329 code lines covered by shared 12-grams
+   lines 23-26  ~ arm/arm.c:102, arm/arm.c:103, arm/arm.c:104, arm/arm.c:105
+   lines 28-30  ~ arm/arm.c:102, arm/arm.c:103, arm/arm.c:104, arm/arm.c:105
+   lines 87-88  ~ gba/cheats/gameshark.c:64, gba/cheats/gameshark.c:75
+   lines 146-149  ~ gba/ppu/background.cpp:131, gba/ppu/background.cpp:133, gba/ppu/background.cpp:172, gba/ppu/background.cpp:174
+   lines 162-162  ~ arm/arm.c:97, arm/arm.c:98, gba/bios.c:37, gba/bios.c:38
+   lines 166-167  ~ arm/isa-thumb.c:270, arm/isa-thumb.c:82, arm/isa-thumb.c:83
+   lines 177-179  ~ arm/arm.c:34, arm/arm.c:35, arm/isa-arm.c:670, arm/isa-thumb.c:270
+   lines 192-199  ~ gba/apu/sequencer.cpp:10, gba/apu/sequencer.cpp:11, gba/cart/ereader.c:1013, gba/cart/ereader.c:1043
+   lines 206-208  ~ arm/debugger/debugger.c:308, arm/debugger/debugger.c:354, arm7tdmi/instruction.cpp:7, gba/cartridge/flash.cpp:38
+   lines 214-216  ~ gba/cart/ereader.c:1013, gba/cart/ereader.c:1043, gba/cart/ereader.c:344, gba/cart/ereader.c:420
+   lines 243-245  ~ gba/sio/lockstep.c:805, gba/sio/lockstep.c:806
+   lines 281-282  ~ gba/bios.c:616, gba/bios.c:634, gba/core.c:1171
+   lines 292-293  ~ gba/audio.c:525, gba/audio.c:564, gba/bios.c:616, gba/renderers/video-software.c:136
+   lines 328-330  ~ arm/arm.c:135, arm/arm.c:136, arm/arm.c:154, arm/debugger/debugger.c:185
+== bios.js: 109 of 354 code lines covered by shared 12-grams
+   lines 20-21  ~ gba/audio.c:525, gba/audio.c:564, gba/bios.c:616, gba/bios.c:634
+   lines 41-42  ~ arm/debugger/debugger.c:493, arm/debugger/debugger.c:599, gba/overrides.c:208
+   lines 44-46  ~ arm/debugger/debugger.c:493, arm/debugger/debugger.c:599, gba/overrides.c:208, gba/overrides.c:231
+   lines 56-61  ~ arm/debugger/debugger.c:493, arm/debugger/debugger.c:599, gba/cheats/gameshark.c:82, gba/cheats/gameshark.c:93
+   lines 70-72  ~ arm/arm.c:102, arm/arm.c:103, arm/arm.c:104, arm/arm.c:105
+   lines 103-112  ~ arm/arm.c:100, arm/arm.c:66, arm/arm.c:67, arm/arm.c:68
+   lines 117-118  ~ gba/cart/ereader.c:1204, gba/cart/ereader.c:1205, gba/cart/ereader.c:1208, gba/cart/ereader.c:1209
+   lines 141-143  ~ gba/bios.c:330, gba/bios.c:331, gba/bios.c:348, gba/bios.c:349
+   lines 146-149  ~ gba/bios.c:338, gba/bios.c:339, gba/bios.c:340, gba/bios.c:356
+   lines 164-165  ~ arm/debugger/debugger.c:292, arm/debugger/debugger.c:331, arm7tdmi/instructions-arm.cpp:204, gba/bios.c:616
+   lines 168-168  ~ arm/debugger/debugger.c:292, arm/debugger/debugger.c:331, gba/bios.c:616, gba/bios.c:634
+   lines 178-181  ~ arm/debugger/debugger.c:292, arm/debugger/debugger.c:331, arm7tdmi/instructions-arm.cpp:204, gba/bios.c:616
+   lines 186-187  ~ gba/bios.c:616, gba/bios.c:634, gba/core.c:1171
+   lines 199-206  ~ gba/bios.c:225, gba/bios.c:616, gba/bios.c:634, gba/core.c:1171
+   lines 214-219  ~ gba/bios.c:257, gba/bios.c:258
+   lines 230-230  ~ gba/bios.c:953, gba/bios.c:954
+   lines 232-234  ~ gba/bios.c:768, gba/bios.c:780, gba/bios.c:953, gba/bios.c:959
+   lines 244-246  ~ gba/cart/ereader.c:483, gba/cart/ereader.c:484, gba/renderers/video-software.c:676, gba/renderers/video-software.c:704
+   lines 254-256  ~ gba/cheats/parv3.c:293, gba/renderers/cache-set.c:155, gba/video.c:52
+   lines 263-264  ~ gba/sio/lockstep.c:431
+   lines 273-276  ~ arm/debugger/cli-debugger.c:56, arm/debugger/cli-debugger.c:60, arm/debugger/cli-debugger.c:78, arm/debugger/memory-debugger.c:68
+   lines 298-300  ~ gba/bios.c:768, gba/bios.c:780, gba/bios.c:953, gba/bios.c:959
+   lines 304-315  ~ gba/audio.c:590, gba/bios.c:616, gba/bios.c:617, gba/bios.c:634
+   lines 318-320  ~ gba/cheats/parv3.c:293, gba/renderers/cache-set.c:155, gba/video.c:52
+   lines 324-325  ~ gba/sio/lockstep.c:431
+   lines 327-328  ~ gba/sio/lockstep.c:431
+   lines 331-334  ~ arm/debugger/cli-debugger.c:56, arm/debugger/cli-debugger.c:60, arm/debugger/cli-debugger.c:78, arm/debugger/memory-debugger.c:68
+   lines 338-346  ~ arm/decoder.c:152, arm/decoder.c:198, arm/decoder.c:291, gba/audio.c:218
+== bus.js: 138 of 716 code lines covered by shared 12-grams
+   lines 3-3  ~ gba/cheats/gameshark.h:12, gba/cheats/gameshark.h:13, gba/extra/battlechip.c:13, gba/extra/battlechip.c:14
+   lines 9-10  ~ arm/isa-arm.c:159
+   lines 12-13  ~ arm/isa-arm.c:159
+   lines 15-16  ~ arm/isa-arm.c:159
+   lines 20-21  ~ arm/isa-arm.c:159
+   lines 23-24  ~ arm/isa-arm.c:159
+   lines 26-27  ~ arm/isa-arm.c:159
+   lines 29-37  ~ arm/arm.c:102, arm/arm.c:103, arm/arm.c:104, arm/arm.c:105
+   lines 49-54  ~ arm/isa-arm.c:168, arm/isa-arm.c:176, arm/isa-thumb.c:11, gba/cart/gpio.c:375
+   lines 59-62  ~ arm/arm.c:102, arm/arm.c:103, arm/arm.c:104, arm/arm.c:105
+   lines 71-74  ~ arm/debugger/cli-debugger.c:130, arm/debugger/cli-debugger.c:152, gba/memory.c:1712, gba/memory.c:1713
+   lines 104-104  ~ gba/cpu/bus.cpp:39
+   lines 122-122  ~ gba/cpu/bus.cpp:39
+   lines 163-164  ~ gba/cpu/bus.cpp:37, gba/cpu/bus.cpp:39
+   lines 173-173  ~ gba/memory.c:659, gba/memory.c:674, gba/renderers/software-obj.c:109
+   lines 204-205  ~ gba/cpu/bus.cpp:37, gba/cpu/bus.cpp:39
+   lines 245-246  ~ gba/cpu/bus.cpp:37, gba/cpu/bus.cpp:39
+   lines 279-281  ~ arm/debugger/debugger.c:100, gba/cheats/parv3.c:156, gba/cheats/parv3.c:168, gba/cheats/parv3.c:180
+   lines 285-286  ~ gba/cpu/bus.cpp:37, gba/cpu/bus.cpp:39
+   lines 311-312  ~ gba/cpu/bus.cpp:37, gba/cpu/bus.cpp:39
+   lines 325-325  ~ gba/memory.c:659, gba/memory.c:674, gba/renderers/software-obj.c:109
+   lines 348-349  ~ gba/cpu/bus.cpp:37, gba/cpu/bus.cpp:39
+   lines 392-396  ~ gba/dma.c:29, gba/dma.c:30, gba/dma.c:46, gba/dma.c:47
+   lines 416-421  ~ gba/apu/square1.cpp:62, gba/apu/square2.cpp:30, gba/apu/wave.cpp:53, gba/cheats/gameshark.c:253
+   lines 465-466  ~ gba/gba.c:926
+   lines 484-485  ~ gba/bios.c:248, gba/cart/unlicensed.c:76, gba/gba.c:107, gba/gba.c:113
+   lines 509-509  ~ gba/apu/noise.cpp:78, gba/apu/square1.cpp:82, gba/apu/square2.cpp:45, gba/audio.c:363
+   lines 513-515  ~ arm/isa-arm.c:578, arm/isa-arm.c:586
+   lines 519-522  ~ gba/memory.c:1870, gba/renderers/software-private.h:113, gba/renderers/software-private.h:87, gba/renderers/video-software.c:564
+   lines 534-535  ~ arm/debugger/debugger.c:109
+   lines 541-542  ~ arm/debugger/debugger.c:377, arm/debugger/debugger.c:429, gba/cheats/gameshark.c:64, gba/cheats/gameshark.c:75
+   lines 566-569  ~ gba/bios.c:616, gba/bios.c:634, gba/cartridge/cartridge.hpp:65, gba/core.c:1171
+   lines 574-575  ~ gba/bios.c:616, gba/bios.c:634, gba/core.c:1171
+   lines 580-583  ~ gba/audio.c:78, gba/cheats.c:110, gba/renderers/gl.c:1468
+   lines 617-617  ~ arm/debugger/debugger.c:377, arm/debugger/debugger.c:429, gba/cheats/gameshark.c:64, gba/cheats/gameshark.c:75
+   lines 635-636  ~ gba/apu/noise.cpp:78, gba/apu/square1.cpp:82, gba/apu/square2.cpp:45, gba/audio.c:363
+   lines 641-642  ~ arm/debugger/debugger.c:109
+   lines 650-664  ~ arm/debugger/debugger.c:87, gba/cart/vfame.c:121, gba/cart/vfame.c:96, gba/core.c:937
+   lines 667-674  ~ arm/debugger/debugger.c:109, arm/decoder.c:146, arm/decoder.c:401, arm/decoder.c:79
+   lines 681-681  ~ gba/renderers/gl.c:1941, gba/renderers/gl.c:2134
+   lines 688-689  ~ gba/dma.c:216, gba/dma.c:232
+   lines 691-693  ~ gba/extra/audio-mixer.c:153, gba/ppu/background.cpp:161, gba/renderers/gl.c:922
+   lines 695-701  ~ arm/debugger/debugger.c:109, gba/cpu/coprocessor.cpp:5
+   lines 703-705  ~ gba/dma.c:72, gba/dma.c:95, gba/memory.c:1539, gba/memory.c:1578
+   lines 714-715  ~ arm/debugger/debugger.c:377, arm/debugger/debugger.c:429, gba/cheats/gameshark.c:64, gba/cheats/gameshark.c:75
+== cart.js: 98 of 349 code lines covered by shared 12-grams
+   lines 4-6  ~ arm/arm.c:65, arm/arm.c:66, arm/isa-arm.c:135, arm/isa-arm.c:136
+   lines 12-16  ~ arm/arm.c:101, arm/arm.c:102, gba/cart/gpio.c:360, gba/cart/gpio.c:389
+   lines 20-22  ~ gba/gba.c:272, gba/gba.c:306
+   lines 48-49  ~ gba/gba.c:147, gba/gba.c:156, gba/gba.c:418
+   lines 57-60  ~ arm/arm.c:66, arm/arm.c:67, gba/bios.c:248, gba/cart/unlicensed.c:76
+   lines 81-82  ~ gba/gba.c:59, gba/gba.c:60, gba/gba.c:63, gba/gba.c:64
+   lines 84-88  ~ arm7tdmi/instructions-thumb.cpp:203, gba/cart/gpio.c:403, gba/cart/unlicensed.c:76, gba/gba.c:107
+   lines 96-98  ~ gba/audio.c:525, gba/audio.c:564, gba/bios.c:616, gba/bios.c:634
+   lines 107-109  ~ gba/audio.c:525, gba/audio.c:564, gba/bios.c:616, gba/bios.c:634
+   lines 111-117  ~ gba/audio.c:525, gba/audio.c:564, gba/bios.c:616, gba/gba.c:148
+   lines 134-134  ~ gba/cart/gpio.c:31, gba/cart/gpio.c:32, gba/cart/gpio.c:33
+   lines 146-149  ~ arm/arm.c:102, arm/arm.c:103, arm/arm.c:104, gba/cart/gpio.c:308
+   lines 154-159  ~ arm/decoder.c:389, arm/decoder.c:575, gba/bios.c:248, gba/bios.c:422
+   lines 175-178  ~ gba/core.c:1099, gba/core.c:1370
+   lines 180-186  ~ gba/extra/proxy.c:165, gba/extra/proxy.c:174, gba/io.c:727, gba/io.c:784
+   lines 191-196  ~ gba/cart/vfame.c:102, gba/cart/vfame.c:123, gba/cart/vfame.c:124, gba/cart/vfame.c:127
+   lines 233-234  ~ gba/cart/gpio.c:47, gba/gba.c:249
+   lines 237-239  ~ arm/arm.c:101, arm/arm.c:102, arm/arm.c:103, arm/arm.c:104
+   lines 253-255  ~ gba/memory.c:1676, gba/memory.c:1678, gba/memory.c:1679
+   lines 261-265  ~ gba/cart/gpio.c:47, gba/gba.c:153, gba/gba.c:155, gba/gba.c:162
+   lines 284-285  ~ gba/sio/lockstep.c:332
+   lines 320-322  ~ arm/arm.c:65, arm/arm.c:66, gba/dma.c:15, gba/gba.c:103
+   lines 328-334  ~ gba/cart/ereader.c:1051, gba/cart/ereader.c:1081
+   lines 338-342  ~ gba/audio.c:452, gba/audio.c:495, gba/cart/ereader.c:1013, gba/cart/ereader.c:1043
+   lines 345-347  ~ gba/renderers/gl.c:2030, gba/renderers/gl.c:2073, gba/sio/lockstep.c:1030
+== cpu.js: 216 of 883 code lines covered by shared 12-grams
+   lines 5-6  ~ arm7tdmi/arm7tdmi.hpp:137, arm7tdmi/arm7tdmi.hpp:138, arm7tdmi/arm7tdmi.hpp:139, arm7tdmi/arm7tdmi.hpp:140
+   lines 8-14  ~ gba/savedata.c:129, gba/savedata.c:134, gba/sio/lockstep.c:276, gba/sio/lockstep.c:277
+   lines 34-46  ~ arm/arm.c:101, arm/arm.c:102, arm/arm.c:103, arm/arm.c:104
+   lines 49-52  ~ arm/arm.c:102, arm/arm.c:103, arm/arm.c:104, arm/arm.c:105
+   lines 65-67  ~ arm/isa-thumb.c:215
+   lines 80-81  ~ gba/gba.c:237, gba/gba.c:271
+   lines 86-87  ~ gba/audio.c:236, gba/audio.c:263, gba/cart/unlicensed.c:206, gba/renderers/video-software.c:828
+   lines 89-90  ~ arm/isa-thumb.c:255
+   lines 116-122  ~ arm7tdmi/instructions-thumb.cpp:205, gba/cart/matrix.c:48, gba/core.c:464, gba/io.c:727
+   lines 145-146  ~ gba/core.c:309, gba/core.c:373
+   lines 148-151  ~ gba/gba.c:313, gba/gba.c:339, gba/gba.c:863
+   lines 166-169  ~ gba/audio.c:590
+   lines 176-180  ~ gba/audio.c:590
+   lines 186-190  ~ gba/audio.c:590
+   lines 197-201  ~ gba/audio.c:590
+   lines 223-224  ~ gba/system/serialization.cpp:52, gba/system/system.cpp:27, gba/system/system.cpp:71
+   lines 226-236  ~ arm/arm.c:66, arm/arm.c:67, gba/apu/square1.cpp:36, gba/cart/gpio.c:400
+   lines 243-243  ~ arm/isa-arm.c:134, arm/isa-arm.c:63, arm/isa-arm.c:98
+   lines 246-250  ~ arm/debugger/memory-debugger.c:74
+   lines 260-260  ~ arm/isa-arm.c:134, arm/isa-arm.c:63, arm/isa-arm.c:98
+   lines 269-270  ~ gba/bios.c:19, gba/bios.c:22
+   lines 307-312  ~ gba/cart/ereader.c:1013, gba/cart/ereader.c:1043, gba/cart/ereader.c:344, gba/cart/ereader.c:420
+   lines 321-323  ~ arm7tdmi/instructions-arm.cpp:216, arm7tdmi/instructions-arm.cpp:231, arm7tdmi/instructions-arm.cpp:304
+   lines 325-331  ~ arm/decoder.c:184, arm7tdmi/instructions-arm.cpp:98, gba/cpu/bus.cpp:24, gba/cpu/bus.cpp:35
+   lines 333-334  ~ arm/debugger/cli-debugger.c:101, arm/debugger/cli-debugger.c:123, arm/debugger/cli-debugger.c:158, arm7tdmi/instructions-arm.cpp:122
+   lines 386-388  ~ gba/sio/lockstep.c:784
+   lines 402-404  ~ gba/memory.c:1713, gba/memory.c:1714, gba/memory.c:1757, gba/memory.c:1845
+   lines 440-442  ~ arm/decoder-arm.c:105
+   lines 451-452  ~ gba/cart/ereader.c:1013, gba/cart/ereader.c:1043, gba/cart/ereader.c:344, gba/cart/ereader.c:420
+   lines 464-466  ~ arm7tdmi/instructions-arm.cpp:216, arm7tdmi/instructions-arm.cpp:231, arm7tdmi/instructions-arm.cpp:304
+   lines 489-491  ~ arm/decoder.c:561, gba/cart/ereader.c:420, gba/renderers/software-obj.c:101, gba/renderers/software-obj.c:102
+   lines 493-494  ~ gba/cartridge/cartridge.hpp:65
+   lines 500-502  ~ arm/isa-arm.c:437
+   lines 513-519  ~ arm/debugger/cli-debugger.c:130, arm/debugger/cli-debugger.c:152, arm/decoder-arm.c:260, arm/decoder-thumb.c:200
+   lines 526-526  ~ gba/renderers/gl.c:1380, gba/renderers/gl.c:1418
+   lines 532-535  ~ arm/arm.c:86, arm/arm.c:87, arm/debugger/cli-debugger.c:130, arm/debugger/cli-debugger.c:152
+   lines 573-576  ~ arm/debugger/cli-debugger.c:56, arm/debugger/cli-debugger.c:60, arm/debugger/cli-debugger.c:78
+   lines 580-583  ~ arm/decoder.c:181, gba/cart/gpio.c:359, gba/cart/gpio.c:388, gba/gba.c:364
+   lines 598-607  ~ arm7tdmi/instructions-arm.cpp:11, arm7tdmi/instructions-arm.cpp:13, arm7tdmi/instructions-arm.cpp:16, arm7tdmi/instructions-arm.cpp:18
+   lines 623-625  ~ gba/cpu/bus.cpp:19, gba/renderers/gl.c:1670, gba/renderers/gl.c:1727, gba/renderers/gl.c:1735
+   lines 735-736  ~ arm/decoder-arm.c:260, arm/decoder-thumb.c:200, gba/renderers/video-software.c:602, gba/renderers/video-software.c:603
+   lines 752-754  ~ arm/decoder-arm.c:260, arm/decoder-thumb.c:200, gba/audio.c:63, gba/audio.c:74
+   lines 762-764  ~ gba/cpu/keypad.cpp:20, gba/cpu/keypad.cpp:21, gba/ppu/object.cpp:250, gba/renderers/software-obj.c:109
+   lines 771-772  ~ arm/decoder-arm.c:260, arm/decoder-thumb.c:200, gba/renderers/video-software.c:602, gba/renderers/video-software.c:603
+   lines 774-774  ~ gba/renderers/gl.c:1380, gba/renderers/gl.c:1418
+   lines 777-779  ~ arm/decoder-arm.c:260, arm/decoder-thumb.c:200, gba/audio.c:453, gba/audio.c:496
+   lines 782-787  ~ gba/cart/ereader.c:351
+   lines 829-842  ~ arm/arm.c:125, arm/arm.c:126, arm/arm.c:127, arm/arm.c:144
+   lines 846-848  ~ arm/debugger/debugger.c:129, gba/savedata.c:510, gba/savedata.c:525
+   lines 850-862  ~ arm/arm.c:125, arm/arm.c:126, arm/arm.c:127, arm/arm.c:144
+   lines 884-887  ~ gba/cpu/memory.cpp:47
+== gba.js: 9 of 79 code lines covered by shared 12-grams
+   lines 16-20  ~ gba/cart/gpio.c:381
+   lines 46-49  ~ gba/renderers/gl.c:1913, gba/renderers/software-mode0.c:441, gba/renderers/software-mode0.c:452
+== ppu.js: 122 of 479 code lines covered by shared 12-grams
+   lines 36-44  ~ arm/arm.c:103, arm/arm.c:104, arm/arm.c:105, arm/arm.c:106
+   lines 58-60  ~ arm/decoder.c:144, arm/decoder.c:193, gba/core.c:1116
+   lines 85-86  ~ gba/cart/gpio.c:170
+   lines 95-98  ~ gba/gba.c:153, gba/gba.c:155, gba/gba.c:162, gba/gba.c:164
+   lines 102-104  ~ gba/core.c:688
+   lines 117-118  ~ gba/gba.c:421, gba/gba.c:446
+   lines 150-153  ~ gba/renderers/video-software.c:536, gba/renderers/video-software.c:582, gba/video.c:304, gba/video.c:305
+   lines 160-164  ~ arm/debugger/memory-debugger.c:68, arm/debugger/memory-debugger.c:77, arm/decoder.c:154, arm/decoder.c:198
+   lines 167-169  ~ arm/isa-thumb.c:270, arm/isa-thumb.c:82, arm/isa-thumb.c:83
+   lines 184-187  ~ gba/extra/audio-mixer.c:153, gba/ppu/background.cpp:161, gba/renderers/gl.c:922, gba/renderers/video-software.c:1023
+   lines 189-191  ~ arm/decoder-thumb.c:17, arm/isa-thumb.c:63
+   lines 203-205  ~ gba/renderers/software-mode0.c:317, gba/renderers/software-mode0.c:328, gba/renderers/software-mode0.c:63
+   lines 224-228  ~ gba/dma.c:29, gba/dma.c:46
+   lines 246-247  ~ arm/isa-thumb.c:202, arm/isa-thumb.c:208
+   lines 254-254  ~ gba/ppu/object.cpp:107, gba/ppu/object.cpp:49
+   lines 257-261  ~ arm/decoder.c:444, gba/audio.c:590
+   lines 263-265  ~ gba/bios.c:915, gba/bios.c:916
+   lines 270-271  ~ gba/cart/ereader.c:1561, gba/cart/ereader.c:1603
+   lines 281-285  ~ arm/decoder.c:444, gba/audio.c:590
+   lines 300-302  ~ gba/ppu/window.cpp:2
+   lines 327-329  ~ arm/debugger/cli-debugger.c:111, arm/debugger/cli-debugger.c:89, arm/debugger/memory-debugger.c:16, gba/bios.c:616
+   lines 333-335  ~ gba/cheats/parv3.c:53
+   lines 343-346  ~ gba/renderers/software-private.h:172, gba/renderers/software-private.h:174
+   lines 356-358  ~ gba/memory.c:1713, gba/memory.c:1714, gba/memory.c:1757, gba/ppu/dac.cpp:22
+   lines 379-383  ~ gba/cheats/gameshark.c:64, gba/cheats/gameshark.c:75, gba/extra/proxy.c:360, gba/extra/proxy.c:361
+   lines 416-421  ~ gba/audio.c:322, gba/audio.c:347, gba/cart/ereader.c:1013, gba/cart/ereader.c:1043
+   lines 425-428  ~ arm/debugger/cli-debugger.c:76, arm/debugger/cli-debugger.c:77, arm/debugger/cli-debugger.c:98, arm/debugger/cli-debugger.c:99
+   lines 434-434  ~ gba/audio.c:322, gba/audio.c:347
+   lines 439-448  ~ arm/debugger/debugger.c:102, arm/debugger/debugger.c:74, arm/decoder-arm.c:260, arm/decoder-thumb.c:200
+   lines 459-460  ~ arm/arm.c:65, arm/arm.c:66, gba/dma.c:15, gba/memory.c:214
+   lines 470-474  ~ gba/cheats/gameshark.c:253, gba/cheats/gameshark.c:280, gba/cheats/parv3.c:365
+   lines 476-480  ~ gba/cheats/gameshark.c:253, gba/cheats/gameshark.c:280, gba/cheats/parv3.c:365

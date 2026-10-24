@@ -1,0 +1,2 @@
+blended pixel ff7b7bff outside ff0000ff
+with windows, blended pixel ff7b7bff

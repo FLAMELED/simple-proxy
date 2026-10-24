@@ -1,0 +1,20 @@
+RTC rtcReadPins vs mGBA-0.10.5 _rtcReadPins ratio=0.83  longest_run= 11 tokens  ours=258 ref=288
+RTC rtcReadPins vs mGBA-master _rtcReadPins ratio=0.34  longest_run= 10 tokens  ours=258 ref=422
+RTC rtcProcessByte vs 0.10.5 _rtcProcessByte ratio=0.65  longest_run=  9 tokens  ours=149 ref=188
+RTC rtcOutput vs 0.10.5 _rtcOutput     ratio=0.55  longest_run=  6 tokens  ours=73 ref=98
+RTC outputPins vs 0.10.5 _outputPins   ratio=0.48  longest_run= 11 tokens  ours=27 ref=60
+BIOS arctan vs _ArcTan                 ratio=0.61  longest_run= 10 tokens  ours=177 ref=254
+BIOS arctan2 vs _ArcTan2               ratio=0.64  longest_run= 20 tokens  ours=279 ref=245
+BIOS objAffineSet vs _ObjAffineSet     ratio=0.58  longest_run= 11 tokens  ours=195 ref=228
+BIOS bgAffineSet vs _BgAffineSet       ratio=0.31  longest_run= 10 tokens  ours=322 ref=340
+BIOS div vs _Div                       ratio=0.57  longest_run=  8 tokens  ours=101 ref=190
+BIOS midiKey2Freq vs _MidiKey2Freq     ratio=0.48  longest_run=  3 tokens  ours=50 ref=75
+BIOS lz77 vs _unLz77                   ratio=0.33  longest_run=  8 tokens  ours=207 ref=495
+BIOS huffman vs _unHuffman             ratio=0.46  longest_run= 26 tokens  ours=380 ref=396
+EEPROM write vs GBASavedataWriteEEPROM ratio=0.22  longest_run=  8 tokens  ours=357 ref=261
+BASELINE Flash.write8 vs WriteFlash (same protocol) ratio=0.26  longest_run=  8 tokens  ours=291 ref=295
+BASELINE rtcReadPins vs _gyroReadPins (unrelated) ratio=0.34  longest_run=  6 tokens  ours=258 ref=121
+COLOR setColorCorrection vs higan 8f4df01 color() ratio=0.44  longest_run= 20 tokens  ours=291 ref=242
+RTC rtcReadPins vs GBA.js setPins      ratio=0.82  longest_run= 38 tokens  ours=258 ref=234
+RTC rtcProcessByte vs GBA.js processByte ratio=0.63  longest_run= 22 tokens  ours=149 ref=150
+RTC rtcOutput vs GBA.js sioOutputPin   ratio=0.58  longest_run= 11 tokens  ours=73 ref=61

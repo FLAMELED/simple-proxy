@@ -1,0 +1,18 @@
+verified=true v1=false v2=true 
+apk: <repo>/bolsillo-advance/app/apk/build/Bolsillo-Advance.apk 91480 bytes
+OK   [APK] avisos de terceros = notices/THIRD-PARTY-NOTICES.txt
+OK   [APK] texto completo MPL-2.0
+OK   [APK] texto completo BSD-2-Clause (GBA.js)
+OK   [APK] fuente separada cart.js = app/gba/src/cart.js
+OK   [APK] fuente separada bios.js = app/gba/src/bios.js
+OK   [APK] la página lleva la sección "Licencias y avisos"
+OK   [APK] la página lleva el aviso Exhibit A
+OK   [APK] corrección de color nueva presente
+OK   [APK] sin restos del perfil de color anterior
+OK   [APK] código JS sin minificar (forma de código fuente)
+OK   [APK] no incluye fuentes tipográficas
+OK   [APK] no incluye ROMs ni BIOS
+OK   [APK] DEX: solo paquetes propios fuera de la plataforma — com/bolsillo/advance
+OK   [APK] firma APK v2 válida (androguard)
+OK   [APK] paquete y SDK — com.bolsillo.advance min=24 target=29
+sha256 a81709736dd9b5990f706c30a91921ec6efc8df4ebdc12a692c789edd6cb5ad5 91480 bytes

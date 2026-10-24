@@ -1,0 +1,10 @@
+OK   [UI] opción de color "Suaves (LCD)" presente
+OK   [UI] la etiqueta antigua "Como la GBA" ya no existe
+OK   [UI] el motor activa la corrección
+OK   [UI] avisos visibles en el menú
+OK   [UI] el texto de avisos contiene "Jeffrey Pfau"
+OK   [UI] el texto de avisos contiene "Mozilla Public License Version 2.0"
+OK   [UI] el texto de avisos contiene "Redistributions in binary form"
+OK   [UI] el texto de avisos contiene "SIL Open Font License 1.1"
+OK   [UI] el texto de avisos contiene "gba/src/cart.js"
+OK   [UI] sin errores de JavaScript

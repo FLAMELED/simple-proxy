@@ -1,0 +1,21 @@
+# name|our file|from|to|reference file|from|to     ($O = engine sources, refs/ = clones from refs.lock)
+RTC rtcReadPins vs mGBA-0.10.5 _rtcReadPins|$O/cart.js|209|244|refs/mgba-0.10.5/src/gba/cart/gpio.c|138|197
+RTC rtcReadPins vs mGBA-master _rtcReadPins|$O/cart.js|209|244|refs/mgba-master/src/gba/cart/gpio.c|159|228
+RTC rtcProcessByte vs 0.10.5 _rtcProcessByte|$O/cart.js|246|266|refs/mgba-0.10.5/src/gba/cart/gpio.c|199|246
+RTC rtcOutput vs 0.10.5 _rtcOutput|$O/cart.js|268|276|refs/mgba-0.10.5/src/gba/cart/gpio.c|248|271
+RTC outputPins vs 0.10.5 _outputPins|$O/cart.js|205|207|refs/mgba-0.10.5/src/gba/cart/gpio.c|126|135
+BIOS arctan vs _ArcTan|$O/bios.js|121|133|refs/mgba-0.10.5/src/gba/bios.c|309|335
+BIOS arctan2 vs _ArcTan2|$O/bios.js|135|156|refs/mgba-0.10.5/src/gba/bios.c|337|372
+BIOS objAffineSet vs _ObjAffineSet|$O/bios.js|204|217|refs/mgba-0.10.5/src/gba/bios.c|234|264
+BIOS bgAffineSet vs _BgAffineSet|$O/bios.js|185|202|refs/mgba-0.10.5/src/gba/bios.c|190|232
+BIOS div vs _Div|$O/bios.js|111|119|refs/mgba-0.10.5/src/gba/bios.c|277|307
+BIOS midiKey2Freq vs _MidiKey2Freq|$O/bios.js|352|355|refs/mgba-0.10.5/src/gba/bios.c|266|275
+BIOS lz77 vs _unLz77|$O/bios.js|250|274|refs/mgba-0.10.5/src/gba/bios.c|646|734
+BIOS huffman vs _unHuffman|$O/bios.js|276|313|refs/mgba-0.10.5/src/gba/bios.c|736|802
+EEPROM write vs GBASavedataWriteEEPROM|$O/cart.js|91|123|refs/mgba-0.10.5/src/gba/savedata.c|@GBASavedataWriteEEPROM
+BASELINE Flash.write8 vs WriteFlash (same protocol)|$O/cart.js|23|64|refs/mgba-0.10.5/src/gba/savedata.c|384|470
+BASELINE rtcReadPins vs _gyroReadPins (unrelated)|$O/cart.js|209|244|refs/mgba-0.10.5/src/gba/cart/gpio.c|317|345
+COLOR setColorCorrection vs higan 8f4df01 color()|$O/ppu.js|47|63|refs/higan/higan/gba/ppu/color.cpp|1|21
+RTC rtcReadPins vs GBA.js setPins|$O/cart.js|209|244|refs/gbajs/js/gpio.js|@GameBoyAdvanceRTC.prototype.setPins..GameBoyAdvanceRTC.prototype.setDirection
+RTC rtcProcessByte vs GBA.js processByte|$O/cart.js|246|266|refs/gbajs/js/gpio.js|@GameBoyAdvanceRTC.prototype.processByte..GameBoyAdvanceRTC.prototype.sioOutputPin
+RTC rtcOutput vs GBA.js sioOutputPin|$O/cart.js|268|276|refs/gbajs/js/gpio.js|@GameBoyAdvanceRTC.prototype.sioOutputPin..GameBoyAdvanceRTC.prototype.updateClock

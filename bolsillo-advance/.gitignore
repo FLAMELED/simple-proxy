@@ -1,0 +1,15 @@
+# build outputs
+app/gba/dist/
+app/apk/build/
+out/
+audit/out*/
+# third-party material fetched from the lock files (not redistributed here)
+audit/refs
+testroms/
+# build-only tools and the signing key: never commit a keystore
+app/apk/.tools/
+*.p12
+*.jks
+*.keystore
+*.apk
+__pycache__/

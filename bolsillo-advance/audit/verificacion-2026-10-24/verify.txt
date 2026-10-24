@@ -1,0 +1,118 @@
+OK   [CPU/BIOS] gba-tests arm/arm — passed
+OK   [CPU/BIOS] gba-tests arm/arm = versión de referencia (colores sin corregir) — afc525600e609311
+OK   [CPU/BIOS] gba-tests thumb/thumb — passed
+OK   [CPU/BIOS] gba-tests thumb/thumb = versión de referencia (colores sin corregir) — afc525600e609311
+OK   [CPU/BIOS] gba-tests memory/memory — passed
+OK   [CPU/BIOS] gba-tests memory/memory = versión de referencia (colores sin corregir) — afc525600e609311
+OK   [CPU/BIOS] gba-tests bios/bios — passed
+OK   [CPU/BIOS] gba-tests bios/bios = versión de referencia (colores sin corregir) — afc525600e609311
+OK   [CPU/BIOS] control negativo: CPU saboteada -> el test informa del fallo — failed
+OK   [Guardados] gba-tests save/flash64: tipo detectado flash64
+OK   [Guardados] gba-tests save/flash64 — passed
+OK   [Guardados] save/flash64: partida recargada idéntica — 65536 bytes
+OK   [Guardados] save/flash64: el test pasa con la partida recargada
+OK   [Guardados] gba-tests save/flash64 = versión de referencia (colores sin corregir) — afc525600e609311
+OK   [Guardados] gba-tests save/flash128: tipo detectado flash128
+OK   [Guardados] gba-tests save/flash128 — passed
+OK   [Guardados] save/flash128: partida recargada idéntica — 131072 bytes
+OK   [Guardados] save/flash128: el test pasa con la partida recargada
+OK   [Guardados] gba-tests save/flash128 = versión de referencia (colores sin corregir) — afc525600e609311
+OK   [Guardados] gba-tests save/sram: tipo detectado sram
+OK   [Guardados] gba-tests save/sram — passed
+OK   [Guardados] save/sram: partida recargada idéntica — 32768 bytes
+OK   [Guardados] save/sram: el test pasa con la partida recargada
+OK   [Guardados] gba-tests save/sram = versión de referencia (colores sin corregir) — afc525600e609311
+OK   [Guardados] gba-tests save/none: tipo detectado none
+OK   [Guardados] gba-tests save/none — passed
+OK   [Guardados] EEPROM detectada por la cadena EEPROM_V
+OK   [Guardados] EEPROM 64 Kbit: escribir y leer un bloque — de ad be ef 1 23 45 67
+OK   [Guardados] EEPROM: el bloque sobrevive a exportar/importar
+OK   [RTC] registro de control leído = 0x40 (24 h) — 0x40
+OK   [RTC] fecha y hora (BCD) = reloj del sistema — 26 10 24 06 19 05 55
+OK   [RTC] modo 12 h con indicador PM — 0x87
+OK   [RTC] estado del RTC se conserva en un estado guardado
+OK   [BIOS] BIOSARCTAN.gba se ejecuta y dibuja
+OK   [BIOS] BIOSARCTAN.gba = versión de referencia (colores sin corregir) — a75d9743ca839854
+OK   [BIOS] BIOSDIV.gba se ejecuta y dibuja
+OK   [BIOS] BIOSDIV.gba = versión de referencia (colores sin corregir) — 28daf45de78d56e3
+OK   [BIOS] BIOSSQRT.gba se ejecuta y dibuja
+OK   [BIOS] BIOSSQRT.gba = versión de referencia (colores sin corregir) — 41241800290ab893
+OK   [BIOS] BIOSBIT1BPP.gba se ejecuta y dibuja
+OK   [BIOS] BIOSBIT1BPP.gba = versión de referencia (colores sin corregir) — 5476a5f39ba8c930
+OK   [BIOS] BIOSBIT2BPP.gba se ejecuta y dibuja
+OK   [BIOS] BIOSBIT2BPP.gba = versión de referencia (colores sin corregir) — 2ddbb6a1dda5bf3f
+OK   [BIOS] BIOSBIT4BPP.gba se ejecuta y dibuja
+OK   [BIOS] BIOSBIT4BPP.gba = versión de referencia (colores sin corregir) — c7f118484cd61872
+OK   [BIOS] BIOSBIT8BPP.gba se ejecuta y dibuja
+OK   [BIOS] BIOSBIT8BPP.gba = versión de referencia (colores sin corregir) — 2c53881b4113e47d
+OK   [BIOS] BIOSDIFF.gba se ejecuta y dibuja
+OK   [BIOS] BIOSDIFF.gba = versión de referencia (colores sin corregir) — e5ff45fd84f102c3
+OK   [BIOS] BIOSHUFFMAN.gba se ejecuta y dibuja
+OK   [BIOS] BIOSHUFFMAN.gba = versión de referencia (colores sin corregir) — 5029b982e5e1d736
+OK   [BIOS] BIOSLZ77.gba se ejecuta y dibuja
+OK   [BIOS] BIOSLZ77.gba = versión de referencia (colores sin corregir) — 0acc6c16feb28774
+OK   [BIOS] BIOSRLE.gba se ejecuta y dibuja
+OK   [BIOS] BIOSRLE.gba = versión de referencia (colores sin corregir) — df4471c0aab272df
+OK   [BIOS] BIOSCPUFASTSET.gba se ejecuta y dibuja
+OK   [BIOS] BIOSCPUFASTSET.gba = versión de referencia (colores sin corregir) — d23523137cf92760
+OK   [BIOS] BIOSCPUSET.gba se ejecuta y dibuja
+OK   [BIOS] BIOSCPUSET.gba = versión de referencia (colores sin corregir) — b8348635da59d691
+OK   [BIOS] BIOSCHECKSUM.gba se ejecuta y dibuja
+OK   [BIOS] BIOSCHECKSUM.gba = versión de referencia (colores sin corregir) — bda17d80533c5021
+OK   [BIOS] BIOSRegisterRamReset.gba se ejecuta y dibuja
+OK   [BIOS] BIOSRegisterRamReset.gba = versión de referencia (colores sin corregir) — 45aaaadea9cddc29
+OK   [BIOS] BIOSBGAFFINESET.gba se ejecuta y dibuja
+OK   [BIOS] BIOSBGAFFINESET.gba = versión de referencia (colores sin corregir) — 34be619e5b38efdc
+OK   [BIOS] BIOSOBJAFFINESET.gba se ejecuta y dibuja
+OK   [BIOS] BIOSOBJAFFINESET.gba = versión de referencia (colores sin corregir) — 2d2ac74345a57160
+OK   [BIOS] BIOSSoundBias.gba se ejecuta y dibuja
+OK   [BIOS] BIOSSoundBias.gba = versión de referencia (colores sin corregir) — 6612bb6415c1e72e
+OK   [BIOS] BIOSSoundChannelClear.gba se ejecuta y dibuja
+OK   [BIOS] BIOSSoundChannelClear.gba = versión de referencia (colores sin corregir) — 025f96f1270ca4dd
+OK   [BIOS] BIOSSoundDriverInit.gba se ejecuta y dibuja
+OK   [BIOS] BIOSSoundDriverInit.gba = versión de referencia (colores sin corregir) — 3bfa9dfc0a8b5359
+OK   [BIOS] BIOSSoundDriverMain.gba se ejecuta y dibuja
+OK   [BIOS] BIOSSoundDriverMain.gba = versión de referencia (colores sin corregir) — 0d1644e54b9c7c8d
+OK   [BIOS] BIOSSoundDriverMode.gba se ejecuta y dibuja
+OK   [BIOS] BIOSSoundDriverMode.gba = versión de referencia (colores sin corregir) — bd8b8ec6926afab5
+OK   [BIOS] BIOSSoundDriverVSync.gba se ejecuta y dibuja
+OK   [BIOS] BIOSSoundDriverVSync.gba = versión de referencia (colores sin corregir) — 35c583a834334cd4
+OK   [BIOS] BIOSSoundGetJumpList.gba se ejecuta y dibuja
+OK   [BIOS] BIOSSoundGetJumpList.gba = versión de referencia (colores sin corregir) — 57f5e333003500a4
+OK   [BIOS] BIOSMidiKey2Freq.gba se ejecuta y dibuja
+OK   [BIOS] BIOSMidiKey2Freq.gba = versión de referencia (colores sin corregir) — 89ee5451faeedf73
+OK   [BIOS] Div/Sqrt/ArcTan/ArcTan2: 9288 llamadas idénticas a la referencia — 0 diferencias
+OK   [Gráficos] BGMode0.gba dibuja — 54 colores
+OK   [Gráficos] BGMode0.gba = versión de referencia (colores sin corregir) — ed0e8e1a0fbdce93
+OK   [Gráficos] BGMode7.gba dibuja — 30 colores
+OK   [Gráficos] BGMode7.gba = versión de referencia (colores sin corregir) — 0c5a40f0850e3535
+OK   [Gráficos] BGRotZoomMode2.gba dibuja — 23 colores
+OK   [Gráficos] BGRotZoomMode2.gba = versión de referencia (colores sin corregir) — ed83ce1c96e59311
+OK   [Gráficos] BGRotZoomMode3.gba dibuja — 362 colores
+OK   [Gráficos] BGRotZoomMode3.gba = versión de referencia (colores sin corregir) — 1ee77f8502ab17f3
+OK   [Gráficos] BGRotZoomMode4.gba dibuja — 16 colores
+OK   [Gráficos] BGRotZoomMode4.gba = versión de referencia (colores sin corregir) — eb21bf91d6f78864
+OK   [Gráficos] BGRotZoomMode5.gba dibuja — 359 colores
+OK   [Gráficos] BGRotZoomMode5.gba = versión de referencia (colores sin corregir) — 27ffc50e1fd326bf
+OK   [Gráficos] OBJRotZoom4BPP.gba dibuja — 16 colores
+OK   [Gráficos] OBJRotZoom4BPP.gba = versión de referencia (colores sin corregir) — b4b67351ceab1e89
+OK   [Gráficos] OBJRotZoom8BPP.gba dibuja — 16 colores
+OK   [Gráficos] OBJRotZoom8BPP.gba = versión de referencia (colores sin corregir) — b4b67351ceab1e89
+OK   [Gráficos] hello.gba dibuja — 2 colores
+OK   [Gráficos] hello.gba = versión de referencia (colores sin corregir) — 39ea616cb9ac6fce
+OK   [Gráficos] shades.gba dibuja — 15 colores
+OK   [Gráficos] shades.gba = versión de referencia (colores sin corregir) — 70dc4aa1116866d9
+OK   [Gráficos] stripes.gba dibuja — 2 colores
+OK   [Gráficos] stripes.gba = versión de referencia (colores sin corregir) — 8463365677fc157c
+OK   [Gráficos] HelloWorld.gba dibuja — 4 colores
+OK   [Gráficos] HelloWorld.gba = versión de referencia (colores sin corregir) — abb36ecf0a140811
+OK   [Gráficos] Myst.gba dibuja — 1069 colores
+OK   [Gráficos] Myst.gba = versión de referencia (colores sin corregir) — b79458067a5a5d44
+OK   [Gráficos] 3DEngine.gba dibuja — 8 colores
+OK   [Gráficos] 3DEngine.gba = versión de referencia (colores sin corregir) — 225e03a6abdd8a9b
+OK   [Gráficos] colores sin corregir: 5 bits -> 8 bits exacto
+OK   [Gráficos] modo LCD: grises neutros y rampa creciente
+OK   [Gráficos] modo LCD: negro = 0 y blanco atenuado — blanco=237
+OK   [Gráficos] modo LCD distinto del perfil anterior
+
+116/116 comprobaciones correctas

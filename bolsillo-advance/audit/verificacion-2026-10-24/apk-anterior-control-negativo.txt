@@ -1,0 +1,17 @@
+# check_apk.py sobre el APK anterior (versión auditada, sha256 4d57ba9d…): control negativo
+FAIL [APK] avisos de terceros = notices/THIRD-PARTY-NOTICES.txt
+FAIL [APK] texto completo MPL-2.0
+FAIL [APK] texto completo BSD-2-Clause (GBA.js)
+FAIL [APK] fuente separada cart.js = app/gba/src/cart.js
+FAIL [APK] fuente separada bios.js = app/gba/src/bios.js
+FAIL [APK] la página lleva la sección "Licencias y avisos"
+FAIL [APK] la página lleva el aviso Exhibit A
+FAIL [APK] corrección de color nueva presente
+FAIL [APK] sin restos del perfil de color anterior
+OK   [APK] código JS sin minificar (forma de código fuente)
+OK   [APK] no incluye fuentes tipográficas
+OK   [APK] no incluye ROMs ni BIOS
+OK   [APK] DEX: solo paquetes propios fuera de la plataforma — com/bolsillo/advance
+OK   [APK] firma APK v2 válida (androguard)
+OK   [APK] paquete y SDK — com.bolsillo.advance min=24 target=29
+sha256 4d57ba9d5aaaee2abcd3889e6ca4bb88d47048badeb321bc5ed5e221cedeccbc 68888 bytes

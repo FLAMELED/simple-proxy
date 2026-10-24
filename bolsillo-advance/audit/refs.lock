@@ -1,0 +1,8 @@
+# name          url                                           commit                                    note
+mgba-0.10.5     https://github.com/mgba-emu/mgba.git          26b7884bc25a5933960f3cdcd98bac1ae14d42e2  tag 0.10.5, MPL-2.0
+mgba-master     https://github.com/mgba-emu/mgba.git          fd9dc5c2cbf234365068855851107e762fc6211b  master on 2026-10-18, MPL-2.0
+higan           https://github.com/higan-emu/higan.git        8f4df010715298455b92cfc0821ea833770a8b5a  GPLv3-or-later
+ares            https://github.com/ares-emulator/ares.git     c76aaffa6e69778baf9a66d1da04298ac2ed7d1d  ISC
+gbajs           https://github.com/endrift/gbajs.git          0cf0ac7d624eaae032e19ba2f154e0ae1ce73796  BSD-2-Clause
+iodinegba       https://github.com/taisel/IodineGBA.git       a6aa38941739701f85b5a4e589c9fdd4b5008ad0  MIT
+gfonts          https://github.com/google/fonts.git           e7db6ca603fd4862010383ff17ffd6cc4ffac1c0  OFL-1.1 (Silkscreen, Rubik)

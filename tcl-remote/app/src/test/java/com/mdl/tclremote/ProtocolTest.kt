@@ -1,5 +1,6 @@
 package com.mdl.tclremote
 
+import com.mdl.tclremote.atv.ClientCert
 import com.mdl.tclremote.atv.Framing
 import com.mdl.tclremote.atv.PairingMessages
 import com.mdl.tclremote.atv.PairingSecret
@@ -15,6 +16,8 @@ import org.junit.Test
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.math.BigInteger
+import java.security.Signature
+import java.security.interfaces.RSAPublicKey
 
 class ProtocolTest {
     @Test
@@ -73,6 +76,18 @@ class ProtocolTest {
     fun necAndRcaPatternsHaveExpectedLength() {
         assertEquals(2 + 64 + 1, IrCodes.nec(0x04, 0x08).pattern.size)
         assertEquals((2 + 48 + 1) * 2 + 1, IrCodes.rca(0xF, 0x54).pattern.size)
+    }
+
+    @Test
+    fun clientCertIsSelfSignedRsaAndSurvivesReload() {
+        val cert = ClientCert.generate()
+        cert.certificate.verify(cert.certificate.publicKey)
+        assertEquals(2048, (cert.certificate.publicKey as RSAPublicKey).modulus.bitLength())
+        val reloaded = ClientCert.load(cert.keyBytes(), cert.certBytes())
+        val data = "hola".toByteArray()
+        val sig = Signature.getInstance("SHA256withRSA").apply { initSign(reloaded.privateKey); update(data) }.sign()
+        val ok = Signature.getInstance("SHA256withRSA").apply { initVerify(reloaded.certificate); update(data) }.verify(sig)
+        assertTrue(ok)
     }
 
     private companion object {

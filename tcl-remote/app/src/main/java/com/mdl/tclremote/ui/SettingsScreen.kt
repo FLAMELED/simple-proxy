@@ -345,11 +345,13 @@ private fun WidgetSection() {
 
 @Composable
 private fun AppsSection() {
+    val context = LocalContext.current
     val apps by Store.apps.collectAsState()
     var adding by remember { mutableStateOf(false) }
     Section("Apps rápidas") {
         apps.forEachIndexed { i, app ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                AppIcon(app, 40)
                 Column(Modifier.weight(1f)) {
                     Text(app.name)
                     Text(app.link, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -362,6 +364,7 @@ private fun AppsSection() {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = { adding = true }) { Text("Añadir app") }
             TextButton(onClick = { Store.setApps(Store.defaultApps) }) { Text("Restaurar") }
+            TextButton(onClick = { TvRemote.launch { AppIcons.clear(context) } }) { Text("Recargar iconos") }
         }
     }
     if (adding) {

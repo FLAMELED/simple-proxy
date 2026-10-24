@@ -139,11 +139,8 @@ fun RemoteScreen(onOpenSettings: () -> Unit) {
 
         Spacer(Modifier.height(24.dp))
         Text("Apps", style = MaterialTheme.typography.titleSmall, modifier = Modifier.fillMaxWidth())
-        Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            apps.forEach { app ->
-                AssistChip(onClick = { TvRemote.launch { TvRemote.openApp(app.link) } }, label = { Text(app.name) })
-            }
-        }
+        Spacer(Modifier.height(10.dp))
+        AppGrid(apps) { app -> TvRemote.launch { TvRemote.openApp(app.link) } }
         if (scenes.isNotEmpty()) {
             Spacer(Modifier.height(8.dp))
             Text("Escenas", style = MaterialTheme.typography.titleSmall, modifier = Modifier.fillMaxWidth())

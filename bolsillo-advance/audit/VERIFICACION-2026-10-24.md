@@ -1,4 +1,12 @@
-# Verificación de la versión actual (2026-10-24)
+# Verificación de la versión actual (2026-10-24, primera ronda)
+
+> **Cómo leer el "116/116" de esta ronda (aclaración añadida en la segunda ronda):**
+> - Son **comprobaciones automáticas de regresión y de componentes con ROMs de prueba**, que informa el propio script. **No son una medida de compatibilidad.** No se probó ningún juego comercial.
+> - **No incluían como fallos** las filas TIMER0 de las ROMs de BIOS ni `SoundGetJumpList`, que fallaban y se describían aparte.
+> - Desde la segunda ronda, `verify.js` cuenta esas filas por sí mismo y las saca en un bloque "FALLOS CONOCIDOS" que no suma a las comprobaciones superadas.
+> - Desde la segunda ronda, el mismo script se ejecuta también en GitHub Actions. Ver `VERIFICACION-ANDROID.md`.
+>
+> Esta página describe la versión de la primera ronda (APK sin Gradle, targetSdk 29), **que ha quedado sustituida**.
 
 **Versión probada:** los hashes de la sección 2 de `ESTADO-VERSIONES.md`.
 - `dist/bolsillo-advance.html`: sha256 `2f4e3cf9…2a74887`.

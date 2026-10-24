@@ -1,6 +1,12 @@
 # Propuesta para los componentes posiblemente derivados de mGBA
 
-**Estado:** propuesta. **Solo está aplicado el punto 4** (avisos y código fuente dentro del APK y de la app) porque era necesario para no distribuir sin avisos. La separación en archivos (punto 2) **no se ha aplicado**. Es una decisión tuya, junto con la opción de pedir permiso o reescribir (punto 6).
+**Estado (actualizado el 2026-10-24, segunda ronda):** se ha elegido y **aplicado la opción A (cumplir la MPL-2.0)**. La delimitación vigente y cómo se cumple cada obligación están en **`COVERED-FILES.md`**. Este documento queda como la propuesta original.
+
+Cambios respecto a lo propuesto:
+- **Nombre del archivo del RTC:** es `mpl/gpio-rtc.js` y no `mpl/rtc.js`. Incluye el puerto GPIO completo, porque `outputPins` y la máscara de lectura también estaban señaladas.
+- **Fuentes duplicadas:** los archivos se sirven aparte (`assets/www/mpl/`), así que desaparecen las copias de `assets/source/cart.js` y `bios.js`.
+- **Avisos:** dan la URL del código con el commit exacto.
+
 **No es asesoramiento legal.** Los puntos marcados ⚖ requieren un abogado.
 
 ## 1. Componentes y archivos afectados

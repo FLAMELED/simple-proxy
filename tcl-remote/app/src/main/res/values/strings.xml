@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Mi TCL</string>
+    <string name="widget_description">Encender, volumen y escenas de tu TCL</string>
+</resources>

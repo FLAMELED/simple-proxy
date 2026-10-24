@@ -1,0 +1,49 @@
+name: Mi TCL APK
+
+on:
+  push:
+    paths:
+      - "tcl-remote/**"
+      - ".github/workflows/tcl-remote-apk.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tcl-remote
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Test and build
+        run: ./gradlew --no-daemon testReleaseUnitTest assembleRelease
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/release/app-release.apk MiTCL.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MiTCL-apk
+          path: tcl-remote/MiTCL.apk
+
+      - name: Publish download link
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete mi-tcl-latest --yes --cleanup-tag || true
+          gh release create mi-tcl-latest MiTCL.apk \
+            --target "${{ github.sha }}" \
+            --prerelease \
+            --title "Mi TCL (build ${{ github.run_number }})" \
+            --notes "APK de la app de mando para la TCL 65C6K. Descárgalo desde el móvil e instálalo."

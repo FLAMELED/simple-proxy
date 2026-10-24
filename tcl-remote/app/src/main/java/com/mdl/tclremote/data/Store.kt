@@ -41,6 +41,9 @@ fun newId(): String = UUID.randomUUID().toString()
 
 /** Guarda la configuración en SharedPreferences y la expone como StateFlow para la interfaz. */
 object Store {
+    private const val SPOTIFY_LINK = "spotify://"
+    private const val OLD_SPOTIFY_LINK = "market://launch?id=com.spotify.tv.android"
+
     private lateinit var prefs: SharedPreferences
 
     private val _host = MutableStateFlow("")
@@ -66,7 +69,10 @@ object Store {
         _irCode.value = prefs.getString("ir_code", "") ?: ""
         _scenes.value = prefs.getString("scenes", null)?.let(::parseScenes) ?: defaultScenes()
         _schedules.value = prefs.getString("schedules", null)?.let(::parseSchedules) ?: emptyList()
-        _apps.value = prefs.getString("apps", null)?.let(::parseApps) ?: defaultApps
+        _apps.value = prefs.getString("apps", null)?.let(::parseApps)?.map {
+            // La TV no abría Spotify con el enlace market:// de la primera versión.
+            if (it.link == OLD_SPOTIFY_LINK) it.copy(link = SPOTIFY_LINK) else it
+        } ?: defaultApps
         _widgetScenes.value = prefs.getString("widget_scenes", null)?.let { s ->
             JSONArray(s).let { a -> List(a.length()) { a.getString(it) } }
         } ?: _scenes.value.take(2).map { it.id }
@@ -175,7 +181,7 @@ object Store {
         AppShortcut("Prime Video", "https://app.primevideo.com"),
         AppShortcut("Disney+", "https://www.disneyplus.com"),
         AppShortcut("Max", "market://launch?id=com.wbd.stream"),
-        AppShortcut("Spotify", "market://launch?id=com.spotify.tv.android"),
+        AppShortcut("Spotify", SPOTIFY_LINK),
     )
 
     private fun defaultScenes() = listOf(

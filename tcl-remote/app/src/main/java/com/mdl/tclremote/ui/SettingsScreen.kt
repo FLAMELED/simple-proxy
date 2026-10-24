@@ -1,5 +1,7 @@
 package com.mdl.tclremote.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,9 +36,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.mdl.tclremote.atv.DebugLog
 import com.mdl.tclremote.atv.Discovery
 import com.mdl.tclremote.atv.FoundTv
 import com.mdl.tclremote.atv.Identity
@@ -61,6 +65,7 @@ fun SettingsScreen() {
         IrSection()
         WidgetSection()
         AppsSection()
+        LogSection()
     }
 }
 
@@ -95,6 +100,7 @@ private fun TvSection() {
     fun startPairing() {
         Store.setHost(ip)
         TvRemote.disconnect()
+        DebugLog.clear()
         step = PairStep.STARTING
         code = ""
         codeError = null
@@ -107,7 +113,7 @@ private fun TvSection() {
             } catch (e: Exception) {
                 s.close()
                 step = PairStep.IDLE
-                TvRemote.notify("No se pudo iniciar la vinculación: ${e.message ?: e.javaClass.simpleName}")
+                TvRemote.notify("No se pudo iniciar la vinculación. Mira el registro al final de Ajustes.")
             }
         }
     }
@@ -138,15 +144,23 @@ private fun TvSection() {
         }
         found.forEach { tv ->
             TextButton(onClick = { ip = tv.host; Store.setHost(tv.host) }, modifier = Modifier.fillMaxWidth()) {
-                Text("${tv.name} · ${tv.host}", modifier = Modifier.fillMaxWidth())
+                Column(Modifier.fillMaxWidth()) {
+                    Text(tv.name + if (tv.host == ip) "  ✓" else "")
+                    Text(tv.host, style = MaterialTheme.typography.bodySmall)
+                }
             }
         }
-        if (scanning && found.isEmpty()) {
+        if (found.size > 1) {
             Text(
-                "Si no aparece, mira la IP en la TV: Ajustes › Red e Internet › tu WiFi.",
+                "Aparecen también tus Mi Box y otras Android TV: elige la que se llame como la TCL.",
                 style = MaterialTheme.typography.bodySmall,
             )
         }
+        Text(
+            "Para asegurarte, mira la IP en la TV: Ajustes › Red e Internet › tu WiFi.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
         Text(
             if (paired) "✓ Teléfono vinculado con la TV" else "Falta vincular: la TV mostrará un código.",
             style = MaterialTheme.typography.bodyMedium,
@@ -183,7 +197,15 @@ private fun TvSection() {
             title = { Text("Código de la TV") },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Escribe el código de 6 caracteres que aparece en la pantalla de la TV.")
+                    Text(
+                        "Ha respondido: «${session?.serverName ?: "aparato sin nombre"}». " +
+                            "Escribe el código de 6 caracteres que aparece en su pantalla.",
+                    )
+                    Text(
+                        "Si el código sale en otro aparato (por ejemplo una Mi Box), la IP no es la de la TCL.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                     OutlinedTextField(
                         value = code,
                         onValueChange = { code = it.uppercase().filter { c -> c.isLetterOrDigit() }.take(6); codeError = null },
@@ -370,5 +392,31 @@ private fun AppsSection() {
             },
             dismissButton = { TextButton(onClick = { adding = false }) { Text("Cancelar") } },
         )
+    }
+}
+
+@Composable
+private fun LogSection() {
+    val context = LocalContext.current
+    val lines by DebugLog.lines.collectAsState()
+    Section("Registro (para diagnosticar)") {
+        if (lines.isEmpty()) {
+            Text("Vacío. Pulsa «Vincular» y vuelve aquí.", style = MaterialTheme.typography.bodySmall)
+        } else {
+            Text(
+                lines.takeLast(30).joinToString("\n"),
+                style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
+            )
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(onClick = {
+                val text = "Mi TCL ${Build.MANUFACTURER} ${Build.MODEL} Android ${Build.VERSION.RELEASE}\n" +
+                    lines.joinToString("\n")
+                context.getSystemService(ClipboardManager::class.java)
+                    .setPrimaryClip(ClipData.newPlainText("Registro Mi TCL", text))
+                TvRemote.notify("Registro copiado")
+            }, enabled = lines.isNotEmpty()) { Text("Copiar") }
+            TextButton(onClick = { DebugLog.clear() }) { Text("Borrar") }
+        }
     }
 }

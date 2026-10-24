@@ -24,6 +24,7 @@ class TvConnection(private val host: String, private val listener: Listener) : C
 
     /** Abre la conexión y completa el saludo inicial. Bloqueante. */
     fun open(timeoutMs: Int = 6000) {
+        DebugLog.log("Mando: conectando a $host")
         val s = Identity.connect(host, RemoteMessages.PORT, timeoutMs)
         socket = s
         val deadline = System.currentTimeMillis() + timeoutMs
@@ -36,9 +37,11 @@ class TvConnection(private val host: String, private val listener: Listener) : C
                 handle(msg)
             }
         } catch (e: Exception) {
+            DebugLog.error("saludo del mando", e)
             runCatching { s.close() }
             throw e
         }
+        DebugLog.log("✓ Mando listo")
         s.soTimeout = 0
         isOpen = true
         Thread({ readLoop(s) }, "tv-reader").apply { isDaemon = true }.start()

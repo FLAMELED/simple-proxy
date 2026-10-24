@@ -88,14 +88,21 @@ object Identity {
 
     fun connect(host: String, port: Int, timeoutMs: Int): SSLSocket {
         val plain = Socket()
+        var step = "conectar a $host:$port"
         try {
             plain.connect(InetSocketAddress(host, port), timeoutMs)
             plain.soTimeout = timeoutMs
             plain.tcpNoDelay = true
-            val ssl = sslContext.socketFactory.createSocket(plain, host, port, true) as SSLSocket
+            DebugLog.log("✓ Conectado a $host:$port")
+            step = "preparar certificado del móvil"
+            val context = sslContext
+            step = "cifrado TLS con $host:$port"
+            val ssl = context.socketFactory.createSocket(plain, host, port, true) as SSLSocket
             ssl.startHandshake()
+            DebugLog.log("✓ TLS ${ssl.session.protocol} con $host:$port")
             return ssl
         } catch (e: Exception) {
+            DebugLog.error(step, e)
             plain.close()
             throw e
         }

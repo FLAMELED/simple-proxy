@@ -13,14 +13,22 @@ class PairingException(message: String) : Exception(message)
 class PairingSession(private val host: String) : Closeable {
     private var socket: SSLSocket? = null
 
+    /** Nombre con el que se identifica el aparato que respondió (para comprobar que es la TCL). */
+    var serverName: String? = null
+        private set
+
     fun start(clientName: String) {
+        DebugLog.log("Vinculación con $host")
         val s = Identity.connect(host, PairingMessages.PORT, 10_000)
         socket = s
         s.soTimeout = 15_000
-        exchange(PairingMessages.pairingRequest(clientName), PairingMessages.FIELD_PAIRING_REQUEST_ACK)
-        exchange(PairingMessages.options(), PairingMessages.FIELD_OPTIONS)
-        exchange(PairingMessages.configuration(), PairingMessages.FIELD_CONFIGURATION_ACK)
+        val ack = exchange(PairingMessages.pairingRequest(clientName), PairingMessages.FIELD_PAIRING_REQUEST_ACK, "solicitud")
+        serverName = ack.message(PairingMessages.FIELD_PAIRING_REQUEST_ACK)?.string(1)
+        DebugLog.log("Responde el aparato: ${serverName ?: "(sin nombre)"}")
+        exchange(PairingMessages.options(), PairingMessages.FIELD_OPTIONS, "opciones")
+        exchange(PairingMessages.configuration(), PairingMessages.FIELD_CONFIGURATION_ACK, "configuración")
         // A partir de aquí la TV muestra el código en pantalla y espera.
+        DebugLog.log("✓ El aparato debería mostrar ahora el código")
         s.soTimeout = 0
     }
 
@@ -31,18 +39,25 @@ class PairingSession(private val host: String) : Closeable {
         val server = s.session.peerCertificates.first().publicKey as RSAPublicKey
         val secret = PairingSecret.compute(
             client.modulus, client.publicExponent, server.modulus, server.publicExponent, code,
-        ) ?: return false
+        ) ?: return false.also { DebugLog.log("✗ El código no coincide con este aparato") }
         s.soTimeout = 15_000
-        exchange(PairingMessages.secret(secret), PairingMessages.FIELD_SECRET_ACK)
+        exchange(PairingMessages.secret(secret), PairingMessages.FIELD_SECRET_ACK, "código")
+        DebugLog.log("✓ Vinculado")
         close()
         return true
     }
 
-    private fun exchange(request: ByteArray, expectedField: Int): ProtoMessage {
+    private fun exchange(request: ByteArray, expectedField: Int, step: String): ProtoMessage {
         val s = socket!!
-        Framing.write(s.outputStream, request)
-        val reply = ProtoMessage.parse(Framing.read(s.inputStream))
+        val reply = try {
+            Framing.write(s.outputStream, request)
+            ProtoMessage.parse(Framing.read(s.inputStream))
+        } catch (e: Exception) {
+            DebugLog.error("paso «$step»", e)
+            throw e
+        }
         val status = reply.int(2) ?: 0
+        DebugLog.log("${if (status == PairingMessages.STATUS_OK) "✓" else "✗"} Paso «$step»: estado $status, campos $reply")
         if (status != PairingMessages.STATUS_OK) {
             throw PairingException(
                 when (status) {

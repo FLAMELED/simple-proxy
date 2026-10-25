@@ -35,12 +35,14 @@ data class Schedule(
     val enabled: Boolean,
 )
 
-data class AppShortcut(val name: String, val link: String)
+/** [icon] es el paquete del que descargar el logo (vacío = deducirlo del nombre o del enlace). */
+data class AppShortcut(val name: String, val link: String, val icon: String = "")
 
 fun newId(): String = UUID.randomUUID().toString()
 
 /** Guarda la configuración en SharedPreferences y la expone como StateFlow para la interfaz. */
 object Store {
+    private const val APPS_VERSION = 2
     private const val SPOTIFY_LINK = "spotify://"
     private const val OLD_SPOTIFY_LINK = "market://launch?id=com.spotify.tv.android"
 
@@ -73,6 +75,16 @@ object Store {
             // La TV no abría Spotify con el enlace market:// de la primera versión.
             if (it.link == OLD_SPOTIFY_LINK) it.copy(link = SPOTIFY_LINK) else it
         } ?: defaultApps
+        if (prefs.getInt("apps_version", 1) < APPS_VERSION) {
+            // Pasa a la lista completa de apps de la TV, conservando las que se añadieron a mano.
+            val firstVersionLinks = setOf(
+                "https://www.youtube.com", "https://www.netflix.com/title", "https://app.primevideo.com",
+                "https://www.disneyplus.com", "market://launch?id=com.wbd.stream", SPOTIFY_LINK, OLD_SPOTIFY_LINK,
+            )
+            val custom = _apps.value.filter { it.link !in firstVersionLinks && defaultApps.none { d -> d.link == it.link } }
+            setApps(defaultApps + custom)
+            prefs.edit().putInt("apps_version", APPS_VERSION).apply()
+        }
         _widgetScenes.value = prefs.getString("widget_scenes", null)?.let { s ->
             JSONArray(s).let { a -> List(a.length()) { a.getString(it) } }
         } ?: _scenes.value.take(2).map { it.id }
@@ -130,8 +142,16 @@ object Store {
     fun setApps(list: List<AppShortcut>) {
         _apps.value = list
         prefs.edit().putString("apps", JSONArray(list.map {
-            JSONObject().put("name", it.name).put("link", it.link)
+            JSONObject().put("name", it.name).put("link", it.link).put("icon", it.icon)
         }).toString()).apply()
+    }
+
+    /** Mueve la app de la posición [from] a [to] (para ordenar la cuadrícula). */
+    fun moveApp(from: Int, to: Int) {
+        val list = _apps.value.toMutableList()
+        if (from !in list.indices || to !in list.indices || from == to) return
+        list.add(to, list.removeAt(from))
+        setApps(list)
     }
 
     fun setWidgetScenes(ids: List<String>) {
@@ -171,17 +191,34 @@ object Store {
     }
 
     private fun parseApps(json: String): List<AppShortcut> =
-        JSONArray(json).objects().map { AppShortcut(it.getString("name"), it.getString("link")) }
+        JSONArray(json).objects().map { AppShortcut(it.getString("name"), it.getString("link"), it.optString("icon")) }
 
     private fun JSONArray.objects() = List(length()) { getJSONObject(it) }
 
+    private fun tvApp(name: String, pkg: String, icon: String = "") = AppShortcut(name, "market://launch?id=$pkg", icon)
+
+    /** Apps instaladas en la TCL 65C6K (según «Tus apps»), en el mismo orden que en la TV. */
     val defaultApps = listOf(
-        AppShortcut("YouTube", "https://www.youtube.com"),
-        AppShortcut("Netflix", "https://www.netflix.com/title"),
-        AppShortcut("Prime Video", "https://app.primevideo.com"),
-        AppShortcut("Disney+", "https://www.disneyplus.com"),
-        AppShortcut("Max", "market://launch?id=com.wbd.stream"),
-        AppShortcut("Spotify", SPOTIFY_LINK),
+        AppShortcut("Disney+", "https://www.disneyplus.com", "com.disney.disneyplus"),
+        AppShortcut("Netflix", "https://www.netflix.com/title", "com.netflix.mediaclient"),
+        AppShortcut("Spotify", SPOTIFY_LINK, "com.spotify.music"),
+        AppShortcut("YouTube", "https://www.youtube.com", "com.google.android.youtube"),
+        AppShortcut("Prime Video", "https://app.primevideo.com", "com.amazon.avod.thirdpartyclient"),
+        tvApp("Crunchyroll", "com.crunchyroll.crunchyroid"),
+        tvApp("HBO Max", "com.wbd.stream"),
+        tvApp("Paramount+", "com.cbs.ott", "com.cbs.app"),
+        tvApp("Apple TV", "com.apple.atve.androidtv.appletv"),
+        tvApp("Stremio", "com.stremio.one"),
+        tvApp("Kick", "com.kick.mobile"),
+        tvApp("TCL Channel", "com.tcl.waterfall.overseas"),
+        tvApp("iQIYI", "com.iqiyi.i18n.tv", "com.iqiyi.i18n"),
+        tvApp("YouTube Music", "com.google.android.youtube.tvmusic", "com.google.android.apps.youtube.music"),
+        tvApp("ESPN", "com.espn.score_center"),
+        tvApp("Tubi", "com.tubitv"),
+        tvApp("Twitch", "tv.twitch.android.viewer", "tv.twitch.android.app"),
+        tvApp("DAZN", "com.dazn"),
+        tvApp("Downloader", "com.esaba.downloader"),
+        tvApp("BrowseHere", "com.tcl.browser"),
     )
 
     private fun defaultScenes() = listOf(

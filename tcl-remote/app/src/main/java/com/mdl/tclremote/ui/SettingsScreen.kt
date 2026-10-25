@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -355,6 +358,14 @@ private fun AppsSection() {
                 Column(Modifier.weight(1f)) {
                     Text(app.name)
                     Text(app.link, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Column {
+                    IconButton(onClick = { Store.moveApp(i, i - 1) }, enabled = i > 0, modifier = Modifier.size(32.dp)) {
+                        Icon(Icons.Default.KeyboardArrowUp, "Subir")
+                    }
+                    IconButton(onClick = { Store.moveApp(i, i + 1) }, enabled = i < apps.lastIndex, modifier = Modifier.size(32.dp)) {
+                        Icon(Icons.Default.KeyboardArrowDown, "Bajar")
+                    }
                 }
                 IconButton(onClick = { Store.setApps(apps.filterIndexed { j, _ -> j != i }) }) {
                     Icon(Icons.Default.Delete, "Quitar")

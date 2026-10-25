@@ -37,6 +37,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -60,6 +63,7 @@ fun RemoteScreen(onOpenSettings: () -> Unit) {
     val host by Store.host.collectAsState()
     val apps by Store.apps.collectAsState()
     val scenes by Store.scenes.collectAsState()
+    var ordering by remember { mutableStateOf(false) }
 
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 12.dp),
@@ -138,9 +142,20 @@ fun RemoteScreen(onOpenSettings: () -> Unit) {
         }
 
         Spacer(Modifier.height(24.dp))
-        Text("Apps", style = MaterialTheme.typography.titleSmall, modifier = Modifier.fillMaxWidth())
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text("Apps", style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
+            TextButton(onClick = { ordering = !ordering }) { Text(if (ordering) "Listo" else "Ordenar") }
+        }
+        if (ordering) {
+            Text(
+                "Toca una app y luego el lugar al que quieres moverla.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
         Spacer(Modifier.height(10.dp))
-        AppGrid(apps) { app -> TvRemote.launch { TvRemote.openApp(app.link) } }
+        AppGrid(apps, onOpen = { app -> TvRemote.launch { TvRemote.openApp(app.link) } }, ordering = ordering)
         if (scenes.isNotEmpty()) {
             Spacer(Modifier.height(8.dp))
             Text("Escenas", style = MaterialTheme.typography.titleSmall, modifier = Modifier.fillMaxWidth())

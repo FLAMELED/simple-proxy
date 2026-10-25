@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mdl.tclremote.atv.DebugLog
 import com.mdl.tclremote.data.AppShortcut
+import com.mdl.tclremote.data.Store
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.sync.Mutex
@@ -88,7 +89,7 @@ private fun tileFor(app: AppShortcut): Tile = knownFor(app)?.tile ?: run {
 
 /** Paquete del que sacar el icono: el de la app conocida, o el de un enlace market://launch?id=… */
 private fun iconPackage(app: AppShortcut): String? =
-    knownFor(app)?.iconPackage ?: app.link.substringAfter("id=", "").takeIf { app.link.startsWith("market://") && it.isNotBlank() }
+    app.icon.ifBlank { null } ?: knownFor(app)?.iconPackage ?: app.link.substringAfter("id=", "").takeIf { app.link.startsWith("market://") && it.isNotBlank() }
 
 /** Descarga el icono desde la ficha de Google Play y lo guarda en caché en el móvil. */
 object AppIcons {
@@ -184,21 +185,37 @@ fun AppIcon(app: AppShortcut, size: Int) {
     }
 }
 
-/** Cuadrícula de apps: icono grande con el nombre debajo, 4 por fila. */
+/**
+ * Cuadrícula de apps: icono grande con el nombre debajo, 4 por fila.
+ * En modo [ordering], tocar una app la selecciona y tocar otra posición la mueve allí.
+ */
 @Composable
-fun AppGrid(apps: List<AppShortcut>, onOpen: (AppShortcut) -> Unit) {
+fun AppGrid(apps: List<AppShortcut>, onOpen: (AppShortcut) -> Unit, ordering: Boolean = false) {
     val view = LocalView.current
+    var selected by remember(ordering) { mutableStateOf<Int?>(null) }
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        apps.chunked(4).forEach { row ->
+        apps.chunked(4).forEachIndexed { rowIndex, row ->
             Row(Modifier.fillMaxWidth()) {
-                row.forEach { app ->
+                row.forEachIndexed { col, app ->
+                    val index = rowIndex * 4 + col
                     Column(
                         Modifier
                             .weight(1f)
                             .clip(RoundedCornerShape(16.dp))
+                            .background(if (ordering && selected == index) Accent.copy(alpha = 0.3f) else Color.Transparent)
                             .clickable {
                                 view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-                                onOpen(app)
+                                if (!ordering) {
+                                    onOpen(app)
+                                } else {
+                                    val from = selected
+                                    if (from == null) {
+                                        selected = index
+                                    } else {
+                                        Store.moveApp(from, index)
+                                        selected = null
+                                    }
+                                }
                             },
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {

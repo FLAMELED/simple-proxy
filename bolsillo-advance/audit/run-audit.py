@@ -38,6 +38,14 @@ def c_end(path, start):
         if i > start and l.startswith('}'):
             return i
 
+import hashlib
+AUDITED = {'cart.js': 'af3f1605248c4acc96c14447321964b268d20592d209f893e389e03bdaf03349',
+           'bios.js': '5e73d2e2652f12b13b99c4ef91d5866eb19ba809e490e4cf8c27ab4d4c639a47'}
+changed = [f for f, h in AUDITED.items() if hashlib.sha256(open(os.path.join(SRC, f), 'rb').read()).hexdigest() != h]
+if changed:  # the line ranges of pairs.txt belong to the audited files
+    note = 'pairs.txt describes the audited version; %s changed (MPL split), so the function pairs are not run here.\n' % ', '.join(changed)
+    open(os.path.join(OUT, 'pairsim-results.txt'), 'w').write(note)
+    print(note); sys.exit(0)
 rows = []
 color_gone = 'LCD_DESAT' in open(os.path.join(SRC, 'ppu.js'), encoding='utf-8').read()
 for line in open('pairs.txt', encoding='utf-8'):

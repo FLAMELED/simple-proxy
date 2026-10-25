@@ -7,6 +7,8 @@
 | `ESTADO-VERSIONES.md` | Hashes de la versión auditada frente a la actual, y qué conclusiones siguen aplicando |
 | `PROPUESTA-MGBA.md` | Propuesta para los componentes posiblemente derivados de mGBA: archivos, avisos, licencias, código fuente |
 | `COLOR-REEMPLAZO.md` | Retirada de la corrección de color con parámetros de higan y procedencia del reemplazo |
+| `COVERED-FILES.md` | Archivos bajo MPL-2.0, delimitación del resto (Larger Work) y cómo se cumple cada obligación |
+| `VERIFICACION-ANDROID.md` | Segunda ronda: CI en GitHub Actions (motor, navegador, AAB API 36, emulador Android 16: 34/34) |
 | `VERIFICACION-2026-10-24.md` + `verificacion-2026-10-24/` | Pruebas de la versión actual (motor, interfaz, APK), con sus registros |
 | `snapshot-SHA256SUMS.txt` | Hashes de los 16 archivos auditados |
 | `results-2026-10-24-auditada/`, `results-actual/` | Resultados de similitud de cada versión, regenerados de forma determinista |

@@ -6,22 +6,19 @@
    241-243 ~ js/audio.js:70, js/audio.js:71, js/mmu.js:259
    292-293 ~ js/audio.js:585, js/audio.js:597, js/irq.js:44
    329-330 ~ js/audio.js:585, js/audio.js:597, js/irq.js:44
-== bios.js: 33/354 lines in shared 10-grams (identifiers kept)
-   12-13 ~ js/audio.js:70, js/irq.js:391, js/video/software.js:309
-   20-21 ~ js/video/worker.js:150
-   47-50 ~ js/irq.js:517, js/irq.js:521, js/irq.js:525
-   63-64 ~ js/irq.js:300, js/irq.js:301
-   132-133 ~ js/io.js:177, js/video/software.js:10
-   164-165 ~ js/audio.js:70, js/irq.js:391, js/irq.js:392
-   168-169 ~ js/audio.js:70, js/irq.js:391, js/irq.js:392
-   178-181 ~ js/audio.js:70, js/audio.js:742, js/irq.js:391
-   186-187 ~ js/irq.js:391, js/irq.js:392, js/irq.js:398
-   205-206 ~ js/irq.js:391, js/irq.js:392, js/irq.js:398
-   244-246 ~ js/audio.js:741, js/audio.js:742, js/irq.js:434
-   298-298 ~ js/irq.js:913
-   340-341 ~ js/video/worker.js:150
-   344-345 ~ js/video/worker.js:150
-   354-354 ~ js/irq.js:538
+== bios.js: 27/283 lines in shared 10-grams (identifiers kept)
+   4-5 ~ js/audio.js:70, js/irq.js:391, js/video/software.js:309
+   38-41 ~ js/irq.js:517, js/irq.js:521, js/irq.js:525
+   54-55 ~ js/irq.js:300, js/irq.js:301
+   108-109 ~ js/audio.js:70, js/irq.js:391, js/irq.js:392
+   112-113 ~ js/audio.js:70, js/irq.js:391, js/irq.js:392
+   122-125 ~ js/audio.js:70, js/audio.js:742, js/irq.js:391
+   130-131 ~ js/irq.js:391, js/irq.js:392, js/irq.js:398
+   173-175 ~ js/audio.js:741, js/audio.js:742, js/irq.js:434
+   227-227 ~ js/irq.js:913
+   269-270 ~ js/video/worker.js:150
+   273-274 ~ js/video/worker.js:150
+   283-283 ~ js/irq.js:538
 == bus.js: 18/716 lines in shared 10-grams (identifiers kept)
    69-69 ~ js/mmu.js:269
    147-148 ~ IodineGBA/core/Memory.js:2250, IodineGBA/core/Memory.js:4030
@@ -34,15 +31,11 @@
    627-628 ~ js/audio.js:585, js/audio.js:597, js/irq.js:44
    688-689 ~ js/audio.js:585, js/audio.js:597, js/irq.js:44
    714-715 ~ js/audio.js:585, js/audio.js:597, js/core.js:48
-== cart.js: 19/349 lines in shared 10-grams (identifiers kept)
+== cart.js: 8/238 lines in shared 10-grams (identifiers kept)
    97-98 ~ js/video/worker.js:150
    100-101 ~ js/mmu.js:259, js/util.js:247, js/video/software.js:309
    108-109 ~ js/video/worker.js:150
-   134-134 ~ js/gpio.js:52
-   159-160 ~ js/mmu.js:453, js/mmu.js:456
-   198-200 ~ js/gpio.js:14
-   211-213 ~ js/gpio.js:90
-   234-237 ~ js/gpio.js:121
+   152-153 ~ js/mmu.js:453, js/mmu.js:456
 == cpu.js: 25/883 lines in shared 10-grams (identifiers kept)
    8-10 ~ js/core.js:334
    442-443 ~ js/video/software.js:6

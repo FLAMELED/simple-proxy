@@ -91,9 +91,18 @@ def tap_node(n):
     tap_xy((x1 + x2) // 2, (y1 + y2) // 2)
 
 
+def dismiss_system_hints():
+    """Android shows "Viewing full screen / Got it" the first time an app hides the system bars; it covers the app."""
+    got = find(dump(), '^(Got it|Entendido)$')
+    if got:
+        tap_node(got[0]); time.sleep(1)
+    return bool(got)
+
+
 def pick_file(filename):
     """Picks /sdcard/Download/<filename> in the system picker the app opens (DocumentsUI)."""
     target = '^' + re.escape(filename) + '$'
+    dismiss_system_hints()
     nodes = until(lambda: [n for n in [dump()] if find(n, target + '|Downloads|Descargas|Recent|Show roots|Elige un archivo')], 25)
     nodes = nodes[0] if nodes else dump('picker-missing')
     if not find(nodes, target):
@@ -136,6 +145,7 @@ class Page:
         self.ws = websocket.create_connection(page[0]['webSocketDebuggerUrl'], suppress_origin=True, timeout=30)
         self.n = 0
         self.origin = None  # WebView position on screen (system bars hidden, cutout padding)
+        self.hint_checked = False
 
     def eval(self, expr):
         self.n += 1
@@ -167,6 +177,11 @@ class Page:
 
     def tap(self, sel):
         x, y, _ = self.xy(sel)
+        if not self.hint_checked:
+            self.hint_checked = True
+            if dismiss_system_hints():
+                self.origin = None
+                x, y, _ = self.xy(sel)
         tap_xy(x, y)
 
 
@@ -225,7 +240,12 @@ def load_rom(page, filename, from_menu):
 
 
 def full_pass():
-    adb('install', '-r', '-g', DEBUG_APK, timeout=300)
+    # On userdebug/eng system images (the emulator) every WebView exposes DevTools, so the full pass can run on
+    # the very release APK built from the Play bundle; on a production phone only the debug build can be read.
+    apk = RELEASE_APK if SYSTEM_DEBUGGABLE else DEBUG_APK
+    check('[completa] APK probado', True, 'release (del .aab)' if SYSTEM_DEBUGGABLE else 'debug (mismo commit)')
+    adb('uninstall', PKG, check=False)
+    adb('install', '-g', apk, timeout=300)
     sh('pm clear %s' % PKG)
     for f in ('BGMode7.gba', 'SoundPCMStereo.gba', 'sram.gba'):
         adb('push', os.path.join(ROMS, f), '/sdcard/Download/' + f)
@@ -289,6 +309,8 @@ def full_pass():
     uid = (re.search(r'uid:(\d+)', sh('cmd package list packages -U %s' % PKG)) or [None, '?'])[1]
     started = [l.strip() for l in audio.split('\n') if 'AudioPlaybackConfiguration' in l and 'state:started' in l]
     check('[completa] sonido: Android registra un reproductor activo de la app', any('/%s/' % uid in l or ' u/pid:%s/' % uid in l for l in started), (started or ['ninguno'])[:2])
+    if not started:
+        print('   players:', [l.strip()[:160] for l in audio.split('\n') if 'AudioPlaybackConfiguration' in l][:6], flush=True)
 
     # 7. game saves: jsmolka's sram test writes SRAM; export it and compare with the expected bytes
     expected = open(EXPECTED_SAV, 'rb').read()
@@ -339,12 +361,16 @@ def release_pass():
     check('[release] no es depurable', 'DEBUGGABLE' not in (re.search(r'pkgFlags=\[([^\]]*)\]', pkg) or [None, ''])[1])
     launch()
     check('[release] la app abre en primer plano', until(lambda: resumed_package() == PKG, 15), resumed_package())
-    time.sleep(10)
+    time.sleep(8)
+    dismiss_system_hints(); time.sleep(2)
     img = shot('release-inicio')
     lcd = sum(1 for p in img.resize((108, 240)).getdata() if abs(p[0] - 143) < 12 and abs(p[1] - 154) < 12 and abs(p[2] - 122) < 12)
     check('[release] la página se dibuja (pantalla LCD de "Inserta un cartucho" visible)', lcd > 200, '%d px' % lcd)
     pid = sh('pidof %s' % PKG, check=False).strip()
-    check('[release] sin socket de DevTools (no inspeccionable)', pid and ('webview_devtools_remote_%s' % pid) not in sh('cat /proc/net/unix', check=False))
+    if SYSTEM_DEBUGGABLE:
+        print('   (sistema userdebug: todas las WebView abren DevTools; la comprobación de no-inspeccionable solo vale en un teléfono de producción)', flush=True)
+    else:
+        check('[release] sin socket de DevTools (no inspeccionable)', pid and ('webview_devtools_remote_%s' % pid) not in sh('cat /proc/net/unix', check=False))
     sh('input keyevent KEYCODE_BACK')
     check('[release] atrás sin menús abiertos: la app pasa a segundo plano', until(lambda: resumed_package() != PKG, 8), resumed_package())
     log = adb('logcat', '-d')
@@ -354,7 +380,8 @@ def release_pass():
 
 try:
     info = sh('getprop ro.build.version.sdk').strip() + ' / ' + sh('getprop ro.product.model').strip()
-    check('dispositivo', True, 'API ' + info)
+    SYSTEM_DEBUGGABLE = sh('getprop ro.debuggable').strip() == '1'
+    check('dispositivo', True, 'API %s, sistema %s' % (info, 'userdebug' if SYSTEM_DEBUGGABLE else 'producción'))
     for name, fn in (('completa', full_pass), ('release', release_pass)):
         try:
             fn()

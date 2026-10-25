@@ -58,3 +58,21 @@ Las rutas son relativas a `bolsillo-advance/app/`. Los hashes completos de la ve
 | §4.3 "No existe NOTICE" | **Resuelto en la versión actual** | `notices/THIRD-PARTY-NOTICES.txt`, los textos de MPL-2.0 y de BSD-2-Clause, y las fuentes `cart.js`/`bios.js` van dentro del APK y en el menú de la app (ver `VERIFICACION-2026-10-24.md`). **No resuelto** en el artefacto publicado ni en el APK anterior. |
 | §4.1 MPL en un `index.html` concatenado ⚖ | Sigue abierto | La propuesta está en `PROPUESTA-MGBA.md`. No se ha aplicado la separación en archivos. |
 | §4.4, §4.5 (autoría de IA, marcas) ⚖ | Siguen abiertos | — |
+
+## 4. Segunda ronda (2026-10-24/25): qué cambia respecto a la tabla anterior
+
+| Cambio | Archivos | Detalle |
+|---|---|---|
+| Separación MPL (opción A) | `src/mpl/gpio-rtc.js`, `src/mpl/bios-hle.js` (nuevos); `cart.js`, `bios.js` (las funciones salen de aquí) | Ver `COVERED-FILES.md`. La salida del motor es **idéntica bit a bit** a la versión auditada en todas las ROMs de prueba (`verify.js --ref`: 120/120). Los estados guardados con la versión anterior cargan. |
+| Avisos con URL y commit | `notices/THIRD-PARTY-NOTICES.txt`, `app/gba/build.js`, `version.json` | Los avisos de cada compilación dicen la versión y `https://github.com/FLAMELED/simple-proxy/tree/<commit>/bolsillo-advance`. |
+| Android para Play | `android/` (Gradle, API 36, AAB); se retira `app/apk/` (compilación sin SDK, targetSdk 29) | Ver `android/PUBLICAR-EN-PLAY.md` y `VERIFICACION-ANDROID.md`. |
+| Diagnóstico de solo lectura | `ui/ui.js` (`window.__diag`, pico de audio) | Lo usan las pruebas en el dispositivo. No cambia el comportamiento. |
+
+**Distribución anterior, actualizada:**
+
+| Copia | Antes | Ahora |
+|---|---|---|
+| Artefacto público https://claude.ai/artifact/5rDBasLwjDBPY56UCybKmi | v11 (`1792186409-5033`), versión auditada sin avisos, con el color de higan | **v12 (`1792888822-f1d0`)**, compilada desde el commit limpio `096dbd4ea6db8b2e90b909079694cf55bb95a75e`. Página `fe5ff852…` y `mpl/gpio-rtc.js` y `mpl/bios-hle.js` publicados como archivos aparte, con los mismos hashes que en `COVERED-FILES.md`. Lleva avisos y URL del código. Sigue compartida "con cualquiera que tenga el enlace". |
+| APK anterior (`4d57ba9d…`, targetSdk 29, sin avisos) | Entregado al usuario por este chat | No se puede retirar desde aquí. **Hay que borrar las copias que se hayan compartido** y sustituirlas por la compilación nueva. |
+
+**No verificado en esta ronda:** la carga del artefacto v12 en el visor de claude.ai. Este entorno no puede abrir el visor ("Couldn't load artifact" en Chromium). Solo se ha comprobado la lista de archivos publicados (3: `index.html`, `mpl/bios-hle.js`, `mpl/gpio-rtc.js`). El mismo HTML y los mismos archivos pasan en Chromium (`ui-notices.js`) y en Android (34/34).

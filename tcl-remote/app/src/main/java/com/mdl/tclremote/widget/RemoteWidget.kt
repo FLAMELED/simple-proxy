@@ -13,6 +13,7 @@ import com.mdl.tclremote.R
 import com.mdl.tclremote.atv.Keys
 import com.mdl.tclremote.atv.TvRemote
 import com.mdl.tclremote.data.Store
+import com.mdl.tclremote.system.Commands
 import com.mdl.tclremote.work.SceneWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,12 +41,7 @@ class RemoteWidget : AppWidgetProvider() {
         TvRemote.scope.launch {
             try {
                 withTimeout(9000) {
-                    when (command) {
-                        "power" -> TvRemote.togglePower(context)
-                        "vol_up" -> TvRemote.key(Keys.VOLUME_UP)
-                        "vol_down" -> TvRemote.key(Keys.VOLUME_DOWN)
-                        "mute" -> TvRemote.key(Keys.MUTE)
-                    }
+                    Commands.run(context, command)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
@@ -60,6 +56,9 @@ class RemoteWidget : AppWidgetProvider() {
     companion object {
         private const val ACTION = "com.mdl.tclremote.WIDGET"
         private const val EXTRA_COMMAND = "command"
+
+        /** Acción reutilizable desde otros widgets, la notificación y los accesos directos. */
+        fun commandIntent(context: Context, command: String): PendingIntent = intent(context, command)
 
         fun refresh(context: Context) {
             val manager = AppWidgetManager.getInstance(context)

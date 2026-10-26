@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Mi TCL</string>
     <string name="widget_description">Encender, volumen y escenas de tu TCL</string>
+    <string name="widget_power_description">Encender o apagar la TV</string>
+    <string name="widget_apps_description">Tus apps favoritas</string>
+    <string name="widget_power_label">TV encendido</string>
+    <string name="widget_apps_label">Apps favoritas</string>
 </resources>

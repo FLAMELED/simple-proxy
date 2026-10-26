@@ -1,9 +1,19 @@
 package com.mdl.tclremote.ui
 
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,8 +28,11 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -27,12 +40,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.mdl.tclremote.R
+import com.mdl.tclremote.atv.Keys
+import com.mdl.tclremote.atv.Link
 import com.mdl.tclremote.atv.TvRemote
+import com.mdl.tclremote.data.Store
+import kotlin.math.sqrt
 
 class MainActivity : ComponentActivity() {
+    private var lastVolumeKey = 0L
+    private var shake: ShakeDetector? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -42,21 +64,94 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         TvRemote.keepAlive = true
-        TvRemote.launch { TvRemote.connection() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Store.shakeToMute.enabled) {
+            shake = ShakeDetector { TvRemote.press(Keys.MUTE) }.also { it.start(this) }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        shake?.stop()
+        shake = null
     }
 
     override fun onStop() {
         super.onStop()
         TvRemote.keepAlive = false
     }
+
+    private fun volumeKeysToTv() = Store.volumeKeys.enabled && TvRemote.state.value.link == Link.CONNECTED
+
+    /** Con la opción activada, los botones de volumen del móvil mandan volumen a la TV. */
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if ((keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) && volumeKeysToTv()) {
+            // Al mantener pulsado, Android repite muy rápido: limitamos a ~7 pulsaciones por segundo.
+            val now = System.currentTimeMillis()
+            if (event.repeatCount == 0 || now - lastVolumeKey > 140) {
+                lastVolumeKey = now
+                TvRemote.press(if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) Keys.VOLUME_UP else Keys.VOLUME_DOWN)
+            }
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+        if ((keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) && volumeKeysToTv()) return true
+        return super.onKeyUp(keyCode, event)
+    }
+}
+
+/** Detecta dos sacudidas fuertes seguidas. */
+private class ShakeDetector(private val onShake: () -> Unit) : SensorEventListener {
+    private var manager: SensorManager? = null
+    private var firstPeak = 0L
+    private var lastShake = 0L
+
+    fun start(activity: ComponentActivity) {
+        val sm = activity.getSystemService(SensorManager::class.java) ?: return
+        val sensor = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) ?: return
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI)
+        manager = sm
+    }
+
+    fun stop() {
+        manager?.unregisterListener(this)
+        manager = null
+    }
+
+    override fun onSensorChanged(event: SensorEvent) {
+        val (x, y, z) = event.values
+        val g = sqrt(x * x + y * y + z * z) / SensorManager.GRAVITY_EARTH
+        if (g < 2.6f) return
+        val now = System.currentTimeMillis()
+        if (now - lastShake < 1500) return
+        if (now - firstPeak in 120..700) {
+            lastShake = now
+            firstPeak = 0
+            onShake()
+        } else {
+            firstPeak = now
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
 }
 
 val Accent = Color(0xFFE5484D)
 
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
-    MaterialTheme(
-        colorScheme = darkColorScheme(
+    val dynamic by Store.dynamicColor.value.collectAsState()
+    val context = LocalContext.current
+    val colors = if (dynamic) {
+        dynamicDarkColorScheme(context)
+    } else {
+        darkColorScheme(
             primary = Accent,
             onPrimary = Color.White,
             secondary = Color(0xFF8E9BFF),
@@ -68,15 +163,16 @@ fun AppTheme(content: @Composable () -> Unit) {
             surfaceContainerHighest = Color(0xFF2D2F38),
             onSurface = Color(0xFFF2F2F5),
             onSurfaceVariant = Color(0xFFB4B6C2),
-        ),
-        content = content,
-    )
+        )
+    }
+    MaterialTheme(colorScheme = colors, content = content)
 }
 
 private data class Tab(val label: String, val icon: Int)
 
 private val tabs = listOf(
     Tab("Mando", R.drawable.ic_remote),
+    Tab("Apps", R.drawable.ic_apps),
     Tab("Escenas", R.drawable.ic_scenes),
     Tab("Horarios", R.drawable.ic_auto),
     Tab("Ajustes", R.drawable.ic_tv),
@@ -84,6 +180,19 @@ private val tabs = listOf(
 
 @Composable
 private fun App() {
+    val onboardingDone by Store.onboardingDone.value.collectAsState()
+    val keepScreenOn by Store.keepScreenOn.value.collectAsState()
+    val view = LocalView.current
+    DisposableEffect(keepScreenOn) {
+        view.keepScreenOn = keepScreenOn
+        onDispose { view.keepScreenOn = false }
+    }
+
+    if (!onboardingDone) {
+        Onboarding(onFinish = {})
+        return
+    }
+
     var tab by rememberSaveable { mutableIntStateOf(0) }
     val snackbar = remember { SnackbarHostState() }
     LaunchedEffect(Unit) {
@@ -100,19 +209,27 @@ private fun App() {
                         icon = { Icon(painterResource(t.icon), null, Modifier.size(24.dp)) },
                         label = { Text(t.label) },
                         colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = Accent.copy(alpha = 0.25f),
+                            indicatorColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
                         ),
                     )
                 }
             }
         },
     ) { padding ->
-        Box(Modifier.fillMaxSize().padding(padding)) {
-            when (tab) {
-                0 -> RemoteScreen(onOpenSettings = { tab = 3 })
-                1 -> ScenesScreen()
-                2 -> SchedulesScreen()
-                else -> SettingsScreen()
+        AnimatedContent(
+            tab,
+            transitionSpec = { fadeIn(tween(200)) togetherWith fadeOut(tween(120)) },
+            modifier = Modifier.fillMaxSize().padding(padding),
+            label = "tabs",
+        ) { current ->
+            Box(Modifier.fillMaxSize()) {
+                when (current) {
+                    0 -> RemoteScreen(onOpenSettings = { tab = 4 }, onOpenApps = { tab = 1 })
+                    1 -> AppsScreen()
+                    2 -> ScenesScreen()
+                    3 -> SchedulesScreen()
+                    else -> SettingsScreen()
+                }
             }
         }
     }

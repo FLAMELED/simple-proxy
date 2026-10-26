@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,6 +55,31 @@ object TvRemote : TvConnection.Listener {
     private var connection: TvConnection? = null
     private var idleJob: Job? = null
     private var reconnectJob: Job? = null
+
+    /** Teclas pulsadas en la interfaz: se envían en orden, una tras otra (importante para el touchpad). */
+    private val keyQueue = Channel<Int>(Channel.UNLIMITED)
+    @Volatile private var lastKeyError = 0L
+
+    init {
+        scope.launch {
+            for (code in keyQueue) {
+                try {
+                    key(code)
+                } catch (e: Exception) {
+                    // Si falla la conexión, descarta lo pendiente y avisa una sola vez.
+                    while (keyQueue.tryReceive().isSuccess) Unit
+                    val now = System.currentTimeMillis()
+                    if (now - lastKeyError > 4000) _messages.tryEmit(e.message ?: "Sin conexión con la TV")
+                    lastKeyError = now
+                }
+            }
+        }
+    }
+
+    /** Pulsa una tecla desde la interfaz sin esperar (se encola). */
+    fun press(code: Int) {
+        keyQueue.trySend(code)
+    }
 
     /** Mientras la app está en pantalla la conexión se mantiene abierta y se recupera sola si se corta. */
     @Volatile var keepAlive = false

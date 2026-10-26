@@ -5,7 +5,8 @@ import android.graphics.BitmapFactory
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -88,8 +90,36 @@ private fun tileFor(app: AppShortcut): Tile = knownFor(app)?.tile ?: run {
 }
 
 /** Paquete del que sacar el icono: el de la app conocida, o el de un enlace market://launch?id=… */
-private fun iconPackage(app: AppShortcut): String? =
+fun iconPackage(app: AppShortcut): String? =
     app.icon.ifBlank { null } ?: knownFor(app)?.iconPackage ?: app.link.substringAfter("id=", "").takeIf { app.link.startsWith("market://") && it.isNotBlank() }
+
+/** Apps de TV cuyo paquete no coincide con un enlace market:// de la lista (se abren por https o esquema propio). */
+private val tvPackageNames = mapOf(
+    "com.netflix.ninja" to ("Netflix" to "com.netflix.mediaclient"),
+    "com.google.android.youtube.tv" to ("YouTube" to "com.google.android.youtube"),
+    "com.amazon.amazonvideo.livingroom" to ("Prime Video" to "com.amazon.avod.thirdpartyclient"),
+    "com.disney.disneyplus" to ("Disney+" to "com.disney.disneyplus"),
+    "com.spotify.tv.android" to ("Spotify" to "com.spotify.music"),
+)
+
+/** Paquetes de la pantalla de inicio de la TV: no se muestran como «app abierta». */
+private val launcherPackages = setOf(
+    "com.google.android.apps.tv.launcherx", "com.google.android.tvlauncher", "com.tcl.waterfall.overseas.launcher",
+)
+
+/**
+ * Traduce el paquete que informa la TV a una app de la lista (para mostrar nombre e icono).
+ * Devuelve null para la pantalla de inicio.
+ */
+fun appForPackage(pkg: String): AppShortcut? {
+    if (pkg in launcherPackages || "launcher" in pkg) return null
+    Store.apps.value.firstOrNull { it.link.endsWith("id=$pkg") }?.let { return it }
+    tvPackageNames[pkg]?.let { (name, icon) ->
+        return Store.apps.value.firstOrNull { it.name.equals(name, ignoreCase = true) } ?: AppShortcut(name, "market://launch?id=$pkg", icon)
+    }
+    val label = pkg.substringAfterLast('.').replaceFirstChar { it.uppercase() }
+    return AppShortcut(label, "market://launch?id=$pkg")
+}
 
 /** Descarga el icono desde la ficha de Google Play y lo guarda en caché en el móvil. */
 object AppIcons {
@@ -190,37 +220,58 @@ fun AppIcon(app: AppShortcut, size: Int) {
  * En modo [ordering], tocar una app la selecciona y tocar otra posición la mueve allí.
  */
 @Composable
-fun AppGrid(apps: List<AppShortcut>, onOpen: (AppShortcut) -> Unit, ordering: Boolean = false) {
+@OptIn(ExperimentalFoundationApi::class)
+fun AppGrid(apps: List<AppShortcut>, onOpen: (AppShortcut) -> Unit, ordering: Boolean = false, columns: Int = 4) {
     val view = LocalView.current
+    val favorites by Store.favorites.collectAsState()
     var selected by remember(ordering) { mutableStateOf<Int?>(null) }
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        apps.chunked(4).forEachIndexed { rowIndex, row ->
+        apps.chunked(columns).forEachIndexed { rowIndex, row ->
             Row(Modifier.fillMaxWidth()) {
                 row.forEachIndexed { col, app ->
-                    val index = rowIndex * 4 + col
+                    val index = rowIndex * columns + col
                     Column(
                         Modifier
                             .weight(1f)
                             .clip(RoundedCornerShape(16.dp))
                             .background(if (ordering && selected == index) Accent.copy(alpha = 0.3f) else Color.Transparent)
-                            .clickable {
-                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-                                if (!ordering) {
-                                    onOpen(app)
-                                } else {
-                                    val from = selected
-                                    if (from == null) {
-                                        selected = index
+                            .combinedClickable(
+                                onClick = {
+                                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                    if (!ordering) {
+                                        onOpen(app)
                                     } else {
-                                        Store.moveApp(from, index)
-                                        selected = null
+                                        val from = selected
+                                        if (from == null) {
+                                            selected = index
+                                        } else {
+                                            Store.moveApp(from, index)
+                                            selected = null
+                                        }
                                     }
-                                }
-                            },
+                                },
+                                onLongClick = {
+                                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                                    Store.toggleFavorite(app)
+                                },
+                            ),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Spacer(Modifier.height(4.dp))
-                        AppIcon(app, 56)
+                        Box {
+                            AppIcon(app, 56)
+                            if (app.link in favorites) {
+                                Text(
+                                    "★",
+                                    color = Color(0xFFFFC53D),
+                                    fontSize = 14.sp,
+                                    modifier = Modifier
+                                        .align(Alignment.TopEnd)
+                                        .background(Color(0xCC101114), RoundedCornerShape(50))
+                                        .padding(horizontal = 3.dp),
+                                )
+                            }
+                        }
                         Spacer(Modifier.height(6.dp))
                         Text(
                             app.name,
@@ -228,7 +279,7 @@ fun AppGrid(apps: List<AppShortcut>, onOpen: (AppShortcut) -> Unit, ordering: Bo
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.width(72.dp),
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 2.dp),
                         )
                         Spacer(Modifier.height(4.dp))
                     }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/w_apps_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Marca apps como favoritas en Mi TCL"
+        android:textColor="#FFB4B6C2"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/w_app0"
+            style="@style/WidgetAppCell">
+
+            <TextView
+                android:id="@+id/w_app0_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/w_app0_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitCenter" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/w_app1"
+            style="@style/WidgetAppCell">
+
+            <TextView
+                android:id="@+id/w_app1_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/w_app1_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitCenter" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/w_app2"
+            style="@style/WidgetAppCell">
+
+            <TextView
+                android:id="@+id/w_app2_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/w_app2_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitCenter" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/w_app3"
+            style="@style/WidgetAppCell">
+
+            <TextView
+                android:id="@+id/w_app3_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/w_app3_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitCenter" />
+        </FrameLayout>
+
+</LinearLayout>

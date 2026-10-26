@@ -14,6 +14,9 @@ App Android personal para controlar una TV **TCL 65C6K (Google TV)** desde un Xi
 - **Notificación de control** (también en la pantalla de bloqueo) y **accesos directos** en el icono.
 - **Pausa al recibir una llamada** y reanudación al colgar.
 - **Reconexión automática**, asistente de primer uso y colores del sistema (Material You) opcionales.
+- **Al llegar a casa**: ejecuta una escena cuando el móvil vuelve a la WiFi de la TV (sin permiso de ubicación).
+- **Volumen deslizable** hasta el nivel exacto.
+- **Aviso de actualización** dentro de la app y **copia de seguridad** (exportar/importar).
 - **Infrarrojo** como respaldo para encender la TV si no responde por WiFi.
 
 ## Instalar

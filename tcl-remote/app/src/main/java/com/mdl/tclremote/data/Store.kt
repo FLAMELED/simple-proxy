@@ -40,13 +40,50 @@ data class AppShortcut(val name: String, val link: String, val icon: String = ""
 
 fun newId(): String = UUID.randomUUID().toString()
 
+/** Opción de sí/no guardada en preferencias y observable desde la interfaz. */
+class Flag internal constructor(private val key: String, private val default: Boolean) {
+    private val _value = MutableStateFlow(default)
+    val value: StateFlow<Boolean> = _value
+    val enabled get() = _value.value
+
+    internal fun load(prefs: SharedPreferences) {
+        _value.value = prefs.getBoolean(key, default)
+    }
+
+    fun set(enabled: Boolean) {
+        _value.value = enabled
+        Store.prefs.edit().putBoolean(key, enabled).apply()
+    }
+}
+
 /** Guarda la configuración en SharedPreferences y la expone como StateFlow para la interfaz. */
 object Store {
     private const val APPS_VERSION = 2
     private const val SPOTIFY_LINK = "spotify://"
     private const val OLD_SPOTIFY_LINK = "market://launch?id=com.spotify.tv.android"
 
-    private lateinit var prefs: SharedPreferences
+    internal lateinit var prefs: SharedPreferences
+
+    /** Botones de volumen del móvil controlan la TV mientras la app está abierta. */
+    val volumeKeys = Flag("volume_keys", true)
+    val keepScreenOn = Flag("keep_screen_on", false)
+    val dynamicColor = Flag("dynamic_color", false)
+    val pauseOnCall = Flag("pause_on_call", false)
+    val controlNotification = Flag("control_notification", false)
+    val shakeToMute = Flag("shake_to_mute", false)
+    val touchpad = Flag("touchpad", false)
+    val onboardingDone = Flag("onboarding_done", false)
+    private val flags = listOf(
+        volumeKeys, keepScreenOn, dynamicColor, pauseOnCall, controlNotification, shakeToMute, touchpad, onboardingDone,
+    )
+
+    private val _favorites = MutableStateFlow<List<String>>(emptyList())
+    /** Enlaces de las apps favoritas (se muestran en el mando y en el widget de apps). */
+    val favorites: StateFlow<List<String>> = _favorites
+
+    private val _sleepAt = MutableStateFlow(0L)
+    /** Hora (ms) a la que el temporizador apagará la TV; 0 si no hay temporizador. */
+    val sleepAt: StateFlow<Long> = _sleepAt
 
     private val _host = MutableStateFlow("")
     val host: StateFlow<String> = _host
@@ -75,6 +112,10 @@ object Store {
             // La TV no abría Spotify con el enlace market:// de la primera versión.
             if (it.link == OLD_SPOTIFY_LINK) it.copy(link = SPOTIFY_LINK) else it
         } ?: defaultApps
+        flags.forEach { it.load(prefs) }
+        // Quien ya vinculó con una versión anterior no necesita el asistente de primer uso.
+        if (_paired.value && !onboardingDone.enabled) onboardingDone.set(true)
+        _sleepAt.value = prefs.getLong("sleep_at", 0L).takeIf { it > System.currentTimeMillis() } ?: 0L
         if (prefs.getInt("apps_version", 1) < APPS_VERSION) {
             // Pasa a la lista completa de apps de la TV, conservando las que se añadieron a mano.
             val firstVersionLinks = setOf(
@@ -85,6 +126,9 @@ object Store {
             setApps(defaultApps + custom)
             prefs.edit().putInt("apps_version", APPS_VERSION).apply()
         }
+        _favorites.value = prefs.getString("favorites", null)?.let { s ->
+            JSONArray(s).let { a -> List(a.length()) { a.getString(it) } }
+        } ?: _apps.value.take(5).map { it.link }
         _widgetScenes.value = prefs.getString("widget_scenes", null)?.let { s ->
             JSONArray(s).let { a -> List(a.length()) { a.getString(it) } }
         } ?: _scenes.value.take(2).map { it.id }
@@ -144,6 +188,26 @@ object Store {
         prefs.edit().putString("apps", JSONArray(list.map {
             JSONObject().put("name", it.name).put("link", it.link).put("icon", it.icon)
         }).toString()).apply()
+    }
+
+    fun isFavorite(app: AppShortcut) = app.link in _favorites.value
+
+    fun toggleFavorite(app: AppShortcut) {
+        val list = _favorites.value
+        setFavorites(if (app.link in list) list - app.link else list + app.link)
+    }
+
+    private fun setFavorites(links: List<String>) {
+        _favorites.value = links
+        prefs.edit().putString("favorites", JSONArray(links).toString()).apply()
+    }
+
+    /** Favoritas en el orden de la lista de apps. */
+    fun favoriteApps(): List<AppShortcut> = _apps.value.filter { it.link in _favorites.value }
+
+    fun setSleepAt(at: Long) {
+        _sleepAt.value = at
+        prefs.edit().putLong("sleep_at", at).apply()
     }
 
     /** Mueve la app de la posición [from] a [to] (para ordenar la cuadrícula). */

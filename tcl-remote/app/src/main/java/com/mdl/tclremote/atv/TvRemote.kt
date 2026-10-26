@@ -34,6 +34,10 @@ data class TvState(
     val maxVolume: Int? = null,
     val muted: Boolean = false,
     val error: String? = null,
+    /** Paquete de la app que está en primer plano en la TV, si la TV lo ha dicho. */
+    val currentApp: String? = null,
+    /** La TV tiene un campo de texto abierto (por ejemplo, un buscador). */
+    val imeRequested: Boolean = false,
 )
 
 /** Punto único de acceso a la TV: lo usan la interfaz, el widget y los horarios. */
@@ -49,13 +53,28 @@ object TvRemote : TvConnection.Listener {
     private val mutex = Mutex()
     private var connection: TvConnection? = null
     private var idleJob: Job? = null
+    private var reconnectJob: Job? = null
 
-    /** Mientras la app está en pantalla la conexión se mantiene abierta. */
+    /** Mientras la app está en pantalla la conexión se mantiene abierta y se recupera sola si se corta. */
     @Volatile var keepAlive = false
         set(value) {
             field = value
             touch()
+            if (value) autoConnect()
         }
+
+    /** Conecta en segundo plano y reintenta con esperas crecientes, sin mostrar errores en pantalla. */
+    fun autoConnect() {
+        if (reconnectJob?.isActive == true) return
+        reconnectJob = scope.launch {
+            var wait = 1500L
+            while (keepAlive && Store.host.value.isNotBlank() && Store.paired.value) {
+                if (runCatching { connection() }.isSuccess) return@launch
+                delay(wait)
+                wait = (wait * 2).coerceAtMost(20_000L)
+            }
+        }
+    }
 
     suspend fun connection(): TvConnection {
         val c = mutex.withLock {
@@ -101,6 +120,11 @@ object TvRemote : TvConnection.Listener {
     suspend fun key(code: Int) = connection().key(code)
 
     suspend fun openApp(link: String) = connection().openApp(link)
+
+    /** Escribe [text] en el campo de texto que tiene el foco en la TV (sustituye su contenido). */
+    suspend fun sendText(text: String) = connection().sendText(text)
+
+    fun dismissImeRequest() = _state.update { it.copy(imeRequested = false) }
 
     /** Enciende sin arriesgarse a apagar: usa el estado que informa la TV y, si no responde, el infrarrojo. */
     suspend fun powerOn(context: Context) {
@@ -185,17 +209,23 @@ object TvRemote : TvConnection.Listener {
     override fun onVolume(level: Int, max: Int, muted: Boolean) =
         _state.update { it.copy(volume = level, maxVolume = max, muted = muted) }
 
+    override fun onCurrentApp(packageName: String) =
+        _state.update { it.copy(currentApp = packageName, imeRequested = false) }
+
+    override fun onImeRequest() = _state.update { it.copy(imeRequested = true) }
+
     override fun onClosed(connection: TvConnection, error: Throwable?) {
         if (this.connection === connection) {
             this.connection = null
             _state.update { it.copy(link = Link.DISCONNECTED) }
+            if (keepAlive) autoConnect()
         }
     }
 
     private fun friendly(e: Exception): String = when (e) {
-        is SSLException -> "La TV no reconoce este teléfono. Vincúlalo en Ajustes."
+        is SSLException -> "La TV no reconoce este móvil. Vuelve a vincularlo en Ajustes."
         is ConnectException, is NoRouteToHostException, is SocketTimeoutException ->
-            "No se encuentra la TV en ${Store.host.value}. ¿Está encendida y en la misma WiFi?"
+            "La TV no responde. Puede estar apagada del todo o en otra WiFi."
         else -> e.message ?: e.javaClass.simpleName
     }
 }

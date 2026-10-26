@@ -96,6 +96,9 @@ object RemoteMessages {
     const val FIELD_SET_ACTIVE = 2
     const val FIELD_ERROR = 3
     const val FIELD_PING_REQUEST = 8
+    const val FIELD_IME_KEY_INJECT = 20
+    const val FIELD_IME_BATCH_EDIT = 21
+    const val FIELD_IME_SHOW_REQUEST = 22
     const val FIELD_START = 40
     const val FIELD_VOLUME = 50
 
@@ -119,6 +122,23 @@ object RemoteMessages {
         ProtoWriter().message(10) { int(1, keyCode); int(2, direction) }.toByteArray()
 
     fun appLink(link: String) = ProtoWriter().message(90) { string(1, link) }.toByteArray()
+
+    /**
+     * Sustituye el texto del campo que tiene el foco en la TV. Los contadores son los últimos
+     * que envió la TV en su propio remote_ime_batch_edit.
+     */
+    fun imeText(imeCounter: Int, fieldCounter: Int, text: String) = ProtoWriter().message(FIELD_IME_BATCH_EDIT) {
+        int(1, imeCounter)
+        int(2, fieldCounter)
+        message(3) {
+            int(1, 1)
+            message(2) {
+                int(1, text.length - 1)
+                int(2, text.length - 1)
+                string(3, text)
+            }
+        }
+    }.toByteArray()
 }
 
 /** Códigos de tecla de Android (KeyEvent.KEYCODE_*), que son los que entiende la TV. */
@@ -134,11 +154,15 @@ object Keys {
     const val VOLUME_DOWN = 25
     const val POWER = 26
     const val MENU = 82
+    const val ENTER = 66
+    const val DEL = 67
     const val MEDIA_PLAY_PAUSE = 85
     const val MEDIA_NEXT = 87
     const val MEDIA_PREVIOUS = 88
     const val MEDIA_REWIND = 89
     const val MEDIA_FAST_FORWARD = 90
+    const val MEDIA_PLAY = 126
+    const val MEDIA_PAUSE = 127
     const val MUTE = 164
     const val INFO = 165
     const val CHANNEL_UP = 166

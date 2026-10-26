@@ -90,6 +90,18 @@ class ProtocolTest {
         assertTrue(ok)
     }
 
+    @Test
+    fun imeTextCarriesCountersAndValue() {
+        val msg = ProtoMessage.parse(RemoteMessages.imeText(7, 3, "hola"))
+        val edit = msg.message(21)!!
+        assertEquals(7, edit.int(1))
+        assertEquals(3, edit.int(2))
+        val field = edit.message(3)!!.message(2)!!
+        assertEquals("hola", field.string(3))
+        assertEquals(3, field.int(1))
+        assertEquals(3, field.int(2))
+    }
+
     private companion object {
         const val CLIENT_MODULUS =
             "98f135d25f557203301850c5a38fd547923a736994e3bf911a61dbe22e44158bae97ba94d0eda82f8f6d05584ef8aa38922766581e27a1c08a6a63ec24ede6a46b4cb2424a23d5962217beaddbc496cb8e81973e0becd7b03898d190f9ebdacc0cb1e29c658cda1495e60af593bd04cf0fd630f1f29d0da9953f48f1a09f76b5a170b33839263059f28c105d1fb17c2390c192cfd3ac94af0f21ddb66cad4a268d116ece1738f7d93d9c172411e20b8f6b0d549b6f03675a1600a35a099950d836f675cc81e74ef5e8e25d940ed904759531985d5d9dc9f81818e811892f902bd23f0824128b2f330c5c7fd0a6a3a4506513270e269e0d37f2a74de452e6b439"

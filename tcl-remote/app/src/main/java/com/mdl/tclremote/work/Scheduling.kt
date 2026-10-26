@@ -82,6 +82,50 @@ class AlarmReceiver : BroadcastReceiver() {
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         Scheduler.rescheduleAll(context)
+        SleepTimer.restore(context)
+    }
+}
+
+/** «Apagar en X minutos»: una alarma de un solo uso que apaga la TV. */
+object SleepTimer {
+    private fun pendingIntent(context: Context) = PendingIntent.getBroadcast(
+        context, 7001, Intent(context, SleepReceiver::class.java),
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+    )
+
+    fun start(context: Context, minutes: Int) {
+        val at = System.currentTimeMillis() + minutes * 60_000L
+        Store.setSleepAt(at)
+        arm(context, at)
+    }
+
+    fun cancel(context: Context) {
+        context.getSystemService(AlarmManager::class.java).cancel(pendingIntent(context))
+        Store.setSleepAt(0L)
+    }
+
+    fun restore(context: Context) {
+        Store.init(context)
+        val at = Store.sleepAt.value
+        if (at > System.currentTimeMillis()) arm(context, at)
+    }
+
+    private fun arm(context: Context, at: Long) {
+        val am = context.getSystemService(AlarmManager::class.java)
+        val pi = pendingIntent(context)
+        if (am.canScheduleExactAlarms()) {
+            am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+        } else {
+            am.setWindow(AlarmManager.RTC_WAKEUP, at, 60_000, pi)
+        }
+    }
+}
+
+class SleepReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        Store.init(context)
+        Store.setSleepAt(0L)
+        SceneWorker.enqueuePowerOff(context)
     }
 }
 
@@ -89,6 +133,14 @@ class BootReceiver : BroadcastReceiver() {
 class SceneWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
         Store.init(applicationContext)
+        if (inputData.getBoolean(KEY_POWER_OFF, false)) {
+            return try {
+                TvRemote.powerOff()
+                Result.success()
+            } catch (e: Exception) {
+                if (runAttemptCount < 2) Result.retry() else Result.failure()
+            }
+        }
         val scene = inputData.getString(KEY_SCENE)?.let(Store::scene) ?: return Result.failure()
         return try {
             TvRemote.runScene(applicationContext, scene)
@@ -101,6 +153,15 @@ class SceneWorker(context: Context, params: WorkerParameters) : CoroutineWorker(
 
     companion object {
         private const val KEY_SCENE = "scene"
+        private const val KEY_POWER_OFF = "power_off"
+
+        fun enqueuePowerOff(context: Context) {
+            val request = OneTimeWorkRequestBuilder<SceneWorker>()
+                .setInputData(workDataOf(KEY_POWER_OFF to true))
+                .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                .build()
+            WorkManager.getInstance(context).enqueue(request)
+        }
 
         fun enqueue(context: Context, sceneId: String) {
             val request = OneTimeWorkRequestBuilder<SceneWorker>()

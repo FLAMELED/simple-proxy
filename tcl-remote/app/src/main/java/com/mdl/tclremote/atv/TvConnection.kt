@@ -10,6 +10,8 @@ class TvConnection(private val host: String, private val listener: Listener) : C
     interface Listener {
         fun onPower(on: Boolean)
         fun onVolume(level: Int, max: Int, muted: Boolean)
+        fun onCurrentApp(packageName: String)
+        fun onImeRequest()
         fun onClosed(connection: TvConnection, error: Throwable?)
     }
 
@@ -21,6 +23,9 @@ class TvConnection(private val host: String, private val listener: Listener) : C
 
     @Volatile var power: Boolean? = null
         private set
+
+    @Volatile private var imeCounter = 0
+    @Volatile private var imeFieldCounter = 0
 
     /** Abre la conexión y completa el saludo inicial. Bloqueante. */
     fun open(timeoutMs: Int = 6000) {
@@ -77,6 +82,17 @@ class TvConnection(private val host: String, private val listener: Listener) : C
                 val v = msg.message(RemoteMessages.FIELD_VOLUME) ?: return
                 listener.onVolume(v.int(7) ?: 0, v.int(6) ?: 0, v.bool(8) ?: false)
             }
+            msg.has(RemoteMessages.FIELD_IME_KEY_INJECT) -> {
+                // app_info.app_package: la app que está en primer plano en la TV.
+                msg.message(RemoteMessages.FIELD_IME_KEY_INJECT)?.message(1)?.string(12)
+                    ?.takeIf { it.isNotBlank() }?.let(listener::onCurrentApp)
+            }
+            msg.has(RemoteMessages.FIELD_IME_BATCH_EDIT) -> {
+                val edit = msg.message(RemoteMessages.FIELD_IME_BATCH_EDIT) ?: return
+                imeCounter = edit.int(1) ?: imeCounter
+                imeFieldCounter = edit.int(2) ?: imeFieldCounter
+            }
+            msg.has(RemoteMessages.FIELD_IME_SHOW_REQUEST) -> listener.onImeRequest()
         }
     }
 
@@ -88,6 +104,8 @@ class TvConnection(private val host: String, private val listener: Listener) : C
     fun key(code: Int) = send(RemoteMessages.key(code))
 
     fun openApp(link: String) = send(RemoteMessages.appLink(link))
+
+    fun sendText(text: String) = send(RemoteMessages.imeText(imeCounter, imeFieldCounter, text))
 
     /** Espera a que la TV informe si está encendida (llega justo después del saludo). */
     fun awaitPower(timeoutMs: Long): Boolean? {

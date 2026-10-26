@@ -82,6 +82,11 @@ class ProtocolTest {
     fun clientCertIsSelfSignedRsaAndSurvivesReload() {
         val cert = ClientCert.generate()
         cert.certificate.verify(cert.certificate.publicKey)
+        assertEquals(3, cert.certificate.version)
+        assertEquals("CN=atvremote", cert.certificate.subjectX500Principal.name)
+        assertEquals(cert.certificate.subjectX500Principal, cert.certificate.issuerX500Principal)
+        assertEquals("SHA256withRSA", cert.certificate.sigAlgName)
+        cert.certificate.checkValidity()
         assertEquals(2048, (cert.certificate.publicKey as RSAPublicKey).modulus.bitLength())
         val reloaded = ClientCert.load(cert.keyBytes(), cert.certBytes())
         val data = "hola".toByteArray()

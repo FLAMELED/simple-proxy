@@ -28,7 +28,10 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // R8 elimina el código que no se usa: la app ocupa menos y arranca antes.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("personal")
         }
     }
@@ -49,11 +52,6 @@ android {
         abortOnError = false
         checkReleaseBuilds = false
     }
-    packaging {
-        resources {
-            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
-        }
-    }
 }
 
 dependencies {
@@ -67,6 +65,5 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.work:work-runtime-ktx:2.10.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
-    implementation("org.bouncycastle:bcpkix-jdk18on:1.78.1")
     testImplementation("junit:junit:4.13.2")
 }

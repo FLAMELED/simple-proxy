@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
@@ -90,6 +92,9 @@ private fun tileFor(app: AppShortcut): Tile = knownFor(app)?.tile ?: run {
 }
 
 /** Paquete del que sacar el icono: el de la app conocida, o el de un enlace market://launch?id=… */
+/** Color de la marca de la app (para tarjetas y mosaicos). */
+fun brandColor(app: AppShortcut): Color = tileFor(app).color
+
 fun iconPackage(app: AppShortcut): String? =
     app.icon.ifBlank { null } ?: knownFor(app)?.iconPackage ?: app.link.substringAfter("id=", "").takeIf { app.link.startsWith("market://") && it.isNotBlank() }
 
@@ -221,7 +226,14 @@ fun AppIcon(app: AppShortcut, size: Int) {
  */
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
-fun AppGrid(apps: List<AppShortcut>, onOpen: (AppShortcut) -> Unit, ordering: Boolean = false, columns: Int = 4) {
+fun AppGrid(
+    apps: List<AppShortcut>,
+    onOpen: (AppShortcut) -> Unit,
+    ordering: Boolean = false,
+    columns: Int = 4,
+    /** Mosaicos anchos sobre el color de la marca, como «Tus apps» en la TV. */
+    banners: Boolean = false,
+) {
     val view = LocalView.current
     val favorites by Store.favorites.collectAsState()
     var selected by remember(ordering) { mutableStateOf<Int?>(null) }
@@ -258,8 +270,20 @@ fun AppGrid(apps: List<AppShortcut>, onOpen: (AppShortcut) -> Unit, ordering: Bo
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Spacer(Modifier.height(4.dp))
-                        Box {
-                            AppIcon(app, 56)
+                        Box(
+                            if (banners) {
+                                Modifier
+                                    .padding(horizontal = 4.dp)
+                                    .fillMaxWidth()
+                                    .aspectRatio(1.6f)
+                                    .clip(RoundedCornerShape(16.dp))
+                                    .background(Brush.linearGradient(listOf(brandColor(app), brandColor(app).copy(alpha = 0.55f))))
+                            } else {
+                                Modifier
+                            },
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            AppIcon(app, if (banners) 40 else 56)
                             if (app.link in favorites) {
                                 Text(
                                     "★",

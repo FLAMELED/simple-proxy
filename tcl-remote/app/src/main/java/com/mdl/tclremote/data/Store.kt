@@ -79,6 +79,18 @@ object Store {
         volumeKeys, keepScreenOn, dynamicColor, pauseOnCall, controlNotification, shakeToMute, touchpad, onboardingDone, arrival,
     )
 
+    enum class ThemeMode(val label: String) {
+        DARK("Oscuro"), AMOLED("Negro puro (AMOLED)"), LIGHT("Claro"), SYSTEM("Como el sistema")
+    }
+
+    private val _themeMode = MutableStateFlow(ThemeMode.DARK)
+    val themeMode: StateFlow<ThemeMode> = _themeMode
+
+    fun setThemeMode(mode: ThemeMode) {
+        _themeMode.value = mode
+        prefs.edit().putString("theme_mode", mode.name).apply()
+    }
+
     data class ArrivalConfig(val sceneId: String, val fromHour: Int, val toHour: Int)
 
     private val _arrivalConfig = MutableStateFlow(ArrivalConfig("", 0, 0))
@@ -147,6 +159,8 @@ object Store {
         _favorites.value = prefs.getString("favorites", null)?.let { s ->
             JSONArray(s).let { a -> List(a.length()) { a.getString(it) } }
         } ?: _apps.value.take(5).map { it.link }
+        _themeMode.value = runCatching { ThemeMode.valueOf(prefs.getString("theme_mode", null) ?: "DARK") }
+            .getOrDefault(ThemeMode.DARK)
         _arrivalConfig.value = ArrivalConfig(
             prefs.getString("arrival_scene", null) ?: _scenes.value.firstOrNull()?.id.orEmpty(),
             prefs.getInt("arrival_from", 0),
@@ -157,7 +171,9 @@ object Store {
         } ?: _scenes.value.take(2).map { it.id }
     }
 
-    private val backupKeys = listOf("host", "ir_code", "scenes", "schedules", "apps", "favorites", "widget_scenes", "arrival_scene")
+    private val backupKeys = listOf(
+        "host", "ir_code", "scenes", "schedules", "apps", "favorites", "widget_scenes", "arrival_scene", "theme_mode",
+    )
     private val backupInts = listOf("arrival_from", "arrival_to")
     private val backupFlags get() = listOf(volumeKeys, keepScreenOn, dynamicColor, pauseOnCall, controlNotification, shakeToMute, touchpad, arrival)
 

@@ -9,6 +9,10 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.res.painterResource
+import androidx.compose.material3.Icon
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -42,6 +46,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import com.mdl.tclremote.R
 import com.mdl.tclremote.atv.DebugLog
 import com.mdl.tclremote.atv.Discovery
 import com.mdl.tclremote.atv.FoundTv
@@ -111,7 +116,7 @@ private fun TvSection() {
         scanning = false
     }
 
-    Section("Televisor") {
+    Section("Televisor", R.drawable.ic_tv) {
         Text(
             if (paired) "✓ Vinculado con la TV en ${host.ifBlank { "—" }}" else "Este móvil aún no está vinculado con la TV.",
             style = MaterialTheme.typography.bodyMedium,
@@ -164,12 +169,19 @@ private fun TvSection() {
 }
 
 @Composable
-private fun SwitchRow(title: String, subtitle: String, flag: Flag, onChange: (Boolean) -> Unit = { flag.set(it) }) {
+private fun SwitchRow(
+    title: String,
+    subtitle: String,
+    flag: Flag,
+    icon: Int? = null,
+    onChange: (Boolean) -> Unit = { flag.set(it) },
+) {
     val checked by flag.value.collectAsState()
     Row(
         Modifier.fillMaxWidth().clickable { onChange(!checked) },
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        if (icon != null) SettingIcon(icon)
         Column(Modifier.weight(1f).padding(end = 12.dp)) {
             Text(title, style = MaterialTheme.typography.bodyLarge)
             Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -193,15 +205,28 @@ private fun PreferencesSection() {
     fun granted(permission: String) =
         ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 
-    Section("Preferencias") {
-        SwitchRow("Botones de volumen del móvil", "Con la app abierta, suben y bajan el volumen de la TV", Store.volumeKeys)
-        SwitchRow("Pantalla siempre encendida", "Mientras usas el mando", Store.keepScreenOn)
-        SwitchRow("Colores del sistema", "Usa los colores de tu fondo de pantalla (Material You)", Store.dynamicColor)
-        SwitchRow("Agitar para silenciar", "Agita el móvil con la app abierta", Store.shakeToMute)
+    Section("Preferencias", R.drawable.ic_settings_tv) {
+        val theme by Store.themeMode.collectAsState()
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            SettingIcon(R.drawable.ic_contrast)
+            Picker(
+                "Tema",
+                Store.ThemeMode.entries,
+                theme,
+                { "Tema: ${it.label}" },
+                { Store.setThemeMode(it) },
+                Modifier.weight(1f),
+            )
+        }
+        SwitchRow("Colores del sistema", "Usa los colores de tu fondo de pantalla (Material You)", Store.dynamicColor, R.drawable.ic_palette)
+        SwitchRow("Botones de volumen del móvil", "Con la app abierta, suben y bajan el volumen de la TV", Store.volumeKeys, R.drawable.ic_vol_up)
+        SwitchRow("Pantalla siempre encendida", "Mientras usas el mando", Store.keepScreenOn, R.drawable.ic_phone)
+        SwitchRow("Agitar para silenciar", "Agita el móvil con la app abierta", Store.shakeToMute, R.drawable.ic_vibration)
         SwitchRow(
             "Pausar la TV al recibir una llamada",
             "Y la reanuda al colgar",
             Store.pauseOnCall,
+            R.drawable.ic_call,
             onChange = { on ->
                 if (on && !granted(Manifest.permission.READ_PHONE_STATE)) {
                     phonePermission.launch(Manifest.permission.READ_PHONE_STATE)
@@ -214,6 +239,7 @@ private fun PreferencesSection() {
             "Control en notificaciones",
             "Encendido, volumen y play/pausa en la cortina y la pantalla de bloqueo",
             Store.controlNotification,
+            R.drawable.ic_notifications,
             onChange = { on ->
                 if (on && Build.VERSION.SDK_INT >= 33 && !granted(Manifest.permission.POST_NOTIFICATIONS)) {
                     notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -230,7 +256,7 @@ private fun PreferencesSection() {
 private fun ForgetSection() {
     val paired by Store.paired.collectAsState()
     if (!paired) return
-    Section("Vinculación") {
+    Section("Vinculación", R.drawable.ic_remote) {
         Text(
             "Olvidar borra el certificado de este móvil. Tendrás que volver a introducir el código de la TV.",
             style = MaterialTheme.typography.bodySmall,
@@ -262,7 +288,7 @@ private fun IrSection() {
             .onFailure { TvRemote.notify(it.message ?: "Error de infrarrojo") }
     }
 
-    Section("Infrarrojo (encender cuando la TV no responde por WiFi)") {
+    Section("Infrarrojo (encender cuando la TV no responde por WiFi)", R.drawable.ic_ir) {
         if (!hasIr) {
             Text("Este teléfono no tiene emisor de infrarrojos.")
             return@Section
@@ -306,7 +332,7 @@ private fun WidgetSection() {
     val context = LocalContext.current
     val scenes by Store.scenes.collectAsState()
     val selected by Store.widgetScenes.collectAsState()
-    Section("Widget") {
+    Section("Widget", R.drawable.ic_widgets) {
         Text(
             "Mantén pulsada la pantalla de inicio › Widgets › Mi TCL. Tiene encendido, volumen, silencio y dos escenas:",
             style = MaterialTheme.typography.bodySmall,
@@ -337,7 +363,7 @@ private fun WidgetSection() {
 private fun LogSection() {
     val context = LocalContext.current
     val lines by DebugLog.lines.collectAsState()
-    Section("Registro (para diagnosticar)") {
+    Section("Registro (para diagnosticar)", R.drawable.ic_info) {
         if (lines.isEmpty()) {
             Text("Vacío. Pulsa «Vincular» y vuelve aquí.", style = MaterialTheme.typography.bodySmall)
         } else {
@@ -365,7 +391,7 @@ private fun UpdatesSection() {
     val update by Updates.available.collectAsState()
     val installed = remember { Updates.installedBuild(context) }
     var checking by remember { mutableStateOf(false) }
-    Section("Actualizaciones") {
+    Section("Actualizaciones", R.drawable.ic_update) {
         Text("Versión instalada: build $installed", style = MaterialTheme.typography.bodyMedium)
         val info = update
         if (info != null) {
@@ -408,7 +434,7 @@ private fun BackupSection() {
             TvRemote.notify("Ese archivo no es una copia de Mi TCL")
         }
     }
-    Section("Copia de seguridad") {
+    Section("Copia de seguridad", R.drawable.ic_backup) {
         Text(
             "Guarda escenas, horarios, apps, favoritas y preferencias en un archivo. " +
                 "Al restaurar en otro móvil tendrás que volver a vincular la TV.",
@@ -430,11 +456,12 @@ private fun ArrivalSection() {
     val scenes by Store.scenes.collectAsState()
     val config by Store.arrivalConfig.collectAsState()
     val enabled by Store.arrival.value.collectAsState()
-    Section("Al llegar a casa") {
+    Section("Al llegar a casa", R.drawable.ic_home) {
         SwitchRow(
             "Ejecutar una escena al llegar",
             "Cuando el móvil se conecta a la WiFi de la TV tras 10 minutos o más fuera de casa",
             Store.arrival,
+            R.drawable.ic_wifi,
             onChange = { on ->
                 Store.arrival.set(on)
                 HomeArrival.sync(context)
@@ -476,5 +503,19 @@ private fun ArrivalSection() {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
+    }
+}
+
+/** Icono de una opción, en un círculo suave, como en los ajustes de Android. */
+@Composable
+private fun SettingIcon(icon: Int) {
+    androidx.compose.foundation.layout.Box(
+        Modifier
+            .padding(end = 14.dp)
+            .size(38.dp)
+            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.14f), androidx.compose.foundation.shape.CircleShape),
+        contentAlignment = Alignment.Center,
+    ) {
+        Icon(painterResource(icon), null, Modifier.size(20.dp), tint = MaterialTheme.colorScheme.primary)
     }
 }

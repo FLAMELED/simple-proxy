@@ -4,6 +4,20 @@ import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.input.pointer.PointerEventPass
+import com.mdl.tclremote.ir.IrSender
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
@@ -128,8 +142,31 @@ fun RemoteScreen(onOpenSettings: () -> Unit, onOpenApps: () -> Unit) {
             }
         }
 
-        Spacer(Modifier.height(18.dp))
+        val paired by Store.paired.collectAsState()
+        val currentApp = state.currentApp?.takeIf { on && state.link == Link.CONNECTED }?.let(::appForPackage)
+        val offline = host.isNotBlank() && paired && state.link == Link.DISCONNECTED && state.error != null
+        AnimatedVisibility(currentApp != null && !offline) {
+            if (currentApp != null) NowPlaying(currentApp)
+        }
+        AnimatedVisibility(offline) {
+            OfflineCard(state.error.orEmpty(), onOpenSettings)
+        }
 
+        Spacer(Modifier.height(14.dp))
+
+        // «Carcasa» del mando: agrupa los controles en una pieza, como un mando físico.
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .alpha(if (offline) 0.5f else 1f)
+                .clip(RoundedCornerShape(32.dp))
+                .background(
+                    Brush.verticalGradient(
+                        listOf(MaterialTheme.colorScheme.surfaceContainerHigh, MaterialTheme.colorScheme.surfaceContainer),
+                    ),
+                )
+                .padding(14.dp),
+        ) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             RemoteButton(
                 onPress = { TvRemote.launch { TvRemote.togglePower(context) } },
@@ -179,7 +216,9 @@ fun RemoteScreen(onOpenSettings: () -> Unit, onOpenApps: () -> Unit) {
             }
         }
 
-        Spacer(Modifier.height(22.dp))
+        }
+
+        Spacer(Modifier.height(20.dp))
         Favorites(onOpenApps)
 
         if (scenes.isNotEmpty()) {
@@ -226,46 +265,124 @@ private fun Header(notConfigured: Boolean, onOpenSettings: () -> Unit, onSleep: 
         }
     }
 
+    val (dot, label) = when {
+        notConfigured -> Color.Gray to "Sin configurar"
+        state.link == Link.CONNECTED && state.power == false -> Color(0xFFFFB224) to "En reposo"
+        state.link == Link.CONNECTED -> Color(0xFF46A758) to "Conectada"
+        state.link == Link.CONNECTING -> Color(0xFF8E9BFF) to "Conectando…"
+        else -> Accent to "Sin conexión"
+    }
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        Column(Modifier.weight(1f)) {
-            Text("TCL 65C6K", style = MaterialTheme.typography.headlineSmall)
-            val (dot, label) = when {
-                notConfigured -> Color.Gray to "Sin configurar"
-                state.link == Link.CONNECTED && state.power == false -> Color(0xFFFFB224) to "En reposo"
-                state.link == Link.CONNECTED -> Color(0xFF46A758) to "Conectada"
-                state.link == Link.CONNECTING -> Color(0xFF8E9BFF) to "Conectando…"
-                else -> Accent to (state.error ?: "Buscando la TV…")
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(Modifier.size(8.dp).background(dot, CircleShape))
-                Spacer(Modifier.width(6.dp))
-                Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
-            }
-            val app = state.currentApp?.takeIf { state.link == Link.CONNECTED && state.power != false }?.let(::appForPackage)
-            AnimatedVisibility(app != null) {
-                if (app != null) {
-                    Row(Modifier.padding(top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
-                        AppIcon(app, 20)
-                        Spacer(Modifier.width(6.dp))
-                        Text("En la TV: ${app.name}", style = MaterialTheme.typography.labelLarge)
-                    }
-                }
-            }
-            if (sleepAt > now) {
-                val minutes = ((sleepAt - now) / 60_000.0).roundToInt().coerceAtLeast(1)
+        Box(Modifier.weight(1f)) {
+            // Píldora de estado compacta en lugar de un título grande.
+            Row(
+                Modifier
+                    .clip(RoundedCornerShape(50))
+                    .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                    .padding(horizontal = 14.dp, vertical = 9.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Box(Modifier.size(9.dp).background(dot, CircleShape))
+                Spacer(Modifier.width(8.dp))
+                Text("TCL 65C6K", style = MaterialTheme.typography.labelLarge, maxLines = 1)
                 Text(
-                    "Se apaga en $minutes min",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.secondary,
-                    modifier = Modifier.padding(top = 4.dp).clickable(onClick = onSleep),
+                    " · $label",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
         }
         if (notConfigured) {
             TextButton(onClick = onOpenSettings) { Text("Configurar") }
         } else {
-            IconButton(onClick = onSleep) { Icon(painterResource(R.drawable.ic_bedtime), "Temporizador de apagado") }
+            if (sleepAt > now) {
+                val minutes = ((sleepAt - now) / 60_000.0).roundToInt().coerceAtLeast(1)
+                Row(
+                    Modifier
+                        .clip(RoundedCornerShape(50))
+                        .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.18f))
+                        .clickable(onClick = onSleep)
+                        .padding(horizontal = 10.dp, vertical = 7.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(painterResource(R.drawable.ic_bedtime), "Temporizador", Modifier.size(16.dp), tint = MaterialTheme.colorScheme.secondary)
+                    Spacer(Modifier.width(4.dp))
+                    Text("$minutes min", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.secondary)
+                }
+            } else {
+                IconButton(onClick = onSleep) { Icon(painterResource(R.drawable.ic_bedtime), "Temporizador de apagado") }
+            }
             IconButton(onClick = onMore) { Icon(painterResource(R.drawable.ic_more), "Más botones") }
+        }
+    }
+}
+
+/** Tarjeta grande con la app abierta en la TV, sobre el color de su marca. */
+@Composable
+private fun NowPlaying(app: com.mdl.tclremote.data.AppShortcut) {
+    val brand = brandColor(app)
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .background(Brush.horizontalGradient(listOf(brand, brand.copy(alpha = 0.55f))))
+            .padding(14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        AppIcon(app, 52)
+        Spacer(Modifier.width(14.dp))
+        Column(Modifier.weight(1f)) {
+            Text("Viendo ahora", style = MaterialTheme.typography.labelMedium, color = Color.White.copy(alpha = 0.8f))
+            Text(app.name, style = MaterialTheme.typography.titleLarge, color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        }
+        RemoteButton({ send(Keys.MEDIA_PLAY_PAUSE) }, Modifier.size(48.dp), color = Color.White.copy(alpha = 0.22f)) {
+            Icon(painterResource(R.drawable.ic_play_pause), "Play / pausa", tint = Color.White)
+        }
+    }
+}
+
+/** Sin conexión: explica qué pasa y ofrece soluciones en vez de un simple texto de error. */
+@Composable
+private fun OfflineCard(message: String, onOpenSettings: () -> Unit) {
+    val context = LocalContext.current
+    val canIr = remember { IrSender.hasEmitter(context) } && IrSender.isConfigured()
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainer)
+            .padding(18.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Box(Modifier.size(64.dp).background(Accent.copy(alpha = 0.15f), CircleShape), contentAlignment = Alignment.Center) {
+            Icon(painterResource(R.drawable.ic_tv_off), null, Modifier.size(32.dp), tint = Accent)
+        }
+        Spacer(Modifier.height(10.dp))
+        Text("La TV no responde", style = MaterialTheme.typography.titleMedium)
+        Text(
+            message,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+        )
+        Spacer(Modifier.height(12.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = { TvRemote.launch { TvRemote.connection() } }) { Text("Reintentar") }
+            if (canIr) {
+                OutlinedButton(onClick = {
+                    if (IrSender.sendPower(context)) TvRemote.notify("Infrarrojo enviado: apunta el móvil a la TV")
+                }) {
+                    Icon(painterResource(R.drawable.ic_ir), null, Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text("Encender por IR")
+                }
+            } else {
+                TextButton(onClick = onOpenSettings) { Text("Ayuda") }
+            }
         }
     }
 }
@@ -460,12 +577,36 @@ private fun DPad() {
 @Composable
 private fun Touchpad() {
     val view = LocalView.current
+    val glowColor = Accent
+    var touching by remember { mutableStateOf(false) }
+    var finger by remember { mutableStateOf(Offset.Zero) }
+    val glow by animateFloatAsState(if (touching) 1f else 0f, tween(if (touching) 90 else 450), label = "glow")
     Box(
         Modifier
             .fillMaxWidth()
-            .height(250.dp)
-            .clip(RoundedCornerShape(32.dp))
+            .height(240.dp)
+            .clip(RoundedCornerShape(28.dp))
             .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+            // Brillo que sigue al dedo: confirma que el touchpad está respondiendo.
+            .drawBehind {
+                if (glow > 0f) {
+                    val radius = 80.dp.toPx()
+                    drawCircle(
+                        Brush.radialGradient(listOf(glowColor.copy(alpha = 0.35f * glow), Color.Transparent), center = finger, radius = radius),
+                        radius = radius,
+                        center = finger,
+                    )
+                }
+            }
+            .pointerInput(Unit) {
+                awaitPointerEventScope {
+                    while (true) {
+                        val change = awaitPointerEvent(PointerEventPass.Initial).changes.firstOrNull() ?: continue
+                        touching = change.pressed
+                        if (change.pressed) finger = change.position
+                    }
+                }
+            }
             .pointerInput(Unit) {
                 detectTapGestures(
                     onTap = {
@@ -564,12 +705,17 @@ private fun KeyboardDialog(onDismiss: () -> Unit) {
 /** Botones que se usan poco: menú, guía, canales, números y control de reproducción. */
 @Composable
 private fun MoreDialog(onDismiss: () -> Unit) {
-    val keys = listOf(
-        "Menú" to Keys.MENU, "Guía" to Keys.GUIDE, "Info" to Keys.INFO,
-        "Canal +" to Keys.CHANNEL_UP, "Canal −" to Keys.CHANNEL_DOWN, "Entrada" to Keys.TV_INPUT,
-        "⏮" to Keys.MEDIA_PREVIOUS, "⏪" to Keys.MEDIA_REWIND, "⏩" to Keys.MEDIA_FAST_FORWARD,
-        "⏭" to Keys.MEDIA_NEXT, "▶" to Keys.MEDIA_PLAY, "⏸" to Keys.MEDIA_PAUSE,
-    ) + (1..9).map { "$it" to (7 + it) } + listOf("0" to 7)
+    // (texto, tecla, icono): los controles de reproducción usan icono en vez de símbolos de texto.
+    val keys: List<Triple<String, Int, Int?>> = listOf(
+        Triple("Menú", Keys.MENU, null), Triple("Guía", Keys.GUIDE, null), Triple("Info", Keys.INFO, null),
+        Triple("Canal +", Keys.CHANNEL_UP, null), Triple("Canal −", Keys.CHANNEL_DOWN, null), Triple("Entrada", Keys.TV_INPUT, null),
+        Triple("Anterior", Keys.MEDIA_PREVIOUS, R.drawable.ic_skip_previous),
+        Triple("Retroceder", Keys.MEDIA_REWIND, R.drawable.ic_fast_rewind),
+        Triple("Avanzar", Keys.MEDIA_FAST_FORWARD, R.drawable.ic_fast_forward),
+        Triple("Siguiente", Keys.MEDIA_NEXT, R.drawable.ic_skip_next),
+        Triple("Reproducir", Keys.MEDIA_PLAY, R.drawable.ic_play),
+        Triple("Pausa", Keys.MEDIA_PAUSE, R.drawable.ic_pause),
+    ) + (1..9).map { Triple("$it", 7 + it, null) } + listOf(Triple("0", 7, null))
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Más botones") },
@@ -577,12 +723,15 @@ private fun MoreDialog(onDismiss: () -> Unit) {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 keys.chunked(3).forEach { row ->
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        row.forEach { (label, code) ->
+                        row.forEach { (label, code, icon) ->
                             RemoteButton(
                                 onPress = { send(code) },
                                 modifier = Modifier.weight(1f).height(48.dp),
                                 shape = RoundedCornerShape(14.dp),
-                            ) { Text(label, fontSize = 16.sp, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                            ) {
+                                if (icon != null) Icon(painterResource(icon), label)
+                                else Text(label, fontSize = 16.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                            }
                         }
                         repeat(3 - row.size) { Spacer(Modifier.weight(1f)) }
                     }
@@ -631,4 +780,57 @@ private fun SleepDialog(onDismiss: () -> Unit) {
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Cerrar") } },
     )
+}
+
+/** Indicador grande de volumen que aparece un momento cuando cambia el volumen de la TV. */
+@Composable
+fun VolumeHud(modifier: Modifier = Modifier) {
+    val state by TvRemote.state.collectAsState()
+    var visible by remember { mutableStateOf(false) }
+    var previous by remember { mutableStateOf<Pair<Int?, Boolean>?>(null) }
+    LaunchedEffect(state.volume, state.muted) {
+        val now = state.volume to state.muted
+        val before = previous
+        previous = now
+        // No se muestra al conectar (primer valor), solo cuando el volumen cambia de verdad.
+        if (before == null || before.first == null || state.volume == null || before == now) return@LaunchedEffect
+        visible = true
+        delay(1500)
+        visible = false
+    }
+    AnimatedVisibility(
+        visible,
+        enter = fadeIn() + slideInVertically { -it },
+        exit = fadeOut() + slideOutVertically { -it },
+        modifier = modifier,
+    ) {
+        val volume = state.volume ?: 0
+        val max = (state.maxVolume ?: 100).coerceAtLeast(1)
+        Row(
+            Modifier
+                .width(260.dp)
+                .clip(RoundedCornerShape(50))
+                .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                painterResource(if (state.muted) R.drawable.ic_mute else R.drawable.ic_vol_up),
+                null,
+                tint = if (state.muted) MaterialTheme.colorScheme.onSurfaceVariant else Accent,
+            )
+            Spacer(Modifier.width(12.dp))
+            Box(
+                Modifier.weight(1f).height(8.dp).clip(RoundedCornerShape(4.dp))
+                    .background(MaterialTheme.colorScheme.surfaceContainer),
+            ) {
+                Box(
+                    Modifier.fillMaxWidth(if (state.muted) 0f else volume / max.toFloat()).fillMaxHeight()
+                        .background(Accent),
+                )
+            }
+            Spacer(Modifier.width(12.dp))
+            Text(if (state.muted) "Silencio" else "$volume", style = MaterialTheme.typography.titleSmall)
+        }
+    }
 }

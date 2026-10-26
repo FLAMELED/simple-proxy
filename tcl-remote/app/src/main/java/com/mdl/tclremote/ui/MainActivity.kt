@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -29,6 +31,10 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.activity.SystemBarStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -146,31 +152,81 @@ private class ShakeDetector(private val onShake: () -> Unit) : SensorEventListen
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
 }
 
-val Accent = Color(0xFFE5484D)
+private val BrandRed = Color(0xFFE5484D)
+
+private val DarkColors = darkColorScheme(
+    primary = BrandRed,
+    onPrimary = Color.White,
+    secondary = Color(0xFF8E9BFF),
+    background = Color(0xFF101114),
+    surface = Color(0xFF101114),
+    surfaceVariant = Color(0xFF24262E),
+    surfaceContainer = Color(0xFF1B1C22),
+    surfaceContainerHigh = Color(0xFF24262E),
+    surfaceContainerHighest = Color(0xFF2D2F38),
+    onSurface = Color(0xFFF2F2F5),
+    onSurfaceVariant = Color(0xFFB4B6C2),
+)
+
+/** Negro puro: en pantallas OLED los píxeles negros van apagados (más contraste, menos batería). */
+private val AmoledColors = DarkColors.copy(
+    background = Color.Black,
+    surface = Color.Black,
+    surfaceVariant = Color(0xFF17171A),
+    surfaceContainer = Color(0xFF0D0D0F),
+    surfaceContainerHigh = Color(0xFF17171A),
+    surfaceContainerHighest = Color(0xFF212125),
+)
+
+private val LightColors = lightColorScheme(
+    primary = Color(0xFFD6363C),
+    onPrimary = Color.White,
+    secondary = Color(0xFF4B5BD6),
+    background = Color(0xFFF5F5F8),
+    surface = Color(0xFFF5F5F8),
+    surfaceVariant = Color(0xFFE6E6EC),
+    surfaceContainer = Color(0xFFFFFFFF),
+    surfaceContainerHigh = Color(0xFFEDEDF2),
+    surfaceContainerHighest = Color(0xFFE2E2E9),
+    onSurface = Color(0xFF16171B),
+    onSurfaceVariant = Color(0xFF5B5E6B),
+)
 
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
     val dynamic by Store.dynamicColor.value.collectAsState()
+    val mode by Store.themeMode.collectAsState()
     val context = LocalContext.current
-    val colors = if (dynamic) {
-        dynamicDarkColorScheme(context)
-    } else {
-        darkColorScheme(
-            primary = Accent,
-            onPrimary = Color.White,
-            secondary = Color(0xFF8E9BFF),
-            background = Color(0xFF101114),
-            surface = Color(0xFF101114),
-            surfaceVariant = Color(0xFF24262E),
-            surfaceContainer = Color(0xFF1B1C22),
-            surfaceContainerHigh = Color(0xFF24262E),
-            surfaceContainerHighest = Color(0xFF2D2F38),
-            onSurface = Color(0xFFF2F2F5),
-            onSurfaceVariant = Color(0xFFB4B6C2),
+    val dark = when (mode) {
+        Store.ThemeMode.LIGHT -> false
+        Store.ThemeMode.SYSTEM -> isSystemInDarkTheme()
+        else -> true
+    }
+    val colors = when {
+        dynamic && dark -> dynamicDarkColorScheme(context).let {
+            if (mode == Store.ThemeMode.AMOLED) it.copy(background = Color.Black, surface = Color.Black) else it
+        }
+        dynamic -> dynamicLightColorScheme(context)
+        mode == Store.ThemeMode.AMOLED -> AmoledColors
+        dark -> DarkColors
+        else -> LightColors
+    }
+    // Iconos de la barra de estado claros u oscuros según el tema de la app (no el del sistema).
+    val activity = context as? ComponentActivity
+    LaunchedEffect(dark) {
+        activity?.enableEdgeToEdge(
+            statusBarStyle = if (dark) SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+            else SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = if (dark) SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+            else SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT),
         )
     }
     MaterialTheme(colorScheme = colors, content = content)
 }
+
+/** Rojo de la marca del tema actual (el tema claro usa uno algo más oscuro para que contraste). */
+val Accent: Color
+    @Composable get() = MaterialTheme.colorScheme.primary
 
 private data class Tab(val label: String, val icon: Int)
 
@@ -236,5 +292,6 @@ private fun App() {
                 }
             }
         }
+        VolumeHud(Modifier.padding(padding).padding(top = 8.dp).fillMaxWidth().wrapContentWidth())
     }
 }

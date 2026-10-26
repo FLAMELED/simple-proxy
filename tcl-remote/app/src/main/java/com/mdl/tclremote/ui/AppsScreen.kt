@@ -55,7 +55,7 @@ fun AppsScreen() {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Spacer(Modifier.height(16.dp))
-        AppGrid(apps, onOpen = { app -> TvRemote.launch { TvRemote.openApp(app.link) } }, ordering = ordering)
+        AppGrid(apps, onOpen = { app -> TvRemote.launch { TvRemote.openApp(app.link) } }, ordering = ordering, columns = 3, banners = true)
         Spacer(Modifier.height(16.dp))
         OutlinedButton(onClick = { editing = !editing }, modifier = Modifier.fillMaxWidth()) {
             Text(if (editing) "Ocultar lista" else "Añadir, quitar o cambiar apps")

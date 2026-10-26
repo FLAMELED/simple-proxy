@@ -36,7 +36,7 @@ object Shortcuts {
     private fun appIcon(context: Context, pkg: String?): Icon {
         val file = pkg?.let { File(File(context.cacheDir, "app-icons"), "$it.png") }
         val bitmap = file?.takeIf { it.exists() }?.let { BitmapFactory.decodeFile(it.path) }
-        return if (bitmap != null) Icon.createWithAdaptiveBitmap(bitmap) else Icon.createWithResource(context, R.drawable.ic_shortcut_apps)
+        return if (bitmap != null) Icon.createWithBitmap(bitmap) else Icon.createWithResource(context, R.drawable.ic_shortcut_apps)
     }
 
     private fun shortcut(context: Context, id: String, label: String, command: String, icon: Icon) =

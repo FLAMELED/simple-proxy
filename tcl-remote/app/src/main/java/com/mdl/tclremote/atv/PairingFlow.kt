@@ -52,7 +52,6 @@ object PairingFlow {
                 if (s.finish(code)) {
                     session = null
                     Store.setPaired(true)
-                    Store.onboardingDone.set(true)
                     _state.value = PairingState.Done
                     runCatching { TvRemote.connection() }
                 } else {

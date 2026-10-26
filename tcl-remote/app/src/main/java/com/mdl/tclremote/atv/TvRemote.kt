@@ -235,8 +235,10 @@ object TvRemote : TvConnection.Listener {
     override fun onVolume(level: Int, max: Int, muted: Boolean) =
         _state.update { it.copy(volume = level, maxVolume = max, muted = muted) }
 
-    override fun onCurrentApp(packageName: String) =
-        _state.update { it.copy(currentApp = packageName, imeRequested = false) }
+    override fun onCurrentApp(packageName: String) = _state.update {
+        // Al cambiar de app, el campo de texto que pedía la anterior ya no existe.
+        it.copy(currentApp = packageName, imeRequested = it.imeRequested && it.currentApp == packageName)
+    }
 
     override fun onImeRequest() = _state.update { it.copy(imeRequested = true) }
 

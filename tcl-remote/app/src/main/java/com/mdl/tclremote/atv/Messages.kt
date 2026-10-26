@@ -166,6 +166,7 @@ object Keys {
     const val MUTE = 164
     const val INFO = 165
     const val CHANNEL_UP = 166
+    const val CAPTIONS = 175
     const val CHANNEL_DOWN = 167
     const val GUIDE = 172
     const val SETTINGS = 176

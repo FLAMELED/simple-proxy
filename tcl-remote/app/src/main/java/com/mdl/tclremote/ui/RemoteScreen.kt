@@ -320,27 +320,71 @@ private fun Header(notConfigured: Boolean, onOpenSettings: () -> Unit, onSleep: 
     }
 }
 
-/** Tarjeta grande con la app abierta en la TV, sobre el color de su marca. */
+private data class MediaControl(val icon: Int, val label: String, val key: Int, val repeat: Boolean = false)
+
+/**
+ * Controles según el tipo de app abierta. La TV no envía el título ni el progreso del vídeo,
+ * así que solo se ofrecen las teclas multimedia que cada app entiende.
+ */
+private fun mediaControls(app: com.mdl.tclremote.data.AppShortcut): List<MediaControl> {
+    val id = (app.name + " " + app.link).lowercase()
+    val prev = MediaControl(R.drawable.ic_skip_previous, "Anterior", Keys.MEDIA_PREVIOUS)
+    val next = MediaControl(R.drawable.ic_skip_next, "Siguiente", Keys.MEDIA_NEXT)
+    val rewind = MediaControl(R.drawable.ic_fast_rewind, "Retroceder", Keys.MEDIA_REWIND, repeat = true)
+    val forward = MediaControl(R.drawable.ic_fast_forward, "Avanzar", Keys.MEDIA_FAST_FORWARD, repeat = true)
+    val play = MediaControl(R.drawable.ic_play_pause, "Play / pausa", Keys.MEDIA_PLAY_PAUSE)
+    val captions = MediaControl(R.drawable.ic_cc, "Subtítulos", Keys.CAPTIONS)
+    val music = listOf("spotify", "music", "deezer", "tidal", "amazon music")
+    val video = listOf(
+        "netflix", "disney", "prime", "max", "hbo", "paramount", "apple", "crunchyroll", "stremio",
+        "tubi", "dazn", "espn", "iqiyi", "vix", "pluto", "plex", "kick", "twitch",
+    )
+    return when {
+        music.any { it in id } -> listOf(prev, play, next)
+        "youtube" in id -> listOf(prev, rewind, play, forward, next, captions)
+        video.any { it in id } -> listOf(rewind, play, forward, captions)
+        else -> listOf(rewind, play, forward)
+    }
+}
+
+/** Tarjeta con la app abierta en la TV, sobre el color de su marca, y sus controles de reproducción. */
 @Composable
 private fun NowPlaying(app: com.mdl.tclremote.data.AppShortcut) {
     val brand = brandColor(app)
-    Row(
+    Column(
         Modifier
             .fillMaxWidth()
             .padding(top = 12.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(Brush.horizontalGradient(listOf(brand, brand.copy(alpha = 0.55f))))
             .padding(14.dp),
-        verticalAlignment = Alignment.CenterVertically,
     ) {
-        AppIcon(app, 52)
-        Spacer(Modifier.width(14.dp))
-        Column(Modifier.weight(1f)) {
-            Text("Viendo ahora", style = MaterialTheme.typography.labelMedium, color = Color.White.copy(alpha = 0.8f))
-            Text(app.name, style = MaterialTheme.typography.titleLarge, color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            AppIcon(app, 44)
+            Spacer(Modifier.width(12.dp))
+            Column(Modifier.weight(1f)) {
+                Text("Viendo ahora", style = MaterialTheme.typography.labelMedium, color = Color.White.copy(alpha = 0.8f))
+                Text(app.name, style = MaterialTheme.typography.titleLarge, color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            }
         }
-        RemoteButton({ send(Keys.MEDIA_PLAY_PAUSE) }, Modifier.size(48.dp), color = Color.White.copy(alpha = 0.22f)) {
-            Icon(painterResource(R.drawable.ic_play_pause), "Play / pausa", tint = Color.White)
+        Spacer(Modifier.height(12.dp))
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+            mediaControls(app).forEach { control ->
+                val main = control.key == Keys.MEDIA_PLAY_PAUSE
+                RemoteButton(
+                    { send(control.key) },
+                    Modifier.size(if (main) 52.dp else 44.dp),
+                    color = Color.White.copy(alpha = if (main) 0.95f else 0.2f),
+                    repeat = control.repeat,
+                ) {
+                    Icon(
+                        painterResource(control.icon),
+                        control.label,
+                        Modifier.size(if (main) 26.dp else 22.dp),
+                        tint = if (main) brand else Color.White,
+                    )
+                }
+            }
         }
     }
 }

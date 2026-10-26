@@ -1,6 +1,13 @@
 package com.mdl.tclremote.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
+import com.mdl.tclremote.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +16,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,6 +32,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -82,28 +91,43 @@ fun ScenesScreen() {
                 )
             }
             items(scenes, key = { it.id }) { scene ->
-                Column(
+                val run = {
+                    TvRemote.notify("Ejecutando “${scene.name}”")
+                    TvRemote.launch { TvRemote.runScene(context, scene) }
+                }
+                var menu by remember { mutableStateOf(false) }
+                Row(
                     Modifier.fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surfaceContainer, RoundedCornerShape(20.dp))
-                        .padding(16.dp),
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(MaterialTheme.colorScheme.surfaceContainer)
+                        .clickable { editing = scene }
+                        .padding(start = 14.dp, top = 12.dp, bottom = 12.dp, end = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(scene.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
-                        IconButton(onClick = { editing = scene }) { Icon(Icons.Default.Edit, "Editar") }
-                        IconButton(onClick = { deleting = scene }) { Icon(Icons.Default.Delete, "Borrar") }
+                    Box(
+                        Modifier.size(40.dp).background(Accent.copy(alpha = 0.15f), CircleShape),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(painterResource(R.drawable.ic_scenes), null, Modifier.size(20.dp), tint = Accent)
                     }
-                    Text(
-                        scene.steps.joinToString(" → ") { it.describe(apps) }.ifEmpty { "Sin pasos" },
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Spacer(Modifier.height(10.dp))
-                    Button(onClick = {
-                        TvRemote.notify("Ejecutando “${scene.name}”")
-                        TvRemote.launch { TvRemote.runScene(context, scene) }
-                    }) {
-                        Icon(Icons.Default.PlayArrow, null)
-                        Text("Ejecutar")
+                    Spacer(Modifier.width(12.dp))
+                    Column(Modifier.weight(1f)) {
+                        Text(scene.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(
+                            scene.steps.joinToString(" → ") { it.describe(apps) }.ifEmpty { "Sin pasos" },
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
+                    FilledIconButton(onClick = run) { Icon(Icons.Default.PlayArrow, "Ejecutar") }
+                    Box {
+                        IconButton(onClick = { menu = true }) { Icon(painterResource(R.drawable.ic_more), "Más opciones") }
+                        DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                            DropdownMenuItem(text = { Text("Editar") }, onClick = { menu = false; editing = scene })
+                            DropdownMenuItem(text = { Text("Borrar") }, onClick = { menu = false; deleting = scene })
+                        }
                     }
                 }
             }

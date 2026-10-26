@@ -25,6 +25,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -404,6 +405,9 @@ private fun Favorites(onOpenApps: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
         )
     } else {
+        // Cinco por pantalla exactas (sin cortar la última); si hay más, la fila se desliza.
+        BoxWithConstraints(Modifier.fillMaxWidth()) {
+        val itemWidth = (maxWidth - 4.dp * 4) / 5
         Row(
             Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -411,13 +415,13 @@ private fun Favorites(onOpenApps: () -> Unit) {
             favorites.forEach { app ->
                 Column(
                     Modifier
-                        .width(72.dp)
+                        .width(itemWidth)
                         .clip(RoundedCornerShape(16.dp))
                         .clickable { TvRemote.launch { TvRemote.openApp(app.link) } }
                         .padding(vertical = 4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    AppIcon(app, 56)
+                    AppIcon(app, 54)
                     Spacer(Modifier.height(6.dp))
                     Text(
                         app.name,
@@ -429,6 +433,7 @@ private fun Favorites(onOpenApps: () -> Unit) {
                     )
                 }
             }
+        }
         }
     }
 }

@@ -308,7 +308,7 @@ fun AppGrid(
                         Spacer(Modifier.height(4.dp))
                     }
                 }
-                repeat(4 - row.size) { Spacer(Modifier.weight(1f)) }
+                repeat(columns - row.size) { Spacer(Modifier.weight(1f)) }
             }
         }
     }

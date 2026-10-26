@@ -2,6 +2,13 @@ package com.mdl.tclremote.ui
 
 import android.app.TimePickerDialog
 import androidx.compose.foundation.background
+import com.mdl.tclremote.R
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -82,13 +89,7 @@ fun SchedulesScreen() {
                 )
             }
             if (schedules.isEmpty()) {
-                item {
-                    Text(
-                        "Aún no hay horarios.",
-                        modifier = Modifier.padding(top = 24.dp),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
+                item { EmptySchedules(scenes) }
             }
             items(schedules, key = { it.id }) { s ->
                 Row(
@@ -177,4 +178,57 @@ private fun ScheduleEditor(schedule: Schedule, scenes: List<Scene>, onDismiss: (
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Cancelar") } },
     )
+}
+
+/** Pantalla vacía con sugerencias de un toque, en vez de solo «no hay horarios». */
+@Composable
+private fun EmptySchedules(scenes: List<Scene>) {
+    val context = LocalContext.current
+    val off = scenes.firstOrNull { sc -> sc.steps.any { it.type == com.mdl.tclremote.data.StepType.POWER_OFF } }
+    val watch = scenes.firstOrNull { sc -> sc.steps.any { it.type == com.mdl.tclremote.data.StepType.APP } }
+    val weekdays = setOf(Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY, Calendar.FRIDAY)
+    val suggestions = listOfNotNull(
+        off?.let { Triple("Apagar a la 1:00 cada noche", "Por si te quedas dormido", Schedule(newId(), 1, 0, emptySet(), it.id, true)) },
+        watch?.let { Triple("“${it.name}” a las 20:00", "De lunes a viernes", Schedule(newId(), 20, 0, weekdays, it.id, true)) },
+    )
+    Column(
+        Modifier.fillMaxWidth().padding(top = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Box(
+            Modifier.size(88.dp).background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f), CircleShape),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(painterResource(R.drawable.ic_auto), null, Modifier.size(44.dp), tint = MaterialTheme.colorScheme.primary)
+        }
+        Spacer(Modifier.height(14.dp))
+        Text("Aún no hay horarios", style = MaterialTheme.typography.titleMedium)
+        Text(
+            "Crea uno con el botón de abajo o usa una sugerencia:",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Spacer(Modifier.height(16.dp))
+        suggestions.forEach { (title, subtitle, schedule) ->
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp)
+                    .clip(RoundedCornerShape(18.dp))
+                    .background(MaterialTheme.colorScheme.surfaceContainer)
+                    .clickable {
+                        Store.saveSchedule(schedule)
+                        Scheduler.schedule(context, schedule)
+                    }
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(title, style = MaterialTheme.typography.bodyLarge)
+                    Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Icon(Icons.Default.Add, "Añadir", tint = MaterialTheme.colorScheme.primary)
+            }
+        }
+    }
 }

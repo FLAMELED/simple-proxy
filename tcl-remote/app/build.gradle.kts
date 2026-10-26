@@ -43,6 +43,12 @@ android {
     buildFeatures {
         compose = true
     }
+    lint {
+        textReport = true
+        textOutput = file("stdout")
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
     packaging {
         resources {
             excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"

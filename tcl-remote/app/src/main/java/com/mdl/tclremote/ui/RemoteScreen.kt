@@ -6,6 +6,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,12 +33,8 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.AssistChip
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -146,25 +144,23 @@ fun RemoteScreen(onOpenSettings: () -> Unit, onOpenApps: () -> Unit) {
             }
         }
 
-        Spacer(Modifier.height(16.dp))
-
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            FilterChip(
-                selected = !touchpad,
-                onClick = { Store.touchpad.set(false) },
-                label = { Text("Cruceta") },
-                leadingIcon = { Icon(painterResource(R.drawable.ic_dpad), null, Modifier.size(18.dp)) },
-            )
-            FilterChip(
-                selected = touchpad,
-                onClick = { Store.touchpad.set(true) },
-                label = { Text("Touchpad") },
-                leadingIcon = { Icon(painterResource(R.drawable.ic_touchpad), null, Modifier.size(18.dp)) },
-            )
+        Spacer(Modifier.height(18.dp))
+        Box(Modifier.fillMaxWidth()) {
+            Crossfade(touchpad, label = "pad") { pad -> if (pad) Touchpad() else DPad() }
+            // Cambiar entre touchpad y cruceta: un botón pequeño en la esquina, sin ocupar una fila.
+            IconButton(
+                onClick = { Store.touchpad.set(!touchpad) },
+                modifier = Modifier.align(Alignment.TopEnd).padding(6.dp)
+                    .background(MaterialTheme.colorScheme.surfaceContainerHigh, CircleShape),
+            ) {
+                Icon(
+                    painterResource(if (touchpad) R.drawable.ic_dpad else R.drawable.ic_touchpad),
+                    if (touchpad) "Usar cruceta" else "Usar touchpad",
+                    Modifier.size(20.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
         }
-
-        Spacer(Modifier.height(14.dp))
-        Crossfade(touchpad, label = "pad") { pad -> if (pad) Touchpad() else DPad() }
         Spacer(Modifier.height(18.dp))
 
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -176,18 +172,11 @@ fun RemoteScreen(onOpenSettings: () -> Unit, onOpenApps: () -> Unit) {
         Spacer(Modifier.height(12.dp))
 
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            VolumeRocker(Modifier.weight(1f))
+            VolumeBar(state.volume, state.maxVolume, state.muted, Modifier.weight(1f))
             IconKey(R.drawable.ic_mute, "Silencio", Keys.MUTE, highlighted = state.muted)
             RemoteButton(onPress = { keyboard = true }, modifier = Modifier.size(56.dp)) {
                 Icon(painterResource(R.drawable.ic_keyboard), "Teclado")
             }
-        }
-
-        val volume = state.volume
-        val max = state.maxVolume
-        if (volume != null && max != null && max > 0) {
-            Spacer(Modifier.height(4.dp))
-            VolumeSlider(volume, max, state.muted)
         }
 
         Spacer(Modifier.height(22.dp))
@@ -199,13 +188,21 @@ fun RemoteScreen(onOpenSettings: () -> Unit, onOpenApps: () -> Unit) {
             Spacer(Modifier.height(6.dp))
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 scenes.forEach { scene ->
-                    AssistChip(
-                        onClick = {
-                            TvRemote.notify("Ejecutando “${scene.name}”")
-                            TvRemote.launch { TvRemote.runScene(context, scene) }
-                        },
-                        label = { Text(scene.name) },
-                    )
+                    Row(
+                        Modifier
+                            .clip(RoundedCornerShape(20.dp))
+                            .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                            .clickable {
+                                TvRemote.notify("Ejecutando “${scene.name}”")
+                                TvRemote.launch { TvRemote.runScene(context, scene) }
+                            }
+                            .padding(horizontal = 14.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(painterResource(R.drawable.ic_scenes), null, Modifier.size(16.dp), tint = Accent)
+                        Spacer(Modifier.width(6.dp))
+                        Text(scene.name, style = MaterialTheme.typography.labelLarge)
+                    }
                 }
             }
         }
@@ -290,7 +287,32 @@ private fun Favorites(onOpenApps: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
         )
     } else {
-        AppGrid(favorites, onOpen = { app -> TvRemote.launch { TvRemote.openApp(app.link) } }, columns = 5)
+        Row(
+            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            favorites.forEach { app ->
+                Column(
+                    Modifier
+                        .width(72.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .clickable { TvRemote.launch { TvRemote.openApp(app.link) } }
+                        .padding(vertical = 4.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    AppIcon(app, 56)
+                    Spacer(Modifier.height(6.dp))
+                    Text(
+                        app.name,
+                        style = MaterialTheme.typography.labelMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 2.dp),
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -314,8 +336,12 @@ private fun WideKey(icon: Int, label: String, code: Int, modifier: Modifier) {
     }
 }
 
+/**
+ * Volumen en una sola pieza: − a la izquierda, + a la derecha y, en medio, la barra con el nivel.
+ * La barra se toca o se arrastra; al soltar se envían las pulsaciones para llegar a ese nivel.
+ */
 @Composable
-private fun VolumeRocker(modifier: Modifier) {
+private fun VolumeBar(volume: Int?, max: Int?, muted: Boolean, modifier: Modifier) {
     val color = MaterialTheme.colorScheme.surfaceContainerHighest
     Row(
         modifier.height(56.dp).background(color, RoundedCornerShape(28.dp)),
@@ -324,60 +350,84 @@ private fun VolumeRocker(modifier: Modifier) {
         RemoteButton({ send(Keys.VOLUME_DOWN) }, Modifier.size(56.dp), color = color, repeat = true) {
             Icon(painterResource(R.drawable.ic_vol_down), "Bajar volumen")
         }
-        Text(
-            "VOL",
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f),
-        )
+        if (volume != null && max != null && max > 0) {
+            VolumeTrack(volume, max, muted, Modifier.weight(1f))
+        } else {
+            Text(
+                "VOL",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.weight(1f),
+            )
+        }
         RemoteButton({ send(Keys.VOLUME_UP) }, Modifier.size(56.dp), color = color, repeat = true) {
             Icon(painterResource(R.drawable.ic_vol_up), "Subir volumen")
         }
     }
 }
 
-/** Barra de volumen: al soltar, envía las pulsaciones necesarias para llegar al nivel elegido. */
 @Composable
-private fun VolumeSlider(volume: Int, max: Int, muted: Boolean) {
+private fun VolumeTrack(volume: Int, max: Int, muted: Boolean, modifier: Modifier) {
     val scope = rememberCoroutineScope()
     val current by rememberUpdatedState(volume)
     var target by remember { mutableStateOf<Int?>(null) }
-    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        Slider(
-            value = (target ?: volume).toFloat(),
-            onValueChange = { target = it.roundToInt() },
-            onValueChangeFinished = {
-                val goal = target ?: return@Slider
-                target = null
-                val diff = goal - current
-                if (diff != 0) {
-                    scope.launch {
-                        repeat(abs(diff).coerceAtMost(100)) {
-                            send(if (diff > 0) Keys.VOLUME_UP else Keys.VOLUME_DOWN)
-                            delay(60)
-                        }
-                    }
+
+    fun levelAt(x: Float, width: Int) = ((x / width.coerceAtLeast(1)).coerceIn(0f, 1f) * max).roundToInt()
+    fun commit() {
+        val goal = target ?: return
+        target = null
+        val diff = goal - current
+        if (diff == 0) return
+        scope.launch {
+            repeat(abs(diff).coerceAtMost(100)) {
+                send(if (diff > 0) Keys.VOLUME_UP else Keys.VOLUME_DOWN)
+                delay(60)
+            }
+        }
+    }
+
+    val shown = target ?: volume
+    val active = if (muted && target == null) MaterialTheme.colorScheme.onSurfaceVariant else Accent
+    Box(
+        modifier
+            .fillMaxHeight()
+            .padding(horizontal = 4.dp)
+            .pointerInput(max) {
+                detectTapGestures(onTap = { target = levelAt(it.x, size.width); commit() })
+            }
+            .pointerInput(max) {
+                detectHorizontalDragGestures(
+                    onDragStart = { target = levelAt(it.x, size.width) },
+                    onDragEnd = { commit() },
+                    onDragCancel = { target = null },
+                ) { change, _ ->
+                    change.consume()
+                    target = levelAt(change.position.x, size.width)
                 }
             },
-            valueRange = 0f..max.toFloat(),
-            colors = SliderDefaults.colors(
-                thumbColor = if (muted) MaterialTheme.colorScheme.onSurfaceVariant else Accent,
-                activeTrackColor = if (muted) MaterialTheme.colorScheme.onSurfaceVariant else Accent,
-                inactiveTrackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-            ),
-            modifier = Modifier.weight(1f),
-        )
+    ) {
         Text(
             when {
-                target != null -> "  ${target}"
-                muted -> "  Silencio"
-                else -> "  $volume"
+                target != null -> "$shown"
+                muted -> "Silencio"
+                else -> "VOL $shown"
             },
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.labelSmall,
             color = if (target != null) Accent else MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.width(72.dp),
+            modifier = Modifier.align(Alignment.TopCenter).padding(top = 9.dp),
         )
+        Box(
+            Modifier
+                .align(Alignment.Center)
+                .padding(top = 12.dp)
+                .fillMaxWidth()
+                .height(6.dp)
+                .clip(RoundedCornerShape(3.dp))
+                .background(MaterialTheme.colorScheme.surfaceContainer),
+        ) {
+            Box(Modifier.fillMaxWidth(shown / max.toFloat()).fillMaxHeight().background(active))
+        }
     }
 }
 

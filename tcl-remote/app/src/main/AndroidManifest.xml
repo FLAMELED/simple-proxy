@@ -103,6 +103,10 @@
             android:exported="false" />
 
         <receiver
+            android:name=".system.WifiArrivalReceiver"
+            android:exported="false" />
+
+        <receiver
             android:name=".work.SleepReceiver"
             android:exported="false" />
 

@@ -35,7 +35,8 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -47,6 +48,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -69,10 +72,12 @@ import com.mdl.tclremote.atv.Keys
 import com.mdl.tclremote.atv.Link
 import com.mdl.tclremote.atv.TvRemote
 import com.mdl.tclremote.data.Store
+import com.mdl.tclremote.system.Updates
 import com.mdl.tclremote.work.SleepTimer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -95,6 +100,20 @@ fun RemoteScreen(onOpenSettings: () -> Unit, onOpenApps: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Header(host.isBlank(), onOpenSettings, onSleep = { sleep = true }, onMore = { more = true })
+
+        val update by Updates.available.collectAsState()
+        update?.let { info ->
+            Row(
+                Modifier.fillMaxWidth().padding(top = 10.dp)
+                    .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.18f), RoundedCornerShape(16.dp))
+                    .clickable { Updates.open(context, info) }
+                    .padding(horizontal = 14.dp, vertical = 10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text("Hay una versión nueva (build ${info.build})", Modifier.weight(1f))
+                Text("Actualizar", color = MaterialTheme.colorScheme.secondary, style = MaterialTheme.typography.labelLarge)
+            }
+        }
 
         AnimatedVisibility(state.imeRequested) {
             Row(
@@ -167,20 +186,8 @@ fun RemoteScreen(onOpenSettings: () -> Unit, onOpenApps: () -> Unit) {
         val volume = state.volume
         val max = state.maxVolume
         if (volume != null && max != null && max > 0) {
-            Spacer(Modifier.height(10.dp))
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                LinearProgressIndicator(
-                    progress = { volume / max.toFloat() },
-                    modifier = Modifier.weight(1f).height(6.dp).clip(RoundedCornerShape(3.dp)),
-                    color = if (state.muted) MaterialTheme.colorScheme.onSurfaceVariant else Accent,
-                    trackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-                )
-                Text(
-                    if (state.muted) "  Silencio" else "  $volume",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
+            Spacer(Modifier.height(4.dp))
+            VolumeSlider(volume, max, state.muted)
         }
 
         Spacer(Modifier.height(22.dp))
@@ -327,6 +334,50 @@ private fun VolumeRocker(modifier: Modifier) {
         RemoteButton({ send(Keys.VOLUME_UP) }, Modifier.size(56.dp), color = color, repeat = true) {
             Icon(painterResource(R.drawable.ic_vol_up), "Subir volumen")
         }
+    }
+}
+
+/** Barra de volumen: al soltar, envía las pulsaciones necesarias para llegar al nivel elegido. */
+@Composable
+private fun VolumeSlider(volume: Int, max: Int, muted: Boolean) {
+    val scope = rememberCoroutineScope()
+    val current by rememberUpdatedState(volume)
+    var target by remember { mutableStateOf<Int?>(null) }
+    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Slider(
+            value = (target ?: volume).toFloat(),
+            onValueChange = { target = it.roundToInt() },
+            onValueChangeFinished = {
+                val goal = target ?: return@Slider
+                target = null
+                val diff = goal - current
+                if (diff != 0) {
+                    scope.launch {
+                        repeat(abs(diff).coerceAtMost(100)) {
+                            send(if (diff > 0) Keys.VOLUME_UP else Keys.VOLUME_DOWN)
+                            delay(60)
+                        }
+                    }
+                }
+            },
+            valueRange = 0f..max.toFloat(),
+            colors = SliderDefaults.colors(
+                thumbColor = if (muted) MaterialTheme.colorScheme.onSurfaceVariant else Accent,
+                activeTrackColor = if (muted) MaterialTheme.colorScheme.onSurfaceVariant else Accent,
+                inactiveTrackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            ),
+            modifier = Modifier.weight(1f),
+        )
+        Text(
+            when {
+                target != null -> "  ${target}"
+                muted -> "  Silencio"
+                else -> "  $volume"
+            },
+            style = MaterialTheme.typography.labelLarge,
+            color = if (target != null) Accent else MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.width(72.dp),
+        )
     }
 }
 

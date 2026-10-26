@@ -41,7 +41,7 @@ data class AppShortcut(val name: String, val link: String, val icon: String = ""
 fun newId(): String = UUID.randomUUID().toString()
 
 /** Opción de sí/no guardada en preferencias y observable desde la interfaz. */
-class Flag internal constructor(private val key: String, private val default: Boolean) {
+class Flag internal constructor(internal val key: String, private val default: Boolean) {
     private val _value = MutableStateFlow(default)
     val value: StateFlow<Boolean> = _value
     val enabled get() = _value.value
@@ -73,9 +73,23 @@ object Store {
     val shakeToMute = Flag("shake_to_mute", false)
     val touchpad = Flag("touchpad", false)
     val onboardingDone = Flag("onboarding_done", false)
+    /** Ejecutar una escena cuando el móvil vuelve a la WiFi de casa. */
+    val arrival = Flag("arrival_enabled", false)
     private val flags = listOf(
-        volumeKeys, keepScreenOn, dynamicColor, pauseOnCall, controlNotification, shakeToMute, touchpad, onboardingDone,
+        volumeKeys, keepScreenOn, dynamicColor, pauseOnCall, controlNotification, shakeToMute, touchpad, onboardingDone, arrival,
     )
+
+    data class ArrivalConfig(val sceneId: String, val fromHour: Int, val toHour: Int)
+
+    private val _arrivalConfig = MutableStateFlow(ArrivalConfig("", 0, 0))
+    /** Escena y franja horaria (from == to significa «a cualquier hora»). */
+    val arrivalConfig: StateFlow<ArrivalConfig> = _arrivalConfig
+
+    fun setArrivalConfig(config: ArrivalConfig) {
+        _arrivalConfig.value = config
+        prefs.edit().putString("arrival_scene", config.sceneId).putInt("arrival_from", config.fromHour)
+            .putInt("arrival_to", config.toHour).apply()
+    }
 
     private val _favorites = MutableStateFlow<List<String>>(emptyList())
     /** Enlaces de las apps favoritas (se muestran en el mando y en el widget de apps). */
@@ -103,6 +117,10 @@ object Store {
     fun init(context: Context) {
         if (::prefs.isInitialized) return
         prefs = context.getSharedPreferences("tclremote", Context.MODE_PRIVATE)
+        load()
+    }
+
+    private fun load() {
         _host.value = prefs.getString("host", "") ?: ""
         _paired.value = prefs.getBoolean("paired", false)
         _irCode.value = prefs.getString("ir_code", "") ?: ""
@@ -129,9 +147,53 @@ object Store {
         _favorites.value = prefs.getString("favorites", null)?.let { s ->
             JSONArray(s).let { a -> List(a.length()) { a.getString(it) } }
         } ?: _apps.value.take(5).map { it.link }
+        _arrivalConfig.value = ArrivalConfig(
+            prefs.getString("arrival_scene", null) ?: _scenes.value.firstOrNull()?.id.orEmpty(),
+            prefs.getInt("arrival_from", 0),
+            prefs.getInt("arrival_to", 0),
+        )
         _widgetScenes.value = prefs.getString("widget_scenes", null)?.let { s ->
             JSONArray(s).let { a -> List(a.length()) { a.getString(it) } }
         } ?: _scenes.value.take(2).map { it.id }
+    }
+
+    private val backupKeys = listOf("host", "ir_code", "scenes", "schedules", "apps", "favorites", "widget_scenes", "arrival_scene")
+    private val backupInts = listOf("arrival_from", "arrival_to")
+    private val backupFlags get() = listOf(volumeKeys, keepScreenOn, dynamicColor, pauseOnCall, controlNotification, shakeToMute, touchpad, arrival)
+
+    /** Copia de seguridad: escenas, horarios, apps, favoritas y preferencias (no incluye la vinculación). */
+    fun exportJson(): String {
+        val json = JSONObject().put("mitcl_backup", 1).put("created", System.currentTimeMillis())
+        backupKeys.forEach { key -> prefs.getString(key, null)?.let { json.put(key, it) } }
+        backupInts.forEach { key -> if (prefs.contains(key)) json.put(key, prefs.getInt(key, 0)) }
+        val flagsJson = JSONObject()
+        backupFlags.forEach { flagsJson.put(it.key, it.enabled) }
+        json.put("flags", flagsJson)
+        return json.toString(2)
+    }
+
+    /** Restaura una copia. Devuelve false si el archivo no es una copia válida (y no cambia nada). */
+    fun importJson(text: String): Boolean {
+        val json = runCatching { JSONObject(text) }.getOrNull() ?: return false
+        if (json.optInt("mitcl_backup") != 1) return false
+        // Comprueba que todo se puede leer antes de tocar nada.
+        val valid = runCatching {
+            json.optString("scenes").takeIf { it.isNotEmpty() }?.let(::parseScenes)
+            json.optString("schedules").takeIf { it.isNotEmpty() }?.let(::parseSchedules)
+            json.optString("apps").takeIf { it.isNotEmpty() }?.let(::parseApps)
+            json.optString("favorites").takeIf { it.isNotEmpty() }?.let(::JSONArray)
+            json.optString("widget_scenes").takeIf { it.isNotEmpty() }?.let(::JSONArray)
+        }.isSuccess
+        if (!valid) return false
+        val edit = prefs.edit()
+        backupKeys.forEach { key -> if (json.has(key)) edit.putString(key, json.getString(key)) }
+        backupInts.forEach { key -> if (json.has(key)) edit.putInt(key, json.getInt(key)) }
+        json.optJSONObject("flags")?.let { flagsJson ->
+            backupFlags.forEach { flag -> if (flagsJson.has(flag.key)) edit.putBoolean(flag.key, flagsJson.getBoolean(flag.key)) }
+        }
+        edit.putInt("apps_version", APPS_VERSION).commit()
+        load()
+        return true
     }
 
     fun setHost(value: String) {

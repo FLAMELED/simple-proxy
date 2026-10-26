@@ -49,6 +49,8 @@ import com.mdl.tclremote.atv.Keys
 import com.mdl.tclremote.atv.Link
 import com.mdl.tclremote.atv.TvRemote
 import com.mdl.tclremote.data.Store
+import com.mdl.tclremote.system.Updates
+import kotlinx.coroutines.launch
 import kotlin.math.sqrt
 
 class MainActivity : ComponentActivity() {
@@ -64,6 +66,8 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         TvRemote.keepAlive = true
+        val app = applicationContext
+        TvRemote.scope.launch { Updates.check(app) }
     }
 
     override fun onResume() {

@@ -54,7 +54,10 @@ import com.mdl.tclremote.data.Store
 import com.mdl.tclremote.ir.IrCodes
 import com.mdl.tclremote.ir.IrSender
 import com.mdl.tclremote.system.ControlNotification
+import com.mdl.tclremote.system.HomeArrival
+import com.mdl.tclremote.system.Updates
 import com.mdl.tclremote.widget.RemoteWidget
+import com.mdl.tclremote.work.Scheduler
 import kotlinx.coroutines.withTimeoutOrNull
 
 @Composable
@@ -64,7 +67,10 @@ fun SettingsScreen() {
         Text("Ajustes", style = MaterialTheme.typography.headlineSmall)
         TvSection()
         PreferencesSection()
+        ArrivalSection()
         WidgetSection()
+        BackupSection()
+        UpdatesSection()
         Row(
             Modifier.fillMaxWidth().clickable { advanced = !advanced }.padding(vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -349,6 +355,126 @@ private fun LogSection() {
                 TvRemote.notify("Registro copiado")
             }, enabled = lines.isNotEmpty()) { Text("Copiar") }
             TextButton(onClick = { DebugLog.clear() }) { Text("Borrar") }
+        }
+    }
+}
+
+@Composable
+private fun UpdatesSection() {
+    val context = LocalContext.current
+    val update by Updates.available.collectAsState()
+    val installed = remember { Updates.installedBuild(context) }
+    var checking by remember { mutableStateOf(false) }
+    Section("Actualizaciones") {
+        Text("Versión instalada: build $installed", style = MaterialTheme.typography.bodyMedium)
+        val info = update
+        if (info != null) {
+            Button(onClick = { Updates.open(context, info) }) { Text("Descargar build ${info.build}") }
+        } else {
+            OutlinedButton(enabled = !checking, onClick = {
+                checking = true
+                TvRemote.launch {
+                    val found = Updates.check(context, force = true)
+                    checking = false
+                    TvRemote.notify(if (found != null) "Hay una versión nueva: build ${found.build}" else "Ya tienes la última versión")
+                }
+            }) { Text(if (checking) "Buscando…" else "Buscar actualizaciones") }
+        }
+    }
+}
+
+@Composable
+private fun BackupSection() {
+    val context = LocalContext.current
+    val date = remember { java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.ROOT).format(java.util.Date()) }
+    val exporter = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        val ok = runCatching {
+            context.contentResolver.openOutputStream(uri)?.use { it.write(Store.exportJson().toByteArray()) } ?: error("sin archivo")
+        }.isSuccess
+        TvRemote.notify(if (ok) "Copia guardada" else "No se pudo guardar la copia")
+    }
+    val importer = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        val text = runCatching {
+            context.contentResolver.openInputStream(uri)?.use { it.readBytes().toString(Charsets.UTF_8) }
+        }.getOrNull()
+        if (text != null && Store.importJson(text)) {
+            Scheduler.rescheduleAll(context)
+            RemoteWidget.refresh(context)
+            ControlNotification.update(context)
+            TvRemote.notify("Copia restaurada")
+        } else {
+            TvRemote.notify("Ese archivo no es una copia de Mi TCL")
+        }
+    }
+    Section("Copia de seguridad") {
+        Text(
+            "Guarda escenas, horarios, apps, favoritas y preferencias en un archivo. " +
+                "Al restaurar en otro móvil tendrás que volver a vincular la TV.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(onClick = { exporter.launch("mi-tcl-$date.json") }) { Text("Exportar") }
+            OutlinedButton(onClick = { importer.launch(arrayOf("application/json", "text/plain", "application/octet-stream")) }) {
+                Text("Importar")
+            }
+        }
+    }
+}
+
+@Composable
+private fun ArrivalSection() {
+    val context = LocalContext.current
+    val scenes by Store.scenes.collectAsState()
+    val config by Store.arrivalConfig.collectAsState()
+    val enabled by Store.arrival.value.collectAsState()
+    Section("Al llegar a casa") {
+        SwitchRow(
+            "Ejecutar una escena al llegar",
+            "Cuando el móvil se conecta a la WiFi de la TV tras 10 minutos o más fuera de casa",
+            Store.arrival,
+            onChange = { on ->
+                Store.arrival.set(on)
+                HomeArrival.sync(context)
+            },
+        )
+        if (enabled) {
+            Picker(
+                "Escena",
+                scenes,
+                scenes.firstOrNull { it.id == config.sceneId },
+                { "Escena: ${it.name}" },
+                { Store.setArrivalConfig(config.copy(sceneId = it.id)) },
+                Modifier.fillMaxWidth(),
+            )
+            val hours = (0..23).toList()
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Picker(
+                    "Desde",
+                    hours,
+                    config.fromHour,
+                    { if (config.fromHour == config.toHour) "A cualquier hora" else "Desde las %02d:00".format(it) },
+                    { Store.setArrivalConfig(config.copy(fromHour = it)) },
+                    Modifier.weight(1f),
+                )
+                Picker(
+                    "Hasta",
+                    hours,
+                    config.toHour,
+                    { "hasta las %02d:00".format(it) },
+                    { Store.setArrivalConfig(config.copy(toHour = it)) },
+                    Modifier.weight(1f),
+                )
+            }
+            Text(
+                "Pon la misma hora en los dos para que funcione a cualquier hora. Al salir de casa no se puede " +
+                    "apagar la TV sola: sin la WiFi de casa el móvil ya no llega a ella. Para eso usa el widget o " +
+                    "el botón de Ajustes rápidos antes de salir.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
     }
 }

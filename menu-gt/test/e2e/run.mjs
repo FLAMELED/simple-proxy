@@ -166,7 +166,8 @@ for (const width of [320, 390]) {
     await page.locator('#set-budget').press('Enter');
     await page.locator('#set-budget').blur();
     await go(page, 'semana');
-    assert.match(await page.locator('.budget .status').innerText(), /No alcanza: faltan/);
+    assert.match(await page.locator('.ticket-total').innerText(), /Faltan Q/i);
+    assert.match(await page.locator('.bar').getAttribute('aria-label'), /No alcanza: faltan/);
     assert.ok(await page.locator('.sugg').count());
     await page.waitForTimeout(700); // fin de la animación de cifras
     if (width === 390) await page.screenshot({ path: `${OUT}/semana-insuficiente-${width}.png`, fullPage: true });

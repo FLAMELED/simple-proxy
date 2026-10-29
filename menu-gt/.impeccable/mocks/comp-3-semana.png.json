@@ -1,0 +1,9 @@
+{
+ "model": "seedream_5_0_flash",
+ "tool": "higgsfield generate_image_batch",
+ "job_id": "350db0ff-be63-408c-bd4c-34a855641789",
+ "aspect_ratio": "9:16",
+ "resolution": "2k",
+ "prompt_source": "ver la conversación del 2026-10-29; prompt estructural del ticket",
+ "approved": false
+}

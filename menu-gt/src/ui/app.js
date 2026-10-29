@@ -159,6 +159,7 @@ const actions = {
     syncPlan(s, { regenerate: true });
     s.view = 'semana';
     commit();
+    window.scrollTo({ top: 0 });
     toast('Menú creado. Puedes cambiar cualquier receta.');
   },
   step(d) {
@@ -551,10 +552,19 @@ const forms = {
 
 // ---------- Render ----------
 const tweenPrev = new Map();
-const widthPrev = new Map();
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+let lastTicketKey = null;
+
 function animateAfterRender() {
+  // Movimiento propio: si cambian los montos, el ticket se vuelve a imprimir renglón por renglón.
+  const ticket = document.getElementById('ticket');
+  if (ticket) {
+    const b = ctx.result.budget;
+    const key = `${b.purchaseKnownCents}|${b.extrasCents}|${b.budgetCents}|${b.pendingCount}`;
+    if (lastTicketKey !== null && key !== lastTicketKey && !reduceMotion()) ticket.classList.add('printing');
+    lastTicketKey = key;
+  }
   if (reduceMotion()) return;
   document.querySelectorAll('[data-tween]').forEach((el, i) => {
     const key = el.dataset.tweenKey ?? `${ctx.state.view}-${i}`;
@@ -571,24 +581,16 @@ function animateAfterRender() {
     };
     requestAnimationFrame(step);
   });
-  document.querySelectorAll('.bar .seg[data-w]').forEach((el) => {
-    const key = el.className;
-    const prev = widthPrev.get(key);
-    widthPrev.set(key, el.dataset.w);
-    if (!prev || prev === el.dataset.w) return;
-    el.style.width = prev;
-    requestAnimationFrame(() => requestAnimationFrame(() => (el.style.width = el.dataset.w)));
-  });
 }
 
 function header() {
   const s = ctx.state;
   const sample = s.demo && s.stores.primary.startsWith('ejemplo');
+  const place = s.location.municipio || s.location.departamento;
   return `<div class="head-inner">
-    <div class="brand"><span class="logo" aria-hidden="true"></span><span>Mercadito</span></div>
-    <button class="loc" data-action="go" data-view="ajustes" aria-label="Ajustes: ubicación, tienda, preferencias y datos">
-      <span class="loc-text"><b>${esc(s.location.municipio || s.location.departamento)}</b><span>${esc(storeLabel(s.stores.primary, s))}</span></span>
-      ${icon('ajustes')}
+    <span class="brand">Mercadito</span>
+    <button class="loc" data-action="go" data-view="ajustes" aria-label="Ajustes: ${esc(place)}, ${esc(storeLabel(s.stores.primary, s))}">
+      <span class="loc-text">${esc(place)} · ${esc(storeLabel(s.stores.primary, s))}</span>
     </button>
   </div>
   ${sample ? '<p class="demo-band">Precios de ejemplo, ficticios</p>' : ''}`;
@@ -604,6 +606,7 @@ function render() {
   const focusKey = active?.id || (active?.dataset?.action ? `${active.dataset.action}|${active.dataset.slot ?? ''}|${active.dataset.view ?? ''}|${active.dataset.ing ?? ''}|${active.dataset.mode ?? ''}` : null);
   document.getElementById('app-head').innerHTML = header();
   document.getElementById('main').innerHTML = VIEWS[view](ctx);
+  document.querySelector('.apron')?.setAttribute('data-view', view);
   document.getElementById('tabs').innerHTML = nav();
   const dlg = document.getElementById('sheet');
   const sheetHtml = renderSheet(ctx);

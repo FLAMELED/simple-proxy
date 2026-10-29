@@ -7,6 +7,13 @@ import { INGREDIENTS } from '../data/ingredients.js';
 import { DEPARTAMENTOS } from '../data/stores.js';
 import { REAL_SNAPSHOT } from '../engine/index.js';
 import { formatDate } from './common.js';
+import { DISH_IMAGES } from './dish-images.js';
+
+/** Ilustración del plato (generada, no foto) o, si no hay, el icono de su proteína. */
+export function dishArt(recipe, cls = 'slot-art') {
+  const src = DISH_IMAGES[recipe.id];
+  return `<span class="${cls}" aria-hidden="true">${src ? `<img src="${src}" alt="" width="192" height="192" loading="lazy" decoding="async">` : icon(proteinIcon(recipe.protein))}</span>`;
+}
 
 export const snapshotDate = () => (REAL_SNAPSHOT.offers.length ? formatDate(REAL_SNAPSHOT.finished, false) : 'sin captura');
 
@@ -71,44 +78,56 @@ export function stepper(path, value, min, max, labelledBy) {
   </div>`;
 }
 
-// ---------- Presupuesto ----------
+// ---------- Presupuesto: el ticket ----------
 export function budgetCard(ctx, { compact = false } = {}) {
-  const { result, state, days } = ctx;
+  const { result, days } = ctx;
   const b = result.budget;
   const t = result.purchase.totals;
   const budget = b.budgetCents ?? 0;
   const scale = Math.max(budget, b.spentKnownCents, 1);
-  const pct = (c) => `${((c / scale) * 100).toFixed(2)}%`;
+  const pct = (c) => `${((Math.min(c, scale) / scale) * 100).toFixed(2)}%`;
   const free = Math.max(budget - b.spentKnownCents, 0);
-  const headline =
-    b.status === 'sin-presupuesto'
-      ? `<span class="big">${q(b.spentKnownCents)}</span><span class="big-label">cotizados</span>`
-      : b.balanceCents >= 0
-        ? `<span class="big" data-tween="${b.balanceCents}" data-tween-key="saldo">${q(b.balanceCents)}</span><span class="big-label">${b.pendingCount ? 'disponibles por ahora' : 'te quedan'}</span>`
-        : `<span class="big danger" data-tween="${b.shortfallCents}" data-tween-key="faltante">${q(b.shortfallCents)}</span><span class="big-label">${b.shortfallIsMinimum ? 'faltan, como mínimo' : 'faltan'}</span>`;
-  const tone = { alcanza: 'ok', 'sin-confirmar': 'warn', insuficiente: 'danger', 'sin-presupuesto': 'warn' }[b.status];
+  const over = Math.max(b.spentKnownCents - budget, 0);
+  let total;
+  let tone;
+  if (b.status === 'sin-presupuesto') {
+    total = `<span data-tween="${b.spentKnownCents}" data-tween-key="cotizado">${q(b.spentKnownCents)}</span><small>cotizados; indica un presupuesto en Ajustes</small>`;
+    tone = '';
+  } else if (b.balanceCents >= 0) {
+    total = `${b.pendingCount ? 'Quedan' : 'Te quedan'} <span data-tween="${b.balanceCents}" data-tween-key="saldo">${q(b.balanceCents)}</span>${b.pendingCount ? '<small>por ahora: faltan precios, no se puede confirmar</small>' : ''}`;
+    tone = b.pendingCount ? '' : 'ok';
+  } else {
+    total = `Faltan <span data-tween="${b.shortfallCents}" data-tween-key="faltante">${q(b.shortfallCents)}</span>${b.shortfallIsMinimum ? '<small>como mínimo: además hay productos sin precio</small>' : ''}`;
+    tone = 'danger';
+  }
+  const pendingStamp = b.pendingCount
+    ? `<span class="stamp-mark" role="img" aria-label="${b.pendingCount} productos sin cotizar">Sin cotizar · ${b.pendingCount}</span>`
+    : '';
   return `
-  <section class="card budget" aria-labelledby="budget-title">
-    <div class="budget-head">
-      <div>
-        <h2 id="budget-title" class="eyebrow">Presupuesto · ${esc(periodText(days))}</h2>
-        <div class="headline">${headline}</div>
-      </div>
-      ${b.budgetCents ? `<div class="of">de ${q(b.budgetCents)}</div>` : ''}
-    </div>
-    <div class="bar" role="img" aria-label="${esc(budgetMessage(b, q))}">
-      <span class="seg buy" data-w="${pct(b.purchaseKnownCents)}" style="width:${pct(b.purchaseKnownCents)}"></span>
-      <span class="seg extra" data-w="${pct(b.extrasCents)}" style="width:${pct(b.extrasCents)}"></span>
-      ${b.budgetCents ? `<span class="seg free" data-w="${pct(free)}" style="width:${pct(free)}"></span>` : ''}
-      ${b.pendingCount ? `<span class="seg pending" title="Sin cotizar">?</span>` : ''}
-    </div>
-    <ul class="legend">
-      <li><i class="dot buy"></i>Compra cotizada <b>${q(b.purchaseKnownCents)}</b></li>
-      ${b.extrasCents ? `<li><i class="dot extra"></i>Gastos adicionales <b>${q(b.extrasCents)}</b></li>` : ''}
-      ${b.budgetCents ? `<li><i class="dot free"></i>Disponible <b>${q(free)}</b></li>` : ''}
-      ${b.pendingCount ? `<li><i class="dot pending"></i>Sin cotizar <b>${b.pendingCount} producto${b.pendingCount > 1 ? 's' : ''}</b></li>` : ''}
+  <section class="ticket" id="ticket" aria-labelledby="budget-title">
+    <h2 id="budget-title" class="ticket-head">Presupuesto · ${esc(periodText(days))}</h2>
+    <p class="ticket-total ${tone}" aria-live="polite">${total}</p>
+    <div class="rule-double" aria-hidden="true"></div>
+    <ul class="ticket-rows">
+      <li class="leader"><span>Presupuesto</span><span class="num">${b.budgetCents ? q(b.budgetCents) : '—'}</span></li>
+      <li class="leader"><span>Compra cotizada</span><span class="num">${q(b.purchaseKnownCents)}</span></li>
+      <li class="leader"><span>Gastos adicionales</span><span class="num">${q(b.extrasCents)}</span></li>
     </ul>
-    <p class="status ${tone}" role="status">${icon(tone === 'ok' ? 'check' : 'alerta')} ${esc(budgetMessage(b, q))}</p>
+    <div class="rule-double" aria-hidden="true"></div>
+    <div class="ticket-meter">
+      <div class="bar" role="img" aria-label="${esc(budgetMessage(b, q))}">
+        <span class="seg buy" data-w="${pct(Math.min(b.purchaseKnownCents, scale))}" style="width:${pct(Math.min(b.purchaseKnownCents, scale))}"></span>
+        <span class="seg extra" data-w="${pct(b.extrasCents)}" style="width:${pct(b.extrasCents)}"></span>
+        ${free ? `<span class="seg free" data-w="${pct(free)}" style="width:${pct(free)}"></span>` : ''}
+        ${b.pendingCount ? '<span class="seg pending"></span>' : ''}
+      </div>
+      ${pendingStamp}
+    </div>
+    ${over && !b.pendingCount ? '' : ''}
+    <div class="ticket-actions">
+      <button class="btn" data-action="go" data-view="compras">Ver lista de compras</button>
+      <button class="count-badge" data-action="go" data-view="compras" aria-label="${t.toBuy} productos por comprar"><b>${t.toBuy}</b><span>productos</span></button>
+    </div>
     ${compact ? '' : budgetExplain(ctx)}
   </section>`;
 }
@@ -188,55 +207,48 @@ function nextMeals(ctx) {
   const today = new Date().toISOString().slice(0, 10);
   let startIdx = days.findIndex((d) => d.iso >= today && !d.skipped);
   if (startIdx < 0) startIdx = 0;
-  const upcoming = result.slots.filter((s) => s.day >= startIdx).slice(0, 4);
-  if (!upcoming.length) return '';
-  return `<section aria-labelledby="next-title">
-    <div class="section-head"><h2 id="next-title" class="h3">Próximas comidas</h2><button class="btn link" data-action="go" data-view="menu">Ver menú completo</button></div>
-    <div class="slot-list">${upcoming.map((s) => slotCard(ctx, s, { compact: true })).join('')}</div>
+  const first = result.slots.find((s) => s.day >= startIdx);
+  if (!first) return '';
+  const sameDay = result.slots.filter((s) => s.day === first.day);
+  const day = days[first.day];
+  const title = day.iso === today ? 'Hoy' : dayLabel(day, true);
+  return `<section class="today" aria-labelledby="next-title">
+    <div class="section-head"><h2 id="next-title" class="h2">${esc(title)}</h2><button class="btn link" data-action="go" data-view="menu">Menú completo</button></div>
+    <ul class="meal-list">${sameDay.map((s, i) => `<li>${slotCard(ctx, s, { compact: true, highlight: i === 0 })}</li>`).join('')}</ul>
   </section>`;
 }
 
 export function viewSemana(ctx) {
-  const { state, result } = ctx;
+  const { state } = ctx;
   if (!state.onboarded) return quickStart(ctx);
-  const t = result.purchase.totals;
   return `
   ${budgetCard(ctx)}
-  ${suggestionsCard(ctx)}
-  <button class="card shortcut" data-action="go" data-view="compras">
-    ${icon('compras')}
-    <span><b>Lista de compras</b><span class="muted small">${t.toBuy} producto${t.toBuy === 1 ? '' : 's'} por comprar · ${t.inPantry} ya en casa · ${esc(storeLabel(state.stores.primary, state))}</span></span>
-    <span class="amount">${q(t.purchaseCents)}${t.missing.length ? '<small> + faltantes</small>' : ''}</span>
-  </button>
-  ${nextMeals(ctx)}`;
+  ${nextMeals(ctx)}
+  ${suggestionsCard(ctx)}`;
 }
 
 // ---------- Menú ----------
-export function slotCard(ctx, slot, { compact = false } = {}) {
+export function slotCard(ctx, slot, { compact = false, highlight = false } = {}) {
   const r = RECIPE_BY_ID[slot.recipeId];
-  const day = ctx.days[slot.day];
   const cost = ctx.result.slotCosts[slot.id];
   const conflict = checkRecipe(r, ctx.state.prefs, INGREDIENTS);
   const flash = ctx.ui.flash === slot.id ? ' flash' : '';
-  const costText = cost
-    ? cost.complete
-      ? `${q(cost.cents)} por porción`
-      : `${q(cost.cents)}+ por porción <span class="pill warn">${cost.missing.length} sin precio</span>`
+  const price = cost
+    ? `<span class="slot-price">${q(cost.cents)}${cost.complete ? '' : '+'}<small>/porción</small></span>`
     : '';
   return `
   <article class="slot${flash}" data-slot-card="${slot.id}">
-    <div class="slot-icon" aria-hidden="true">${icon(proteinIcon(r.protein))}</div>
+    ${dishArt(r)}
     <div class="slot-body">
-      <p class="eyebrow">${compact ? `${esc(dayLabel(day))} · ` : ''}${mealLabel(slot.meal)}</p>
       <h3><button class="link-title" data-action="open-recipe" data-slot="${slot.id}">${esc(r.name)}</button></h3>
-      <p class="meta">
-        <span>${icon('reloj')} ${r.minutes} min</span>
-        <span>${icon('personas')} ${slot.servings} porci${slot.servings === 1 ? 'ón' : 'ones'}</span>
-        <span>${costText}</span>
-      </p>
-      ${!conflict.ok ? `<p class="status danger small">${icon('alerta')} Ya no cumple tus preferencias: ${esc(conflict.reasons.join(', '))}.</p>` : ''}
-      ${slot.relaxed ? `<p class="muted small">Supera tu tiempo máximo: no había otra receta que cumpliera lo demás.</p>` : ''}
+      <p class="meta"><span>${r.minutes} min</span><span>${slot.servings} porci${slot.servings === 1 ? 'ón' : 'ones'}</span>${cost && !cost.complete ? `<span>${cost.missing.length} sin precio</span>` : ''}</p>
     </div>
+    <div class="slot-side">
+      <span class="meal-tag${highlight ? '' : ' quiet'}">${mealLabel(slot.meal)}</span>
+      ${price}
+    </div>
+    ${!conflict.ok ? `<p class="status danger small">${icon('alerta')} Ya no cumple tus preferencias: ${esc(conflict.reasons.join(', '))}.</p>` : ''}
+    ${slot.relaxed ? `<p class="muted small">Supera tu tiempo máximo: no había otra receta que cumpliera lo demás.</p>` : ''}
     ${compact ? '' : `<div class="slot-actions">
       ${stepperSlot(slot)}
       <button class="btn small" data-action="open-swap" data-slot="${slot.id}">${icon('cambiar')} Cambiar</button>
@@ -272,7 +284,7 @@ export function viewMenu(ctx) {
   </div>
   ${conflicts.length ? `<div class="card banner danger"><p>${conflicts.length} receta${conflicts.length > 1 ? 's' : ''} ya no cumple${conflicts.length > 1 ? 'n' : ''} tus preferencias.</p><button class="btn small" data-action="fix-conflicts">Reemplazarlas</button></div>` : ''}
   ${result.menuNotices?.length ? `<div class="card banner warn">${result.menuNotices.map((n) => `<p>${esc(n)}</p>`).join('')}</div>` : ''}
-  <p class="muted small">El costo por porción es el valor proporcional de los ingredientes que usa (precios de ${esc(storeLabel(state.stores.primary, state))}). El dinero a pagar por empaques está en la lista de compras.</p>
+  <p class="muted small">Costo por porción: valor proporcional de los ingredientes en ${esc(storeLabel(state.stores.primary, state))}. Lo que pagas por empaques completos está en Compras.</p>
   ${days
     .map((d) => {
       const slots = (byDay.get(d.index) ?? []).filter((s) => s.recipeId).sort((a, b) => order.indexOf(a.meal) - order.indexOf(b.meal));
@@ -281,7 +293,7 @@ export function viewMenu(ctx) {
           <h3 id="day-${d.index}" class="day-title">${esc(cap(d.weekday))} <span>${d.dayOfMonth} ${d.month}</span></h3>
           <label class="switch small"><input type="checkbox" data-action="toggle-day" data-day="${d.index}" ${d.skipped ? '' : 'checked'}><span>${d.skipped ? 'No se cocina' : 'Se cocina'}</span></label>
         </div>
-        ${d.skipped ? '' : `<div class="slot-list">${slots.map((s) => slotCard(ctx, s)).join('') || '<p class="muted">Sin recetas para este día.</p>'}</div>`}
+        ${d.skipped ? '' : `<ul class="meal-list">${slots.map((s) => `<li>${slotCard(ctx, s, { highlight: true })}</li>`).join('') || '<li class="muted">Sin recetas para este día.</li>'}</ul>`}
       </section>`;
     })
     .join('')}`;

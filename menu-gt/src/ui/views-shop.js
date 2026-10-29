@@ -105,12 +105,12 @@ function itemRow(it, ctx) {
     <div class="item-main">
       <div class="item-top">
         <h4>${esc(ing.name[0].toUpperCase() + ing.name.slice(1))}</h4>
-        <span class="price">${it.status === 'cotizado' ? q(it.cents) : it.status === 'en-casa' ? q(0) : '—'}</span>
+        ${it.status === 'cotizado' ? `<span class="price">${q(it.cents)}</span>` : it.status === 'en-casa' ? `<span class="price muted">${q(0)}</span>` : it.status === 'sin-precio' ? '<span class="stamp-mark">Sin cotizar</span>' : `<span class="pill danger">${STATUS_TEXT[it.status]}</span>`}
       </div>
       <p class="need">Necesitas ${esc(describeQty(it.needQty > 0 ? it.needQty : it.qty, ing))}${it.approx ? ' ≈' : ''}${it.coveredQty > 0 && it.status !== 'en-casa' ? ` <span class="muted">(ya descontado lo de casa)</span>` : ''}</p>
       ${buy}
       <div class="tags">
-        <span class="pill ${tone}">${STATUS_TEXT[it.status]}</span>
+        ${['cotizado', 'en-casa'].includes(it.status) ? `<span class="pill ${tone}">${STATUS_TEXT[it.status]}</span>` : ''}
         ${st && it.status === 'cotizado' ? `<span class="pill ${st.tone}">${st.label}</span>` : ''}
         ${it.promoApplied ? '<span class="pill ok">Promoción aplicada</span>' : ''}
         ${it.mixed ? '<span class="pill">Presentaciones combinadas</span>' : ''}
@@ -269,8 +269,10 @@ export function viewCompras(ctx) {
   const mode = ctx.state.shopMode;
   const tab = (id, label) => `<button role="tab" id="tab-${id}" aria-selected="${mode === id}" aria-controls="shop-panel" class="seg-btn" data-action="shop-mode" data-mode="${id}">${label}</button>`;
   return `
-  <div class="toolbar"><h2 class="h2">Compras</h2></div>
-  <div class="segmented" role="tablist" aria-label="Forma de comprar">${tab('single', 'Mi supermercado')}${tab('compare', 'Comparar')}${tab('combine', 'Combinar')}</div>
+  <div class="shop-head">
+    <h2 class="h2">Compras</h2>
+    <div class="segmented" role="tablist" aria-label="Forma de comprar">${tab('single', 'Mi supermercado')}${tab('compare', 'Comparar')}${tab('combine', 'Combinar')}</div>
+  </div>
   <div id="shop-panel" role="tabpanel" aria-labelledby="tab-${mode}">
     ${mode === 'single' ? singleStore(ctx) : mode === 'compare' ? compareView(ctx) : combineView(ctx)}
   </div>`;

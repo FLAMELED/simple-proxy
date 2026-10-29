@@ -1,0 +1,145 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-10-29T06:03:08.552Z",
+  "comp": ".impeccable/mocks/comp-1-inicio.png",
+  "direction": "ea9c4dbd",
+  "breakpoint": "1584x2816",
+  "artifact": "index.html",
+  "phase": "plates",
+  "phases": {
+    "comps": {
+      "status": "closed",
+      "openedAt": "2026-10-29T06:03:08.552Z",
+      "closedAt": "2026-10-29T06:09:50.169Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "3 comps, 1 approved",
+        "approved": ".impeccable/mocks/comp-1-inicio.png",
+        "at": "2026-10-29T06:09:50.169Z"
+      },
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-10-29T06:09:50.279Z",
+      "closedAt": "2026-10-29T06:12:18.597Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "29 regions, 3 plates, 14 text regions measured",
+        "at": "2026-10-29T06:12:18.597Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "open",
+      "openedAt": "2026-10-29T06:12:18.597Z",
+      "closedAt": null,
+      "attempts": 3,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "2/2 plates",
+        "at": "2026-10-29T06:15:40.201Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "sections": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "motion": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "responsive": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "review": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": null,
+  "plates": {
+    "dish-1": {
+      "id": "dish-1",
+      "file": "assets/plates/dish-1.png",
+      "status": "ok",
+      "assetHash": "799d330189524fdb7cfbdf02117643a74294df1fdc560ae80b237a4d86ed6ad8",
+      "regionHash": "d2755506caf24a387a76ab7fb12d2db52f2472d51865555485f1e1966e6b0a26",
+      "referenceHash": "ce466295d5e72f76c2c8625603120fb65a6d9e18c0a4bed18d6483add81de9ec",
+      "reference": {
+        "policy": "plate-reference-v2",
+        "excludedPixels": 0,
+        "totalPixels": 38160,
+        "remainingPixels": 38160,
+        "excludedFraction": 0.0,
+        "fullyExcluded": false,
+        "regions": [],
+        "ignoredContainers": []
+      },
+      "compHash": "94b4d6a6d3ffa21929e0b5fbacdd162e1a3757727c5d1f095a167adf7c265249",
+      "size": "560x560",
+      "score": 0.5755
+    },
+    "dish-2": {
+      "id": "dish-2",
+      "file": "assets/plates/dish-2.png",
+      "status": "ok",
+      "assetHash": "85a4301a7826719e94a0fdf5ea83d7d8d0b799d8da94825fd806a29164668abb",
+      "regionHash": "092c1d593794c813763450cf7bcd042961a3b7e0357503ff6efc95f99f85a614",
+      "referenceHash": "ce466295d5e72f76c2c8625603120fb65a6d9e18c0a4bed18d6483add81de9ec",
+      "reference": {
+        "policy": "plate-reference-v2",
+        "excludedPixels": 0,
+        "totalPixels": 40404,
+        "remainingPixels": 40404,
+        "excludedFraction": 0.0,
+        "fullyExcluded": false,
+        "regions": [],
+        "ignoredContainers": []
+      },
+      "compHash": "94b4d6a6d3ffa21929e0b5fbacdd162e1a3757727c5d1f095a167adf7c265249",
+      "size": "560x560",
+      "score": 0.6357
+    }
+  }
+}

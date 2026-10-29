@@ -5,6 +5,8 @@ import { INGREDIENTS } from '../data/ingredients.js';
 import { describeRecipeQty, toBase } from '../engine/units.js';
 import { alternativesFor } from '../engine/selector.js';
 import { offersByStore } from '../engine/index.js';
+import { dishArt } from './views-plan.js';
+import { DISH_IMAGES } from './dish-images.js';
 
 function recipeSheet(ctx, slot) {
   const r = RECIPE_BY_ID[slot.recipeId];
@@ -18,6 +20,7 @@ function recipeSheet(ctx, slot) {
     <button class="btn icon" data-action="close-sheet" aria-label="Cerrar">${icon('cerrar')}</button>
   </header>
   <div class="sheet-body">
+    ${DISH_IMAGES[r.id] ? `${dishArt(r, 'sheet-art')}<p class="art-note">Ilustración generada; no es una foto de la receta.</p>` : ''}
     <p class="meta"><span>${icon('reloj')} ${r.minutes} min</span><span>${icon('personas')} ${slot.servings} porciones (la receta rinde ${r.yield})</span><span>${proteinLabel(r.protein)}</span></p>
     ${cost ? `<p class="small">Valor de ingredientes usados: <b>${q(cost.totalCents)}</b> (${q(cost.cents)} por porción)${cost.complete ? '' : ` · <span class="pill warn">${cost.missing.length} ingrediente(s) sin precio</span>`}</p>` : ''}
     <h3 class="h3">Ingredientes para ${slot.servings} porciones</h3>
@@ -74,6 +77,7 @@ function swapSheet(ctx, slot) {
   <div class="sheet-body">
     <p class="small muted">Solo aparecen recetas que respetan tus restricciones${restrictions.length ? ` (${esc(restrictions.join(', '))})` : ''} y tu equipo de cocina. Las diferencias de costo son por ${slot.servings} porciones, con precios de la tienda actual.</p>
     ${alts.length ? `<ul class="alt-list">${alts.map((a) => `<li class="alt">
+      ${dishArt(a.recipe)}
       <div><h3>${esc(a.recipe.name)}</h3><p class="small muted">${a.recipe.minutes} min · ${esc(proteinLabel(a.recipe.protein))}</p>
       <div class="tags">${a.reasons.map((r) => reasonText(r, ctx)).join('')}</div></div>
       <button class="btn small primary" data-action="apply-swap" data-slot="${slot.id}" data-recipe="${a.recipe.id}">Elegir</button>

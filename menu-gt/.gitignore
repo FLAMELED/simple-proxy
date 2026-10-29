@@ -1,3 +1,5 @@
 node_modules/
 dist/
 test/e2e/screens/
+.impeccable/build/scaffold/
+.impeccable/tmp/

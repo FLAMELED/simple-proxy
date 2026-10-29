@@ -145,6 +145,14 @@ function toggleInList(list, value, on) {
 }
 
 const actions = {
+  'guide-done'() {
+    ctx.state.guideDone = true;
+    commit();
+  },
+  'item-more'(d) {
+    ctx.ui.openItem = ctx.ui.openItem === d.ing ? null : d.ing;
+    render();
+  },
   'toggle-explain'() {
     ctx.ui.explainOpen = !ctx.ui.explainOpen;
     render();

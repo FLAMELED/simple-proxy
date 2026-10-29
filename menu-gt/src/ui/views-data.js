@@ -92,8 +92,8 @@ function myPriceForm(ctx) {
   const f = ctx.ui.priceForm;
   const placeOpts = [...REAL_STORES, { id: 'mis-precios', name: 'Mercado u otro lugar' }];
   return `<form class="card" data-form="my-price" id="my-price-form" aria-labelledby="mp-title">
-    <h3 id="mp-title" class="h3">Mi precio</h3>
-    <p class="small muted">Registra lo que pagaste o viste en el mercado, una tienda o un supermercado. Se guarda como "ingresado por ti", con fecha.</p>
+    <h3 id="mp-title" class="h3">Anota un precio</h3>
+    <p class="small muted">Lo que pagaste o viste en el mercado, una tienda o el súper. Sirve sobre todo para lo que no está en línea (miltomate, chipilín, hierbas). Se guarda con la fecha como "ingresado por ti".</p>
     <div class="form-grid">
       <label class="field grow"><span class="label">Ingrediente</span><select id="mp-ing" name="ing" data-action="price-form-ing">${ingredientOptions(f.ing)}</select></label>
       <label class="field grow"><span class="label">Dónde</span><select id="mp-store" name="store">${placeOpts.map((s) => `<option value="${s.id}" ${s.id === f.store ? 'selected' : ''}>${esc(s.name)}</option>`).join('')}</select></label>
@@ -165,7 +165,7 @@ function snapshotBlock(ctx) {
   const byStore = (id) => snap.offers.filter((o) => o.storeId === id).length;
   return `<section class="card" aria-labelledby="snap-title">
     <h3 id="snap-title" class="h3">Precios reales guardados</h3>
-    <p class="small">Leídos el ${esc(formatDate(snap.finished))} de las páginas públicas de producto: <b>${byStore('paiz')}</b> de Paiz y <b>${byStore('la-torre')}</b> de La Torre. Se muestran como "Último precio guardado"; pueden haber cambiado.</p>
+    <p class="small">Leídos el ${esc(formatDate(snap.finished))} de las páginas públicas de producto: ${REAL_STORES.filter((s) => byStore(s.id)).map((s) => `<b>${byStore(s.id)}</b> de ${esc(s.name)}`).join(', ')}. Se muestran como "Último precio guardado"; pueden haber cambiado.</p>
     <p class="small muted">Son precios de la tienda en línea, sin sucursal elegida. No se verificó si cambian por sucursal ni si coinciden con la tienda física de ${esc(ctx.state.location.municipio || ctx.state.location.departamento)}.</p>
     <details class="explain"><summary>${snap.excluded.length} productos no se cargaron y por qué</summary>
       <ul class="plain small">${snap.excluded.map((e) => `<li><b>${esc(STORE_BY_ID[e.storeId]?.name ?? e.storeId)} · ${esc(INGREDIENTS[e.ingredientId]?.name ?? e.ingredientId)}</b>: <span class="pill warn">${EXCLUDED_LABEL[e.reason] ?? e.reason}</span> ${esc(e.detail ?? '')} <a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${icon('enlace')} Ver</a></li>`).join('')}</ul>
@@ -183,16 +183,25 @@ export function viewPrecios(ctx) {
   const shown = filter && byStore.has(filter) ? [[filter, byStore.get(filter)]] : [...byStore].filter(([id]) => !id.startsWith('ejemplo'));
   return `
   <div class="toolbar"><h2 class="h2">Precios</h2></div>
-  ${snapshotBlock(ctx)}
+  <p class="intro muted">De aquí salen los precios del menú y la lista. Los de las tiendas se leen de sus páginas en línea; lo demás lo anotas tú.</p>
   ${myPriceForm(ctx)}
+  ${savedPrices(ctx, { shown, storeIds, filter })}
+  <details class="card tech"><summary>Información técnica: cómo se obtienen los precios</summary>
+  ${snapshotBlock(ctx)}
   ${lookupBlock(ctx)}
-  <section class="card" aria-labelledby="sources-title">
+  <section aria-labelledby="sources-title">
     <h3 id="sources-title" class="h3">Fuentes revisadas</h3>
     <p class="small muted">Revisión inicial del ${RESEARCH_DATE}; consulta en vivo comprobada el 29 oct 2026 en Paiz, La Torre y Walmart.</p>
     <ul class="plain sources">${REAL_STORES.map((s) => `<li><b>${esc(s.name)}</b> ${s.initial ? '<span class="pill">Cadena inicial</span>' : ''} ${s.access === 'verificado' ? '<span class="pill ok">Consulta verificada</span>' : '<span class="pill warn">No verificado en vivo</span>'}<br><span class="small">${esc(s.accessNote)}</span> <a class="small" href="${s.site}" target="_blank" rel="noopener noreferrer">${icon('enlace')} Sitio oficial</a></li>`).join('')}</ul>
   </section>
+  </details>`;
+}
+
+function savedPrices(ctx, { shown, storeIds, filter }) {
+  const { state } = ctx;
+  return `
   <section aria-labelledby="saved-title">
-    <div class="section-head"><h3 id="saved-title" class="h3">Precios guardados</h3>
+    <div class="section-head"><h3 id="saved-title" class="h3">Precios que usa la app</h3>
       <label class="inline-field small"><span>Ver</span><select id="price-filter" data-action="price-filter">
         <option value="">Reales y míos</option>
         ${storeIds.map((id) => `<option value="${id}" ${id === filter ? 'selected' : ''}>${esc(storeLabel(id, state))}</option>`).join('')}

@@ -33,8 +33,13 @@ function quickStart(ctx) {
     `<label class="chip-toggle"><input type="checkbox" data-action="toggle-meal" value="${id}" ${h.meals.includes(id) ? 'checked' : ''}><span>${label}</span></label>`;
   return `
   <section class="card quick" aria-labelledby="qs-title">
-    <h2 id="qs-title">Empecemos con lo básico</h2>
-    <p class="muted">Cuatro datos y tienes menú, lista y total. Preferencias, alergias y despensa las completas después.</p>
+    <h2 id="qs-title">Planifica la comida de la semana</h2>
+    <ol class="how">
+      <li><b>Te armamos un menú</b> con platos guatemaltecos para los días que elijas.</li>
+      <li><b>Sale la lista de compras</b> con lo que hay que comprar y cuánto cuesta en el súper.</li>
+      <li><b>Ves si te alcanza</b> el presupuesto, y qué cambiar si no.</li>
+    </ol>
+    <p class="muted small">Llena estos datos. Alergias, gustos y lo que ya tienes en casa lo cambias después.</p>
     <div class="qs-grid">
       <div class="field">
         <span class="label" id="lbl-people">Personas que comen</span>
@@ -92,22 +97,22 @@ export function budgetCard(ctx, { compact = false } = {}) {
   let note = '';
   if (b.status === 'sin-presupuesto') {
     total = `<span data-tween="${b.spentKnownCents}" data-tween-key="cotizado">${q(b.spentKnownCents)}</span>`;
-    note = 'cotizados; indica un presupuesto en Ajustes.';
+    note = 'cuesta tu compra. Pon un presupuesto en Ajustes para saber si te alcanza.';
     tone = '';
   } else if (b.balanceCents >= 0) {
     const unsure = b.pendingCount || b.staleCount;
     total = `${unsure ? 'Quedan' : 'Te quedan'} <span data-tween="${b.balanceCents}" data-tween-key="saldo">${q(b.balanceCents)}</span>`;
     note = b.pendingCount
-      ? 'por ahora: faltan precios, no se puede confirmar.'
+      ? 'por ahora: faltan precios, así que todavía no se puede confirmar.'
       : b.staleCount ? `por ahora: ${b.staleCount} precio${b.staleCount === 1 ? ' es' : 's son'} de hace más de ${PRICE_MAX_AGE_DAYS.guardado} días; vuelve a consultarlos.` : '';
     tone = unsure ? '' : 'ok';
   } else {
     total = `Faltan <span data-tween="${b.shortfallCents}" data-tween-key="faltante">${q(b.shortfallCents)}</span>`;
-    note = b.shortfallIsMinimum ? 'como mínimo: además hay productos sin precio.' : '';
+    note = `Tu compra cuesta más que tu presupuesto${b.shortfallIsMinimum ? ', y puede faltar más: hay productos sin precio' : ''}.`;
     tone = 'danger';
   }
   const pendingStamp = b.pendingCount
-    ? `<span class="stamp-mark" role="img" aria-label="${b.pendingCount} productos sin cotizar">Sin cotizar · ${b.pendingCount}</span>`
+    ? `<span class="stamp-mark" role="img" aria-label="${b.pendingCount} productos sin precio">Sin precio · ${b.pendingCount}</span>`
     : '';
   return `
   <section class="ticket" id="ticket" aria-labelledby="budget-title">
@@ -118,8 +123,8 @@ export function budgetCard(ctx, { compact = false } = {}) {
     <ul class="ticket-rows">
       <li class="leader meta print-line" style="--i:2"><span>Semana</span><span class="num">${esc(periodText(days))}</span></li>
       <li class="leader print-line" style="--i:3"><span>Presupuesto</span><span class="num">${b.budgetCents ? q(b.budgetCents) : '—'}</span></li>
-      <li class="leader print-line" style="--i:4"><span>Compra cotizada</span><span class="num">${q(b.purchaseKnownCents)}</span></li>
-      <li class="leader print-line" style="--i:5"><span>Gastos adicionales</span><span class="num">${q(b.extrasCents)}</span></li>
+      <li class="leader print-line" style="--i:4"><span>Costo de la compra</span><span class="num">${q(b.purchaseKnownCents)}</span></li>
+      <li class="leader print-line" style="--i:5"><span>Otros gastos</span><span class="num">${q(b.extrasCents)}</span></li>
     </ul>
     <div class="rule-double" aria-hidden="true"></div>
     <div class="ticket-meter print-line" style="--i:6">
@@ -225,12 +230,31 @@ function nextMeals(ctx) {
   </section>`;
 }
 
+/** Qué hacer ahora: tres pasos con su botón, hasta que la persona la cierre. */
+function guide(ctx) {
+  if (ctx.state.guideDone) return '';
+  const bought = Object.keys(ctx.state.checked).length;
+  const step = (n, title, text, action, done) => `<li class="${done ? 'done' : ''}">
+    <span class="step-n" aria-hidden="true">${done ? '✓' : n}</span>
+    <div><b>${title}</b><p class="small muted">${text}</p></div>${action}</li>`;
+  return `<section class="card guide" aria-labelledby="guide-title">
+    <div class="section-head"><h2 id="guide-title" class="h3">Así se usa</h2>
+      <button class="btn link small" data-action="guide-done">Entendido, ocultar</button></div>
+    <ol class="steps-guide">
+      ${step(1, 'Revisa el menú', 'Cambia los platos que no te gusten; el total se recalcula solo.', '<button class="btn small" data-action="go" data-view="menu">Ver menú</button>', false)}
+      ${step(2, 'Lleva la lista al súper', 'Ahí dice qué agarrar y cuánto cuesta. Puedes mandarla por WhatsApp.', '<button class="btn small" data-action="go" data-view="compras">Ver lista</button>', bought > 0)}
+      ${step(3, 'Marca lo que compras', 'Al marcar algo puedes anotar lo que pagaste; la próxima vez el cálculo usa tu precio.', '', false)}
+    </ol>
+  </section>`;
+}
+
 export function viewSemana(ctx) {
   const { state } = ctx;
   if (!state.onboarded) return quickStart(ctx);
   return `
   ${budgetCard(ctx)}
   ${nextMeals(ctx)}
+  ${guide(ctx)}
   ${suggestionsCard(ctx)}`;
 }
 
@@ -241,7 +265,7 @@ export function slotCard(ctx, slot, { compact = false, highlight = false } = {})
   const conflict = checkRecipe(r, ctx.state.prefs, INGREDIENTS);
   const flash = ctx.ui.flash === slot.id ? ' flash' : '';
   const price = cost
-    ? `<span class="slot-price">${q(cost.cents)}${cost.complete ? '' : '+'}<small>/porción</small></span>`
+    ? `<span class="slot-price">${q(cost.cents)}<small> c/persona</small></span>`
     : '';
   return `
   <article class="slot${flash}" data-slot-card="${slot.id}">
@@ -291,7 +315,7 @@ export function viewMenu(ctx) {
   </div>
   ${conflicts.length ? `<div class="card banner danger"><p>${conflicts.length} receta${conflicts.length > 1 ? 's' : ''} ya no cumple${conflicts.length > 1 ? 'n' : ''} tus preferencias.</p><button class="btn small" data-action="fix-conflicts">Reemplazarlas</button></div>` : ''}
   ${result.menuNotices?.length ? `<div class="card banner warn">${result.menuNotices.map((n) => `<p>${esc(n)}</p>`).join('')}</div>` : ''}
-  <p class="muted small">Costo por porción: valor proporcional de los ingredientes en ${esc(storeLabel(state.stores.primary, state))}. Lo que pagas por empaques completos está en Compras.</p>
+  <p class="muted small">Cada plato muestra lo que cuesta por persona con los precios de ${esc(storeLabel(state.stores.primary, state))}. Lo que vas a pagar en total, con empaques completos, está en Compras. Toca "Cambiar" para elegir otro plato.</p>
   ${days
     .map((d) => {
       const slots = (byDay.get(d.index) ?? []).filter((s) => s.recipeId).sort((a, b) => order.indexOf(a.meal) - order.indexOf(b.meal));

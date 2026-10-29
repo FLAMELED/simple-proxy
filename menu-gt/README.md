@@ -4,7 +4,16 @@ Planificador de comidas y compras para hogares de Guatemala: menú semanal edita
 
 > Esta carpeta es independiente del proxy que vive en la raíz del repositorio.
 
-## Uso
+## Cómo se usa (para quien cocina)
+
+1. **Llena cuatro datos:** cuántas personas, qué comidas, cuántos días y cuánto quieres gastar. La app arma un menú con platos guatemaltecos.
+2. **Revisa el menú** (pestaña Menú). Toca "Cambiar" en el plato que no te guste; el total se recalcula solo.
+3. **Lleva la lista** (pestaña Compras). Cada producto dice qué agarrar ("Lleva 2 × 1 lb") y cuánto cuesta. Se puede mandar por WhatsApp.
+4. **Marca lo que echas al carrito.** Al marcarlo puedes anotar lo que pagaste; la próxima vez el cálculo usa tu precio.
+
+Lo que no tiene precio en línea (miltomate, chipilín, hierbas) aparece con el sello "Sin precio" y no se suma. Anótalo en Precios cuando lo compres.
+
+## Uso para desarrollo
 
 ```bash
 cd menu-gt

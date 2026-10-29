@@ -130,3 +130,14 @@ test('cálculo completo con datos de ejemplo: coherente y sin precios faltantes 
   assert.equal(JSON.stringify(s.plan.slots), before);
   assert.equal(r3.slots.length, 21);
 });
+
+test('lo pagado en la sucursal reemplaza el precio en línea de ese producto', () => {
+  const s = defaultState('2026-10-29');
+  const online = allOffers(s).find((o) => o.storeId === 'paiz' && o.status === 'guardado');
+  s.myPrices.push({ id: 'mine-1', storeId: 'paiz', ingredientId: online.ingredientId, product: online.product, brand: online.brand,
+    packQty: online.packQty, packUnit: online.packUnit, priceCents: online.priceCents + 500, channel: 'usuario', status: 'usuario',
+    availability: 'disponible', replacesOfferId: online.id, fetchedAt: '2026-10-29T18:00:00Z' });
+  const offers = allOffers(s);
+  assert.equal(offers.some((o) => o.id === online.id), false);
+  assert.equal(offers.find((o) => o.id === 'mine-1').priceCents, online.priceCents + 500);
+});

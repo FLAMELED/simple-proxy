@@ -122,9 +122,26 @@ function itemRow(it, ctx) {
         ${promoControl(it, ctx)}
         ${['sin-precio', 'agotado', 'marca-no-disponible', 'sin-conversion'].includes(it.status) ? `<button class="btn small" data-action="add-price-for" data-ing="${it.ingredientId}">${icon('mas')} Agregar precio</button>` : ''}
       </div>
+      ${checked ? paidForm(it, ctx) : ''}
       ${itemExplain(it, ctx)}
     </div>
   </li>`;
+}
+
+/** Al marcar como comprado: lo que se pagó en la sucursal reemplaza el precio en línea de ese producto. */
+function paidForm(it, ctx) {
+  const o = it.offer;
+  if (it.status !== 'cotizado' || it.mixed || !o || o.channel === 'usuario' || o.status === 'ejemplo') return '';
+  const branch = ctx.state.stores.branches[o.storeId] ?? '';
+  return `<form class="paid" data-form="paid">
+    <input type="hidden" name="offer" value="${esc(o.id)}">
+    <label class="field small"><span class="label">Pagué por 1 × ${esc(packText(o))}</span>
+      <input name="price" inputmode="decimal" autocomplete="off" placeholder="${esc(q(o.priceCents))}" aria-describedby="paid-${esc(o.id)}"></label>
+    <label class="field small"><span class="label">Sucursal</span>
+      <input name="place" value="${esc(branch)}" placeholder="Ej.: Chiquimula centro"></label>
+    <button class="btn small">Guardar precio</button>
+    <p class="small muted" id="paid-${esc(o.id)}">Reemplaza el precio en línea de este producto en ${esc(storeLabel(o.storeId, ctx.state))} y queda como "Ingresado por ti" con fecha.</p>
+  </form>`;
 }
 
 export function listText(ctx) {

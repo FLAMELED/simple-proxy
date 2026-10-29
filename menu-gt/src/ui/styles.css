@@ -360,6 +360,9 @@ table.sum tr.total th, table.sum tr.total td { font-weight: 700; border-top: 1px
 .buy { font-size: 0.88rem; color: var(--text-2); overflow-wrap: anywhere; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .item-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.paid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: end; padding: 10px; margin-top: 4px; background: var(--paper); border: 1px dashed var(--rule-strong); border-radius: 4px; }
+.paid .btn, .paid p { grid-column: 1 / -1; }
+.paid input { width: 100%; }
 .item.done h4, .item.done .need { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--text-2); }
 .item details.explain { border-top-color: var(--rule); }
 .item details.explain summary { color: var(--ink-2); }

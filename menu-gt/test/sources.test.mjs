@@ -123,3 +123,18 @@ test('captura real guardada: cada precio tiene origen, fecha, monto válido y pr
   }
   for (const e of REAL.excluded) assert.ok(e.reason && e.url, JSON.stringify(e));
 });
+
+test('cambios entre capturas: subidas, bajadas, agotados y quitados', async () => {
+  const { diffSnapshots, diffReport } = await import('../scripts/price-diff.mjs');
+  const o = (id, priceCents, availability = 'disponible') => ({ id, product: id, priceCents, availability });
+  const prev = { finished: '2026-10-29T06:00:00Z', offers: [o('a', 1000), o('b', 2000), o('c', 500), o('d', 800)] };
+  const next = { finished: '2026-11-05T06:00:00Z', offers: [o('a', 1100), o('b', 1800), o('c', 500, 'agotado'), o('e', 300)] };
+  const ch = diffSnapshots(prev, next);
+  assert.deepEqual(ch.subio.map((x) => [x.id, x.pct]), [['a', 10]]);
+  assert.deepEqual(ch.bajo.map((x) => [x.id, x.pct]), [['b', -10]]);
+  assert.deepEqual(ch.agotado.map((x) => x.id), ['c']);
+  assert.deepEqual(ch.nuevo.map((x) => x.id), ['e']);
+  assert.deepEqual(ch.quitado.map((x) => x.id), ['d']);
+  assert.match(diffReport(prev, next, ch), /a: Q10\.00 → Q11\.00 \(\+10 %\)/);
+  assert.match(diffReport(prev, prev, diffSnapshots(prev, prev)), /Sin cambios/);
+});

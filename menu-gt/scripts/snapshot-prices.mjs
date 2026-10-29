@@ -8,6 +8,8 @@ import { SOURCES } from '../server/sources/registry.mjs';
 import { allPresentations, decode } from '../server/sources/product-page.mjs';
 import { INGREDIENTS } from '../src/data/ingredients.js';
 import { toBase } from '../src/engine/units.js';
+import { diffSnapshots, diffReport } from './price-diff.mjs';
+import PREVIOUS from '../src/data/real-prices.js';
 
 const map = JSON.parse(await readFile(new URL('../src/data/product-urls.json', import.meta.url), 'utf8'));
 const reviews = JSON.parse(await readFile(new URL('../src/data/price-reviews.json', import.meta.url), 'utf8').catch(() => '{}'));
@@ -118,4 +120,7 @@ if (process.argv[1].endsWith('snapshot-prices.mjs')) {
     `// GENERADO por scripts/snapshot-prices.mjs. Precios reales publicados en línea;\n// no editar a mano. Ver docs/INVESTIGACION-PRECIOS.md.\nexport default ${JSON.stringify(snapshot, null, 1)};\n`,
   );
   console.log(`\n${offers.length} precios aceptados, ${excluded.length} excluidos`);
+  const changes = diffSnapshots(PREVIOUS, snapshot);
+  await writeFile(new URL('../data/capturas/cambios.md', import.meta.url), diffReport(PREVIOUS, snapshot, changes));
+  console.log(`Cambios frente a la captura anterior: ${changes.subio.length} subieron, ${changes.bajo.length} bajaron, ${changes.agotado.length} agotados, ${changes.nuevo.length} nuevos, ${changes.quitado.length} quitados (data/capturas/cambios.md)`);
 }

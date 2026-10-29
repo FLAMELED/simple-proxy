@@ -9,7 +9,10 @@
     "test": "node --test test/*.test.mjs",
     "test:e2e": "node test/e2e/run.mjs",
     "build:artifact": "node scripts/build-artifact.mjs",
-    "capture": "node scripts/capture.mjs"
+    "capture": "node scripts/capture.mjs",
+    "check": "node scripts/check-data.mjs",
+    "ci": "npm run check && npm test && npm run test:e2e && npm run build:artifact",
+    "snapshot": "node scripts/snapshot-prices.mjs"
   },
   "devDependencies": {
     "esbuild": "0.25.10",

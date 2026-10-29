@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { consolidateDemand, applyPantry } from '../src/engine/demand.js';
 import { computePurchase, offerCost, chooseOffer } from '../src/engine/purchase.js';
-import { evaluateBudget, budgetMessage } from '../src/engine/budget.js';
+import { evaluateBudget, budgetMessage, priceAge, staleItems } from '../src/engine/budget.js';
 import { compareStores, combineStores } from '../src/engine/compare.js';
 import { toBase, packsFor, ConversionError, describeQty } from '../src/engine/units.js';
 import { formatQ, parseQuetzales, proportionalCents } from '../src/engine/money.js';
@@ -280,4 +280,27 @@ test('lo usado más lo sobrante suma exactamente lo pagado, también al combinar
   assert.equal(it.leftover, 0);
   const usedFromPurchase = it.usedValueCents - it.pantryValueCents;
   assert.ok(Math.abs(usedFromPurchase + it.leftoverValueCents - it.cents) <= 1);
+});
+
+test('vigencia: un precio guardado de más de 14 días no confirma que alcanza', () => {
+  const now = Date.parse('2026-11-20T12:00:00Z');
+  const saved = { status: 'guardado', channel: 'online', fetchedAt: '2026-10-29T05:45:00Z' };
+  assert.deepEqual(priceAge(saved, now), { days: 22, maxDays: 14, stale: true });
+  assert.equal(priceAge({ ...saved, fetchedAt: '2026-11-10T00:00:00Z' }, now).stale, false);
+  // Lo ingresado por la persona vale 30 días; un ejemplo ficticio no tiene vigencia
+  assert.equal(priceAge({ status: 'usuario', channel: 'usuario', fetchedAt: '2026-10-29T00:00:00Z' }, now).stale, false);
+  assert.equal(priceAge({ status: 'ejemplo', fetchedAt: '2020-01-01T00:00:00Z' }, now), null);
+  const items = [
+    { status: 'cotizado', packs: 1, lines: [{ offer: saved }] },
+    { status: 'cotizado', packs: 0, lines: [{ offer: saved }] }, // referencia sin compra: no cuenta
+    { status: 'sin-precio', lines: [] },
+  ];
+  assert.equal(staleItems(items, now).length, 1);
+  const totals = { purchaseCents: 50000, missing: [] };
+  const b = evaluateBudget({ budgetCents: 90000, totals, staleCount: 1 });
+  assert.equal(b.status, 'sin-confirmar');
+  assert.match(budgetMessage(b, (c) => `Q${c / 100}`), /más días de los permitidos/);
+  assert.equal(evaluateBudget({ budgetCents: 90000, totals }).status, 'alcanza');
+  // Si ya no alcanza, lo viejo no cambia el veredicto
+  assert.equal(evaluateBudget({ budgetCents: 100, totals, staleCount: 3 }).status, 'insuficiente');
 });

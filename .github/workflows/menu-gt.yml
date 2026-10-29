@@ -1,0 +1,44 @@
+name: Mercadito
+
+on:
+  push:
+    paths: ['menu-gt/**', '.github/workflows/menu-gt.yml']
+  pull_request:
+    paths: ['menu-gt/**', '.github/workflows/menu-gt.yml']
+
+defaults:
+  run:
+    working-directory: menu-gt
+
+jobs:
+  test:
+    name: Datos, motor, E2E y Artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: menu-gt/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Integridad de datos y sintaxis
+        run: npm run check
+      - name: Pruebas del motor, selector, guardado y fuentes
+        run: npm test
+      - name: Pruebas E2E en Chromium (320 y 390 px)
+        run: npm run test:e2e
+        env:
+          CHROMIUM_PATH: ''
+      - name: Artifact de un solo archivo
+        run: npm run build:artifact
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mercadito
+          path: |
+            menu-gt/dist/mercadito.html
+            menu-gt/test/e2e/screens/
+          retention-days: 14

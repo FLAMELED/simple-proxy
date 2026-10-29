@@ -99,11 +99,33 @@ for (const width of [320, 390]) {
     assert.ok(await page.locator('#snap-title').count());
     await noOverflow(page, 'precios reales');
     if (width === 390) await page.screenshot({ path: `${OUT}/precios-reales-${width}.png`, fullPage: true });
-    // A partir de aquí se usan las tiendas de ejemplo (ficticias) para casos reproducibles
-    await page.click('.loc');
-    await page.click('[data-action="toggle-demo"]');
-    await page.evaluate(() => window.__mercadito.actions['set-primary']({ store: 'ejemplo-a' }));
   });
+
+  await check(`[${width}px] al marcar comprado se puede guardar lo pagado y reemplaza el precio en línea`, async () => {
+    await go(page, 'compras');
+    const ingId = await page.evaluate(() => window.__mercadito.ctx.result.purchase.items.find((i) => i.status === 'cotizado' && !i.mixed && i.offer.status === 'guardado').ingredientId);
+    const box = page.locator(`[data-action="check-item"][data-ing="${ingId}"]`);
+    await box.check();
+    const form = page.locator('li.item', { has: box }).locator('form.paid');
+    await form.locator('input[name="price"]').fill('99.50');
+    await form.locator('input[name="place"]').fill('Chiquimula centro');
+    await form.locator('button').click();
+    const r = await page.evaluate(() => {
+      const c = window.__mercadito.ctx;
+      const m = c.state.myPrices.at(-1);
+      return { cents: m.priceCents, replaces: m.replacesOfferId, branch: c.state.stores.branches[m.storeId] };
+    });
+    assert.equal(r.cents, 9950);
+    assert.ok(r.replaces);
+    assert.equal(r.branch, 'Chiquimula centro');
+    await noOverflow(page, 'compras con precio pagado');
+    await box.uncheck();
+  });
+
+  // A partir de aquí se usan las tiendas de ejemplo (ficticias) para casos reproducibles
+  await page.click('.loc');
+  await page.click('[data-action="toggle-demo"]');
+  await page.evaluate(() => window.__mercadito.actions['set-primary']({ store: 'ejemplo-a' }));
 
   for (const v of ['menu', 'compras', 'despensa', 'precios']) {
     await check(`[${width}px] vista ${v} sin desbordamiento`, async () => {
@@ -225,6 +247,41 @@ for (const width of [320, 390]) {
 
   await check(`[${width}px] sin errores de JavaScript`, async () => assert.deepEqual(errors, []));
   await context.close();
+}
+
+// Vigencia: con el reloj 3 semanas después de la captura, los precios guardados se marcan como viejos
+{
+  const later = await browser.newContext({ viewport: { width: 390, height: 800 } });
+  const lp = await later.newPage();
+  await lp.clock.install({ time: new Date('2026-11-20T12:00:00-06:00') });
+  await lp.goto(base);
+  await lp.click('[data-action="finish-onboarding"]');
+  await check('[390px] precios de más de 14 días se marcan y no confirman el presupuesto', async () => {
+    const r = await lp.evaluate(() => ({ stale: window.__mercadito.ctx.result.stale.length, status: window.__mercadito.ctx.result.budget.status }));
+    assert.ok(r.stale > 0, 'sin precios vencidos');
+    assert.notEqual(r.status, 'alcanza');
+    await go(lp, 'compras');
+    assert.ok(await lp.getByText(/Precio de hace \d+ días/).count());
+  });
+  await later.close();
+}
+
+// Sin señal: tras la primera visita, la app abre sin red y conserva el plan
+{
+  const off = await browser.newContext({ viewport: { width: 390, height: 800 } });
+  const op = await off.newPage();
+  await op.goto(base);
+  await op.click('[data-action="finish-onboarding"]');
+  await op.evaluate(() => navigator.serviceWorker.ready);
+  await op.reload(); // la segunda carga ya pasa por el service worker y guarda todo
+  await op.waitForSelector('#ticket');
+  await check('[390px] sin señal: abre desde lo guardado y conserva el plan', async () => {
+    await off.setOffline(true);
+    await op.reload();
+    await op.waitForSelector('#ticket', { timeout: 5000 });
+    assert.ok(await op.locator('.today .slot').count());
+  });
+  await off.close();
 }
 
 // Tema oscuro: captura para revisar contraste

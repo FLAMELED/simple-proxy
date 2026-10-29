@@ -1,6 +1,6 @@
 // Vistas "Esta semana" y "Menú".
 import { esc, q, icon, mealLabel, dayLabel, storeLabel, proteinIcon, proteinLabel, cap } from './common.js';
-import { budgetMessage } from '../engine/budget.js';
+import { budgetMessage, PRICE_MAX_AGE_DAYS } from '../engine/budget.js';
 import { checkRecipe } from '../engine/selector.js';
 import { RECIPE_BY_ID } from '../data/recipes.js';
 import { INGREDIENTS } from '../data/ingredients.js';
@@ -95,9 +95,12 @@ export function budgetCard(ctx, { compact = false } = {}) {
     note = 'cotizados; indica un presupuesto en Ajustes.';
     tone = '';
   } else if (b.balanceCents >= 0) {
-    total = `${b.pendingCount ? 'Quedan' : 'Te quedan'} <span data-tween="${b.balanceCents}" data-tween-key="saldo">${q(b.balanceCents)}</span>`;
-    note = b.pendingCount ? 'por ahora: faltan precios, no se puede confirmar.' : '';
-    tone = b.pendingCount ? '' : 'ok';
+    const unsure = b.pendingCount || b.staleCount;
+    total = `${unsure ? 'Quedan' : 'Te quedan'} <span data-tween="${b.balanceCents}" data-tween-key="saldo">${q(b.balanceCents)}</span>`;
+    note = b.pendingCount
+      ? 'por ahora: faltan precios, no se puede confirmar.'
+      : b.staleCount ? `por ahora: ${b.staleCount} precio${b.staleCount === 1 ? ' es' : 's son'} de hace más de ${PRICE_MAX_AGE_DAYS.guardado} días; vuelve a consultarlos.` : '';
+    tone = unsure ? '' : 'ok';
   } else {
     total = `Faltan <span data-tween="${b.shortfallCents}" data-tween-key="faltante">${q(b.shortfallCents)}</span>`;
     note = b.shortfallIsMinimum ? 'como mínimo: además hay productos sin precio.' : '';

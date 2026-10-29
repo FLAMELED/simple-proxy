@@ -1,6 +1,7 @@
 // Utilidades de presentación compartidas por las vistas.
 import { formatQ } from '../engine/money.js';
 import { toBase, UNITS, describeQty, ConversionError } from '../engine/units.js';
+import { priceAge } from '../engine/budget.js';
 import { STORE_BY_ID } from '../data/stores.js';
 import { MEALS, EQUIPMENT } from '../data/recipes.js';
 
@@ -40,6 +41,8 @@ export function priceStatus(offer, sessionStart) {
   if (offer.channel === 'usuario' || offer.status === 'usuario') {
     return { tone: 'user', label: 'Ingresado por ti', detail: `Registrado el ${dtf(offer.fetchedAt)}${offer.place ? ` · ${offer.place}` : ''}` };
   }
+  const age = priceAge(offer);
+  if (age?.stale) return { tone: 'warn', label: `Precio de hace ${age.days} días`, detail: `Consultado el ${dtf(offer.fetchedAt)}; tiene más de ${age.maxDays} días y no sirve para confirmar el presupuesto` };
   const fresh = new Date(offer.fetchedAt).getTime() >= sessionStart;
   return fresh
     ? { tone: 'live', label: 'Consultado ahora', detail: `Consultado el ${dtf(offer.fetchedAt)} en la tienda en línea` }

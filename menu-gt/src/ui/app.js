@@ -542,6 +542,24 @@ const forms = {
     else lk.error = out.error;
     render();
   },
+  paid(form) {
+    const f = Object.fromEntries(new FormData(form));
+    const o = allOffers(ctx.state).find((x) => x.id === f.offer);
+    const cents = parseQuetzales(f.price);
+    if (!o) return toast('Ese producto ya no está en la lista.');
+    if (!cents) return toast('Escribe lo que pagaste, por ejemplo 27.70.');
+    const place = f.place.trim() || null;
+    if (place && !ctx.state.stores.branches[o.storeId]) ctx.state.stores.branches[o.storeId] = place;
+    ctx.state.myPrices = ctx.state.myPrices.filter((m) => m.replacesOfferId !== o.id);
+    ctx.state.myPrices.push({
+      id: `mine-${uid()}`, storeId: o.storeId, place, ingredientId: o.ingredientId, product: o.product, brand: o.brand,
+      packQty: o.packQty, packUnit: o.packUnit, priceCents: cents, promo: null, note: 'Pagado en tienda',
+      availability: 'disponible', channel: 'usuario', status: 'usuario', branch: place, sourceUrl: null,
+      replacesOfferId: o.id, fetchedAt: new Date().toISOString(),
+    });
+    commit();
+    toast(`Guardado: ${q(cents)} en ${place ?? storeLabel(o.storeId, ctx.state)}.`);
+  },
   extra(form) {
     const label = form.label.value.trim();
     const cents = parseQuetzales(form.amount.value);
@@ -687,6 +705,11 @@ serverStatus().then((ok) => {
   ctx.server.available = ok;
   if (ctx.state.view === 'precios') render();
 });
+
+// Sin señal en el súper: solo en la versión servida (en el Artifact no hay service worker).
+if ('serviceWorker' in navigator && location.protocol.startsWith('http') && document.querySelector('link[rel="manifest"]')) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 
 // Para pruebas automatizadas
 window.__mercadito = { ctx, actions };

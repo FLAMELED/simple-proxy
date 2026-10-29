@@ -2,7 +2,7 @@
 // verificable: sin IA, sin red.
 import { consolidateDemand, applyPantry } from './demand.js';
 import { computePurchase } from './purchase.js';
-import { evaluateBudget } from './budget.js';
+import { evaluateBudget, staleItems } from './budget.js';
 import { compareStores, combineStores } from './compare.js';
 import { servingCost, alternativesFor, generateMenu } from './selector.js';
 import { INGREDIENTS } from '../data/ingredients.js';
@@ -22,7 +22,10 @@ export function allOffers(state) {
   const fetchedIds = new Set(state.fetchedPrices.map((o) => o.sourceUrl));
   // Una consulta más reciente de la misma página reemplaza la captura guardada.
   const saved = (state.useSavedPrices === false ? [] : REAL.offers).filter((o) => !fetchedIds.has(o.sourceUrl));
-  return [...(state.demo ? samples() : []), ...saved, ...state.fetchedPrices, ...state.myPrices];
+  // Lo que la persona pagó en su sucursal reemplaza el precio en línea de ese mismo producto.
+  const replaced = new Set(state.myPrices.map((m) => m.replacesOfferId).filter(Boolean));
+  const keep = (o) => !replaced.has(o.id);
+  return [...(state.demo ? samples() : []), ...saved.filter(keep), ...state.fetchedPrices.filter(keep), ...state.myPrices];
 }
 
 export function offersByStore(state) {
@@ -62,7 +65,7 @@ function primaryOffers(state, byStore) {
   return { offers: own, fallback: null };
 }
 
-export function computeAll(state) {
+export function computeAll(state, { now = Date.now() } = {}) {
   const slots = activeSlots(state);
   const demand = consolidateDemand(slots, RECIPE_BY_ID, INGREDIENTS);
   const needs = applyPantry(demand, state.pantry, INGREDIENTS);
@@ -71,7 +74,9 @@ export function computeAll(state) {
   const { offers, fallback } = primaryOffers(state, byStore);
   const purchase = computePurchase(needs, INGREDIENTS, offers, { ...opts, fallbackOffers: fallback });
   const transportCents = state.transport[state.stores.primary];
+  const stale = staleItems(purchase.items, now);
   const budget = evaluateBudget({
+    staleCount: stale.length,
     budgetCents: state.household.budgetCents,
     totals: purchase.totals,
     extras: state.extras,
@@ -91,7 +96,7 @@ export function computeAll(state) {
   };
   const suggestions =
     budget.status === 'insuficiente' ? suggestSavings(state, slots, offers, comparison, budget, purchaseFor) : [];
-  return { slots, demand, needs, purchase, budget, comparison, combination, slotCosts, suggestions };
+  return { slots, demand, needs, purchase, budget, stale, comparison, combination, slotCosts, suggestions };
 }
 
 /** Propuestas para ajustar el gasto. Nunca se aplican solas. */

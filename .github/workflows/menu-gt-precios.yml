@@ -1,0 +1,39 @@
+name: Mercadito · captura semanal de precios
+
+# Lee las mismas ~120 páginas públicas de producto (una cada 3 s, respetando robots.txt)
+# y deja el resultado para revisión. No hace commit: una persona revisa cambios.md
+# y, si todo está bien, copia real-prices.js y abre un PR.
+on:
+  schedule:
+    - cron: '17 11 * * 1' # lunes 05:17 en Guatemala
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: menu-gt
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: menu-gt/package-lock.json
+      - run: npm ci
+      - name: Capturar precios
+        run: npm run snapshot
+      - name: Revisar que la captura sea válida
+        run: npm run check && npm test
+      - name: Resumen
+        run: cat data/capturas/cambios.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: precios-${{ github.run_id }}
+          path: |
+            menu-gt/src/data/real-prices.js
+            menu-gt/data/capturas/
+          retention-days: 30

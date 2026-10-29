@@ -1,8 +1,8 @@
 // GENERADO por scripts/snapshot-prices.mjs. Precios reales publicados en línea;
 // no editar a mano. Ver docs/INVESTIGACION-PRECIOS.md.
 export default {
- "started": "2026-10-29T05:42:06.436Z",
- "finished": "2026-10-29T05:51:53.830Z",
+ "started": "2026-10-29T16:18:56.022Z",
+ "finished": "2026-10-29T16:30:33.119Z",
  "method": "Página pública de producto (JSON-LD y ficha), robots.txt respetado, 1 consulta cada 3 s",
  "offers": [
   {
@@ -24,7 +24,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/arroz-blanco-albay-2000-grs/p",
-   "fetchedAt": "2026-10-29T05:42:09.577Z"
+   "fetchedAt": "2026-10-29T16:18:59.158Z"
   },
   {
    "id": "paiz-arroz-suli-blanco-800gr",
@@ -35,7 +35,7 @@ export default {
    "packQty": 800,
    "packUnit": "g",
    "presentationSource": "800 g",
-   "priceCents": 1225,
+   "priceCents": 1125,
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
@@ -45,7 +45,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/arroz-suli-blanco-800gr/p",
-   "fetchedAt": "2026-10-29T05:42:12.556Z"
+   "fetchedAt": "2026-10-29T16:19:02.214Z"
   },
   {
    "id": "paiz-frijol-negro-suli-bolsa-400-g-5",
@@ -66,7 +66,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/frijol-negro-suli-bolsa-400-g-5/p",
-   "fetchedAt": "2026-10-29T05:42:15.558Z"
+   "fetchedAt": "2026-10-29T16:19:06.165Z"
   },
   {
    "id": "paiz-frijol-negro-la-campana-800-g-8",
@@ -87,7 +87,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/frijol-negro-la-campana-800-g-8/p",
-   "fetchedAt": "2026-10-29T05:42:18.561Z"
+   "fetchedAt": "2026-10-29T16:19:09.239Z"
   },
   {
    "id": "paiz-frijol-la-chula-volteados-negros-227-g-5",
@@ -108,7 +108,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/frijol-la-chula-volteados-negros-227-g-5/p",
-   "fetchedAt": "2026-10-29T05:42:21.564Z"
+   "fetchedAt": "2026-10-29T16:19:12.462Z"
   },
   {
    "id": "paiz-frijol-negro-la-chula-volteados-1000-g-0",
@@ -131,7 +131,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/frijol-negro-la-chula-volteados-1000-g-0/p",
-   "fetchedAt": "2026-10-29T05:42:24.564Z"
+   "fetchedAt": "2026-10-29T16:19:14.147Z"
   },
   {
    "id": "paiz-lentejas-don-lazaro-400-gr-0",
@@ -154,28 +154,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/lentejas-don-lazaro-400-gr-0/p",
-   "fetchedAt": "2026-10-29T05:42:27.567Z"
-  },
-  {
-   "id": "paiz-harina-de-maiz-maseca-820gr",
-   "storeId": "paiz",
-   "ingredientId": "harina-maiz",
-   "product": "Harina Maseca de Maíz Extra Suave - 820 g",
-   "brand": "MASECA",
-   "packQty": 820,
-   "packUnit": "g",
-   "presentationSource": "820 g",
-   "priceCents": 1300,
-   "regularPriceCents": null,
-   "promo": null,
-   "notes": [],
-   "availability": "disponible",
-   "channel": "online",
-   "status": "guardado",
-   "branch": null,
-   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
-   "sourceUrl": "https://www.paiz.com.gt/harina-de-maiz-maseca-820gr/p",
-   "fetchedAt": "2026-10-29T05:42:30.575Z"
+   "fetchedAt": "2026-10-29T16:19:17.977Z"
   },
   {
    "id": "paiz-harina-suli-de-maiz-907gr",
@@ -196,7 +175,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/harina-suli-de-maiz-907gr/p",
-   "fetchedAt": "2026-10-29T05:42:33.571Z"
+   "fetchedAt": "2026-10-29T16:19:23.129Z"
   },
   {
    "id": "paiz-avena-albay-en-hojuela-400gr",
@@ -217,7 +196,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/avena-albay-en-hojuela-400gr/p",
-   "fetchedAt": "2026-10-29T05:42:36.574Z"
+   "fetchedAt": "2026-10-29T16:19:27.872Z"
   },
   {
    "id": "paiz-barilla-spaghetti-5-500-g-gt9608-4-1",
@@ -238,7 +217,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/barilla-spaghetti-5-500-g-gt9608-4-1/p",
-   "fetchedAt": "2026-10-29T05:42:39.579Z"
+   "fetchedAt": "2026-10-29T16:19:32.057Z"
   },
   {
    "id": "paiz-azucar-ca-a-real-blanca-2500g",
@@ -259,7 +238,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/azucar-ca-a-real-blanca-2500g/p",
-   "fetchedAt": "2026-10-29T05:42:42.593Z"
+   "fetchedAt": "2026-10-29T16:19:33.389Z"
   },
   {
    "id": "paiz-azucar-ca-a-real-blanca-500gr",
@@ -280,7 +259,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/azucar-ca-a-real-blanca-500gr/p",
-   "fetchedAt": "2026-10-29T05:42:45.591Z"
+   "fetchedAt": "2026-10-29T16:19:36.084Z"
   },
   {
    "id": "paiz-la-sirena-atun-agua-142gr-5",
@@ -303,7 +282,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/la-sirena-atun-agua-142gr-5/p",
-   "fetchedAt": "2026-10-29T05:42:48.595Z"
+   "fetchedAt": "2026-10-29T16:19:39.492Z"
   },
   {
    "id": "paiz-especias-sasson-pepitoria-bolsa-50gr",
@@ -326,7 +305,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/especias-sasson-pepitoria-bolsa-50gr/p",
-   "fetchedAt": "2026-10-29T05:42:51.591Z"
+   "fetchedAt": "2026-10-29T16:19:42.058Z"
   },
   {
    "id": "paiz-ajonjoli-de-la-provincia-56gr",
@@ -349,7 +328,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/ajonjoli-de-la-provincia-56gr/p",
-   "fetchedAt": "2026-10-29T05:42:54.591Z"
+   "fetchedAt": "2026-10-29T16:19:45.981Z"
   },
   {
    "id": "paiz-especias-sasson-chile-guaque-bolsa-30gr",
@@ -370,7 +349,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/especias-sasson-chile-guaque-bolsa-30gr/p",
-   "fetchedAt": "2026-10-29T05:42:57.593Z"
+   "fetchedAt": "2026-10-29T16:19:48.627Z"
   },
   {
    "id": "paiz-especias-sasson-chile-pasa-bolsa-30gr",
@@ -391,7 +370,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/especias-sasson-chile-pasa-bolsa-30gr/p",
-   "fetchedAt": "2026-10-29T05:43:00.598Z"
+   "fetchedAt": "2026-10-29T16:19:51.624Z"
   },
   {
    "id": "paiz-filete-pio-lindo-de-pechuga-1lb",
@@ -412,7 +391,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/filete-pio-lindo-de-pechuga-1lb/p",
-   "fetchedAt": "2026-10-29T05:43:03.600Z"
+   "fetchedAt": "2026-10-29T16:19:54.133Z"
   },
   {
    "id": "paiz-muslos-pio-lindo-bandeja-1lb",
@@ -433,7 +412,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/muslos-pio-lindo-bandeja-1lb/p",
-   "fetchedAt": "2026-10-29T05:43:06.595Z"
+   "fetchedAt": "2026-10-29T16:19:58.592Z"
   },
   {
    "id": "paiz-guisar-trocitos-res-don-cristobal-1lb",
@@ -454,7 +433,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/guisar-trocitos-res-don-cristobal-1lb/p",
-   "fetchedAt": "2026-10-29T05:43:09.599Z"
+   "fetchedAt": "2026-10-29T16:20:00.155Z"
   },
   {
    "id": "paiz-carne-molida-especial-empacado-85carne-15grasa-1lb",
@@ -475,7 +454,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/carne-molida-especial-empacado-85carne-15grasa-1lb/p",
-   "fetchedAt": "2026-10-29T05:43:12.600Z"
+   "fetchedAt": "2026-10-29T16:20:03.497Z"
   },
   {
    "id": "paiz-hilachas-de-res-don-cristobal-1lb",
@@ -496,7 +475,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/hilachas-de-res-don-cristobal-1lb/p",
-   "fetchedAt": "2026-10-29T05:43:15.606Z"
+   "fetchedAt": "2026-10-29T16:20:06.518Z"
   },
   {
    "id": "paiz-costilla-de-cerdo-porcionado-lb-gt9390-4-5",
@@ -517,7 +496,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/costilla-de-cerdo-porcionado-lb-gt9390-4-5/p",
-   "fetchedAt": "2026-10-29T05:43:18.607Z"
+   "fetchedAt": "2026-10-29T16:20:09.752Z"
   },
   {
    "id": "paiz-longaniza-fud-454gr",
@@ -538,7 +517,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/longaniza-fud-454gr/p",
-   "fetchedAt": "2026-10-29T05:43:21.610Z"
+   "fetchedAt": "2026-10-29T16:20:13.210Z"
   },
   {
    "id": "paiz-huevo-don-yemo-grande-blanco-30-unidades",
@@ -559,7 +538,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/huevo-don-yemo-grande-blanco-30-unidades/p",
-   "fetchedAt": "2026-10-29T05:43:24.617Z"
+   "fetchedAt": "2026-10-29T16:20:15.059Z"
   },
   {
    "id": "paiz-huevo-de-patio-tierra-nueva-15-unidades",
@@ -580,7 +559,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/huevo-de-patio-tierra-nueva-15-unidades/p",
-   "fetchedAt": "2026-10-29T05:43:27.613Z"
+   "fetchedAt": "2026-10-29T16:20:18.295Z"
   },
   {
    "id": "paiz-queso-trebolac-fresco-370-g-0",
@@ -603,7 +582,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/queso-trebolac-fresco-370-g-0/p",
-   "fetchedAt": "2026-10-29T05:43:30.614Z"
+   "fetchedAt": "2026-10-29T16:20:22.843Z"
   },
   {
    "id": "paiz-queso-seco-al-estilo-zacapa-227-g-0",
@@ -624,7 +603,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/queso-seco-al-estilo-zacapa-227-g-0/p",
-   "fetchedAt": "2026-10-29T05:43:33.618Z"
+   "fetchedAt": "2026-10-29T16:20:24.151Z"
   },
   {
    "id": "paiz-crema-foremost-natural-450ml",
@@ -645,7 +624,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/crema-foremost-natural-450ml/p",
-   "fetchedAt": "2026-10-29T05:43:36.620Z"
+   "fetchedAt": "2026-10-29T16:20:27.548Z"
   },
   {
    "id": "paiz-leche-suli-entera-uht-1-l-2",
@@ -666,7 +645,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/leche-suli-entera-uht-1-l-2/p",
-   "fetchedAt": "2026-10-29T05:43:39.622Z"
+   "fetchedAt": "2026-10-29T16:20:29.199Z"
   },
   {
    "id": "paiz-tomate-de-cocina-libra",
@@ -687,7 +666,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/tomate-de-cocina-libra/p",
-   "fetchedAt": "2026-10-29T05:43:42.624Z"
+   "fetchedAt": "2026-10-29T16:20:32.941Z"
   },
   {
    "id": "paiz-cebollas-blanca-libra",
@@ -698,7 +677,7 @@ export default {
    "packQty": 1,
    "packUnit": "lb",
    "presentationSource": "libra",
-   "priceCents": 1160,
+   "priceCents": 1100,
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
@@ -708,7 +687,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/cebollas-blanca-libra/p",
-   "fetchedAt": "2026-10-29T05:43:45.627Z"
+   "fetchedAt": "2026-10-29T16:20:36.408Z"
   },
   {
    "id": "paiz-chile-pimiento-libra",
@@ -729,7 +708,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/chile-pimiento-libra/p",
-   "fetchedAt": "2026-10-29T05:43:51.633Z"
+   "fetchedAt": "2026-10-29T16:20:45.506Z"
   },
   {
    "id": "paiz-papa-super-granel-libra",
@@ -750,7 +729,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/papa-super-granel-libra/p",
-   "fetchedAt": "2026-10-29T05:43:54.629Z"
+   "fetchedAt": "2026-10-29T16:20:49.208Z"
   },
   {
    "id": "paiz-guisquil-1-unidad",
@@ -771,7 +750,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/guisquil-1-unidad/p",
-   "fetchedAt": "2026-10-29T05:43:57.635Z"
+   "fetchedAt": "2026-10-29T16:20:53.231Z"
   },
   {
    "id": "paiz-guicoyito-bandeja-1-unidad",
@@ -782,7 +761,7 @@ export default {
    "packQty": 300,
    "packUnit": "g",
    "presentationSource": "ficha: 300 g",
-   "priceCents": 1825,
+   "priceCents": 2000,
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
@@ -792,7 +771,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/guicoyito-bandeja-1-unidad/p",
-   "fetchedAt": "2026-10-29T05:44:00.636Z"
+   "fetchedAt": "2026-10-29T16:20:54.386Z"
   },
   {
    "id": "paiz-ejotes-go-fresh-precortado-1lb",
@@ -813,7 +792,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/ejotes-go-fresh-precortado-1lb/p",
-   "fetchedAt": "2026-10-29T05:44:03.642Z"
+   "fetchedAt": "2026-10-29T16:20:57.864Z"
   },
   {
    "id": "paiz-zanahoria-granel-libra",
@@ -824,7 +803,7 @@ export default {
    "packQty": 1,
    "packUnit": "lb",
    "presentationSource": "revisión manual: nombre y ficha dicen libra; '2 a 3 unidades' es descriptivo",
-   "priceCents": 500,
+   "priceCents": 475,
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
@@ -834,7 +813,28 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/zanahoria-granel-libra/p",
-   "fetchedAt": "2026-10-29T05:44:06.642Z"
+   "fetchedAt": "2026-10-29T16:21:01.314Z"
+  },
+  {
+   "id": "paiz-repollo-blanco-1-unidad",
+   "storeId": "paiz",
+   "ingredientId": "repollo",
+   "product": "Repollo Blanco - 1 Unidad",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "u",
+   "presentationSource": "1 unidad",
+   "priceCents": 1310,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/repollo-blanco-1-unidad/p",
+   "fetchedAt": "2026-10-29T16:21:03.372Z"
   },
   {
    "id": "paiz-remolacha-granel-media-docena",
@@ -855,7 +855,28 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/remolacha-granel-media-docena/p",
-   "fetchedAt": "2026-10-29T05:44:12.647Z"
+   "fetchedAt": "2026-10-29T16:21:06.282Z"
+  },
+  {
+   "id": "paiz-elote-bandeja-shalom-uxc10-5",
+   "storeId": "paiz",
+   "ingredientId": "elote",
+   "product": "Elote Bandeja Shalom - 4 Unidades",
+   "brand": "SIN MARCA",
+   "packQty": 4,
+   "packUnit": "u",
+   "presentationSource": "4 unidades",
+   "priceCents": 1925,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/elote-bandeja-shalom-uxc10-5/p",
+   "fetchedAt": "2026-10-29T16:21:12.589Z"
   },
   {
    "id": "paiz-aguacate-hass-unidad-3",
@@ -866,7 +887,7 @@ export default {
    "packQty": 1,
    "packUnit": "u",
    "presentationSource": "unidad",
-   "priceCents": 445,
+   "priceCents": 405,
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
@@ -876,7 +897,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/aguacate-hass-unidad-3/p",
-   "fetchedAt": "2026-10-29T05:44:18.657Z"
+   "fetchedAt": "2026-10-29T16:21:16.013Z"
   },
   {
    "id": "paiz-platano-libra-gt4562-4-5",
@@ -887,7 +908,7 @@ export default {
    "packQty": 1,
    "packUnit": "lb",
    "presentationSource": "libra",
-   "priceCents": 365,
+   "priceCents": 390,
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
@@ -897,7 +918,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/platano-libra-gt4562-4-5/p",
-   "fetchedAt": "2026-10-29T05:44:21.659Z"
+   "fetchedAt": "2026-10-29T16:21:18.829Z"
   },
   {
    "id": "paiz-cilantro-manojo-unidad",
@@ -918,7 +939,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/cilantro-manojo-unidad/p",
-   "fetchedAt": "2026-10-29T05:44:24.656Z"
+   "fetchedAt": "2026-10-29T16:21:21.298Z"
   },
   {
    "id": "paiz-cebollin-en-manojo",
@@ -939,7 +960,91 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/cebollin-en-manojo/p",
-   "fetchedAt": "2026-10-29T05:44:27.654Z"
+   "fetchedAt": "2026-10-29T16:21:24.433Z"
+  },
+  {
+   "id": "paiz-limon-persa-red-10-uds-1",
+   "storeId": "paiz",
+   "ingredientId": "limon",
+   "product": "Limon Persa Red - 10 Uds",
+   "brand": "SIN MARCA",
+   "packQty": 10,
+   "packUnit": "u",
+   "presentationSource": "10 uds",
+   "priceCents": 1490,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/limon-persa-red-10-uds-1/p",
+   "fetchedAt": "2026-10-29T16:21:30.637Z"
+  },
+  {
+   "id": "paiz-limon-persa-red-15-uds-8",
+   "storeId": "paiz",
+   "ingredientId": "limon",
+   "product": "Limón Persa red - 15 Uds",
+   "brand": "SIN MARCA",
+   "packQty": 15,
+   "packUnit": "u",
+   "presentationSource": "15 uds",
+   "priceCents": 2125,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/limon-persa-red-15-uds-8/p",
+   "fetchedAt": "2026-10-29T16:21:33.559Z"
+  },
+  {
+   "id": "paiz-banano-datil-libra-gt8436-4-2",
+   "storeId": "paiz",
+   "ingredientId": "banano",
+   "product": "Banano Datil Libra",
+   "brand": "DEL FRESCO",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "libra",
+   "priceCents": 350,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/banano-datil-libra-gt8436-4-2/p",
+   "fetchedAt": "2026-10-29T16:21:39.664Z"
+  },
+  {
+   "id": "paiz-banano-de-exportacion-lb-gt8568-4-2",
+   "storeId": "paiz",
+   "ingredientId": "banano",
+   "product": "Banano De Exportacion lb",
+   "brand": "SIN MARCA",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "ficha: 1 lb",
+   "priceCents": 295,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/banano-de-exportacion-lb-gt8568-4-2/p",
+   "fetchedAt": "2026-10-29T16:21:42.308Z"
   },
   {
    "id": "paiz-papaya-libr-gt6-4-6",
@@ -960,7 +1065,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/papaya-libr-gt6-4-6/p",
-   "fetchedAt": "2026-10-29T05:44:36.668Z"
+   "fetchedAt": "2026-10-29T16:21:45.335Z"
   },
   {
    "id": "paiz-tortilla-tortiamigos-de-maiz-20-uds-260-g-4",
@@ -981,7 +1086,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/tortilla-tortiamigos-de-maiz-20-uds-260-g-4/p",
-   "fetchedAt": "2026-10-29T05:44:42.670Z"
+   "fetchedAt": "2026-10-29T16:21:54.591Z"
   },
   {
    "id": "paiz-tostadas-d-aqui-de-maiz-25-unidades",
@@ -1002,7 +1107,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/tostadas-d-aqui-de-maiz-25-unidades/p",
-   "fetchedAt": "2026-10-29T05:44:45.677Z"
+   "fetchedAt": "2026-10-29T16:21:56.630Z"
   },
   {
    "id": "paiz-pan-frances-tradicional-fila-de-8-unidad-und-gt4006-4-1",
@@ -1025,7 +1130,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/pan-frances-tradicional-fila-de-8-unidad-und-gt4006-4-1/p",
-   "fetchedAt": "2026-10-29T05:44:48.681Z"
+   "fetchedAt": "2026-10-29T16:22:00.608Z"
   },
   {
    "id": "paiz-pan-molido-bimbo-500-gr-6",
@@ -1046,7 +1151,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/pan-molido-bimbo-500-gr-6/p",
-   "fetchedAt": "2026-10-29T05:44:51.681Z"
+   "fetchedAt": "2026-10-29T16:22:03.619Z"
   },
   {
    "id": "paiz-aceite-ideal-vegetal-800ml",
@@ -1067,7 +1172,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/aceite-ideal-vegetal-800ml/p",
-   "fetchedAt": "2026-10-29T05:44:54.679Z"
+   "fetchedAt": "2026-10-29T16:22:06.530Z"
   },
   {
    "id": "paiz-sal-refinada-sabemas-400gr",
@@ -1088,7 +1193,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/sal-refinada-sabemas-400gr/p",
-   "fetchedAt": "2026-10-29T05:44:57.681Z"
+   "fetchedAt": "2026-10-29T16:22:09.329Z"
   },
   {
    "id": "paiz-consome-de-pollo-sam-bolsa-225-g",
@@ -1109,7 +1214,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/consome-de-pollo-sam-bolsa-225-g/p",
-   "fetchedAt": "2026-10-29T05:45:03.691Z"
+   "fetchedAt": "2026-10-29T16:22:15.744Z"
   },
   {
    "id": "paiz-especias-sasson-achiote-masa-bolsa-45gr",
@@ -1132,7 +1237,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/especias-sasson-achiote-masa-bolsa-45gr/p",
-   "fetchedAt": "2026-10-29T05:45:06.694Z"
+   "fetchedAt": "2026-10-29T16:22:19.277Z"
   },
   {
    "id": "paiz-salsa-regia-soya-150ml",
@@ -1153,7 +1258,7 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/salsa-regia-soya-150ml/p",
-   "fetchedAt": "2026-10-29T05:45:09.685Z"
+   "fetchedAt": "2026-10-29T16:22:21.373Z"
   },
   {
    "id": "paiz-epecias-sasson-laurel-10gr",
@@ -1174,7 +1279,49 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/epecias-sasson-laurel-10gr/p",
-   "fetchedAt": "2026-10-29T05:45:12.692Z"
+   "fetchedAt": "2026-10-29T16:22:24.598Z"
+  },
+  {
+   "id": "paiz-canela-de-la-provincia-raja-24-g-5",
+   "storeId": "paiz",
+   "ingredientId": "canela",
+   "product": "Canela De La Provincia Raja - 24 g",
+   "brand": "DE LA PROVINCIA",
+   "packQty": 24,
+   "packUnit": "g",
+   "presentationSource": "24 g",
+   "priceCents": 1175,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/canela-de-la-provincia-raja-24-g-5/p",
+   "fetchedAt": "2026-10-29T16:22:31.192Z"
+  },
+  {
+   "id": "paiz-canela-sasson-raja-verde-22-g-1-4-0-7-7-5",
+   "storeId": "paiz",
+   "ingredientId": "canela",
+   "product": "Canela Sasson Raja Verde - 22 g",
+   "brand": "SASSON",
+   "packQty": 22,
+   "packUnit": "g",
+   "presentationSource": "22 g",
+   "priceCents": 930,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/canela-sasson-raja-verde-22-g-1-4-0-7-7-5/p",
+   "fetchedAt": "2026-10-29T16:22:33.782Z"
   },
   {
    "id": "paiz-vinagre-sharp-767ml",
@@ -1195,7 +1342,70 @@ export default {
    "branch": null,
    "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.paiz.com.gt/vinagre-sharp-767ml/p",
-   "fetchedAt": "2026-10-29T05:45:18.695Z"
+   "fetchedAt": "2026-10-29T16:22:37.000Z"
+  },
+  {
+   "id": "paiz-chile-jalapeno-paquete-8-oz-7",
+   "storeId": "paiz",
+   "ingredientId": "jalapeno",
+   "product": "Chile Jalapeño Paquete - 8 oz",
+   "brand": "SIN MARCA",
+   "packQty": 8,
+   "packUnit": "oz",
+   "presentationSource": "8 oz",
+   "priceCents": 930,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/chile-jalapeno-paquete-8-oz-7/p",
+   "fetchedAt": "2026-10-29T16:22:40.035Z"
+  },
+  {
+   "id": "paiz-pina-hortifruti-dorada-1-ud",
+   "storeId": "paiz",
+   "ingredientId": "pina",
+   "product": "Piña Hortifruti Dorada - 1 Ud",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "u",
+   "presentationSource": "1 ud",
+   "priceCents": 1125,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/pina-hortifruti-dorada-1-ud/p",
+   "fetchedAt": "2026-10-29T16:22:50.639Z"
+  },
+  {
+   "id": "paiz-hierba-buena-manojo-unidad",
+   "storeId": "paiz",
+   "ingredientId": "hierbabuena",
+   "product": "Hierba Buena Manojo Unidad",
+   "brand": "SIN MARCA",
+   "packQty": 1,
+   "packUnit": "manojo",
+   "presentationSource": "manojo",
+   "priceCents": 750,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio de la tienda en línea, leído sin elegir tienda ni dirección de entrega. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
+   "sourceUrl": "https://www.paiz.com.gt/hierba-buena-manojo-unidad/p",
+   "fetchedAt": "2026-10-29T16:22:52.406Z"
   },
   {
    "id": "la-torre-arroz-blanco-molinero-87369",
@@ -1216,7 +1426,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/arroz-blanco-molinero-87369/p",
-   "fetchedAt": "2026-10-29T05:49:08.760Z"
+   "fetchedAt": "2026-10-29T16:22:57.565Z"
   },
   {
    "id": "la-torre-arroz-blanco-macarena-54760",
@@ -1237,7 +1447,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/arroz-blanco-macarena-54760/p",
-   "fetchedAt": "2026-10-29T05:49:11.739Z"
+   "fetchedAt": "2026-10-29T16:22:59.561Z"
   },
   {
    "id": "la-torre-frijol-negro-sasson-2081295",
@@ -1258,7 +1468,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/frijol-negro-sasson-2081295/p",
-   "fetchedAt": "2026-10-29T05:49:14.755Z"
+   "fetchedAt": "2026-10-29T16:23:03.617Z"
   },
   {
    "id": "la-torre-frijoles-volteados-negros-ducal-2037961",
@@ -1279,7 +1489,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/frijoles-volteados-negros-ducal-2037961/p",
-   "fetchedAt": "2026-10-29T05:49:18.882Z"
+   "fetchedAt": "2026-10-29T16:23:06.033Z"
   },
   {
    "id": "la-torre-lentejas-don-lazaro-2088274",
@@ -1294,13 +1504,13 @@ export default {
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
-   "availability": "agotado",
+   "availability": "disponible",
    "channel": "online",
    "status": "guardado",
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/lentejas-don-lazaro-2088274/p",
-   "fetchedAt": "2026-10-29T05:49:20.760Z"
+   "fetchedAt": "2026-10-29T16:23:09.441Z"
   },
   {
    "id": "la-torre-harina-maiz-maseca-2070981",
@@ -1315,13 +1525,13 @@ export default {
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
-   "availability": "agotado",
+   "availability": "disponible",
    "channel": "online",
    "status": "guardado",
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/harina-maiz-maseca-2070981/p",
-   "fetchedAt": "2026-10-29T05:49:23.755Z"
+   "fetchedAt": "2026-10-29T16:23:11.550Z"
   },
   {
    "id": "la-torre-avena-hojuelas-quaker-845",
@@ -1332,7 +1542,7 @@ export default {
    "packQty": 360,
    "packUnit": "g",
    "presentationSource": "ficha: 360gr.",
-   "priceCents": 1330,
+   "priceCents": 1295,
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
@@ -1342,7 +1552,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/avena-hojuelas-quaker-845/p",
-   "fetchedAt": "2026-10-29T05:49:26.761Z"
+   "fetchedAt": "2026-10-29T16:23:15.421Z"
   },
   {
    "id": "la-torre-azucar-blanca-don-justo-cabal-95749",
@@ -1363,7 +1573,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/azucar-blanca-don-justo-cabal-95749/p",
-   "fetchedAt": "2026-10-29T05:49:32.759Z"
+   "fetchedAt": "2026-10-29T16:23:20.856Z"
   },
   {
    "id": "la-torre-pepitoria-sasson-doypack-10842",
@@ -1384,7 +1594,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/pepitoria-sasson-doypack-10842/p",
-   "fetchedAt": "2026-10-29T05:49:37.008Z"
+   "fetchedAt": "2026-10-29T16:23:25.029Z"
   },
   {
    "id": "la-torre-ajonjoli-sasson-doypack-10811",
@@ -1405,7 +1615,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/ajonjoli-sasson-doypack-10811/p",
-   "fetchedAt": "2026-10-29T05:49:38.770Z"
+   "fetchedAt": "2026-10-29T16:23:27.804Z"
   },
   {
    "id": "la-torre-chile-guaque-sasson-doypack-10843",
@@ -1426,7 +1636,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/chile-guaque-sasson-doypack-10843/p",
-   "fetchedAt": "2026-10-29T05:49:41.762Z"
+   "fetchedAt": "2026-10-29T16:23:29.771Z"
   },
   {
    "id": "la-torre-chile-pasa-entero-sasson-doypack-10856",
@@ -1447,7 +1657,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/chile-pasa-entero-sasson-doypack-10856/p",
-   "fetchedAt": "2026-10-29T05:49:45.444Z"
+   "fetchedAt": "2026-10-29T16:23:33.152Z"
   },
   {
    "id": "la-torre-longaniza-criolla-toledo-16981",
@@ -1468,7 +1678,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/longaniza-criolla-toledo-16981/p",
-   "fetchedAt": "2026-10-29T05:50:03.677Z"
+   "fetchedAt": "2026-10-29T16:23:50.612Z"
   },
   {
    "id": "la-torre-huevos-blancos-grande-fatima-2044418",
@@ -1489,7 +1699,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/huevos-blancos-grande-fatima-2044418/p",
-   "fetchedAt": "2026-10-29T05:50:05.765Z"
+   "fetchedAt": "2026-10-29T16:23:53.505Z"
   },
   {
    "id": "la-torre-queso-fresco-chivolac-47569",
@@ -1510,7 +1720,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/queso-fresco-chivolac-47569/p",
-   "fetchedAt": "2026-10-29T05:50:08.774Z"
+   "fetchedAt": "2026-10-29T16:23:58.074Z"
   },
   {
    "id": "la-torre-queso-seco-jutiapa-san-julian-2023396",
@@ -1531,7 +1741,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/queso-seco-jutiapa-san-julian-2023396/p",
-   "fetchedAt": "2026-10-29T05:50:11.782Z"
+   "fetchedAt": "2026-10-29T16:24:00.405Z"
   },
   {
    "id": "la-torre-crema-pura-foremost-91386",
@@ -1552,7 +1762,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/crema-pura-foremost-91386/p",
-   "fetchedAt": "2026-10-29T05:50:14.781Z"
+   "fetchedAt": "2026-10-29T16:24:04.349Z"
   },
   {
    "id": "la-torre-leche-entera-foremost-11601",
@@ -1573,7 +1783,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/leche-entera-foremost-11601/p",
-   "fetchedAt": "2026-10-29T05:50:17.779Z"
+   "fetchedAt": "2026-10-29T16:24:05.948Z"
   },
   {
    "id": "la-torre-tomate-cocina-red-56093",
@@ -1594,7 +1804,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/tomate-cocina-red-56093/p",
-   "fetchedAt": "2026-10-29T05:50:20.771Z"
+   "fetchedAt": "2026-10-29T16:24:09.019Z"
   },
   {
    "id": "la-torre-miltomate-marielita-bandeja-24665",
@@ -1615,7 +1825,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/miltomate-marielita-bandeja-24665/p",
-   "fetchedAt": "2026-10-29T05:50:23.781Z"
+   "fetchedAt": "2026-10-29T16:24:12.494Z"
   },
   {
    "id": "la-torre-guicoyito-el-eden-bandeja-24647",
@@ -1636,7 +1846,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/guicoyito-el-eden-bandeja-24647/p",
-   "fetchedAt": "2026-10-29T05:50:41.852Z"
+   "fetchedAt": "2026-10-29T16:24:29.554Z"
   },
   {
    "id": "la-torre-remolacha-46604",
@@ -1657,7 +1867,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/remolacha-46604/p",
-   "fetchedAt": "2026-10-29T05:50:53.794Z"
+   "fetchedAt": "2026-10-29T16:24:41.722Z"
   },
   {
    "id": "la-torre-elote-criollo-frutos-del-atlantico-bandeja-24470",
@@ -1678,7 +1888,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/elote-criollo-frutos-del-atlantico-bandeja-24470/p",
-   "fetchedAt": "2026-10-29T05:50:56.795Z"
+   "fetchedAt": "2026-10-29T16:24:44.524Z"
   },
   {
    "id": "la-torre-aguacate-hass-red-24657",
@@ -1699,7 +1909,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/aguacate-hass-red-24657/p",
-   "fetchedAt": "2026-10-29T05:50:59.804Z"
+   "fetchedAt": "2026-10-29T16:24:48.263Z"
   },
   {
    "id": "la-torre-lechuga-romana-24463",
@@ -1720,7 +1930,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/lechuga-romana-24463/p",
-   "fetchedAt": "2026-10-29T05:51:05.797Z"
+   "fetchedAt": "2026-10-29T16:24:50.661Z"
   },
   {
    "id": "la-torre-cilantro-manojo-107943",
@@ -1735,13 +1945,13 @@ export default {
    "regularPriceCents": null,
    "promo": null,
    "notes": [],
-   "availability": "agotado",
+   "availability": "disponible",
    "channel": "online",
    "status": "guardado",
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/cilantro-manojo-107943/p",
-   "fetchedAt": "2026-10-29T05:51:08.804Z"
+   "fetchedAt": "2026-10-29T16:24:53.970Z"
   },
   {
    "id": "la-torre-hierbabuena-manojo-24241",
@@ -1762,7 +1972,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/hierbabuena-manojo-24241/p",
-   "fetchedAt": "2026-10-29T05:51:12.940Z"
+   "fetchedAt": "2026-10-29T16:24:56.533Z"
   },
   {
    "id": "la-torre-cebollin-manojo-24471",
@@ -1783,7 +1993,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/cebollin-manojo-24471/p",
-   "fetchedAt": "2026-10-29T05:51:14.804Z"
+   "fetchedAt": "2026-10-29T16:24:59.620Z"
   },
   {
    "id": "la-torre-limon-persa-24188",
@@ -1804,7 +2014,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/limon-persa-24188/p",
-   "fetchedAt": "2026-10-29T05:51:18.437Z"
+   "fetchedAt": "2026-10-29T16:25:03.127Z"
   },
   {
    "id": "la-torre-banano-6-unidades-98857true",
@@ -1825,7 +2035,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/banano-6-unidades-98857true/p",
-   "fetchedAt": "2026-10-29T05:51:20.815Z"
+   "fetchedAt": "2026-10-29T16:25:05.633Z"
   },
   {
    "id": "la-torre-aceite-vegetal-aureola-91970",
@@ -1846,7 +2056,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/aceite-vegetal-aureola-91970/p",
-   "fetchedAt": "2026-10-29T05:51:32.818Z"
+   "fetchedAt": "2026-10-29T16:25:19.646Z"
   },
   {
    "id": "la-torre-sal-yodada-refinada-salita-bolsa-94037",
@@ -1867,7 +2077,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/sal-yodada-refinada-salita-bolsa-94037/p",
-   "fetchedAt": "2026-10-29T05:51:36.691Z"
+   "fetchedAt": "2026-10-29T16:25:22.440Z"
   },
   {
    "id": "la-torre-consome-pollo-knorr-2081784",
@@ -1888,7 +2098,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/consome-pollo-knorr-2081784/p",
-   "fetchedAt": "2026-10-29T05:51:38.816Z"
+   "fetchedAt": "2026-10-29T16:25:24.204Z"
   },
   {
    "id": "la-torre-achiote-juanitas-bolsa-49387",
@@ -1909,7 +2119,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/achiote-juanitas-bolsa-49387/p",
-   "fetchedAt": "2026-10-29T05:51:42.609Z"
+   "fetchedAt": "2026-10-29T16:30:26.143Z"
   },
   {
    "id": "la-torre-salsa-soya-ina-399",
@@ -1930,7 +2140,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/salsa-soya-ina-399/p",
-   "fetchedAt": "2026-10-29T05:51:45.815Z"
+   "fetchedAt": "2026-10-29T16:25:30.460Z"
   },
   {
    "id": "la-torre-laurel-en-hojas-malher-de-la-huerta-2077314",
@@ -1951,7 +2161,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/laurel-en-hojas-malher-de-la-huerta-2077314/p",
-   "fetchedAt": "2026-10-29T05:51:47.818Z"
+   "fetchedAt": "2026-10-29T16:25:33.682Z"
   },
   {
    "id": "la-torre-canela-raja-sasson-doypack-10838",
@@ -1972,7 +2182,7 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/canela-raja-sasson-doypack-10838/p",
-   "fetchedAt": "2026-10-29T05:51:50.822Z"
+   "fetchedAt": "2026-10-29T16:25:37.695Z"
   },
   {
    "id": "la-torre-vinagre-blanco-heinz-17896",
@@ -1993,10 +2203,1291 @@ export default {
    "branch": null,
    "branchNote": "El sitio permite elegir tienda; este precio se leyó sin tienda elegida. No se verificó si cambia por sucursal; puede no coincidir con la tienda física.",
    "sourceUrl": "https://www.latorre.com.gt/vinagre-blanco-heinz-17896/p",
-   "fetchedAt": "2026-10-29T05:51:53.826Z"
+   "fetchedAt": "2026-10-29T16:25:39.518Z"
+  },
+  {
+   "id": "walmart-arroz-blanco-albay-2000-grs",
+   "storeId": "walmart",
+   "ingredientId": "arroz",
+   "product": "Arroz Albay Blanco Empaque - 2000 g",
+   "brand": "ALBAY",
+   "packQty": 2000,
+   "packUnit": "g",
+   "presentationSource": "2000 g",
+   "priceCents": 2860,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/arroz-blanco-albay-2000-grs/p",
+   "fetchedAt": "2026-10-29T16:25:42.875Z"
+  },
+  {
+   "id": "walmart-arroz-suli-blanco-800gr",
+   "storeId": "walmart",
+   "ingredientId": "arroz",
+   "product": "Arroz Suli Blanco 800 g",
+   "brand": "SULI",
+   "packQty": 800,
+   "packUnit": "g",
+   "presentationSource": "800 g",
+   "priceCents": 1200,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/arroz-suli-blanco-800gr/p",
+   "fetchedAt": "2026-10-29T16:25:46.376Z"
+  },
+  {
+   "id": "walmart-frijol-negro-suli-bolsa-400-g-5",
+   "storeId": "walmart",
+   "ingredientId": "frijol-negro",
+   "product": "Frijol Suli Negro Bolsa - 400 g",
+   "brand": "SULI",
+   "packQty": 400,
+   "packUnit": "g",
+   "presentationSource": "400 g",
+   "priceCents": 570,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/frijol-negro-suli-bolsa-400-g-5/p",
+   "fetchedAt": "2026-10-29T16:25:49.461Z"
+  },
+  {
+   "id": "walmart-frijol-negro-la-campana-800-g-8",
+   "storeId": "walmart",
+   "ingredientId": "frijol-negro",
+   "product": "Frijol La Campana Negro - 800 g",
+   "brand": "LA CAMPANA",
+   "packQty": 800,
+   "packUnit": "g",
+   "presentationSource": "800 g",
+   "priceCents": 2225,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/frijol-negro-la-campana-800-g-8/p",
+   "fetchedAt": "2026-10-29T16:25:52.825Z"
+  },
+  {
+   "id": "walmart-frijol-la-chula-volteados-negros-227-g-5",
+   "storeId": "walmart",
+   "ingredientId": "frijol-volteado",
+   "product": "Frijol La Chula Volteados Negros - 227 g",
+   "brand": "LA CHULA",
+   "packQty": 227,
+   "packUnit": "g",
+   "presentationSource": "227 g",
+   "priceCents": 395,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/frijol-la-chula-volteados-negros-227-g-5/p",
+   "fetchedAt": "2026-10-29T16:25:55.861Z"
+  },
+  {
+   "id": "walmart-frijol-negro-la-chula-volteados-1000-g-0",
+   "storeId": "walmart",
+   "ingredientId": "frijol-volteado",
+   "product": "Frijol negro La Chula volteados - 1000 g",
+   "brand": "LA CHULA",
+   "packQty": 1000,
+   "packUnit": "g",
+   "presentationSource": "1000 g",
+   "priceCents": 1100,
+   "regularPriceCents": 1280,
+   "promo": null,
+   "notes": [
+    "Precio regular publicado 12.80; el precio registrado ya es el rebajado."
+   ],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/frijol-negro-la-chula-volteados-1000-g-0/p",
+   "fetchedAt": "2026-10-29T16:25:58.693Z"
+  },
+  {
+   "id": "walmart-lentejas-don-lazaro-400-gr-0",
+   "storeId": "walmart",
+   "ingredientId": "lentejas",
+   "product": "Lentejas Don Lazaro - 400 g",
+   "brand": "DON LAZARO",
+   "packQty": 400,
+   "packUnit": "g",
+   "presentationSource": "400 g",
+   "priceCents": 1000,
+   "regularPriceCents": 1190,
+   "promo": null,
+   "notes": [
+    "Precio regular publicado 11.90; el precio registrado ya es el rebajado."
+   ],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/lentejas-don-lazaro-400-gr-0/p",
+   "fetchedAt": "2026-10-29T16:26:00.683Z"
+  },
+  {
+   "id": "walmart-harina-de-maiz-maseca-820gr",
+   "storeId": "walmart",
+   "ingredientId": "harina-maiz",
+   "product": "Harina Maseca de Maíz Extra Suave - 820 g",
+   "brand": "MASECA",
+   "packQty": 820,
+   "packUnit": "g",
+   "presentationSource": "820 g",
+   "priceCents": 1050,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/harina-de-maiz-maseca-820gr/p",
+   "fetchedAt": "2026-10-29T16:26:04.573Z"
+  },
+  {
+   "id": "walmart-harina-suli-de-maiz-907gr",
+   "storeId": "walmart",
+   "ingredientId": "harina-maiz",
+   "product": "Harina De Maíz Suli - 907 g",
+   "brand": "SULI",
+   "packQty": 907,
+   "packUnit": "g",
+   "presentationSource": "907 g",
+   "priceCents": 790,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/harina-suli-de-maiz-907gr/p",
+   "fetchedAt": "2026-10-29T16:26:08.612Z"
+  },
+  {
+   "id": "walmart-avena-albay-en-hojuela-400gr",
+   "storeId": "walmart",
+   "ingredientId": "avena",
+   "product": "Avena Alvay Hojuela Empaque  - 400 g",
+   "brand": "ALBAY",
+   "packQty": 400,
+   "packUnit": "g",
+   "presentationSource": "400 g",
+   "priceCents": 750,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/avena-albay-en-hojuela-400gr/p",
+   "fetchedAt": "2026-10-29T16:26:10.908Z"
+  },
+  {
+   "id": "walmart-barilla-spaghetti-5-500-g-gt9608-4-1",
+   "storeId": "walmart",
+   "ingredientId": "fideos",
+   "product": "Pasta Barilla Spaghetti Nº5 - 500 g",
+   "brand": "BARILLA",
+   "packQty": 500,
+   "packUnit": "g",
+   "presentationSource": "500 g",
+   "priceCents": 1800,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/barilla-spaghetti-5-500-g-gt9608-4-1/p",
+   "fetchedAt": "2026-10-29T16:26:12.668Z"
+  },
+  {
+   "id": "walmart-azucar-ca-a-real-blanca-2500g",
+   "storeId": "walmart",
+   "ingredientId": "azucar",
+   "product": "Azúcar Blanca Caña Real, Fortificada con Vitamina A  - 2500g",
+   "brand": "CA§A REAL",
+   "packQty": 2500,
+   "packUnit": "g",
+   "presentationSource": "2500g",
+   "priceCents": 2020,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/azucar-ca-a-real-blanca-2500g/p",
+   "fetchedAt": "2026-10-29T16:26:16.523Z"
+  },
+  {
+   "id": "walmart-azucar-ca-a-real-blanca-500gr",
+   "storeId": "walmart",
+   "ingredientId": "azucar",
+   "product": "Azúcar Caña Real, Blanca - 500g",
+   "brand": "CA§A REAL",
+   "packQty": 500,
+   "packUnit": "g",
+   "presentationSource": "500g",
+   "priceCents": 440,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/azucar-ca-a-real-blanca-500gr/p",
+   "fetchedAt": "2026-10-29T16:26:20.564Z"
+  },
+  {
+   "id": "walmart-la-sirena-atun-agua-142gr-5",
+   "storeId": "walmart",
+   "ingredientId": "atun",
+   "product": "Atún La Sirena trozos en agua - 142 g",
+   "brand": "LA SIRENA",
+   "packQty": 142,
+   "packUnit": "g",
+   "presentationSource": "142 g",
+   "priceCents": 1500,
+   "regularPriceCents": 1730,
+   "promo": null,
+   "notes": [
+    "Precio regular publicado 17.30; el precio registrado ya es el rebajado."
+   ],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/la-sirena-atun-agua-142gr-5/p",
+   "fetchedAt": "2026-10-29T16:26:23.430Z"
+  },
+  {
+   "id": "walmart-especias-sasson-pepitoria-bolsa-50gr",
+   "storeId": "walmart",
+   "ingredientId": "pepitoria",
+   "product": "Especias Sasson Pepitoria Bolsa - 50 g",
+   "brand": "SASSON",
+   "packQty": 50,
+   "packUnit": "g",
+   "presentationSource": "50 g",
+   "priceCents": 1000,
+   "regularPriceCents": 1175,
+   "promo": null,
+   "notes": [
+    "Precio regular publicado 11.75; el precio registrado ya es el rebajado."
+   ],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/especias-sasson-pepitoria-bolsa-50gr/p",
+   "fetchedAt": "2026-10-29T16:26:26.326Z"
+  },
+  {
+   "id": "walmart-ajonjoli-de-la-provincia-56gr",
+   "storeId": "walmart",
+   "ingredientId": "ajonjoli",
+   "product": "Ajonjoli  De La Provincia - 56 g",
+   "brand": "DE LA PROVINCIA",
+   "packQty": 56,
+   "packUnit": "g",
+   "presentationSource": "56 g",
+   "priceCents": 550,
+   "regularPriceCents": 680,
+   "promo": null,
+   "notes": [
+    "Precio regular publicado 6.80; el precio registrado ya es el rebajado."
+   ],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/ajonjoli-de-la-provincia-56gr/p",
+   "fetchedAt": "2026-10-29T16:26:29.576Z"
+  },
+  {
+   "id": "walmart-especias-sasson-chile-guaque-bolsa-30gr",
+   "storeId": "walmart",
+   "ingredientId": "chile-guaque",
+   "product": "Especias Sasson Chile Guaque Bolsa - 30 g",
+   "brand": "SASSON",
+   "packQty": 30,
+   "packUnit": "g",
+   "presentationSource": "30 g",
+   "priceCents": 845,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/especias-sasson-chile-guaque-bolsa-30gr/p",
+   "fetchedAt": "2026-10-29T16:26:32.560Z"
+  },
+  {
+   "id": "walmart-especias-sasson-chile-pasa-bolsa-30gr",
+   "storeId": "walmart",
+   "ingredientId": "chile-pasa",
+   "product": "Especias Sasson Chile Pasa Bolsa - 30 g",
+   "brand": "SASSON",
+   "packQty": 30,
+   "packUnit": "g",
+   "presentationSource": "30 g",
+   "priceCents": 895,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/especias-sasson-chile-pasa-bolsa-30gr/p",
+   "fetchedAt": "2026-10-29T16:26:34.767Z"
+  },
+  {
+   "id": "walmart-filete-pio-lindo-de-pechuga-1lb",
+   "storeId": "walmart",
+   "ingredientId": "pollo-pechuga",
+   "product": "Filete Pio Lindo Pechuga de Pollo Bandeja",
+   "brand": "PIO LINDO",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "ficha: 1 lb",
+   "priceCents": 3925,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/filete-pio-lindo-de-pechuga-1lb/p",
+   "fetchedAt": "2026-10-29T16:26:37.582Z"
+  },
+  {
+   "id": "walmart-muslos-pio-lindo-bandeja-1lb",
+   "storeId": "walmart",
+   "ingredientId": "pollo-piezas",
+   "product": "Muslos Pio Lindo Bandeja Lb - Precio indicado por Libra",
+   "brand": "PIO LINDO",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "por libra",
+   "priceCents": 1850,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/muslos-pio-lindo-bandeja-1lb/p",
+   "fetchedAt": "2026-10-29T16:26:40.904Z"
+  },
+  {
+   "id": "walmart-guisar-trocitos-res-don-cristobal-1lb",
+   "storeId": "walmart",
+   "ingredientId": "res-guisar",
+   "product": "Trocitos Don Cristóbal de Res para Guisar - Precio Indicado por libra",
+   "brand": "DON CRISTOBAL",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "por libra",
+   "priceCents": 3400,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/guisar-trocitos-res-don-cristobal-1lb/p",
+   "fetchedAt": "2026-10-29T16:26:42.667Z"
+  },
+  {
+   "id": "walmart-carne-molida-especial-empacado-85carne-15grasa-1lb",
+   "storeId": "walmart",
+   "ingredientId": "res-molida",
+   "product": "Carne Molida Especial Don Cristóbal 85% Carne y 15% Grasa Empacado - Precio Indicado por libra",
+   "brand": "DON CRISTOBAL",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "revisión manual: el nombre dice 'Precio indicado por libra'; el '15 g' de la ficha corresponde al 15 % de grasa (misma ficha en Walmart)",
+   "priceCents": 3550,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/carne-molida-especial-empacado-85carne-15grasa-1lb/p",
+   "fetchedAt": "2026-10-29T16:26:46.542Z"
+  },
+  {
+   "id": "walmart-hilachas-de-res-don-cristobal-1lb",
+   "storeId": "walmart",
+   "ingredientId": "res-falda",
+   "product": "Carne Don Cristobal para hilachas de res - Precio indicado por libra",
+   "brand": "DON CRISTOBAL",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "por libra",
+   "priceCents": 3625,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/hilachas-de-res-don-cristobal-1lb/p",
+   "fetchedAt": "2026-10-29T16:26:49.752Z"
+  },
+  {
+   "id": "walmart-costilla-de-cerdo-porcionado-lb-gt9390-4-5",
+   "storeId": "walmart",
+   "ingredientId": "cerdo-costilla",
+   "product": "Costilla De Cerdo Porcionado lb",
+   "brand": "GRANEL",
+   "packQty": 454,
+   "packUnit": "g",
+   "presentationSource": "ficha: 454 g",
+   "priceCents": 2175,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/costilla-de-cerdo-porcionado-lb-gt9390-4-5/p",
+   "fetchedAt": "2026-10-29T16:26:53.004Z"
+  },
+  {
+   "id": "walmart-longaniza-fud-454gr",
+   "storeId": "walmart",
+   "ingredientId": "longaniza",
+   "product": "Longaniza Fud - 454 g",
+   "brand": "FUD",
+   "packQty": 454,
+   "packUnit": "g",
+   "presentationSource": "454 g",
+   "priceCents": 3050,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/longaniza-fud-454gr/p",
+   "fetchedAt": "2026-10-29T16:26:55.884Z"
+  },
+  {
+   "id": "walmart-huevo-don-yemo-grande-blanco-30-unidades",
+   "storeId": "walmart",
+   "ingredientId": "huevo",
+   "product": "Huevo de Gallina Don Yemo Blanco Grande - 30 Unidades",
+   "brand": "DON YEMO",
+   "packQty": 30,
+   "packUnit": "u",
+   "presentationSource": "30 unidades",
+   "priceCents": 4150,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/huevo-don-yemo-grande-blanco-30-unidades/p",
+   "fetchedAt": "2026-10-29T16:26:58.503Z"
+  },
+  {
+   "id": "walmart-huevo-de-patio-tierra-nueva-15-unidades",
+   "storeId": "walmart",
+   "ingredientId": "huevo",
+   "product": "Huevo De Patio Tierra Nueva - 15 Uds",
+   "brand": "GRANJAS TIERRA NUEVA",
+   "packQty": 15,
+   "packUnit": "u",
+   "presentationSource": "15 uds",
+   "priceCents": 2600,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/huevo-de-patio-tierra-nueva-15-unidades/p",
+   "fetchedAt": "2026-10-29T16:27:01.365Z"
+  },
+  {
+   "id": "walmart-queso-seco-al-estilo-zacapa-227-g-0",
+   "storeId": "walmart",
+   "ingredientId": "queso-seco",
+   "product": "Queso Seco Al Estilo Zacapa - 227 g",
+   "brand": "ZACAPA",
+   "packQty": 227,
+   "packUnit": "g",
+   "presentationSource": "227 g",
+   "priceCents": 1900,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/queso-seco-al-estilo-zacapa-227-g-0/p",
+   "fetchedAt": "2026-10-29T16:27:07.726Z"
+  },
+  {
+   "id": "walmart-crema-foremost-natural-450ml",
+   "storeId": "walmart",
+   "ingredientId": "crema",
+   "product": "Crema Foremost Natural - 450ml",
+   "brand": "FOREMOST",
+   "packQty": 450,
+   "packUnit": "ml",
+   "presentationSource": "450ml",
+   "priceCents": 1700,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/crema-foremost-natural-450ml/p",
+   "fetchedAt": "2026-10-29T16:27:10.932Z"
+  },
+  {
+   "id": "walmart-leche-suli-entera-uht-1-l-2",
+   "storeId": "walmart",
+   "ingredientId": "leche",
+   "product": "Leche Entera Suli UHT - 1 L",
+   "brand": "SULI",
+   "packQty": 1,
+   "packUnit": "l",
+   "presentationSource": "1 l",
+   "priceCents": 1275,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/leche-suli-entera-uht-1-l-2/p",
+   "fetchedAt": "2026-10-29T16:27:12.681Z"
+  },
+  {
+   "id": "walmart-tomate-de-cocina-libra",
+   "storeId": "walmart",
+   "ingredientId": "tomate",
+   "product": "Tomate De Cocina Libra - 7 Unidades Por Lb. Aproximadamente",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "revisión manual: el nombre dice 'Libra – 7 unidades por lb'; la ficha dice 1 kg y se considera un error de la ficha (misma ficha en Walmart)",
+   "priceCents": 645,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/tomate-de-cocina-libra/p",
+   "fetchedAt": "2026-10-29T16:27:16.500Z"
+  },
+  {
+   "id": "walmart-cebollas-blanca-libra",
+   "storeId": "walmart",
+   "ingredientId": "cebolla",
+   "product": "Cebollas Blanca Libra - 2 a 5 Unidades Por Lb. Aproximadamente",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "libra",
+   "priceCents": 1100,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/cebollas-blanca-libra/p",
+   "fetchedAt": "2026-10-29T16:27:19.615Z"
+  },
+  {
+   "id": "walmart-chile-pimiento-libra",
+   "storeId": "walmart",
+   "ingredientId": "chile-pimiento",
+   "product": "Chile pimiento Hortifruti  - Precio indicado por libra",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "por libra",
+   "priceCents": 780,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/chile-pimiento-libra/p",
+   "fetchedAt": "2026-10-29T16:27:28.580Z"
+  },
+  {
+   "id": "walmart-papa-super-granel-libra",
+   "storeId": "walmart",
+   "ingredientId": "papa",
+   "product": "Papa Super Granel Libra - 3 a 4 Unidades por Libra Aproximadamente",
+   "brand": "SIN MARCA",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "libra",
+   "priceCents": 830,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/papa-super-granel-libra/p",
+   "fetchedAt": "2026-10-29T16:27:31.498Z"
+  },
+  {
+   "id": "walmart-guisquil-1-unidad",
+   "storeId": "walmart",
+   "ingredientId": "guisquil",
+   "product": "Guisquil - 1 Unidad",
+   "brand": "DEL FRESCO",
+   "packQty": 1,
+   "packUnit": "u",
+   "presentationSource": "1 unidad",
+   "priceCents": 560,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/guisquil-1-unidad/p",
+   "fetchedAt": "2026-10-29T16:27:34.844Z"
+  },
+  {
+   "id": "walmart-ejotes-go-fresh-precortado-1lb",
+   "storeId": "walmart",
+   "ingredientId": "ejotes",
+   "product": "Ejotes Go Fresh Precortado - 454 g",
+   "brand": "GO FRESH",
+   "packQty": 454,
+   "packUnit": "g",
+   "presentationSource": "454 g",
+   "priceCents": 1600,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/ejotes-go-fresh-precortado-1lb/p",
+   "fetchedAt": "2026-10-29T16:27:40.851Z"
+  },
+  {
+   "id": "walmart-zanahoria-granel-libra",
+   "storeId": "walmart",
+   "ingredientId": "zanahoria",
+   "product": "Zanahoria Granel Libra - 2 a 3 Unidades Aproximadamente",
+   "brand": "DEL FRESCO",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "revisión manual: nombre y ficha dicen libra; '2 a 3 unidades' es descriptivo (misma ficha en Walmart)",
+   "priceCents": 390,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/zanahoria-granel-libra/p",
+   "fetchedAt": "2026-10-29T16:27:43.571Z"
+  },
+  {
+   "id": "walmart-repollo-blanco-1-unidad",
+   "storeId": "walmart",
+   "ingredientId": "repollo",
+   "product": "Repollo Blanco - 1 Unidad",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "u",
+   "presentationSource": "1 unidad",
+   "priceCents": 1195,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/repollo-blanco-1-unidad/p",
+   "fetchedAt": "2026-10-29T16:27:46.695Z"
+  },
+  {
+   "id": "walmart-remolacha-granel-media-docena",
+   "storeId": "walmart",
+   "ingredientId": "remolacha",
+   "product": "Remolacha Media Docena",
+   "brand": "DEL FRESCO",
+   "packQty": 6,
+   "packUnit": "u",
+   "presentationSource": "media docena",
+   "priceCents": 1470,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/remolacha-granel-media-docena/p",
+   "fetchedAt": "2026-10-29T16:27:49.391Z"
+  },
+  {
+   "id": "walmart-platano-libra-gt4562-4-5",
+   "storeId": "walmart",
+   "ingredientId": "platano",
+   "product": "Platano Libra",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "libra",
+   "priceCents": 380,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/platano-libra-gt4562-4-5/p",
+   "fetchedAt": "2026-10-29T16:27:57.942Z"
+  },
+  {
+   "id": "walmart-cilantro-manojo-unidad",
+   "storeId": "walmart",
+   "ingredientId": "cilantro",
+   "product": "Cilantro Manojo Unidad",
+   "brand": "SIN MARCA",
+   "packQty": 1,
+   "packUnit": "manojo",
+   "presentationSource": "manojo",
+   "priceCents": 850,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/cilantro-manojo-unidad/p",
+   "fetchedAt": "2026-10-29T16:27:59.103Z"
+  },
+  {
+   "id": "walmart-cebollin-en-manojo",
+   "storeId": "walmart",
+   "ingredientId": "cebollin",
+   "product": "Cebollin En Manojo",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "manojo",
+   "presentationSource": "manojo",
+   "priceCents": 550,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/cebollin-en-manojo/p",
+   "fetchedAt": "2026-10-29T16:28:01.894Z"
+  },
+  {
+   "id": "walmart-limon-persa-red-15-uds-8",
+   "storeId": "walmart",
+   "ingredientId": "limon",
+   "product": "Limón Persa red - 15 Uds",
+   "brand": "SIN MARCA",
+   "packQty": 15,
+   "packUnit": "u",
+   "presentationSource": "15 uds",
+   "priceCents": 1650,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/limon-persa-red-15-uds-8/p",
+   "fetchedAt": "2026-10-29T16:28:08.194Z"
+  },
+  {
+   "id": "walmart-banano-datil-libra-gt8436-4-2",
+   "storeId": "walmart",
+   "ingredientId": "banano",
+   "product": "Banano Datil Libra",
+   "brand": "DEL FRESCO",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "libra",
+   "priceCents": 350,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/banano-datil-libra-gt8436-4-2/p",
+   "fetchedAt": "2026-10-29T16:28:14.555Z"
+  },
+  {
+   "id": "walmart-papaya-libr-gt6-4-6",
+   "storeId": "walmart",
+   "ingredientId": "papaya",
+   "product": "Papaya Libr",
+   "brand": "SIN MARCA",
+   "packQty": 1,
+   "packUnit": "lb",
+   "presentationSource": "ficha: 1 lb",
+   "priceCents": 575,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/papaya-libr-gt6-4-6/p",
+   "fetchedAt": "2026-10-29T16:28:20.027Z"
+  },
+  {
+   "id": "walmart-tortilla-tortiamigos-de-maiz-20-uds-260-g-4",
+   "storeId": "walmart",
+   "ingredientId": "tortilla",
+   "product": "Tortilla Tortiamigos De Maiz 20 Uds - 260 g",
+   "brand": "TORTIAMIGOS",
+   "packQty": 20,
+   "packUnit": "u",
+   "presentationSource": "20 uds",
+   "priceCents": 675,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/tortilla-tortiamigos-de-maiz-20-uds-260-g-4/p",
+   "fetchedAt": "2026-10-29T16:28:26.125Z"
+  },
+  {
+   "id": "walmart-tostadas-d-aqui-de-maiz-25-unidades",
+   "storeId": "walmart",
+   "ingredientId": "tostada",
+   "product": "Tostadas D' Aqui De Maíz - 25 Uds",
+   "brand": "D¾AQUI",
+   "packQty": 25,
+   "packUnit": "u",
+   "presentationSource": "25 uds",
+   "priceCents": 1630,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/tostadas-d-aqui-de-maiz-25-unidades/p",
+   "fetchedAt": "2026-10-29T16:28:28.896Z"
+  },
+  {
+   "id": "walmart-pan-frances-tradicional-fila-de-8-unidad-und-gt4006-4-1",
+   "storeId": "walmart",
+   "ingredientId": "pan-frances",
+   "product": "Pan Frances Tradicional Fila - 8 Unidades",
+   "brand": "SIN MARCA",
+   "packQty": 8,
+   "packUnit": "u",
+   "presentationSource": "8 unidades",
+   "priceCents": 590,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [
+    "La página muestra promociones con condiciones; no se aplicaron."
+   ],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/pan-frances-tradicional-fila-de-8-unidad-und-gt4006-4-1/p",
+   "fetchedAt": "2026-10-29T16:28:32.743Z"
+  },
+  {
+   "id": "walmart-pan-molido-bimbo-500-gr-6",
+   "storeId": "walmart",
+   "ingredientId": "pan-molido",
+   "product": "Pan Molido Bimbo 500 Gr",
+   "brand": "BIMBO",
+   "packQty": 500,
+   "packUnit": "g",
+   "presentationSource": "500 gr",
+   "priceCents": 2195,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/pan-molido-bimbo-500-gr-6/p",
+   "fetchedAt": "2026-10-29T16:28:36.227Z"
+  },
+  {
+   "id": "walmart-aceite-ideal-vegetal-800ml",
+   "storeId": "walmart",
+   "ingredientId": "aceite",
+   "product": "Aceite Ideal Vegetal - 800 ml",
+   "brand": "IDEAL",
+   "packQty": 800,
+   "packUnit": "ml",
+   "presentationSource": "800 ml",
+   "priceCents": 2075,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/aceite-ideal-vegetal-800ml/p",
+   "fetchedAt": "2026-10-29T16:28:38.306Z"
+  },
+  {
+   "id": "walmart-sal-refinada-sabemas-400gr",
+   "storeId": "walmart",
+   "ingredientId": "sal",
+   "product": "Sal Refinada Sabemas - 400 g",
+   "brand": "SABEMAS",
+   "packQty": 400,
+   "packUnit": "g",
+   "presentationSource": "400 g",
+   "priceCents": 195,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/sal-refinada-sabemas-400gr/p",
+   "fetchedAt": "2026-10-29T16:28:41.838Z"
+  },
+  {
+   "id": "walmart-consome-de-pollo-sam-bolsa-225-g",
+   "storeId": "walmart",
+   "ingredientId": "consome",
+   "product": "Consomé De Pollo Sam Bolsa - 225 g",
+   "brand": "SAM",
+   "packQty": 225,
+   "packUnit": "g",
+   "presentationSource": "225 g",
+   "priceCents": 560,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/consome-de-pollo-sam-bolsa-225-g/p",
+   "fetchedAt": "2026-10-29T16:28:46.922Z"
+  },
+  {
+   "id": "walmart-especias-sasson-achiote-masa-bolsa-45gr",
+   "storeId": "walmart",
+   "ingredientId": "achiote",
+   "product": "Especias Sassón achiote para masa - 45 g",
+   "brand": "SASSON",
+   "packQty": 45,
+   "packUnit": "g",
+   "presentationSource": "45 g",
+   "priceCents": 745,
+   "regularPriceCents": 870,
+   "promo": null,
+   "notes": [
+    "Precio regular publicado 8.70; el precio registrado ya es el rebajado."
+   ],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/especias-sasson-achiote-masa-bolsa-45gr/p",
+   "fetchedAt": "2026-10-29T16:28:50.951Z"
+  },
+  {
+   "id": "walmart-salsa-regia-soya-150ml",
+   "storeId": "walmart",
+   "ingredientId": "salsa-soya",
+   "product": "Salsa China De Soya Regia 150Ml Botella",
+   "brand": "REGIA",
+   "packQty": 150,
+   "packUnit": "ml",
+   "presentationSource": "150ml",
+   "priceCents": 490,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/salsa-regia-soya-150ml/p",
+   "fetchedAt": "2026-10-29T16:28:53.319Z"
+  },
+  {
+   "id": "walmart-canela-de-la-provincia-raja-24-g-5",
+   "storeId": "walmart",
+   "ingredientId": "canela",
+   "product": "Canela De La Provincia Raja - 24 g",
+   "brand": "DE LA PROVINCIA",
+   "packQty": 24,
+   "packUnit": "g",
+   "presentationSource": "24 g",
+   "priceCents": 1150,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/canela-de-la-provincia-raja-24-g-5/p",
+   "fetchedAt": "2026-10-29T16:28:57.337Z"
+  },
+  {
+   "id": "walmart-canela-sasson-raja-verde-22-g-1-4-0-7-7-5",
+   "storeId": "walmart",
+   "ingredientId": "canela",
+   "product": "Canela Sasson Raja Verde - 22 g",
+   "brand": "SASSON",
+   "packQty": 22,
+   "packUnit": "g",
+   "presentationSource": "22 g",
+   "priceCents": 840,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/canela-sasson-raja-verde-22-g-1-4-0-7-7-5/p",
+   "fetchedAt": "2026-10-29T16:28:58.893Z"
+  },
+  {
+   "id": "walmart-vinagre-sharp-767ml",
+   "storeId": "walmart",
+   "ingredientId": "vinagre",
+   "product": "Vinagre Sharp Natural - 767 ml",
+   "brand": "SHARP",
+   "packQty": 767,
+   "packUnit": "ml",
+   "presentationSource": "767 ml",
+   "priceCents": 1250,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/vinagre-sharp-767ml/p",
+   "fetchedAt": "2026-10-29T16:29:02.705Z"
+  },
+  {
+   "id": "walmart-chile-jalapeno-paquete-8-oz-7",
+   "storeId": "walmart",
+   "ingredientId": "jalapeno",
+   "product": "Chile Jalapeño Paquete - 8 oz",
+   "brand": "SIN MARCA",
+   "packQty": 8,
+   "packUnit": "oz",
+   "presentationSource": "8 oz",
+   "priceCents": 580,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/chile-jalapeno-paquete-8-oz-7/p",
+   "fetchedAt": "2026-10-29T16:29:05.109Z"
+  },
+  {
+   "id": "walmart-pina-hortifruti-dorada-1-ud",
+   "storeId": "walmart",
+   "ingredientId": "pina",
+   "product": "Piña Hortifruti Dorada - 1 Ud",
+   "brand": "HORTIFRUTI",
+   "packQty": 1,
+   "packUnit": "u",
+   "presentationSource": "1 ud",
+   "priceCents": 1125,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/pina-hortifruti-dorada-1-ud/p",
+   "fetchedAt": "2026-10-29T16:29:13.871Z"
+  },
+  {
+   "id": "walmart-hierba-buena-manojo-unidad",
+   "storeId": "walmart",
+   "ingredientId": "hierbabuena",
+   "product": "Hierba Buena Manojo Unidad",
+   "brand": "SIN MARCA",
+   "packQty": 1,
+   "packUnit": "manojo",
+   "presentationSource": "manojo",
+   "priceCents": 750,
+   "regularPriceCents": null,
+   "promo": null,
+   "notes": [],
+   "availability": "disponible",
+   "channel": "online",
+   "status": "guardado",
+   "branch": null,
+   "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+   "sourceUrl": "https://www.walmart.com.gt/hierba-buena-manojo-unidad/p",
+   "fetchedAt": "2026-10-29T16:30:33.115Z"
   }
  ],
  "excluded": [
+  {
+   "storeId": "paiz",
+   "ingredientId": "harina-maiz",
+   "url": "https://www.paiz.com.gt/harina-de-maiz-maseca-820gr/p",
+   "reason": "error",
+   "detail": "La página no publica datos estructurados de producto; no se extrajo ningún precio."
+  },
   {
    "storeId": "paiz",
    "ingredientId": "ajo",
@@ -2006,12 +3497,12 @@ export default {
   },
   {
    "storeId": "paiz",
-   "ingredientId": "repollo",
-   "url": "https://www.paiz.com.gt/repollo-blanco-1-unidad/p",
-   "product": "Repollo Blanco - 1 Unidad",
-   "priceCents": 1310,
+   "ingredientId": "ajo",
+   "url": "https://www.paiz.com.gt/ajo-hf-importado-red-3-unidades/p",
+   "product": "Ajo Hortifruti Importado Red de 3 Unidades",
+   "priceCents": 430,
    "reason": "sin-conversion",
-   "detail": "La presentación \"1 unidad\" no se puede convertir a la unidad del ingrediente."
+   "detail": "La presentación \"3 unidades\" no se puede convertir a la unidad del ingrediente."
   },
   {
    "storeId": "paiz",
@@ -2045,6 +3536,13 @@ export default {
   },
   {
    "storeId": "paiz",
+   "ingredientId": "mango",
+   "url": "https://www.paiz.com.gt/mango-tommy-1-unidad/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "paiz",
    "ingredientId": "consome",
    "url": "https://www.paiz.com.gt/knorr-consome-pollo-38-gr-7/p",
    "reason": "no-disponible",
@@ -2054,6 +3552,20 @@ export default {
    "storeId": "paiz",
    "ingredientId": "canela",
    "url": "https://www.paiz.com.gt/canela-malher-raja-bolsa-22gr/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "paiz",
+   "ingredientId": "lechuga",
+   "url": "https://www.paiz.com.gt/lechuga-provegetales-libra-0/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "paiz",
+   "ingredientId": "lechuga",
+   "url": "https://www.paiz.com.gt/lechuga-romana-veggiwell-227-g/p",
    "reason": "no-disponible",
    "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
   },
@@ -2204,9 +3716,99 @@ export default {
    "ingredientId": "tostada",
    "url": "https://www.latorre.com.gt/tostadas-maiz-boca2-63729/p",
    "product": "Tostadas Maíz Boca2",
-   "priceCents": 1625,
+   "priceCents": 2235,
    "reason": "sin-conversion",
    "detail": "La presentación \"485gr.\" no se puede convertir a la unidad del ingrediente."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "queso-fresco",
+   "url": "https://www.walmart.com.gt/queso-trebolac-fresco-370-g-0/p",
+   "reason": "error",
+   "detail": "La página no publica datos estructurados de producto; no se extrajo ningún precio."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "ajo",
+   "url": "https://www.walmart.com.gt/ajo-hortifruti-500g-0/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "ajo",
+   "url": "https://www.walmart.com.gt/ajo-hf-importado-red-3-unidades/p",
+   "product": "Ajo Hortifruti Importado Red de 3 Unidades",
+   "priceCents": 425,
+   "reason": "sin-conversion",
+   "detail": "La presentación \"3 unidades\" no se puede convertir a la unidad del ingrediente."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "guicoy",
+   "url": "https://www.walmart.com.gt/guicoyito-bandeja-1-unidad/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "elote",
+   "url": "https://www.walmart.com.gt/elote-criollo-bandeja/p",
+   "product": "Elote Criollo en Bolsa",
+   "priceCents": 780,
+   "reason": "sin-presentacion",
+   "detail": "Ni el nombre ni la ficha indican el tamaño del empaque."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "limon",
+   "url": "https://www.walmart.com.gt/limon-persa-1-unidad/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "banano",
+   "url": "https://www.walmart.com.gt/banano-libra-gt9912-4-6/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "banano",
+   "url": "https://www.walmart.com.gt/banano-de-exportacion-lb-gt8568-4-2/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "mango",
+   "url": "https://www.walmart.com.gt/mango-tommy-1-unidad/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "consome",
+   "url": "https://www.walmart.com.gt/knorr-consome-pollo-38-gr-7/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "lechuga",
+   "url": "https://www.walmart.com.gt/lechuga-provegetales-libra-0/p",
+   "reason": "no-disponible",
+   "detail": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+  },
+  {
+   "storeId": "walmart",
+   "ingredientId": "lechuga",
+   "url": "https://www.walmart.com.gt/lechuga-romana-veggiwell-227-g/p",
+   "product": "Lechuga Romana Veggiwell Bolsa - 227 g",
+   "priceCents": 1990,
+   "reason": "sin-conversion",
+   "detail": "La presentación \"227 g\" no se puede convertir a la unidad del ingrediente."
   }
  ]
 };

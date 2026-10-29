@@ -4,7 +4,7 @@ Fecha: 2026-10-19. Ubicación de referencia: Chiquimula.
 
 ## Resultado (actualizado 2026-10-29)
 
-**La consulta de páginas públicas de producto funciona en Paiz, La Torre y Walmart.** Con los dominios permitidos en la red del entorno, el servidor leyó robots.txt y páginas de producto reales. La app trae **94 precios reales guardados** (56 de Paiz y 38 de La Torre) leídos el 2026-10-29, cada uno con URL, fecha y hora, disponibilidad y nota de sucursal. Se muestran como "Último precio guardado".
+**La consulta de páginas públicas de producto funciona en Paiz, La Torre y Walmart.** Con los dominios permitidos en la red del entorno, el servidor leyó robots.txt y páginas de producto reales. La app trae **164 precios reales guardados** (66 de Paiz, 60 de Walmart y 38 de La Torre) leídos el 2026-10-29, cada uno con URL, fecha y hora, disponibilidad y nota de sucursal. Se muestran como "Último precio guardado".
 
 ### Qué publica cada página (comprobado)
 
@@ -16,6 +16,17 @@ Fecha: 2026-10-19. Ubicación de referencia: Chiquimula.
 | Precio regular frente a rebajado | Sí (`ListPrice`) | Sí | Sí | — |
 | Promociones con condiciones | Lista incrustada, sin estructura; no se aplican | Igual | Igual | — |
 | Sucursal | La página no la indica | El sitio permite elegir tienda; se leyó sin tienda elegida | No la indica | — |
+
+### Segunda captura del 2026-10-29: Walmart y faltantes de Paiz
+
+- Las listas de productos se bajan con `scripts/sitemap-urls.mjs`: 18,684 páginas en Paiz, 15,400 en La Torre y 40,377 en Walmart. Walmart comparte el catálogo con Paiz (mismas rutas), pero sus precios son propios.
+- Se agregaron alternativas en Paiz para lo que estaba agotado o sin mapear. Faltantes de Paiz para las 30 recetas: de 15 a 7.
+- **Siguen sin precio en línea en ninguna de las tres tiendas:** miltomate, chipilín fresco, tusa y hierba mora. Son productos de mercado; se registran con "Mi precio" o anotando lo pagado.
+- **Agotados en línea en Paiz y Walmart:** ajo, lechuga y mango (precio 0, existencia 0).
+- **Excluidos por no tener una conversión justificada:** el elote "en bolsa" (sin cantidad), el ajo en red de 3 unidades y la lechuga romana de 227 g (la receta pide lechugas enteras).
+- Las revisiones manuales de carne molida, tomate, zanahoria y queso fresco aplican también a Walmart, porque es la misma ficha.
+- La página de harina Maseca de Paiz dejó de publicar datos de producto; la harina de maíz sigue cubierta por otra marca.
+- Cambios de precio respecto de la primera captura: `data/capturas/cambios.md`.
 
 ### Captura del 2026-10-29
 

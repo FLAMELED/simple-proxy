@@ -1,6 +1,10 @@
 {
- "paiz:carne-molida-especial-empacado-85carne-15grasa-1lb": { "accept": { "packQty": 1, "packUnit": "lb" }, "reason": "el nombre dice 'Precio indicado por libra'; el '15 g' de la ficha corresponde al 15 % de grasa" },
- "paiz:tomate-de-cocina-libra": { "accept": { "packQty": 1, "packUnit": "lb" }, "reason": "el nombre dice 'Libra – 7 unidades por lb'; la ficha dice 1 kg y se considera un error de la ficha" },
- "paiz:zanahoria-granel-libra": { "accept": { "packQty": 1, "packUnit": "lb" }, "reason": "nombre y ficha dicen libra; '2 a 3 unidades' es descriptivo" },
- "paiz:queso-trebolac-fresco-370-g-0": { "accept": { "packQty": 350, "packUnit": "g" }, "reason": "el nombre dice 350 g y la ficha 370 g; se usa el menor para no subestimar el costo" }
+ "paiz:carne-molida-especial-empacado-85carne-15grasa-1lb": {"accept": {"packQty": 1, "packUnit": "lb"}, "reason": "el nombre dice 'Precio indicado por libra'; el '15 g' de la ficha corresponde al 15 % de grasa"},
+ "paiz:tomate-de-cocina-libra": {"accept": {"packQty": 1, "packUnit": "lb"}, "reason": "el nombre dice 'Libra – 7 unidades por lb'; la ficha dice 1 kg y se considera un error de la ficha"},
+ "paiz:zanahoria-granel-libra": {"accept": {"packQty": 1, "packUnit": "lb"}, "reason": "nombre y ficha dicen libra; '2 a 3 unidades' es descriptivo"},
+ "paiz:queso-trebolac-fresco-370-g-0": {"accept": {"packQty": 350, "packUnit": "g"}, "reason": "el nombre dice 350 g y la ficha 370 g; se usa el menor para no subestimar el costo"},
+ "walmart:carne-molida-especial-empacado-85carne-15grasa-1lb": {"accept": {"packQty": 1, "packUnit": "lb"}, "reason": "el nombre dice 'Precio indicado por libra'; el '15 g' de la ficha corresponde al 15 % de grasa (misma ficha en Walmart)"},
+ "walmart:tomate-de-cocina-libra": {"accept": {"packQty": 1, "packUnit": "lb"}, "reason": "el nombre dice 'Libra – 7 unidades por lb'; la ficha dice 1 kg y se considera un error de la ficha (misma ficha en Walmart)"},
+ "walmart:zanahoria-granel-libra": {"accept": {"packQty": 1, "packUnit": "lb"}, "reason": "nombre y ficha dicen libra; '2 a 3 unidades' es descriptivo (misma ficha en Walmart)"},
+ "walmart:queso-trebolac-fresco-370-g-0": {"accept": {"packQty": 350, "packUnit": "g"}, "reason": "el nombre dice 350 g y la ficha 370 g; se usa el menor para no subestimar el costo (misma ficha en Walmart)"}
 }

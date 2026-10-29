@@ -63,7 +63,7 @@ Las tazas se convierten a gramos solo con el peso por taza de cada ingrediente; 
 | "Mi precio", copiar lista, compartir por WhatsApp | Implementado |
 | Guardado local, exportar e importar | Implementado (solo este navegador; en el Artifact, la descarga pide confirmación) |
 | Precios de "Súper Ejemplo A/B" | Ficticios, solo para probar |
-| Precios reales de Paiz y La Torre | 94 precios leídos el 2026-10-29 de sus páginas públicas de producto, como "último precio guardado", sin sucursal (ver `docs/INVESTIGACION-PRECIOS.md`) |
+| Precios reales de Paiz, Walmart y La Torre | 164 precios leídos el 2026-10-29 de sus páginas públicas de producto (66 de Paiz, 60 de Walmart, 38 de La Torre), como "último precio guardado", sin sucursal (ver `docs/INVESTIGACION-PRECIOS.md`) |
 | Consulta en vivo por página de producto | Verificada en Paiz, La Torre y Walmart con el servidor local; Maxi Despensa sin precio en el producto probado |
 | Modelo de IA para interpretar preferencias | No conectado |
 | Nutrición, calorías, metas de salud | Fuera de alcance |

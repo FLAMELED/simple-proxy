@@ -352,9 +352,9 @@ const actions = {
     s.demo = el.checked;
     if (!s.demo) {
       s.stores.selected = s.stores.selected.filter((id) => !id.startsWith('ejemplo'));
-      if (!s.stores.selected.length) s.stores.selected = ['paiz', 'la-torre'];
+      if (!s.stores.selected.length) s.stores.selected = ['paiz', 'walmart', 'la-torre'];
       if (s.stores.primary.startsWith('ejemplo')) s.stores.primary = s.stores.selected[0];
-      toast('Sin datos de ejemplo. Paiz y La Torre no tienen precios hasta que los registres.');
+      toast('Sin datos de ejemplo: se usan los últimos precios guardados de las tiendas.');
     } else {
       for (const id of ['ejemplo-a', 'ejemplo-b']) if (!s.stores.selected.includes(id)) s.stores.selected.unshift(id);
     }

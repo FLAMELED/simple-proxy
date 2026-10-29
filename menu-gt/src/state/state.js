@@ -19,7 +19,7 @@ export function defaultState(today = todayISO()) {
     demo: false,
     location: { departamento: 'Chiquimula', municipio: 'Chiquimula' },
     stores: {
-      selected: ['paiz', 'la-torre'],
+      selected: ['paiz', 'walmart', 'la-torre'],
       primary: 'paiz',
       branches: {},
     },

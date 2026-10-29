@@ -65,7 +65,7 @@ export function parsePresentation(name) {
     [/(\d+(?:\.\d+)?)\s*(?:oz|onzas?)\b/, 'oz'],
     [/(\d+(?:\.\d+)?)\s*(?:ml|mililitros?)\b/, 'ml'],
     [/(\d+(?:\.\d+)?)\s*(?:l|lt|lts|litros?)\b/, 'l'],
-    [/(\d+(?:\.\d+)?)\s*(?:u|und|unidad(?:es)?|uds)\b/, 'u'],
+    [/(\d+(?:\.\d+)?)\s*(?:u|ud|und|unidad(?:es)?|uds)\b/, 'u'],
   ];
   for (const [re, unit] of patterns) {
     const m = text.match(re);

@@ -89,7 +89,8 @@
    "cebollas-blanca-libra"
   ],
   "ajo": [
-   "ajo-hortifruti-500g-0"
+   "ajo-hortifruti-500g-0",
+   "ajo-hf-importado-red-3-unidades"
   ],
   "chile-pimiento": [
    "chile-pimiento-libra"
@@ -116,7 +117,8 @@
    "remolacha-granel-media-docena"
   ],
   "elote": [
-   "elote-criollo-bandeja"
+   "elote-criollo-bandeja",
+   "elote-bandeja-shalom-uxc10-5"
   ],
   "aguacate": [
    "aguacate-hass-unidad-3"
@@ -131,16 +133,21 @@
    "cebollin-en-manojo"
   ],
   "limon": [
-   "limon-persa-1-unidad"
+   "limon-persa-1-unidad",
+   "limon-persa-red-10-uds-1",
+   "limon-persa-red-15-uds-8"
   ],
   "banano": [
-   "banano-libra-gt9912-4-6"
+   "banano-libra-gt9912-4-6",
+   "banano-datil-libra-gt8436-4-2",
+   "banano-de-exportacion-lb-gt8568-4-2"
   ],
   "papaya": [
    "papaya-libr-gt6-4-6"
   ],
   "mango": [
-   "mango-ataulfo-unidad"
+   "mango-ataulfo-unidad",
+   "mango-tommy-1-unidad"
   ],
   "tortilla": [
    "tortilla-tortiamigos-de-maiz-20-uds-260-g-4"
@@ -174,10 +181,25 @@
    "epecias-sasson-laurel-10gr"
   ],
   "canela": [
-   "canela-malher-raja-bolsa-22gr"
+   "canela-malher-raja-bolsa-22gr",
+   "canela-de-la-provincia-raja-24-g-5",
+   "canela-sasson-raja-verde-22-g-1-4-0-7-7-5"
   ],
   "vinagre": [
    "vinagre-sharp-767ml"
+  ],
+  "jalapeno": [
+   "chile-jalapeno-paquete-8-oz-7"
+  ],
+  "lechuga": [
+   "lechuga-provegetales-libra-0",
+   "lechuga-romana-veggiwell-227-g"
+  ],
+  "pina": [
+   "pina-hortifruti-dorada-1-ud"
+  ],
+  "hierbabuena": [
+   "hierba-buena-manojo-unidad"
   ]
  },
  "la-torre": {
@@ -341,6 +363,198 @@
   ],
   "vinagre": [
    "vinagre-blanco-heinz-17896"
+  ]
+ },
+ "walmart": {
+  "arroz": [
+   "arroz-blanco-albay-2000-grs",
+   "arroz-suli-blanco-800gr"
+  ],
+  "frijol-negro": [
+   "frijol-negro-suli-bolsa-400-g-5",
+   "frijol-negro-la-campana-800-g-8"
+  ],
+  "frijol-volteado": [
+   "frijol-la-chula-volteados-negros-227-g-5",
+   "frijol-negro-la-chula-volteados-1000-g-0"
+  ],
+  "lentejas": [
+   "lentejas-don-lazaro-400-gr-0"
+  ],
+  "harina-maiz": [
+   "harina-de-maiz-maseca-820gr",
+   "harina-suli-de-maiz-907gr"
+  ],
+  "avena": [
+   "avena-albay-en-hojuela-400gr"
+  ],
+  "fideos": [
+   "barilla-spaghetti-5-500-g-gt9608-4-1"
+  ],
+  "azucar": [
+   "azucar-ca-a-real-blanca-2500g",
+   "azucar-ca-a-real-blanca-500gr"
+  ],
+  "atun": [
+   "la-sirena-atun-agua-142gr-5"
+  ],
+  "pepitoria": [
+   "especias-sasson-pepitoria-bolsa-50gr"
+  ],
+  "ajonjoli": [
+   "ajonjoli-de-la-provincia-56gr"
+  ],
+  "chile-guaque": [
+   "especias-sasson-chile-guaque-bolsa-30gr"
+  ],
+  "chile-pasa": [
+   "especias-sasson-chile-pasa-bolsa-30gr"
+  ],
+  "pollo-pechuga": [
+   "filete-pio-lindo-de-pechuga-1lb"
+  ],
+  "pollo-piezas": [
+   "muslos-pio-lindo-bandeja-1lb"
+  ],
+  "res-guisar": [
+   "guisar-trocitos-res-don-cristobal-1lb"
+  ],
+  "res-molida": [
+   "carne-molida-especial-empacado-85carne-15grasa-1lb"
+  ],
+  "res-falda": [
+   "hilachas-de-res-don-cristobal-1lb"
+  ],
+  "cerdo-costilla": [
+   "costilla-de-cerdo-porcionado-lb-gt9390-4-5"
+  ],
+  "longaniza": [
+   "longaniza-fud-454gr"
+  ],
+  "huevo": [
+   "huevo-don-yemo-grande-blanco-30-unidades",
+   "huevo-de-patio-tierra-nueva-15-unidades"
+  ],
+  "queso-fresco": [
+   "queso-trebolac-fresco-370-g-0"
+  ],
+  "queso-seco": [
+   "queso-seco-al-estilo-zacapa-227-g-0"
+  ],
+  "crema": [
+   "crema-foremost-natural-450ml"
+  ],
+  "leche": [
+   "leche-suli-entera-uht-1-l-2"
+  ],
+  "tomate": [
+   "tomate-de-cocina-libra"
+  ],
+  "cebolla": [
+   "cebollas-blanca-libra"
+  ],
+  "ajo": [
+   "ajo-hortifruti-500g-0",
+   "ajo-hf-importado-red-3-unidades"
+  ],
+  "chile-pimiento": [
+   "chile-pimiento-libra"
+  ],
+  "papa": [
+   "papa-super-granel-libra"
+  ],
+  "guisquil": [
+   "guisquil-1-unidad"
+  ],
+  "guicoy": [
+   "guicoyito-bandeja-1-unidad"
+  ],
+  "ejotes": [
+   "ejotes-go-fresh-precortado-1lb"
+  ],
+  "zanahoria": [
+   "zanahoria-granel-libra"
+  ],
+  "repollo": [
+   "repollo-blanco-1-unidad"
+  ],
+  "remolacha": [
+   "remolacha-granel-media-docena"
+  ],
+  "elote": [
+   "elote-criollo-bandeja"
+  ],
+  "platano": [
+   "platano-libra-gt4562-4-5"
+  ],
+  "cilantro": [
+   "cilantro-manojo-unidad"
+  ],
+  "cebollin": [
+   "cebollin-en-manojo"
+  ],
+  "limon": [
+   "limon-persa-1-unidad",
+   "limon-persa-red-15-uds-8"
+  ],
+  "banano": [
+   "banano-libra-gt9912-4-6",
+   "banano-datil-libra-gt8436-4-2",
+   "banano-de-exportacion-lb-gt8568-4-2"
+  ],
+  "papaya": [
+   "papaya-libr-gt6-4-6"
+  ],
+  "mango": [
+   "mango-tommy-1-unidad"
+  ],
+  "tortilla": [
+   "tortilla-tortiamigos-de-maiz-20-uds-260-g-4"
+  ],
+  "tostada": [
+   "tostadas-d-aqui-de-maiz-25-unidades"
+  ],
+  "pan-frances": [
+   "pan-frances-tradicional-fila-de-8-unidad-und-gt4006-4-1"
+  ],
+  "pan-molido": [
+   "pan-molido-bimbo-500-gr-6"
+  ],
+  "aceite": [
+   "aceite-ideal-vegetal-800ml"
+  ],
+  "sal": [
+   "sal-refinada-sabemas-400gr"
+  ],
+  "consome": [
+   "knorr-consome-pollo-38-gr-7",
+   "consome-de-pollo-sam-bolsa-225-g"
+  ],
+  "achiote": [
+   "especias-sasson-achiote-masa-bolsa-45gr"
+  ],
+  "salsa-soya": [
+   "salsa-regia-soya-150ml"
+  ],
+  "canela": [
+   "canela-de-la-provincia-raja-24-g-5",
+   "canela-sasson-raja-verde-22-g-1-4-0-7-7-5"
+  ],
+  "vinagre": [
+   "vinagre-sharp-767ml"
+  ],
+  "jalapeno": [
+   "chile-jalapeno-paquete-8-oz-7"
+  ],
+  "lechuga": [
+   "lechuga-provegetales-libra-0",
+   "lechuga-romana-veggiwell-227-g"
+  ],
+  "pina": [
+   "pina-hortifruti-dorada-1-ud"
+  ],
+  "hierbabuena": [
+   "hierba-buena-manojo-unidad"
   ]
  }
 }

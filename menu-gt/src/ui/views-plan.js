@@ -65,7 +65,7 @@ function quickStart(ctx) {
         </select>
       </div>
     </div>
-    <p class="note">${icon('info')}<span>Los precios de <strong>Paiz y La Torre</strong> son los publicados en sus tiendas en línea el ${esc(snapshotDate())}, sin sucursal elegida. Lo que falte lo registras con "Mi precio". Puedes cambiar de tienda en Ajustes.</span></p>
+    <p class="note">${icon('info')}<span>Los precios de <strong>Paiz, Walmart y La Torre</strong> son los publicados en sus tiendas en línea el ${esc(snapshotDate())}, sin sucursal elegida. Lo que falte lo registras con "Mi precio". Puedes cambiar de tienda en Ajustes.</span></p>
     <button class="btn primary wide" data-action="finish-onboarding">Crear mi menú</button>
   </section>`;
 }

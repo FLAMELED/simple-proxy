@@ -53,20 +53,23 @@ export function classify(record, ing, path, review) {
 if (process.argv[1].endsWith('snapshot-prices.mjs')) {
   // --reclasificar: usa la última captura cruda guardada, sin consultar los sitios.
   const reclassify = process.argv.includes('--reclasificar');
+  // --reintentar: vuelve a consultar solo las páginas que fallaron en la última captura
+  const retry = process.argv.includes('--reintentar');
   // --solo=la-torre: vuelve a consultar solo esa tienda y conserva lo demás.
   const only = process.argv.find((a) => a.startsWith('--solo='))?.slice(7) ?? null;
   const rawFile = new URL('../data/capturas/ultima-captura.json', import.meta.url);
-  const raw = reclassify || only ? JSON.parse(await readFile(rawFile, 'utf8')) : { started: new Date().toISOString(), results: {} };
+  const raw = reclassify || only || retry ? JSON.parse(await readFile(rawFile, 'utf8')) : { started: new Date().toISOString(), results: {} };
   const offers = [];
   const excluded = [];
   const started = raw.started;
-  for (const storeId of ['paiz', 'la-torre']) {
+  for (const storeId of Object.keys(map).filter((k) => !k.startsWith('_'))) {
     const origin = SOURCES[storeId].origin;
     for (const [ingId, paths] of Object.entries(map[storeId])) {
       const ing = INGREDIENTS[ingId];
       for (const path of paths) {
         const url = `${origin}/${path}/p`;
-        const fetchNow = !reclassify && (!only || only === storeId);
+        const failed = !raw.results[url]?.json?.ok && !raw.results[url]?.json?.unavailable;
+        const fetchNow = !reclassify && (!only || only === storeId) && (!retry || failed);
         const out = fetchNow ? await lookup({ url, storeId }) : raw.results[url];
         if (!out) continue;
         if (fetchNow) raw.results[url] = { status: out.status, json: out.json };

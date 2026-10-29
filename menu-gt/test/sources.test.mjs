@@ -47,6 +47,7 @@ test('presentaciones comunes en nombres de producto', () => {
   assert.deepEqual(parsePresentation('Arroz Molinero Basmati 1 Kilo'), { packQty: 1, packUnit: 'kg', detectedFrom: '1 kilo' });
   assert.equal(parsePresentation('Arroz Tierra Noble Blanco Empaque - 10 Libras').packUnit, 'lb');
   assert.equal(parsePresentation('Arroz Suli Precocido 4536 g').packQty, 4536);
+  assert.deepEqual(parsePresentation('Piña Hortifruti Dorada - 1 Ud'), { packQty: 1, packUnit: 'u', detectedFrom: '1 ud' });
   assert.equal(parsePresentation('Aceite 946 ml').packUnit, 'ml');
   assert.equal(parsePresentation('Producto sin tamaño'), null);
 });

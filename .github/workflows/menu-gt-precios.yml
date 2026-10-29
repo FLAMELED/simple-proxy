@@ -1,6 +1,6 @@
 name: Mercadito · captura semanal de precios
 
-# Lee las mismas ~120 páginas públicas de producto (una cada 3 s, respetando robots.txt)
+# Lee las ~230 páginas públicas de producto (una cada 3 s, respetando robots.txt)
 # y deja el resultado para revisión. No hace commit: una persona revisa cambios.md
 # y, si todo está bien, copia real-prices.js y abre un PR.
 on:
@@ -15,7 +15,7 @@ defaults:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

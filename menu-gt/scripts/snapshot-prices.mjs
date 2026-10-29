@@ -60,7 +60,7 @@ if (process.argv[1].endsWith('snapshot-prices.mjs')) {
   const offers = [];
   const excluded = [];
   const started = raw.started;
-  for (const storeId of ['paiz', 'la-torre']) {
+  for (const storeId of Object.keys(map).filter((k) => !k.startsWith('_'))) {
     const origin = SOURCES[storeId].origin;
     for (const [ingId, paths] of Object.entries(map[storeId])) {
       const ing = INGREDIENTS[ingId];

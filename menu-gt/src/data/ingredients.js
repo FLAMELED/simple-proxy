@@ -73,7 +73,7 @@ const list = [
   { id: 'guicoy', name: 'güicoy', cat: 'verduras', base: 'g', unitG: 196, unitGSource: `${USDA} (calabacín mediano)`, unitName: 'güicoy', unitNamePlural: 'güicoyes' },
   { id: 'ejotes', name: 'ejotes', cat: 'verduras', base: 'g' },
   { id: 'zanahoria', name: 'zanahoria', cat: 'verduras', base: 'g', unitG: 61, unitGSource: `${USDA}, mediana`, unitName: 'zanahoria', unitNamePlural: 'zanahorias' },
-  { id: 'repollo', name: 'repollo', cat: 'verduras', base: 'g' },
+  { id: 'repollo', name: 'repollo', cat: 'verduras', base: 'g', unitG: 908, unitGSource: `${USDA}, cabeza mediana`, unitName: 'repollo', unitNamePlural: 'repollos' },
   { id: 'remolacha', name: 'remolacha', cat: 'verduras', base: 'g', unitG: 82, unitGSource: USDA, unitName: 'remolacha', unitNamePlural: 'remolachas' },
   { id: 'elote', name: 'elote', cat: 'verduras', base: 'u', unitName: 'elote', unitNamePlural: 'elotes' },
   { id: 'aguacate', name: 'aguacate', cat: 'verduras', base: 'u', unitName: 'aguacate', unitNamePlural: 'aguacates' },

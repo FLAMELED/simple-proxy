@@ -3,3 +3,5 @@ dist/
 test/e2e/screens/
 .impeccable/build/scaffold/
 .impeccable/tmp/
+.impeccable/review/
+.impeccable/build/comp-grid.png

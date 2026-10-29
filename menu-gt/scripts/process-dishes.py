@@ -1,4 +1,4 @@
-"""Convierte las ilustraciones crudas (assets/dishes/<id>-raw.png, fondo blanco)
+"""Convierte las ilustraciones crudas (assets/dishes/<id>-src.webp, 768 px, fondo blanco)
 en WebP de 192 px para la app y escribe src/ui/dish-images.js.
 Las crudas no se publican; quedan en el repositorio como fuente con su prompt."""
 import json, os, re, sys
@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 src = os.path.join(ROOT, 'assets', 'dishes')
 ids = []
 for f in sorted(os.listdir(src)):
-    m = re.match(r'(.+)-raw\.png$', f)
+    m = re.match(r'(.+)-(?:raw\.png|src\.webp)$', f)
     if not m:
         continue
     rid = m.group(1)

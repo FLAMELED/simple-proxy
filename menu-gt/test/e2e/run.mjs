@@ -48,6 +48,34 @@ for (const width of [320, 390]) {
     await noOverflow(page, 'semana');
   });
 
+  await check(`[${width}px] primera pantalla: ticket, "Hoy" y dos platos sobre la navegación`, async () => {
+    await page.setViewportSize({ width, height: 844 });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    const r = await page.evaluate(() => {
+      const nav = document.getElementById('tabs').getBoundingClientRect().top;
+      const slots = [...document.querySelectorAll('.today .slot')].slice(0, 2).map((e) => e.getBoundingClientRect().bottom);
+      return { nav, hoy: document.getElementById('next-title').getBoundingClientRect().bottom, slots, weight: getComputedStyle(document.getElementById('next-title')).fontWeight };
+    });
+    assert.ok(r.hoy < r.nav, `título del día en ${r.hoy}, navegación en ${r.nav}`);
+    if (width >= 390) assert.ok(r.slots.length === 2 && r.slots.every((b) => b <= r.nav + 1), `platos terminan en ${r.slots}, navegación en ${r.nav}`);
+    assert.equal(r.weight, '700');
+    await page.setViewportSize({ width, height: 800 });
+  });
+
+  await check(`[${width}px] el ticket se vuelve a imprimir renglón por renglón al recalcular`, async () => {
+    await page.locator('#explain').waitFor({ state: 'attached' });
+    assert.equal(await page.locator('#explain').isVisible(), false);
+    await page.click('[data-action="toggle-explain"]');
+    assert.equal(await page.locator('#explain').isVisible(), true);
+    assert.equal(await page.locator('.ticket.printing').count(), 0, 'abrir la explicación no reimprime');
+    await page.click('[data-action="toggle-explain"]');
+    await go(page, 'menu');
+    await page.locator('[data-action="servings"][data-delta="1"]').first().click();
+    await go(page, 'semana');
+    const anim = await page.evaluate(() => [...document.querySelectorAll('.ticket.printing .print-line')].map((e) => e.getAnimations().length));
+    assert.ok(anim.length >= 6 && anim.every((n) => n === 1), `renglones animados: ${anim}`);
+  });
+
   await check(`[${width}px] precios reales: último precio guardado, con origen y sin ganar si faltan productos`, async () => {
     const r = await page.evaluate(() => {
       const c = window.__mercadito.ctx;

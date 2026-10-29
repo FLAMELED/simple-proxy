@@ -145,6 +145,11 @@ function toggleInList(list, value, on) {
 }
 
 const actions = {
+  'toggle-explain'() {
+    ctx.ui.explainOpen = !ctx.ui.explainOpen;
+    render();
+    if (ctx.ui.explainOpen) document.getElementById('explain')?.scrollIntoView({ block: 'nearest', behavior: reduceMotion() ? 'auto' : 'smooth' });
+  },
   go(d) {
     ctx.state.view = d.view;
     ctx.ui.sheet = null;

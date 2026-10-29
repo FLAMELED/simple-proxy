@@ -87,17 +87,20 @@ export function budgetCard(ctx, { compact = false } = {}) {
   const scale = Math.max(budget, b.spentKnownCents, 1);
   const pct = (c) => `${((Math.min(c, scale) / scale) * 100).toFixed(2)}%`;
   const free = Math.max(budget - b.spentKnownCents, 0);
-  const over = Math.max(b.spentKnownCents - budget, 0);
   let total;
   let tone;
+  let note = '';
   if (b.status === 'sin-presupuesto') {
-    total = `<span data-tween="${b.spentKnownCents}" data-tween-key="cotizado">${q(b.spentKnownCents)}</span><small>cotizados; indica un presupuesto en Ajustes</small>`;
+    total = `<span data-tween="${b.spentKnownCents}" data-tween-key="cotizado">${q(b.spentKnownCents)}</span>`;
+    note = 'cotizados; indica un presupuesto en Ajustes.';
     tone = '';
   } else if (b.balanceCents >= 0) {
-    total = `${b.pendingCount ? 'Quedan' : 'Te quedan'} <span data-tween="${b.balanceCents}" data-tween-key="saldo">${q(b.balanceCents)}</span>${b.pendingCount ? '<small>por ahora: faltan precios, no se puede confirmar</small>' : ''}`;
+    total = `${b.pendingCount ? 'Quedan' : 'Te quedan'} <span data-tween="${b.balanceCents}" data-tween-key="saldo">${q(b.balanceCents)}</span>`;
+    note = b.pendingCount ? 'por ahora: faltan precios, no se puede confirmar.' : '';
     tone = b.pendingCount ? '' : 'ok';
   } else {
-    total = `Faltan <span data-tween="${b.shortfallCents}" data-tween-key="faltante">${q(b.shortfallCents)}</span>${b.shortfallIsMinimum ? '<small>como mínimo: además hay productos sin precio</small>' : ''}`;
+    total = `Faltan <span data-tween="${b.shortfallCents}" data-tween-key="faltante">${q(b.shortfallCents)}</span>`;
+    note = b.shortfallIsMinimum ? 'como mínimo: además hay productos sin precio.' : '';
     tone = 'danger';
   }
   const pendingStamp = b.pendingCount
@@ -105,16 +108,18 @@ export function budgetCard(ctx, { compact = false } = {}) {
     : '';
   return `
   <section class="ticket" id="ticket" aria-labelledby="budget-title">
-    <h2 id="budget-title" class="ticket-head">Presupuesto · ${esc(periodText(days))}</h2>
-    <p class="ticket-total ${tone}" aria-live="polite">${total}</p>
+    <h2 id="budget-title" class="ticket-title">Presupuesto</h2>
+    <p class="ticket-total print-line ${tone}" style="--i:0" aria-live="polite">${total}</p>
+    ${note || !compact ? `<p class="ticket-note print-line" style="--i:1">${esc(note)}${compact ? '' : ` <button class="btn link" data-action="toggle-explain" aria-expanded="${!!ctx.ui.explainOpen}" aria-controls="explain">¿Cómo se calculó?</button>`}</p>` : ''}
     <div class="rule-double" aria-hidden="true"></div>
     <ul class="ticket-rows">
-      <li class="leader"><span>Presupuesto</span><span class="num">${b.budgetCents ? q(b.budgetCents) : '—'}</span></li>
-      <li class="leader"><span>Compra cotizada</span><span class="num">${q(b.purchaseKnownCents)}</span></li>
-      <li class="leader"><span>Gastos adicionales</span><span class="num">${q(b.extrasCents)}</span></li>
+      <li class="leader meta print-line" style="--i:2"><span>Semana</span><span class="num">${esc(periodText(days))}</span></li>
+      <li class="leader print-line" style="--i:3"><span>Presupuesto</span><span class="num">${b.budgetCents ? q(b.budgetCents) : '—'}</span></li>
+      <li class="leader print-line" style="--i:4"><span>Compra cotizada</span><span class="num">${q(b.purchaseKnownCents)}</span></li>
+      <li class="leader print-line" style="--i:5"><span>Gastos adicionales</span><span class="num">${q(b.extrasCents)}</span></li>
     </ul>
     <div class="rule-double" aria-hidden="true"></div>
-    <div class="ticket-meter">
+    <div class="ticket-meter print-line" style="--i:6">
       <div class="bar" role="img" aria-label="${esc(budgetMessage(b, q))}">
         <span class="seg buy" data-w="${pct(Math.min(b.purchaseKnownCents, scale))}" style="width:${pct(Math.min(b.purchaseKnownCents, scale))}"></span>
         <span class="seg extra" data-w="${pct(b.extrasCents)}" style="width:${pct(b.extrasCents)}"></span>
@@ -123,7 +128,6 @@ export function budgetCard(ctx, { compact = false } = {}) {
       </div>
       ${pendingStamp}
     </div>
-    ${over && !b.pendingCount ? '' : ''}
     <div class="ticket-actions">
       <button class="btn" data-action="go" data-view="compras">Ver lista de compras</button>
       <button class="count-badge" data-action="go" data-view="compras" aria-label="${t.toBuy} productos por comprar"><b>${t.toBuy}</b><span>productos</span></button>
@@ -139,7 +143,7 @@ function budgetExplain(ctx) {
   const extras = state.extras.filter((e) => Number.isInteger(e.cents));
   const transport = state.transport[state.stores.primary];
   return `
-  <details class="explain">
+  <details class="explain" id="explain" ${ctx.ui.explainOpen ? 'open' : ''}>
     <summary>¿Cómo se calculó?</summary>
     <ol class="calc">
       <li>Se sumó lo que piden todas las recetas del período, ingrediente por ingrediente (${result.needs.size} ingredientes).</li>
@@ -213,7 +217,7 @@ function nextMeals(ctx) {
   const day = days[first.day];
   const title = day.iso === today ? 'Hoy' : dayLabel(day, true);
   return `<section class="today" aria-labelledby="next-title">
-    <div class="section-head"><h2 id="next-title" class="h2">${esc(title)}</h2><button class="btn link" data-action="go" data-view="menu">Menú completo</button></div>
+    <div class="section-head"><h2 id="next-title" class="h2">${esc(title)}</h2></div>
     <ul class="meal-list">${sameDay.map((s, i) => `<li>${slotCard(ctx, s, { compact: true, highlight: i === 0 })}</li>`).join('')}</ul>
   </section>`;
 }

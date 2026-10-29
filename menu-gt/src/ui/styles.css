@@ -24,9 +24,11 @@
   --on-ink: #f5f7fb;
   --on-ink-2: #c7d0e0;
   --shadow: 0 1px 1px rgb(0 0 0 / 6%), 0 6px 18px -6px rgb(0 0 0 / 18%);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.1 1.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   --f-ui: 'Hanken Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --f-num: 'Spline Sans Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  --f-display: 'Phudu', 'Hanken Grotesk', 'Arial Narrow', sans-serif;
+  --f-display: 'Doto', 'Spline Sans Mono', ui-monospace, monospace;
+  --f-stamp: 'Phudu', 'Hanken Grotesk', 'Arial Narrow', sans-serif;
   --apron: 74px;
   --tabs-h: 76px;
   --r: 6px;
@@ -163,19 +165,21 @@ code { font: 0.85em var(--f-num); background: #eceef2; padding: 1px 5px; border-
 .actions .btn { flex: 1 1 auto; }
 
 .pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 3px; font: 600 0.74rem/1.5 var(--f-ui); letter-spacing: 0.02em; background: #eceef2; color: #333846; white-space: nowrap; }
-.pill.ok, .pill.live { background: #e1f1e7; color: #1d6b45; }
+/* Ahorros y confirmaciones: tinta del ticket, no verde (el mundo es tinta, papel y resaltador). */
+.pill.ok, .pill.live { background: #0b2f6b; color: #fdfdfb; }
 .pill.warn, .pill.saved, .pill.sample { background: #f3f8bf; color: #2a2d00; }
 .pill.danger { background: #fbe6e7; color: #b8262f; }
 .pill.home { background: #ece8f6; color: #5b4a8a; white-space: normal; }
 .pill.user { background: #e3ebf7; color: #0b2f6b; }
 .stamp-mark {
   display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border: 2px solid currentColor; outline: 1px solid currentColor; outline-offset: 2px;
-  color: #6f3aa0; font: 700 0.8rem/1.25 var(--f-display); letter-spacing: 0.08em; text-transform: uppercase; border-radius: 3px;
+  color: #6f3aa0; font: 700 0.8rem/1.25 var(--f-stamp); letter-spacing: 0.08em; text-transform: uppercase; border-radius: 3px;
   filter: url(#stamp-ink); transform: rotate(-3deg); white-space: nowrap; margin: 3px;
 }
 .status { display: flex; gap: 8px; align-items: flex-start; font-weight: 600; }
 .status .ico { margin-top: 2px; }
-.status.ok { color: var(--ok); }
+.status.ok { color: var(--ink-2); }
+.status.ok .ico { color: var(--ink-2); background: var(--highlight); border-radius: 50%; }
 .status.danger { color: var(--red); }
 .warn-text { color: #4f5563; font-style: italic; }
 .banner { flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; }
@@ -219,8 +223,8 @@ input[type='checkbox'] { width: 22px; height: 22px; accent-color: #0b2f6b; flex:
 /* ---------- Ticket del presupuesto ---------- */
 .ticket {
   position: relative; background: var(--paper); border: 1px solid var(--paper-edge); border-bottom: 0;
-  border-radius: 3px 3px 0 0; padding: 18px 18px 16px; box-shadow: var(--shadow);
-  display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;
+  border-radius: 3px 3px 0 0; padding: 14px 18px 12px; box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;
 }
 .ticket::after {
   content: ''; position: absolute; left: -1px; right: -1px; bottom: -11px; height: 11px;
@@ -229,13 +233,21 @@ input[type='checkbox'] { width: 22px; height: 22px; accent-color: #0b2f6b; flex:
     linear-gradient(225deg, var(--paper) 50%, transparent 50%) 0 0 / 16px 11px repeat-x;
   filter: drop-shadow(0 1px 0 var(--paper-edge));
 }
-.ticket-head { text-align: center; font: 600 0.74rem/1.3 var(--f-ui); letter-spacing: 0.16em; text-transform: uppercase; }
-.ticket-total { text-align: center; font: 600 2.9rem/1 var(--f-display); letter-spacing: 0.05em; text-transform: uppercase; font-variant-numeric: tabular-nums; color: #0a2340; }
+.ticket-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* Total en letra de impresora térmica (Doto, matriz de puntos monoespaciada). El grano de tinta
+   se da con una máscara de ruido muy leve: algunos puntos salen más claros, como en papel térmico. */
+.ticket-total {
+  text-align: center; font: 800 clamp(1.85rem, 9.4vw, 2.6rem)/1.05 var(--f-display); letter-spacing: 0.02em; text-transform: uppercase;
+  font-variant-numeric: tabular-nums; color: #0a2340; padding-top: 4px;
+}
+.ticket-total { -webkit-mask: var(--grain); mask: var(--grain); }
 .ticket-total.danger { color: #b8262f; }
-.ticket-total.ok { color: #1d6b45; }
-.ticket-total small { display: block; margin-top: 6px; font: 500 0.78rem/1.25 var(--f-ui); letter-spacing: 0.01em; text-transform: none; color: #4f5563; }
+.ticket-total.ok [data-tween] { background: linear-gradient(100deg, transparent 0 1%, #e8f850 2% 98%, transparent 99%) 0 72% / 100% 46% no-repeat; }
+.ticket-note { margin: -2px 0 0; text-align: center; font: 500 0.8rem/1.3 var(--f-ui); color: #4f5563; }
+.ticket-note .btn.link { padding: 0; font-weight: 700; font-size: inherit; vertical-align: baseline; }
 .rule-double { height: 5px; border-top: 1px solid #8e919d; border-bottom: 1px solid #8e919d; }
-.ticket-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.ticket-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.leader.meta { font-size: 0.86rem; color: #4f5563; }
 .leader { display: flex; align-items: baseline; gap: 6px; font-size: 0.98rem; }
 .leader > span:first-child { flex: 0 1 auto; min-width: 0; }
 .leader::after { content: ''; order: 1; flex: 1 1 auto; min-width: 16px; border-bottom: 2px dotted #8e919d; transform: translateY(-4px); }
@@ -243,7 +255,7 @@ input[type='checkbox'] { width: 22px; height: 22px; accent-color: #0b2f6b; flex:
 .leader.strong { font-weight: 700; }
 .leader.strong > .num { font-weight: 600; }
 .leader.pend > .num { background: linear-gradient(100deg, transparent 0 2%, #e8f850 3% 97%, transparent 98%); padding: 0 4px; }
-.ticket-meter { position: relative; display: flex; align-items: center; padding-top: 10px; min-height: 40px; }
+.ticket-meter { position: relative; display: flex; align-items: center; padding-top: 8px; min-height: 34px; }
 .bar { flex: 1; display: flex; height: 12px; border-radius: 99px; overflow: hidden; background: #e8eaee; }
 .seg { display: block; height: 100%; }
 .seg.buy { background: #0b2f6b; }
@@ -257,15 +269,15 @@ input[type='checkbox'] { width: 22px; height: 22px; accent-color: #0b2f6b; flex:
 .count-badge { flex: none; width: 62px; height: 62px; border: 0; cursor: pointer; border-radius: 50%; background: #0b2f6b; color: #fff; display: grid; place-content: center; text-align: center; line-height: 1; text-decoration: none; }
 .count-badge b { font: 600 1.1rem var(--f-num); }
 .count-badge span { font: 500 0.58rem var(--f-ui); margin-top: 3px; letter-spacing: 0.01em; }
-.ticket.printing .ticket-total, .ticket.printing .leader { animation: feed 0.3s steps(5, end) both; }
-.ticket.printing .leader:nth-child(1) { animation-delay: 0.08s; }
-.ticket.printing .leader:nth-child(2) { animation-delay: 0.16s; }
-.ticket.printing .leader:nth-child(3) { animation-delay: 0.24s; }
-.ticket.printing .leader:nth-child(4) { animation-delay: 0.32s; }
-.ticket.printing .leader:nth-child(5) { animation-delay: 0.40s; }
-@keyframes feed { from { clip-path: inset(0 0 100% 0); transform: translateY(-4px); } to { clip-path: inset(0 0 0 0); transform: none; } }
+/* Movimiento propio: al recalcular, el ticket se imprime de nuevo renglón por renglón, de arriba abajo.
+   El estado por defecto es visible; la animación solo existe mientras la clase .printing está puesta.
+   Cada renglón se destapa con clip-path y una salida exponencial; --i fija el orden. */
+.ticket.printing .print-line { animation: feed 0.42s cubic-bezier(0.16, 1, 0.3, 1) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes feed { from { clip-path: inset(0 0 100% 0); opacity: 0.2; transform: translateY(-3px); } to { clip-path: inset(0 0 -4px 0); opacity: 1; transform: none; } }
 
 details.explain { border-top: 1px dashed #b9bdc7; padding-top: 8px; }
+.ticket details.explain:not([open]) { display: none; }
+.ticket details.explain summary { display: none; }
 details.explain summary { cursor: pointer; font-weight: 700; color: #0b2f6b; min-height: 40px; display: flex; align-items: center; list-style-position: inside; }
 details.explain[open] { display: flex; flex-direction: column; gap: 10px; }
 .calc { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 0.92rem; }
@@ -289,7 +301,8 @@ table.sum tr.total th, table.sum tr.total td { font-weight: 700; border-top: 1px
 
 /* ---------- Comidas ---------- */
 .today { display: flex; flex-direction: column; }
-.today .section-head { padding: 6px 0 2px; }
+.today .section-head { padding: 4px 0 0; }
+.today .h2 { font-weight: 700; font-size: 1.75rem; }
 .meal-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .slot { display: grid; grid-template-columns: 60px 1fr auto; gap: 2px 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
 .slot-art { grid-row: 1 / span 2; width: 60px; height: 60px; border-radius: 50%; background: #fff; display: grid; place-items: center; overflow: hidden; box-shadow: inset 0 0 0 1px #e3e5ea; }

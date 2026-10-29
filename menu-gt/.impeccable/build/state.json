@@ -41,13 +41,13 @@
       "status": "open",
       "openedAt": "2026-10-29T06:12:18.597Z",
       "closedAt": null,
-      "attempts": 3,
+      "attempts": 5,
       "notes": [],
       "gate": {
         "ok": true,
         "reasons": [],
         "summary": "2/2 plates",
-        "at": "2026-10-29T06:15:40.201Z"
+        "at": "2026-10-29T13:36:28.398Z"
       },
       "forced": null
     },

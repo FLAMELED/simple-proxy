@@ -8,7 +8,8 @@
     "start": "node server/server.mjs",
     "test": "node --test test/*.test.mjs",
     "test:e2e": "node test/e2e/run.mjs",
-    "build:artifact": "node scripts/build-artifact.mjs"
+    "build:artifact": "node scripts/build-artifact.mjs",
+    "capture": "node scripts/capture.mjs"
   },
   "devDependencies": {
     "esbuild": "0.25.10",

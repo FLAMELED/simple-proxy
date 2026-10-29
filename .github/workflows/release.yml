@@ -16,7 +16,7 @@ jobs:
         
       - uses: pnpm/action-setup@v2
         with:
-          version: latest
+          version: 8.15.9 # el lockfile es formato 6 (pnpm 8); pnpm 9+ lo rechaza
 
       - name: Get version
         id: package-version

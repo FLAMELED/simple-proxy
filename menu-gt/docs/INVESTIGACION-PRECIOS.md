@@ -15,9 +15,24 @@ Fecha: 2026-10-19. Ubicación de referencia: Chiquimula.
 
 Salida literal de la comprobación: [`verificacion-fuentes-2026-10-19.txt`](verificacion-fuentes-2026-10-19.txt).
 
+### Actualización 2026-10-29: robots.txt
+
+Con el conector Firecrawl (consulta en vivo, `maxAge: 0`) se obtuvieron dos robots.txt. Copias en `test/fixtures/robots/`.
+
+| Sitio | Resultado | Lo relevante |
+|---|---|---|
+| La Torre | Leído (HTTP 200) | Permite las páginas de producto (`/…/p`). Prohíbe `/busca/*` (búsqueda), `/checkout/*`, `/account/*`, `/login/*`, `/quick-view/*`, `/img/*`. Su `Sitemap` apunta a un dominio de plantilla (`lojavazia.com.br`), lo que sugiere una plataforma de comercio estándar sin personalizar ese archivo. |
+| Maxi Despensa | Leído (HTTP 200) | Permite las páginas de producto. Prohíbe `/checkout/`, `/account/`, `/login/*`, `/quick-view/*`, `/404` y URLs con `returnUrl`. Declara los sitemaps de Walmart, Maxi Despensa y Paiz: parece un robots.txt compartido por los tres sitios, pero no se confirmó en Paiz ni en Walmart. |
+| Paiz | **No leído** | El sistema de seguridad de este entorno bloqueó la consulta por Firecrawl: estos dominios están bloqueados a propósito por la política de red, y usar un servicio externo para llegar a ellos se consideró una forma de eludirla. |
+| Walmart | **No leído** | Mismo motivo que Paiz. |
+
+Conclusión: el método elegido (una página de producto a la vez) es compatible con lo que permiten los robots.txt leídos; las búsquedas (`/busca/`) no deben usarse. Siguen sin verificarse los términos de uso, el precio por sucursal y la presencia de datos estructurados en las páginas de producto.
+
+La forma correcta de avanzar es permitir los cuatro dominios en la configuración de red del entorno (Ajustes del entorno → Acceso de red → dominios permitidos) y ejecutar `scripts/check-sources.mjs`.
+
 ### Qué no se pudo comprobar
 
-- robots.txt y términos de uso de cada sitio (no se pudieron leer).
+- robots.txt de Paiz y Walmart, y términos de uso de los cuatro sitios.
 - Si los precios publicados dependen de una sucursal o zona elegida, y cómo se elige.
 - Si existe una integración documentada o un catálogo autorizado para terceros. No se encontró ninguna en búsquedas públicas; no se supone que exista una API pública.
 - Disponibilidad en tiendas de Chiquimula.

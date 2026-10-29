@@ -50,3 +50,14 @@ test('presentaciones comunes en nombres de producto', () => {
   assert.equal(parsePresentation('Aceite 946 ml').packUnit, 'ml');
   assert.equal(parsePresentation('Producto sin tamaño'), null);
 });
+
+test('robots.txt reales (2026-10-29): páginas de producto permitidas, búsqueda y cuenta no', async () => {
+  const latorre = await readFile(new URL('./fixtures/robots/latorre-2026-10-29.txt', import.meta.url), 'utf8');
+  const maxi = await readFile(new URL('./fixtures/robots/maxidespensa-2026-10-29.txt', import.meta.url), 'utf8');
+  assert.equal(isAllowed(latorre, USER_AGENT, '/arroz-precocido-gallo-dorado-2010451/p'), true);
+  assert.equal(isAllowed(latorre, USER_AGENT, '/busca/?ft=arroz'), false);
+  assert.equal(isAllowed(latorre, USER_AGENT, '/checkout/cart'), false);
+  assert.equal(isAllowed(maxi, USER_AGENT, '/arroz-gallo-dorado-precocido-400gr/p'), true);
+  assert.equal(isAllowed(maxi, USER_AGENT, '/abarrotes?page=2&returnUrl=/x'), false);
+  assert.equal(isAllowed(maxi, USER_AGENT, '/account/orders'), false);
+});

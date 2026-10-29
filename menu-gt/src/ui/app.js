@@ -387,13 +387,27 @@ const actions = {
     toggleInList(ctx.state.prefs.favorites, d.recipe, !ctx.state.prefs.favorites.includes(d.recipe));
     commit();
   },
-  export() {
+  async export() {
     const text = exportState(ctx.state);
+    const filename = `menu-gt-${todayISO()}.json`;
+    // Dentro de un Artifact de claude.ai: la descarga pasa por la confirmación del visor.
+    const downloads = window.claude?.use ? await window.claude.use('downloads').catch(() => null) : null;
+    if (downloads) {
+      try {
+        await downloads.save({ filename, data: text });
+        ctx.ui.dataMsg = { tone: 'ok', text: 'Archivo entregado para guardar.' };
+      } catch (err) {
+        ctx.ui.dataMsg = err?.code === 'declined'
+          ? { tone: 'warn', text: 'No se guardó el archivo. Puedes usar "Copiar como texto".' }
+          : { tone: 'warn', text: 'No se pudo guardar aquí. Usa "Copiar como texto".' };
+      }
+      return render();
+    }
     try {
       const blob = new Blob([text], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `menu-gt-${todayISO()}.json`;
+      a.download = filename;
       document.body.append(a);
       a.click();
       a.remove();

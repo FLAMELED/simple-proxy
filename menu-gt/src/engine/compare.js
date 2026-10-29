@@ -40,9 +40,10 @@ function buildEquivalences(rows) {
   }
   for (const eq of byIng.values()) {
     const quoted = Object.values(eq.perStore).filter((it) => it.status === 'cotizado');
-    const keys = new Set(quoted.map((it) => `${it.offer.brand}|${it.offer.product}|${it.offer.packQty}${it.offer.packUnit}`));
+    const keyOf = (it) => it.lines.map((l) => `${l.offer.brand}|${l.offer.product}|${l.offer.packQty}${l.offer.packUnit}`).sort().join('+');
+    const keys = new Set(quoted.map(keyOf));
     eq.sameProduct = keys.size <= 1;
-    eq.differentPack = new Set(quoted.map((it) => it.packQtyBase)).size > 1;
+    eq.differentPack = new Set(quoted.map((it) => it.lines.map((l) => l.packQtyBase).sort().join('+'))).size > 1;
   }
   return [...byIng.values()];
 }

@@ -247,3 +247,37 @@ test('todas las recetas del catálogo son convertibles y están completas', () =
   }
   assert.equal(Object.keys(RECIPE_BY_ID).length, RECIPES.length);
 });
+
+test('combinar presentaciones cuando sale más barato (1 kg + 400 g)', () => {
+  const ing = INGREDIENTS.arroz;
+  const offers = [
+    offer({ id: 'kg', ing: 'arroz', qty: 1, unit: 'kg', cents: 1200 }),
+    offer({ id: 'g4', ing: 'arroz', qty: 400, unit: 'g', cents: 550 }),
+  ];
+  // 1,300 g: 2 kg = Q24.00 · 4 × 400 g = Q22.00 · 1 kg + 400 g = Q17.50
+  const mix = chooseOffer(1300, ing, offers);
+  assert.equal(mix.cents, 1750);
+  assert.equal(mix.mixed, true);
+  assert.deepEqual(mix.lines.map((l) => [l.offer.id, l.packs]).sort(), [['g4', 1], ['kg', 1]]);
+  assert.equal(mix.leftover, 100);
+  const single = chooseOffer(1300, ing, offers, { allowMix: false });
+  assert.equal(single.cents, 2200);
+  assert.equal(single.mixed, false);
+  // Si una sola presentación ya es lo más barato, no se mezcla
+  assert.equal(chooseOffer(900, ing, offers).lines.length, 1);
+});
+
+test('lo usado más lo sobrante suma exactamente lo pagado, también al combinar', () => {
+  const slots = [slot('s1', 'arrozA', 26)]; // 1,300 g
+  const { items } = computePurchase(needsFor(slots, [{ ingredientId: 'arroz', qty: 100, unit: 'g' }]), INGREDIENTS, [
+    offer({ id: 'kg', ing: 'arroz', qty: 1, unit: 'kg', cents: 1200 }),
+    offer({ id: 'g4', ing: 'arroz', qty: 400, unit: 'g', cents: 550 }),
+  ]);
+  const it = items[0];
+  assert.equal(it.needQty, 1200); // 100 g en casa
+  // 1,200 g: 3 × 400 g = Q16.50 es más barato que 1 kg + 400 g = Q17.50
+  assert.equal(it.cents, 1650);
+  assert.equal(it.leftover, 0);
+  const usedFromPurchase = it.usedValueCents - it.pantryValueCents;
+  assert.ok(Math.abs(usedFromPurchase + it.leftoverValueCents - it.cents) <= 1);
+});

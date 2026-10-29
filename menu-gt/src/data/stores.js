@@ -17,7 +17,7 @@ export const REAL_STORES = [
     initial: true,
     access: 'no-verificado',
     accessNote:
-      'Catálogo público con páginas de producto y marca de agotado. No se pudo abrir desde este entorno. No se encontró una API documentada para terceros.',
+      'Catálogo público con páginas de producto y marca de agotado. Su robots.txt (leído el 2026-10-29) permite páginas de producto y prohíbe la búsqueda. Las páginas de producto no se pudieron abrir desde este entorno. No se encontró una API documentada para terceros.',
   },
   {
     id: 'walmart', name: 'Walmart', group: 'Walmart de México y Centroamérica', site: 'https://www.walmart.com.gt/',
@@ -27,7 +27,7 @@ export const REAL_STORES = [
   {
     id: 'maxi-despensa', name: 'Maxi Despensa', group: 'Walmart de México y Centroamérica', site: 'https://www.maxidespensa.com.gt/',
     access: 'no-verificado',
-    accessNote: 'Catálogo público indexado. No verificado en vivo.',
+    accessNote: 'Catálogo público indexado. Su robots.txt (leído el 2026-10-29) permite páginas de producto. Las páginas de producto no se pudieron abrir desde este entorno.',
   },
 ];
 

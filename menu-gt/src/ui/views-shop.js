@@ -6,6 +6,13 @@ import { STORE_BY_ID } from '../data/stores.js';
 import { allOffers } from '../engine/index.js';
 import { periodText } from './views-plan.js';
 
+/** "2 × Arroz blanco 1 kg + 1 × Arroz blanco 400 g" */
+export function linesText(it, { brand = true } = {}) {
+  return it.lines
+    .map((l) => `${l.packs} × ${l.offer.product} ${packText(l.offer)}${brand && l.offer.brand ? ` (${l.offer.brand})` : ''}`)
+    .join(' + ');
+}
+
 const statusTone = { cotizado: 'ok', 'en-casa': 'home', 'sin-precio': 'warn', agotado: 'danger', 'marca-no-disponible': 'warn', 'sin-conversion': 'warn' };
 
 function sourceBlock(offer, ctx) {
@@ -36,8 +43,13 @@ function itemExplain(it, ctx) {
   if (it.pantryQty > 0) lines.push(`<li>En casa tienes ${esc(describeQty(it.pantryQty, ing))}; se usan ${esc(describeQty(it.coveredQty, ing))}.</li>`);
   if (it.status === 'cotizado') {
     lines.push(`<li>Falta comprar: <b>${esc(describeQty(it.needQty, ing))}</b>.</li>`);
-    lines.push(`<li>Empaque: ${esc(packText(it.offer))} = ${esc(describeQty(it.packQtyBase, ing))}${it.packApprox ? ' (aprox.)' : ''}. Se necesitan ${it.packs} (se redondea hacia arriba).</li>`);
-    lines.push(`<li>${it.packs} × ${q(it.offer.priceCents)} = ${q(it.offer.priceCents * it.packs)}${it.promoApplied ? ` → con promoción ${q(it.cents)}` : ''}.</li>`);
+    if (it.mixed) {
+      lines.push(`<li>Se combinan presentaciones porque así se paga menos que con una sola:</li>`);
+    }
+    for (const l of it.lines) {
+      lines.push(`<li>${esc(packText(l.offer))} (${esc(describeQty(l.packQtyBase, ing))}${l.packApprox ? ', aprox.' : ''}): ${l.packs} × ${q(l.offer.priceCents)} = ${q(l.offer.priceCents * l.packs)}${l.promoApplied ? ` → con promoción ${q(l.cents)}` : ''}.</li>`);
+    }
+    lines.push(`<li>Se compran ${esc(describeQty(it.purchasedQty, ing))} en total (empaques completos, redondeando hacia arriba). A pagar: <b>${q(it.cents)}</b>.</li>`);
     if (it.promoNote) lines.push(`<li>${esc(it.promoNote)}</li>`);
     lines.push(`<li>Valor proporcional de lo que usan las comidas: ${q(it.usedValueCents)}. Sobrará ${esc(describeQty(it.leftover, ing))} (≈ ${q(it.leftoverValueCents)}).</li>`);
   } else if (it.status === 'en-casa') {
@@ -80,7 +92,7 @@ function itemRow(it, ctx) {
   const st = offer ? priceStatus(offer, ctx.sessionStart) : null;
   let buy = '';
   if (it.status === 'cotizado') {
-    buy = `<p class="buy">${it.packs} × ${esc(offer.product)} ${esc(packText(offer))} <span class="muted">· ${esc(offer.brand ?? '')}</span></p>`;
+    buy = `<p class="buy">${esc(linesText(it))}</p>`;
   } else if (it.status === 'en-casa') {
     buy = '<p class="buy muted">Cubierto con lo que tienes en casa</p>';
   } else {
@@ -99,6 +111,7 @@ function itemRow(it, ctx) {
         <span class="pill ${tone}">${STATUS_TEXT[it.status]}</span>
         ${st && it.status === 'cotizado' ? `<span class="pill ${st.tone}">${st.label}</span>` : ''}
         ${it.promoApplied ? '<span class="pill ok">Promoción aplicada</span>' : ''}
+        ${it.mixed ? '<span class="pill">Presentaciones combinadas</span>' : ''}
         ${it.fromFallback ? '<span class="pill user">Mi precio</span>' : ''}
         ${it.status === 'cotizado' && it.leftover > 0 ? `<span class="pill">Sobra ${esc(describeQty(it.leftover, ing))}</span>` : ''}
       </div>
@@ -121,7 +134,7 @@ export function listText(ctx) {
     lines.push(`*${cat.label}*`);
     for (const it of items) {
       const mark = state.checked[it.ingredientId] ? '✔' : '☐';
-      const detail = it.status === 'cotizado' ? `${it.packs} × ${it.offer.product} ${packText(it.offer)} — ${q(it.cents)}` : `${describeQty(it.needQty, it.ingredient)} — ${STATUS_TEXT[it.status].toLowerCase()}`;
+      const detail = it.status === 'cotizado' ? `${linesText(it, { brand: false })} — ${q(it.cents)}` : `${describeQty(it.needQty, it.ingredient)} — ${STATUS_TEXT[it.status].toLowerCase()}`;
       lines.push(`${mark} ${it.ingredient.name}: ${detail}`);
     }
     lines.push('');
@@ -202,7 +215,7 @@ function compareView(ctx) {
       const cells = cmp.rows.map((r) => {
         const it = e.perStore[r.storeId];
         if (!it || it.status !== 'cotizado') return `<td data-label="${esc(storeLabel(r.storeId, state))}"><span class="pill ${statusTone[it?.status] ?? 'warn'}">${STATUS_TEXT[it?.status] ?? '—'}</span></td>`;
-        return `<td data-label="${esc(storeLabel(r.storeId, state))}"><b>${q(it.cents)}</b><br><span class="small">${it.packs} × ${esc(packText(it.offer))} ${esc(it.offer.brand ?? '')}</span><br><span class="small muted">${esc(unitPrice(it.offer, any.ingredient))}</span></td>`;
+        return `<td data-label="${esc(storeLabel(r.storeId, state))}"><b>${q(it.cents)}</b><br><span class="small">${esc(linesText(it))}</span><br><span class="small muted">${esc(unitPrice(it.offer, any.ingredient))}</span></td>`;
       });
       const flag = !e.sameProduct ? `<span class="pill">${e.differentPack ? 'Presentaciones distintas' : 'Marcas distintas'}</span>` : '';
       return `<tr><th scope="row">${esc(any.ingredient.name)}<br><span class="small muted">${esc(describeQty(e.needQty, any.ingredient))}</span> ${flag}</th>${cells.join('')}</tr>`;
@@ -246,7 +259,7 @@ function combineView(ctx) {
         : `<p class="status warn">${icon('info')} Combinar no conviene: cuesta ${q(-c.netSavingsCents)} más que comprar todo en ${esc(storeLabel(c.bestSingle, state))}, contando transporte.</p>`}
   </div>
   ${[...byStore].map(([id, items]) => `<section class="card"><h3 class="h3">${esc(storeLabel(id, state))} · ${q(items.reduce((s, i) => s + i.cents, 0))}</h3>
-    <ul class="plain">${items.map((i) => `<li>${esc(i.ingredient.name)} — ${i.packs} × ${esc(packText(i.offer))} · ${q(i.cents)}</li>`).join('')}</ul></section>`).join('')}
+    <ul class="plain">${items.map((i) => `<li>${esc(i.ingredient.name)} — ${esc(linesText(i))} · ${q(i.cents)}</li>`).join('')}</ul></section>`).join('')}
   ${c.missing.length ? `<div class="card banner warn"><p>Sin precio en ninguna tienda: ${c.missing.map((e) => esc(Object.values(e.perStore)[0].ingredient.name)).join(', ')}.</p></div>` : ''}`;
 }
 

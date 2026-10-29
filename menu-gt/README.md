@@ -10,7 +10,7 @@ Planificador de comidas y compras para hogares de Guatemala: menú semanal edita
 cd menu-gt
 npm install          # solo herramientas de prueba y empaquetado
 npm start            # http://localhost:5173 (app + consulta de precios)
-npm test             # 29 pruebas del motor, selector, guardado y capa de precios
+npm test             # 32 pruebas del motor, selector, guardado y capa de precios
 npm run test:e2e     # 30 comprobaciones en Chromium a 320 y 390 px
 npm run build:artifact   # dist/mercadito.html, un solo archivo sin servidor
 ```
@@ -40,7 +40,7 @@ docs/          Investigación de fuentes de precios
 
 1. Se suma lo que piden todas las recetas del período por ingrediente, en unidad base (g, ml, unidad o manojo).
 2. Se descuenta la despensa, solo del mismo ingrediente.
-3. Para lo que falta se eligen empaques completos: `ceil(falta / tamaño)`. Se escoge el producto con menor dinero a pagar, respetando marcas fijas y sin usar agotados ni productos sin precio.
+3. Para lo que falta se eligen empaques completos. Se busca la combinación de presentaciones con menor dinero a pagar (por ejemplo 1 kg + 2 × 400 g si sale más barato que 2 kg), respetando marcas fijas y sin usar agotados ni productos sin precio.
 4. Las promociones solo se aplican si se cumple su requisito (cantidad mínima, o confirmación de la persona en las que piden tarjeta).
 5. Se separan: dinero a pagar, valor proporcional de lo usado, valor de lo que había en casa y sobrante.
 6. Si falta un precio se muestra el subtotal conocido y nunca se afirma que el presupuesto alcanza.
@@ -55,7 +55,7 @@ Las tazas se convierten a gramos solo con el peso por taza de cada ingrediente; 
 | Lista consolidada, despensa, empaques, presupuesto explicable | Implementado y probado |
 | Mi supermercado, Comparar, Combinar (con transporte) | Implementado |
 | "Mi precio", copiar lista, compartir por WhatsApp | Implementado |
-| Guardado local, exportar e importar | Implementado (solo este navegador) |
+| Guardado local, exportar e importar | Implementado (solo este navegador; en el Artifact, la descarga pide confirmación) |
 | Precios de "Súper Ejemplo A/B" | Ficticios, solo para probar |
 | Precios reales de Paiz, La Torre, Walmart, Maxi Despensa | No cargados. Consulta por página de producto implementada pero **no verificada en vivo** (ver `docs/INVESTIGACION-PRECIOS.md`) |
 | Modelo de IA para interpretar preferencias | No conectado |

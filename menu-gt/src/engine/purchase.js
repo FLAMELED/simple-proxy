@@ -43,12 +43,17 @@ export function packBase(offer, ing) {
   return toBase(offer.packQty, offer.packUnit, ing);
 }
 
+const MAX_COMBINATIONS = 50000;
+
 /**
- * Elige la mejor oferta para cubrir `needQty` (unidad base).
+ * Elige cómo cubrir `needQty` (unidad base) con las ofertas de un ingrediente.
+ * Puede combinar presentaciones (p. ej. 1 kg + 400 g) si así se paga menos.
  * Reglas: excluye agotados y sin precio; respeta marca fija; minimiza el
- * dinero a pagar; en empate, menor sobrante.
+ * dinero a pagar; en empate, menor sobrante y menos productos distintos.
+ * Devuelve `lines` (cada producto con su número de empaques) y, por
+ * compatibilidad, `offer`/`packs`/`packQtyBase` de la línea principal.
  */
-export function chooseOffer(needQty, ing, offers, { brandLock = null, acceptedPromos = {} } = {}) {
+export function chooseOffer(needQty, ing, offers, { brandLock = null, acceptedPromos = {}, allowMix = true } = {}) {
   const all = offers.filter((o) => o.ingredientId === ing.id);
   if (all.length === 0) return { status: 'sin-precio', reason: 'Ningún producto cotizado para este ingrediente.' };
   const priced = all.filter((o) => Number.isInteger(o.priceCents) && o.priceCents > 0);
@@ -59,41 +64,111 @@ export function chooseOffer(needQty, ing, offers, { brandLock = null, acceptedPr
   if (branded.length === 0) {
     return { status: 'marca-no-disponible', reason: `La marca fija "${brandLock}" no está disponible aquí. Hay ${available.length} alternativa(s) si aceptas otra marca.` };
   }
-  let best = null;
   const conversionErrors = [];
+  const cands = [];
   for (const offer of branded) {
-    let pack;
     try {
-      pack = packBase(offer, ing);
+      const pack = packBase(offer, ing);
+      cands.push({ offer, packQtyBase: pack.qty, packApprox: pack.approx, packNotes: pack.notes });
     } catch (err) {
       if (!(err instanceof ConversionError)) throw err;
       conversionErrors.push(err.message);
-      continue;
-    }
-    const packs = packsFor(needQty, pack.qty);
-    const cost = offerCost(offer, packs, { acceptedPromos });
-    const leftover = clean(packs * pack.qty - needQty);
-    const candidate = { offer, packQtyBase: pack.qty, packApprox: pack.approx, packNotes: pack.notes, packs, ...cost, leftover };
-    if (
-      !best ||
-      candidate.cents < best.cents ||
-      (candidate.cents === best.cents && candidate.leftover < best.leftover) ||
-      (candidate.cents === best.cents && candidate.leftover === best.leftover && offer.id < best.offer.id)
-    ) {
-      best = candidate;
     }
   }
-  if (!best) return { status: 'sin-conversion', reason: conversionErrors[0] ?? 'Sin conversión posible.' };
-  return { status: 'cotizado', ...best };
+  if (!cands.length) return { status: 'sin-conversion', reason: conversionErrors[0] ?? 'Sin conversión posible.' };
+  cands.sort((a, b) => (a.offer.id < b.offer.id ? -1 : 1));
+
+  const evaluate = (counts) => {
+    let cents = 0;
+    let qty = 0;
+    let packs = 0;
+    const lines = [];
+    counts.forEach((n, i) => {
+      if (!n) return;
+      const c = cands[i];
+      const cost = offerCost(c.offer, n, { acceptedPromos });
+      cents += cost.cents;
+      qty += n * c.packQtyBase;
+      packs += n;
+      lines.push({ ...c, packs: n, cents: cost.cents, promoApplied: cost.promoApplied, promoNote: cost.promoNote });
+    });
+    return { cents, purchasedQty: clean(qty), leftover: clean(qty - needQty), packs, lines };
+  };
+  const better = (a, b) =>
+    !b ||
+    a.cents < b.cents ||
+    (a.cents === b.cents && (a.leftover < b.leftover ||
+      (a.leftover === b.leftover && (a.lines.length < b.lines.length ||
+        (a.lines.length === b.lines.length && a.packs < b.packs)))));
+
+  // Mejor opción con una sola presentación (siempre se calcula).
+  let best = null;
+  cands.forEach((c, i) => {
+    const counts = cands.map(() => 0);
+    counts[i] = packsFor(needQty, c.packQtyBase);
+    const r = evaluate(counts);
+    if (better(r, best)) best = r;
+  });
+  // Combinaciones de presentaciones: búsqueda exhaustiva acotada.
+  if (allowMix && cands.length > 1 && needQty > 0) {
+    let explored = 0;
+    const counts = cands.map(() => 0);
+    const walk = (i, remaining) => {
+      if (explored++ > MAX_COMBINATIONS) return;
+      if (i === cands.length - 1) {
+        counts[i] = packsFor(remaining, cands[i].packQtyBase);
+        const r = evaluate(counts);
+        if (better(r, best)) best = r;
+        counts[i] = 0;
+        return;
+      }
+      const maxN = packsFor(remaining, cands[i].packQtyBase);
+      for (let n = 0; n <= maxN; n++) {
+        counts[i] = n;
+        walk(i + 1, Math.max(0, clean(remaining - n * cands[i].packQtyBase)));
+      }
+      counts[i] = 0;
+    };
+    walk(0, needQty);
+  }
+  if (!best.lines.length) {
+    // Necesidad cero: se toma la presentación más barata por unidad como referencia.
+    const c = [...cands].sort((a, b) => a.offer.priceCents / a.packQtyBase - b.offer.priceCents / b.packQtyBase)[0];
+    best.lines = [{ ...c, packs: 0, cents: 0, promoApplied: false, promoNote: null }];
+  }
+  const main = [...best.lines].sort((a, b) => b.packs * b.packQtyBase - a.packs * a.packQtyBase)[0];
+  return {
+    status: 'cotizado',
+    offer: main.offer,
+    packQtyBase: main.packQtyBase,
+    packApprox: best.lines.some((l) => l.packApprox),
+    packNotes: [...new Set(best.lines.flatMap((l) => l.packNotes))],
+    packs: best.packs,
+    cents: best.cents,
+    purchasedQty: best.purchasedQty,
+    leftover: best.leftover,
+    lines: best.lines,
+    mixed: best.lines.length > 1,
+    promoApplied: best.lines.some((l) => l.promoApplied),
+    promoNote: best.lines.map((l) => l.promoNote).filter(Boolean).join(' ') || null,
+  };
+}
+
+/** Valor proporcional de `qty` al precio por unidad más bajo disponible (para lo que ya hay en casa). */
+function referenceValue(choice, qty) {
+  const l = [...choice.lines].sort((a, b) => a.offer.priceCents / a.packQtyBase - b.offer.priceCents / b.packQtyBase)[0];
+  return proportionalCents(l.offer.priceCents, qty, l.packQtyBase);
 }
 
 /**
  * Calcula la compra de toda la lista en un conjunto de ofertas.
+ * Los valores proporcionales usan lo que realmente se paga por unidad
+ * (dinero a pagar ÷ cantidad comprada), así usado + sobrante = pagado.
  * @param needs salida de applyPantry
  * @returns { items[], totals }
  */
 export function computePurchase(needs, ingredients, offers, opts = {}) {
-  const { brandLocks = {}, acceptedPromos = {}, fallbackOffers = null } = opts;
+  const { brandLocks = {}, acceptedPromos = {}, fallbackOffers = null, allowMix = true } = opts;
   const items = [];
   for (const [id, need] of needs) {
     const ing = ingredients[id];
@@ -102,46 +177,47 @@ export function computePurchase(needs, ingredients, offers, opts = {}) {
       items.push({ ...base, status: 'sin-conversion', reason: need.errors[0] });
       continue;
     }
-    // Si la despensa lo cubre todo, se elige el producto como referencia para
-    // valuar lo usado, sin comprarlo.
-    const qtyForChoice = need.needQty > 0 ? need.needQty : need.qty;
-    let choice = chooseOffer(qtyForChoice, ing, offers, { brandLock: brandLocks[id], acceptedPromos });
+    const buyQty = need.needQty > 0 ? need.needQty : 0;
+    const choiceOpts = { brandLock: brandLocks[id], acceptedPromos, allowMix };
+    let choice = chooseOffer(buyQty, ing, offers, choiceOpts);
     let fromFallback = false;
     if (choice.status !== 'cotizado' && fallbackOffers) {
-      const fb = chooseOffer(qtyForChoice, ing, fallbackOffers, { brandLock: brandLocks[id], acceptedPromos });
+      const fb = chooseOffer(buyQty, ing, fallbackOffers, choiceOpts);
       if (fb.status === 'cotizado') {
         choice = { ...fb, primaryStatus: choice.status, primaryReason: choice.reason };
         fromFallback = true;
       }
     }
     if (need.needQty <= 0) {
-      // Todo cubierto por la despensa: no se compra nada.
+      // Todo cubierto por la despensa: no se compra nada; se valúa como referencia.
       const valued = choice.status === 'cotizado' ? choice : null;
       items.push({
         ...base,
         status: 'en-casa',
         packs: 0,
         cents: 0,
+        lines: [],
         offer: valued?.offer ?? null,
         packQtyBase: valued?.packQtyBase ?? null,
-        usedValueCents: valued ? proportionalCents(valued.offer.priceCents, need.qty, valued.packQtyBase) : null,
-        pantryValueCents: valued ? proportionalCents(valued.offer.priceCents, need.coveredQty, valued.packQtyBase) : null,
+        usedValueCents: valued ? referenceValue(valued, need.qty) : null,
+        pantryValueCents: valued ? referenceValue(valued, need.coveredQty) : null,
         leftover: 0,
         fromFallback,
       });
       continue;
     }
     if (choice.status !== 'cotizado') {
-      items.push({ ...base, ...choice, cents: null, packs: null, fromFallback: false });
+      items.push({ ...base, ...choice, cents: null, packs: null, lines: [], fromFallback: false });
       continue;
     }
+    const rate = (q) => proportionalCents(choice.cents, q, choice.purchasedQty);
     items.push({
       ...base,
       ...choice,
-      // Valor proporcional de lo que se usa en las comidas (incluye lo de la despensa)
-      usedValueCents: proportionalCents(choice.offer.priceCents, need.qty, choice.packQtyBase),
-      pantryValueCents: need.coveredQty > 0 ? proportionalCents(choice.offer.priceCents, need.coveredQty, choice.packQtyBase) : 0,
-      leftoverValueCents: proportionalCents(choice.offer.priceCents, choice.leftover, choice.packQtyBase),
+      // Valor de lo que usan las comidas (incluye lo de la despensa, al mismo precio por unidad)
+      usedValueCents: rate(need.qty),
+      pantryValueCents: need.coveredQty > 0 ? rate(need.coveredQty) : 0,
+      leftoverValueCents: choice.cents - rate(need.needQty),
       fromFallback,
     });
   }

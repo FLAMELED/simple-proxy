@@ -17,9 +17,6 @@ if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
   echo 'export NODE_USE_ENV_PROXY=1' >> "$CLAUDE_ENV_FILE"
 fi
 
-# Proxy de la raíz (pnpm), si la herramienta está disponible.
-if command -v pnpm >/dev/null 2>&1; then
-  cd "$ROOT"
-  # Sin reescribir el lockfile: si no coincide, se avisa y la sesión sigue.
-  pnpm install --frozen-lockfile --silent || echo "aviso: pnpm-lock.yaml no coincide con package.json; dependencias del proxy sin instalar" >&2
-fi
+# Proxy de la raíz. El lockfile es formato 6: se usa pnpm 8, igual que el CI y el Dockerfile.
+cd "$ROOT"
+npx -y pnpm@8.15.9 install --frozen-lockfile --silent || echo "aviso: no se pudieron instalar las dependencias del proxy" >&2

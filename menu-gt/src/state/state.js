@@ -16,6 +16,7 @@ export function defaultState(today = todayISO()) {
   return {
     schema: SCHEMA_VERSION,
     onboarded: false,
+    guideDone: false,
     demo: false,
     location: { departamento: 'Chiquimula', municipio: 'Chiquimula' },
     stores: {

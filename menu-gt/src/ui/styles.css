@@ -465,3 +465,27 @@ dialog#sheet::backdrop { background: rgb(6 22 41 / 55%); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Lista de compras compacta: una línea por producto, lo demás en "Detalles". */
+.item-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.item-line .more { margin-left: auto; }
+.item-more { display: flex; flex-direction: column; gap: 8px; padding: 8px 0 2px; border-top: 1px dashed var(--rule); margin-top: 4px; }
+details.opts summary { cursor: pointer; font-weight: 600; color: var(--ink-2); min-height: 40px; display: flex; align-items: center; }
+
+/* Cómo se usa: pasos numerados en el inicio rápido y en la portada. */
+ol.how { margin: 4px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 0.95rem; }
+.steps-guide { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.steps-guide li { display: grid; grid-template-columns: 30px 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--rule); }
+.steps-guide li:first-child { border-top: 0; }
+.step-n { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #0b2f6b; color: #fdfdfb; font: 600 0.9rem var(--f-num); }
+.steps-guide li.done .step-n { background: #e8f850; color: #0a2340; }
+.steps-guide p { margin: 2px 0 0; }
+details.tech > summary { cursor: pointer; font-weight: 700; color: var(--ink-2); min-height: 40px; display: flex; align-items: center; }
+details.tech[open] { display: flex; flex-direction: column; gap: 14px; }
+details.tech > section { border-top: 1px dashed var(--rule); padding-top: 12px; box-shadow: none; border-left: 0; border-right: 0; border-bottom: 0; }
+.intro { margin: 0 0 12px; }
+.item .buy b { font-weight: 600; }
+.item .prod { margin: -2px 0 0; font-size: 0.82rem; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.buy-row { display: flex; align-items: flex-start; gap: 8px; }
+.buy-text { flex: 1; min-width: 0; }
+.buy-row .more { flex: none; margin-top: -10px; }

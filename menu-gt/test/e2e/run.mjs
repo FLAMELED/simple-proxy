@@ -48,6 +48,19 @@ for (const width of [320, 390]) {
     await noOverflow(page, 'semana');
   });
 
+  await check(`[${width}px] se entiende: guía de 3 pasos, lista compacta y detalles a pedido`, async () => {
+    assert.equal(await page.locator('.steps-guide li').count(), 3);
+    await go(page, 'compras');
+    const items = await page.locator('li.item').count();
+    const perItem = await page.evaluate(() => document.querySelector('.cat').parentElement.scrollHeight) / items;
+    assert.ok(perItem < 190, `cada producto ocupa ${Math.round(perItem)} px`);
+    assert.equal(await page.locator('.item-more').count(), 0, 'los detalles empiezan cerrados');
+    await page.locator('[data-action="item-more"]').first().click();
+    assert.equal(await page.locator('.item-more details.explain').count(), 1);
+    await page.locator('[data-action="item-more"]').first().click();
+    await go(page, 'semana');
+  });
+
   await check(`[${width}px] primera pantalla: ticket, "Hoy" y dos platos sobre la navegación`, async () => {
     await page.setViewportSize({ width, height: 844 });
     await page.evaluate(() => window.scrollTo(0, 0));

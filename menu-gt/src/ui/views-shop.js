@@ -89,44 +89,57 @@ function promoControl(it, ctx) {
 function itemRow(it, ctx) {
   const ing = it.ingredient;
   const checked = !!ctx.state.checked[it.ingredientId];
-  const tone = statusTone[it.status];
   const offer = it.offer;
   const st = offer ? priceStatus(offer, ctx.sessionStart) : null;
-  let buy = '';
+  const open = ctx.ui.openItem === it.ingredientId;
+  let buy;
   if (it.status === 'cotizado') {
-    buy = `<p class="buy">${esc(linesText(it))}</p>`;
-  } else if (it.status === 'en-casa') {
-    buy = '<p class="buy muted">Cubierto con lo que tienes en casa</p>';
-  } else {
-    buy = `<p class="buy warn-text">${esc(it.reason ?? '')}</p>`;
+    const what = it.lines.map((l) => `${l.packs} × ${packText(l.offer)}`).join(' + ');
+    const names = [...new Set(it.lines.map((l) => l.offer.product))].join(' / ');
+    buy = `<p class="buy"><b>Lleva ${esc(what)}</b></p><p class="prod" title="${esc(names)}">${esc(names)}</p>`;
   }
+  else if (it.status === 'en-casa') buy = '<p class="buy muted">Ya lo tienes en casa: no hay que comprarlo.</p>';
+  else buy = `<p class="buy">Necesitas ${esc(describeQty(it.needQty > 0 ? it.needQty : it.qty, ing))}. <span class="muted">${esc(SHORT_REASON[it.status] ?? it.reason ?? '')}</span></p>`;
+  const price = it.status === 'cotizado'
+    ? `<span class="price">${q(it.cents)}</span>`
+    : it.status === 'en-casa' ? `<span class="price muted">${q(0)}</span>` : '<span class="stamp-mark">Sin precio</span>';
+  const pills = `${st && it.status === 'cotizado' && st.tone !== 'saved' ? `<span class="pill ${st.tone}">${st.label}</span>` : ''}${it.fromFallback ? '<span class="pill user">Mi precio</span>' : ''}`;
+  const missing = ['sin-precio', 'agotado', 'marca-no-disponible', 'sin-conversion'].includes(it.status);
   return `<li class="item ${checked ? 'done' : ''}">
     <label class="tick"><input type="checkbox" data-action="check-item" data-ing="${it.ingredientId}" ${checked ? 'checked' : ''} aria-label="Marcar ${esc(ing.name)} como comprado"></label>
     <div class="item-main">
-      <div class="item-top">
-        <h4>${esc(ing.name[0].toUpperCase() + ing.name.slice(1))}</h4>
-        ${it.status === 'cotizado' ? `<span class="price">${q(it.cents)}</span>` : it.status === 'en-casa' ? `<span class="price muted">${q(0)}</span>` : it.status === 'sin-precio' ? '<span class="stamp-mark">Sin cotizar</span>' : `<span class="pill danger">${STATUS_TEXT[it.status]}</span>`}
-      </div>
-      <p class="need">Necesitas ${esc(describeQty(it.needQty > 0 ? it.needQty : it.qty, ing))}${it.approx ? ' ≈' : ''}${it.coveredQty > 0 && it.status !== 'en-casa' ? ` <span class="muted">(ya descontado lo de casa)</span>` : ''}</p>
-      ${buy}
-      <div class="tags">
-        ${['cotizado', 'en-casa'].includes(it.status) ? `<span class="pill ${tone}">${STATUS_TEXT[it.status]}</span>` : ''}
-        ${st && it.status === 'cotizado' ? `<span class="pill ${st.tone}">${st.label}</span>` : ''}
-        ${it.promoApplied ? '<span class="pill ok">Promoción aplicada</span>' : ''}
-        ${it.mixed ? '<span class="pill">Presentaciones combinadas</span>' : ''}
-        ${it.fromFallback ? '<span class="pill user">Mi precio</span>' : ''}
-        ${it.status === 'cotizado' && it.leftover > 0 ? `<span class="pill">Sobra ${esc(describeQty(it.leftover, ing))}</span>` : ''}
-      </div>
-      <div class="item-controls">
-        ${brandControl(it, ctx)}
-        ${promoControl(it, ctx)}
-        ${['sin-precio', 'agotado', 'marca-no-disponible', 'sin-conversion'].includes(it.status) ? `<button class="btn small" data-action="add-price-for" data-ing="${it.ingredientId}">${icon('mas')} Agregar precio</button>` : ''}
-      </div>
+      <div class="item-top"><h4>${esc(ing.name[0].toUpperCase() + ing.name.slice(1))}</h4>${price}</div>
+      <div class="buy-row"><div class="buy-text">${buy}</div>
+        <button class="btn link small more" data-action="item-more" data-ing="${it.ingredientId}" aria-expanded="${open}">${open ? 'Menos' : 'Detalles'}</button></div>
+      ${pills || missing ? `<div class="item-line">${pills}
+        ${missing ? `<button class="btn small" data-action="add-price-for" data-ing="${it.ingredientId}">${icon('mas')} Anotar precio</button>` : ''}
+      </div>` : ''}
       ${checked ? paidForm(it, ctx) : ''}
-      ${itemExplain(it, ctx)}
+      ${open ? `<div class="item-more">
+        <p class="need">Las recetas piden ${esc(describeQty(it.qty, ing))}${it.approx ? ' (aproximado)' : ''}${it.coveredQty > 0 && it.status !== 'en-casa' ? `; ya se descontó lo que tienes en casa` : ''}.</p>
+        ${it.status === 'cotizado' && it.leftover > 0 ? `<p class="small muted">Te sobrará ${esc(describeQty(it.leftover, ing))} para otra semana.</p>` : ''}
+        ${it.promoApplied ? '<p class="small"><span class="pill ok">Promoción aplicada</span></p>' : ''}
+        <div class="item-controls">${brandControl(it, ctx)}${promoControl(it, ctx)}</div>
+        ${itemExplain(it, ctx)}
+      </div>` : ''}
     </div>
   </li>`;
 }
+
+/** Una sola nota sobre el origen de los precios, en vez de repetirlo en cada producto. */
+function savedNote(items) {
+  const saved = items.filter((i) => i.status === 'cotizado' && i.offer?.status === 'guardado');
+  if (!saved.length) return '';
+  const dates = [...new Set(saved.map((i) => formatDate(i.offer.fetchedAt, false)))];
+  return `<p class="small"><span class="pill saved">Último precio guardado</span> Precios de la tienda en línea leídos el ${esc(dates.join(' y '))}; pueden haber cambiado. Los que no dicen nada más son de ahí.</p>`;
+}
+
+const SHORT_REASON = {
+  'sin-precio': 'Esta tienda no lo publica en línea.',
+  agotado: 'Aparece agotado en la tienda en línea.',
+  'marca-no-disponible': 'La marca que fijaste no está; puedes aceptar otra en Detalles.',
+  'sin-conversion': 'No se pudo calcular cuánto comprar con el tamaño que vende la tienda.',
+};
 
 /** Al marcar como comprado: lo que se pagó en la sucursal reemplaza el precio en línea de ese producto. */
 function paidForm(it, ctx) {
@@ -159,7 +172,7 @@ export function listText(ctx) {
     lines.push('');
   }
   const t = result.purchase.totals;
-  lines.push(`Total cotizado: ${q(t.purchaseCents)}${t.missing.length ? ` (faltan ${t.missing.length} por cotizar)` : ''}`);
+  lines.push(`Total estimado: ${q(t.purchaseCents)}${t.missing.length ? ` (sin contar ${t.missing.length} productos sin precio)` : ''}`);
   if (state.demo && state.stores.primary.startsWith('ejemplo')) lines.push('Nota: precios de ejemplo, ficticios.');
   return lines.join('\n');
 }
@@ -180,22 +193,23 @@ function singleStore(ctx) {
   const sample = state.stores.primary.startsWith('ejemplo');
   return `
   <div class="card store-pick">
-    <label class="field"><span class="label">Comprar todo en</span>
+    <label class="field"><span class="label">¿Dónde vas a comprar?</span>
       <select id="primary-store" data-action="set-primary-select">
         ${storeOpts.map((id) => `<option value="${id}" ${id === state.stores.primary ? 'selected' : ''}>${esc(storeLabel(id, state))}</option>`).join('')}
       </select></label>
-    ${state.stores.primary !== 'mis-precios' ? `<label class="field"><span class="label">Mis precios registrados</span>
+    ${state.stores.primary !== 'mis-precios' ? `<details class="opts"><summary>Opciones</summary><label class="field"><span class="label">Los precios que anotaste</span>
       <select id="use-my-prices" data-bind="useMyPrices" data-type="str">
         <option value="faltantes" ${state.useMyPrices === 'faltantes' ? 'selected' : ''}>Usarlos solo si falta precio</option>
         <option value="mas-barato" ${state.useMyPrices === 'mas-barato' ? 'selected' : ''}>Usar el más barato</option>
         <option value="no" ${state.useMyPrices === 'no' ? 'selected' : ''}>No usarlos</option>
-      </select></label>` : ''}
+      </select></label></details>` : ''}
     ${sample ? `<p class="note">${icon('info')}<span>Precios <b>ficticios de ejemplo</b>. No corresponden a ninguna tienda real.</span></p>` : ''}
   </div>
   <div class="card totals">
-    <div class="tot-main"><span class="eyebrow">A pagar</span><span class="big" data-tween="${t.purchaseCents}" data-tween-key="pagar">${q(t.purchaseCents)}</span>
-      ${t.missing.length ? `<span class="pill warn">+ ${t.missing.length} sin precio</span>` : '<span class="pill ok">Todo cotizado</span>'}</div>
-    <p class="muted small">${t.quoted} de ${t.toBuy} productos cotizados · ${t.inPantry} ya en casa</p>
+    <div class="tot-main"><span class="eyebrow">Total estimado</span><span class="big" data-tween="${t.purchaseCents}" data-tween-key="pagar">${q(t.purchaseCents)}</span>
+      ${t.missing.length ? `<span class="pill warn">+ ${t.missing.length} sin precio</span>` : '<span class="pill ok">Todo con precio</span>'}</div>
+    <p class="muted small">${t.toBuy} productos por comprar${t.missing.length ? `; ${t.missing.length} no tienen precio en esta tienda y no están sumados` : ''}${t.inPantry ? ` · ${t.inPantry} ya los tienes en casa` : ''}. Marca cada uno al echarlo al carrito.</p>
+    ${savedNote(result.purchase.items)}
     <div class="actions">
       <button class="btn" data-action="copy-list">${icon('copiar')} Copiar lista</button>
       <a class="btn" href="https://wa.me/?text=${encodeURIComponent(listText(ctx))}" target="_blank" rel="noopener noreferrer">${icon('whatsapp')} Compartir por WhatsApp</a>
@@ -288,7 +302,7 @@ export function viewCompras(ctx) {
   return `
   <div class="shop-head">
     <h2 class="h2">Compras</h2>
-    <div class="segmented" role="tablist" aria-label="Forma de comprar">${tab('single', 'Mi supermercado')}${tab('compare', 'Comparar')}${tab('combine', 'Combinar')}</div>
+    <div class="segmented" role="tablist" aria-label="Forma de comprar">${tab('single', 'Mi lista')}${tab('compare', 'Comparar tiendas')}${tab('combine', 'Combinar')}</div>
   </div>
   <div id="shop-panel" role="tabpanel" aria-labelledby="tab-${mode}">
     ${mode === 'single' ? singleStore(ctx) : mode === 'compare' ? compareView(ctx) : combineView(ctx)}

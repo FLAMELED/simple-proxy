@@ -61,3 +61,65 @@ test('robots.txt reales (2026-10-29): páginas de producto permitidas, búsqueda
   assert.equal(isAllowed(maxi, USER_AGENT, '/abarrotes?page=2&returnUrl=/x'), false);
   assert.equal(isAllowed(maxi, USER_AGENT, '/account/orders'), false);
 });
+
+import { classify } from '../scripts/snapshot-prices.mjs';
+import { embeddedDetails, allPresentations } from '../server/sources/product-page.mjs';
+import { INGREDIENTS } from '../src/data/ingredients.js';
+
+const rec = (product, spec = null) => ({ product, presentationFromSpec: spec });
+
+test('captura: solo se aceptan presentaciones inequívocas', () => {
+  // Peso variable: se excluye aunque tenga precio
+  assert.equal(classify(rec('Muslos Pollo Bandeja Peso Máximo 1.25Lb.'), INGREDIENTS['pollo-piezas'], 'muslos-x').reason, 'peso-variable');
+  assert.equal(classify(rec('Cebolla Blanca Red'), INGREDIENTS.cebolla, 'cebolla-blanca-red-3lb--aprox--1').reason, 'peso-variable');
+  // Nombre y ficha se contradicen (libra frente a 1 kg)
+  const t = classify(rec('Tomate De Cocina Libra - 7 Unidades Por Lb. Aproximadamente', { packQty: 1, packUnit: 'kg', detectedFrom: '1 kg' }), INGREDIENTS.tomate, 'tomate-de-cocina-libra');
+  assert.equal(t.reason, 'contradiccion');
+  // Sin tamaño
+  assert.equal(classify(rec('Tomate Cocina Red'), INGREDIENTS.tomate, 'tomate-cocina-red').reason, 'sin-presentacion');
+  // Tamaño desde la ficha
+  const a = classify(rec('Arroz Precocido Gallo Dorado', { packQty: 400, packUnit: 'g', detectedFrom: '400gr.' }), INGREDIENTS.arroz, 'arroz');
+  assert.deepEqual([a.ok, a.presentation.packQty, a.presentation.packUnit], [true, 400, 'g']);
+  // Se elige la medida compatible con el ingrediente: tortillas por unidad, no por gramos
+  const tor = classify(rec('Tortilla Tortiamigos de Maiz 20 uds 260 g'), INGREDIENTS.tortilla, 'tortilla');
+  assert.deepEqual([tor.presentation.packQty, tor.presentation.packUnit], [20, 'u']);
+  // Manojo de cilantro: no se convierte a peso
+  assert.equal(classify(rec('Cilantro 100 g'), INGREDIENTS.cilantro, 'cilantro').reason, 'sin-conversion');
+  // Revisión manual explícita y documentada
+  const ok = classify(rec('Tomate De Cocina Libra', { packQty: 1, packUnit: 'kg', detectedFrom: '1 kg' }), INGREDIENTS.tomate, 'x', { accept: { packQty: 1, packUnit: 'lb' }, reason: 'el nombre dice Libra' });
+  assert.equal(ok.ok, true);
+  assert.match(ok.presentation.detectedFrom, /revisión manual/);
+});
+
+test('datos incrustados: precio regular, promociones condicionadas, existencia (sintético)', () => {
+  const html = '"name":"Contenido Neto","originalName":"Contenido Neto","values":{"type":"json","json":["400gr."]}' +
+    '"discountHighlights":[],"teasers":[{"name":"2x1 con tarjeta"}],"Price":8.4,"ListPrice":9.9,"AvailableQuantity":0,"measurementUnit":"un","unitMultiplier":1.25';
+  const d = embeddedDetails(html);
+  assert.equal(d.netContent, '400gr.');
+  assert.deepEqual([d.price, d.listPrice, d.conditionalPromos, d.available], ['8.4', '9.9', true, false]);
+  assert.deepEqual(d.measurement, { unit: 'un', multiplier: 1.25 });
+  assert.equal(allPresentations('Arroz 1 Kilo').length, 1);
+});
+
+import REAL from '../src/data/real-prices.js';
+import { toBase } from '../src/engine/units.js';
+import { SOURCES as SRC } from '../server/sources/registry.mjs';
+
+test('captura real guardada: cada precio tiene origen, fecha, monto válido y presentación convertible', () => {
+  assert.ok(REAL.offers.length > 0);
+  const ids = new Set();
+  for (const o of REAL.offers) {
+    assert.ok(!ids.has(o.id), `duplicado ${o.id}`);
+    ids.add(o.id);
+    assert.ok(o.sourceUrl.startsWith(`${SRC[o.storeId].origin}/`), o.id);
+    assert.ok(!Number.isNaN(Date.parse(o.fetchedAt)), o.id);
+    assert.ok(Number.isInteger(o.priceCents) && o.priceCents > 0, o.id);
+    assert.equal(o.status, 'guardado');
+    assert.equal(o.channel, 'online');
+    assert.equal(o.branch, null); // sucursal no conocida: se indica, no se inventa
+    assert.ok(o.branchNote.length > 20);
+    assert.doesNotThrow(() => toBase(o.packQty, o.packUnit, INGREDIENTS[o.ingredientId]), o.id);
+    assert.ok(!/peso m[aá]ximo/i.test(o.product), `peso variable aceptado: ${o.id}`);
+  }
+  for (const e of REAL.excluded) assert.ok(e.reason && e.url, JSON.stringify(e));
+});

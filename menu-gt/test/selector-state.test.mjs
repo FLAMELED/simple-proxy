@@ -7,6 +7,15 @@ import { defaultState, planDays, exportState, importState, saveState, loadState,
 import { computeAll, buildMenu, allOffers } from '../src/engine/index.js';
 
 const days = (n) => Array.from({ length: n }, (_, k) => ({ index: k, weekend: k >= 5 }));
+/** Estado con las tiendas de ejemplo (ficticias) para pruebas reproducibles. */
+const demoState = () => {
+  const s = defaultState('2026-10-19');
+  s.demo = true;
+  s.useSavedPrices = false; // sin la captura real, que cambia con el tiempo
+  s.stores.selected = ['ejemplo-a', 'ejemplo-b'];
+  s.stores.primary = 'ejemplo-a';
+  return s;
+};
 const basePrefs = { allergies: [], excludedIngredients: [], excludedProteins: [], equipment: ALL_EQUIPMENT, maxMinutes: {} };
 
 test('el menú generado respeta alergias, exclusiones y vegetariano', () => {
@@ -58,7 +67,7 @@ test('la variedad evita repetir recetas mientras haya opciones', () => {
 });
 
 test('las alternativas explican qué cambia', () => {
-  const state = defaultState('2026-10-19');
+  const state = demoState();
   const offers = allOffers(state).filter((o) => o.storeId === 'ejemplo-a');
   const slot = { id: 's', day: 0, meal: 'almuerzo', recipeId: 'caldo-res', servings: 4 };
   const alts = alternativesFor(slot, { slots: [slot], prefs: state.prefs, recipes: RECIPES, recipeById: RECIPE_BY_ID, ingredients: INGREDIENTS, offers, limit: 50 });
@@ -71,7 +80,7 @@ test('las alternativas explican qué cambia', () => {
 test('guardar y recuperar conserva el plan, presupuesto, despensa y preferencias', () => {
   const memory = new Map();
   const storage = { getItem: (k) => memory.get(k) ?? null, setItem: (k, v) => memory.set(k, v) };
-  const s = defaultState('2026-10-19');
+  const s = demoState();
   s.household.budgetCents = 123456;
   s.pantry.push({ id: 'p1', ingredientId: 'arroz', qty: 2, unit: 'lb' });
   s.prefs.allergies = ['huevo'];
@@ -98,7 +107,7 @@ test('período: días, fines de semana y días omitidos', () => {
 });
 
 test('cálculo completo con datos de ejemplo: coherente y sin precios faltantes tratados como cero', () => {
-  const s = defaultState('2026-10-19');
+  const s = demoState();
   s.household.meals = ['desayuno', 'almuerzo', 'cena'];
   s.plan.slots = buildMenu(s).slots;
   const r = computeAll(s);

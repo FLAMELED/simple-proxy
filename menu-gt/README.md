@@ -10,9 +10,10 @@ Planificador de comidas y compras para hogares de Guatemala: menú semanal edita
 cd menu-gt
 npm install          # solo herramientas de prueba y empaquetado
 npm start            # http://localhost:5173 (app + consulta de precios)
-npm test             # 32 pruebas del motor, selector, guardado y capa de precios
-npm run test:e2e     # 30 comprobaciones en Chromium a 320 y 390 px
+npm test             # 35 pruebas del motor, selector, guardado y capa de precios
+npm run test:e2e     # 32 comprobaciones en Chromium a 320 y 390 px
 npm run build:artifact   # dist/mercadito.html, un solo archivo sin servidor
+NODE_USE_ENV_PROXY=1 node scripts/snapshot-prices.mjs   # vuelve a capturar precios reales (≈6 min)
 ```
 
 ## Estructura
@@ -57,7 +58,8 @@ Las tazas se convierten a gramos solo con el peso por taza de cada ingrediente; 
 | "Mi precio", copiar lista, compartir por WhatsApp | Implementado |
 | Guardado local, exportar e importar | Implementado (solo este navegador; en el Artifact, la descarga pide confirmación) |
 | Precios de "Súper Ejemplo A/B" | Ficticios, solo para probar |
-| Precios reales de Paiz, La Torre, Walmart, Maxi Despensa | No cargados. Consulta por página de producto implementada pero **no verificada en vivo** (ver `docs/INVESTIGACION-PRECIOS.md`) |
+| Precios reales de Paiz y La Torre | 94 precios leídos el 2026-10-29 de sus páginas públicas de producto, como "último precio guardado", sin sucursal (ver `docs/INVESTIGACION-PRECIOS.md`) |
+| Consulta en vivo por página de producto | Verificada en Paiz, La Torre y Walmart con el servidor local; Maxi Despensa sin precio en el producto probado |
 | Modelo de IA para interpretar preferencias | No conectado |
 | Nutrición, calorías, metas de salud | Fuera de alcance |
 | Cuentas, sincronización, pagos, compras directas | Fuera de alcance |

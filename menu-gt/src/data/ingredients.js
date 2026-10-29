@@ -77,7 +77,7 @@ const list = [
   { id: 'remolacha', name: 'remolacha', cat: 'verduras', base: 'g', unitG: 82, unitGSource: USDA, unitName: 'remolacha', unitNamePlural: 'remolachas' },
   { id: 'elote', name: 'elote', cat: 'verduras', base: 'u', unitName: 'elote', unitNamePlural: 'elotes' },
   { id: 'aguacate', name: 'aguacate', cat: 'verduras', base: 'u', unitName: 'aguacate', unitNamePlural: 'aguacates' },
-  { id: 'platano', name: 'plátano maduro', cat: 'verduras', base: 'u', unitName: 'plátano', unitNamePlural: 'plátanos' },
+  { id: 'platano', name: 'plátano maduro', cat: 'verduras', base: 'u', unitG: 179, unitGSource: `${USDA}, mediano`, unitName: 'plátano', unitNamePlural: 'plátanos' },
   { id: 'lechuga', name: 'lechuga', cat: 'verduras', base: 'u', unitName: 'lechuga', unitNamePlural: 'lechugas' },
 
   // Hierbas y hojas: se compran por manojo; no se convierten a peso.
@@ -86,10 +86,10 @@ const list = [
   { id: 'cebollin', name: 'cebollín', cat: 'hierbas', base: 'manojo' },
   { id: 'chipilin', name: 'chipilín', cat: 'hierbas', base: 'manojo' },
   { id: 'hierba-mora', name: 'hierba mora', cat: 'hierbas', base: 'manojo' },
-  { id: 'limon', name: 'limón', cat: 'hierbas', base: 'u', unitName: 'limón', unitNamePlural: 'limones' },
+  { id: 'limon', name: 'limón', cat: 'hierbas', base: 'u', unitG: 67, unitGSource: `${USDA} (lima)`, unitName: 'limón', unitNamePlural: 'limones' },
 
   // Frutas
-  { id: 'banano', name: 'banano', cat: 'frutas', base: 'u', unitName: 'banano', unitNamePlural: 'bananos' },
+  { id: 'banano', name: 'banano', cat: 'frutas', base: 'u', unitG: 118, unitGSource: `${USDA}, mediano`, unitName: 'banano', unitNamePlural: 'bananos' },
   { id: 'papaya', name: 'papaya', cat: 'frutas', base: 'g' },
   { id: 'pina', name: 'piña', cat: 'frutas', base: 'u', unitName: 'piña', unitNamePlural: 'piñas' },
   { id: 'mango', name: 'mango', cat: 'frutas', base: 'u', unitName: 'mango', unitNamePlural: 'mangos' },

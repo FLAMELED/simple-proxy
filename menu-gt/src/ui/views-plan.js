@@ -5,6 +5,10 @@ import { checkRecipe } from '../engine/selector.js';
 import { RECIPE_BY_ID } from '../data/recipes.js';
 import { INGREDIENTS } from '../data/ingredients.js';
 import { DEPARTAMENTOS } from '../data/stores.js';
+import { REAL_SNAPSHOT } from '../engine/index.js';
+import { formatDate } from './common.js';
+
+export const snapshotDate = () => (REAL_SNAPSHOT.offers.length ? formatDate(REAL_SNAPSHOT.finished, false) : 'sin captura');
 
 export function periodText(days) {
   const active = days.filter((d) => !d.skipped);
@@ -54,7 +58,7 @@ function quickStart(ctx) {
         </select>
       </div>
     </div>
-    <p class="note">${icon('info')}<span>Las tiendas y precios iniciales son <strong>ejemplos ficticios</strong> para que veas cómo funciona. Puedes elegir Paiz, La Torre u otras en Ajustes y registrar precios reales.</span></p>
+    <p class="note">${icon('info')}<span>Los precios de <strong>Paiz y La Torre</strong> son los publicados en sus tiendas en línea el ${esc(snapshotDate())}, sin sucursal elegida. Lo que falte lo registras con "Mi precio". Puedes cambiar de tienda en Ajustes.</span></p>
     <button class="btn primary wide" data-action="finish-onboarding">Crear mi menú</button>
   </section>`;
 }

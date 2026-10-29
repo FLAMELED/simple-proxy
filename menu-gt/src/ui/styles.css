@@ -381,3 +381,9 @@ dialog#sheet::backdrop { background: rgb(15 20 18 / 45%); }
 .eq-details summary::-webkit-details-marker { display: none; }
 .eq-details summary h3::after { content: ' ▾'; color: var(--accent); }
 .eq-details[open] summary h3::after { content: ' ▴'; }
+
+.store-prices summary { cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 44px; list-style: none; }
+.store-prices summary::-webkit-details-marker { display: none; }
+.store-prices summary h4::after { content: ' ▾'; color: var(--accent); }
+.store-prices[open] summary h4::after { content: ' ▴'; }
+.store-prices[open] { gap: 12px; }

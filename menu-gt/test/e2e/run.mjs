@@ -48,6 +48,35 @@ for (const width of [320, 390]) {
     await noOverflow(page, 'semana');
   });
 
+  await check(`[${width}px] precios reales: último precio guardado, con origen y sin ganar si faltan productos`, async () => {
+    const r = await page.evaluate(() => {
+      const c = window.__mercadito.ctx;
+      const quoted = c.result.purchase.items.filter((i) => i.status === 'cotizado');
+      return {
+        primary: c.state.stores.primary,
+        quoted: quoted.length,
+        allSaved: quoted.every((i) => i.offer.status === 'guardado' && i.offer.sourceUrl?.startsWith('https://www.paiz.com.gt/')),
+        missingNull: c.result.purchase.items.filter((i) => !['cotizado', 'en-casa'].includes(i.status)).every((i) => i.cents === null),
+        winnerComplete: !c.result.comparison.winner || c.result.comparison.rows.find((x) => x.storeId === c.result.comparison.winner).totals.complete,
+      };
+    });
+    assert.equal(r.primary, 'paiz');
+    assert.ok(r.quoted > 0, 'hay productos cotizados con precios reales');
+    assert.ok(r.allSaved);
+    assert.ok(r.missingNull);
+    assert.ok(r.winnerComplete);
+    await go(page, 'compras');
+    assert.ok(await page.locator('.pill.saved', { hasText: 'Último precio guardado' }).count());
+    await go(page, 'precios');
+    assert.ok(await page.locator('#snap-title').count());
+    await noOverflow(page, 'precios reales');
+    if (width === 390) await page.screenshot({ path: `${OUT}/precios-reales-${width}.png`, fullPage: true });
+    // A partir de aquí se usan las tiendas de ejemplo (ficticias) para casos reproducibles
+    await page.click('.loc');
+    await page.click('[data-action="toggle-demo"]');
+    await page.evaluate(() => window.__mercadito.actions['set-primary']({ store: 'ejemplo-a' }));
+  });
+
   for (const v of ['menu', 'compras', 'despensa', 'precios']) {
     await check(`[${width}px] vista ${v} sin desbordamiento`, async () => {
       await go(page, v);

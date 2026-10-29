@@ -2,9 +2,46 @@
 
 Fecha: 2026-10-19. Ubicación de referencia: Chiquimula.
 
-## Resultado
+## Resultado (actualizado 2026-10-29)
 
-**Ninguna conexión automática quedó comprobada.** Ningún precio real está cargado en la app.
+**La consulta de páginas públicas de producto funciona en Paiz, La Torre y Walmart.** Con los dominios permitidos en la red del entorno, el servidor leyó robots.txt y páginas de producto reales. La app trae **94 precios reales guardados** (56 de Paiz y 38 de La Torre) leídos el 2026-10-29, cada uno con URL, fecha y hora, disponibilidad y nota de sucursal. Se muestran como "Último precio guardado".
+
+### Qué publica cada página (comprobado)
+
+| Dato | Paiz | La Torre | Walmart | Maxi Despensa |
+|---|---|---|---|---|
+| Precio en GTQ (JSON-LD `schema.org/Product`) | Sí | Sí | Sí | No en el producto probado (sin existencia) |
+| Marca y disponibilidad | Sí | Sí | Sí | — |
+| Tamaño del empaque | Casi siempre en el nombre; si no, en la ficha "Tamaño (Gramaje, Volumen)" | Casi nunca en el nombre; en la ficha "Contenido Neto" | Como Paiz | — |
+| Precio regular frente a rebajado | Sí (`ListPrice`) | Sí | Sí | — |
+| Promociones con condiciones | Lista incrustada, sin estructura; no se aplican | Igual | Igual | — |
+| Sucursal | La página no la indica | El sitio permite elegir tienda; se leyó sin tienda elegida | No la indica | — |
+
+### Captura del 2026-10-29
+
+- Productos elegidos a mano desde los **sitemaps** que cada sitio declara en su robots.txt (17,895 URLs en Paiz y 15,397 en La Torre). No se usaron páginas de búsqueda.
+- 120 páginas, una cada 3 s. Script: `scripts/snapshot-prices.mjs`; lista: `src/data/product-urls.json`; resultado: `src/data/real-prices.js`; datos crudos: `data/capturas/ultima-captura.json`.
+- **Aceptados: 94. Excluidos: 25**, cada uno con su motivo en la app (Precios → "productos no se cargaron y por qué"):
+  - **Peso variable (6):** carnes de La Torre ("bandeja peso máximo 1.25 lb") y cebolla ("3 lb aprox."). El cobro real depende del peso, así que no se pueden tratar como empaque fijo.
+  - **No disponibles en línea (6):** productos de Paiz (limón, banano, mango, ajo, canela y un consomé) aparecen con precio 0 y existencia 0.
+  - **Sin tamaño publicado (7):** varias verduras de La Torre (papa, güisquil, zanahoria, repollo, chile pimiento, papaya) y el elote de Paiz.
+  - **Sin equivalencia justificada (5):** repollo y ajo por unidad, y tortillas o tostadas vendidas por gramos para recetas que piden unidades.
+  - **Error de lectura (1):** una página de azúcar de La Torre no publicó datos estructurados; se usó otra marca.
+- **13 productos de La Torre aparecen "agotados"** sin tienda elegida (leche, tomate, aguacate, cilantro, entre otros). Se guardan como agotados y no se usan para cotizar. Puede que la existencia dependa de la sucursal; no se verificó.
+- **Revisión manual (4 casos, documentados en `src/data/price-reviews.json`):** carne molida (la ficha decía "15 g" por el 15 % de grasa), tomate (la ficha decía 1 kg y el nombre libra), zanahoria y queso fresco (el nombre dice 350 g y la ficha 370 g; se usa 350 g para no subestimar el costo).
+- **Un producto se retiró** del mapa por estar mal elegido: "Plátano Maduro Pro" de 70.9 g no es plátano fresco.
+
+### Límites que siguen
+
+- Los precios son de la tienda **en línea**, sin sucursal. No se verificó si coinciden con las tiendas de Chiquimula.
+- Términos de uso de los sitios: no se encontró una política que prohíba la consulta de páginas públicas, pero tampoco una autorización explícita. El método es de bajo volumen y respeta robots.txt.
+- Hay que volver a capturar periódicamente; la app muestra la fecha de cada precio.
+
+---
+
+## Resultado inicial (2026-10-19)
+
+Ninguna conexión automática quedó comprobada en esa fecha: la red del entorno bloqueaba los cuatro dominios.
 
 | Cadena | Sitio | Qué se pudo comprobar | Acceso en vivo desde este entorno |
 |---|---|---|---|
@@ -23,8 +60,8 @@ Con el conector Firecrawl (consulta en vivo, `maxAge: 0`) se obtuvieron dos robo
 |---|---|---|
 | La Torre | Leído (HTTP 200) | Permite las páginas de producto (`/…/p`). Prohíbe `/busca/*` (búsqueda), `/checkout/*`, `/account/*`, `/login/*`, `/quick-view/*`, `/img/*`. Su `Sitemap` apunta a un dominio de plantilla (`lojavazia.com.br`), lo que sugiere una plataforma de comercio estándar sin personalizar ese archivo. |
 | Maxi Despensa | Leído (HTTP 200) | Permite las páginas de producto. Prohíbe `/checkout/`, `/account/`, `/login/*`, `/quick-view/*`, `/404` y URLs con `returnUrl`. Declara los sitemaps de Walmart, Maxi Despensa y Paiz: parece un robots.txt compartido por los tres sitios, pero no se confirmó en Paiz ni en Walmart. |
-| Paiz | **No leído** | El sistema de seguridad de este entorno bloqueó la consulta por Firecrawl: estos dominios están bloqueados a propósito por la política de red, y usar un servicio externo para llegar a ellos se consideró una forma de eludirla. |
-| Walmart | **No leído** | Mismo motivo que Paiz. |
+| Paiz | Leído después de permitir el dominio | Igual al de Maxi Despensa: los tres sitios de Walmart comparten robots.txt. |
+| Walmart | Leído después de permitir el dominio | Igual al de Maxi Despensa. |
 
 Conclusión: el método elegido (una página de producto a la vez) es compatible con lo que permiten los robots.txt leídos; las búsquedas (`/busca/`) no deben usarse. Siguen sin verificarse los términos de uso, el precio por sucursal y la presencia de datos estructurados en las páginas de producto.
 

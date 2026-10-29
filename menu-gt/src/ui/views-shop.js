@@ -27,6 +27,8 @@ function sourceBlock(offer, ctx) {
     <div><dt>Sucursal o zona</dt><dd>${branch ? esc(branch) : 'No indicada'}${offer.branchNote ? ` <span class="muted">(${esc(offer.branchNote)})</span>` : ''}</dd></div>
     <div><dt>Disponibilidad</dt><dd>${esc(offer.availability)}</dd></div>
     ${offer.promo ? `<div><dt>Promoción</dt><dd>${esc(offer.promo.text ?? '')}</dd></div>` : ''}
+    ${offer.presentationSource ? `<div><dt>Presentación</dt><dd>${esc(offer.presentationSource)}</dd></div>` : ''}
+    ${offer.notes?.length ? `<div><dt>Notas</dt><dd>${offer.notes.map(esc).join(' ')}</dd></div>` : ''}
     ${offer.sourceUrl ? `<div><dt>Página</dt><dd><a href="${esc(offer.sourceUrl)}" target="_blank" rel="noopener noreferrer">${icon('enlace')} Ver origen</a></dd></div>` : ''}
   </dl>`;
 }

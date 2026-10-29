@@ -1,0 +1,4371 @@
+{
+ "started": "2026-10-29T05:42:06.436Z",
+ "results": {
+  "https://www.paiz.com.gt/arroz-blanco-albay-2000-grs/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Arroz Albay Blanco Empaque - 2000 g",
+     "brand": "ALBAY",
+     "presentation": {
+      "packQty": 2000,
+      "packUnit": "g",
+      "detectedFrom": "2000 g"
+     },
+     "priceCents": 2770,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 2000,
+      "packUnit": "g",
+      "detectedFrom": "2000 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 2000,
+      "packUnit": "g",
+      "detectedFrom": "2000 gr"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/arroz-blanco-albay-2000-grs/p",
+     "fetchedAt": "2026-10-29T05:42:09.577Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/arroz-suli-blanco-800gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Arroz Suli Blanco 800 g",
+     "brand": "SULI",
+     "presentation": {
+      "packQty": 800,
+      "packUnit": "g",
+      "detectedFrom": "800 g"
+     },
+     "priceCents": 1225,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 800,
+      "packUnit": "g",
+      "detectedFrom": "800 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 800,
+      "packUnit": "g",
+      "detectedFrom": "800 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/arroz-suli-blanco-800gr/p",
+     "fetchedAt": "2026-10-29T05:42:12.556Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/frijol-negro-suli-bolsa-400-g-5/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Frijol Suli Negro Bolsa - 400 g",
+     "brand": "SULI",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "priceCents": 570,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/frijol-negro-suli-bolsa-400-g-5/p",
+     "fetchedAt": "2026-10-29T05:42:15.558Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/frijol-negro-la-campana-800-g-8/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Frijol La Campana Negro - 800 g",
+     "brand": "LA CAMPANA",
+     "presentation": {
+      "packQty": 800,
+      "packUnit": "g",
+      "detectedFrom": "800 g"
+     },
+     "priceCents": 1850,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 800,
+      "packUnit": "g",
+      "detectedFrom": "800 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 800,
+      "packUnit": "g",
+      "detectedFrom": "800 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/frijol-negro-la-campana-800-g-8/p",
+     "fetchedAt": "2026-10-29T05:42:18.561Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/frijol-la-chula-volteados-negros-227-g-5/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Frijol La Chula Volteados Negros - 227 g",
+     "brand": "LA CHULA",
+     "presentation": {
+      "packQty": 227,
+      "packUnit": "g",
+      "detectedFrom": "227 g"
+     },
+     "priceCents": 435,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 227,
+      "packUnit": "g",
+      "detectedFrom": "227 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 227,
+      "packUnit": "g",
+      "detectedFrom": "227 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/frijol-la-chula-volteados-negros-227-g-5/p",
+     "fetchedAt": "2026-10-29T05:42:21.564Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/frijol-negro-la-chula-volteados-1000-g-0/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Frijol negro La Chula volteados - 1000 g",
+     "brand": "LA CHULA",
+     "presentation": {
+      "packQty": 1000,
+      "packUnit": "g",
+      "detectedFrom": "1000 g"
+     },
+     "priceCents": 1100,
+     "regularPriceCents": 1280,
+     "presentationFromName": {
+      "packQty": 1000,
+      "packUnit": "g",
+      "detectedFrom": "1000 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 1000,
+      "packUnit": "g",
+      "detectedFrom": "1000 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "Precio regular publicado 12.80; el precio registrado ya es el rebajado."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/frijol-negro-la-chula-volteados-1000-g-0/p",
+     "fetchedAt": "2026-10-29T05:42:24.564Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/lentejas-don-lazaro-400-gr-0/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Lentejas Don Lazaro - 400 g",
+     "brand": "DON LAZARO",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "priceCents": 1000,
+     "regularPriceCents": 1190,
+     "presentationFromName": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "Precio regular publicado 11.90; el precio registrado ya es el rebajado."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/lentejas-don-lazaro-400-gr-0/p",
+     "fetchedAt": "2026-10-29T05:42:27.567Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/harina-de-maiz-maseca-820gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Harina Maseca de Maíz Extra Suave - 820 g",
+     "brand": "MASECA",
+     "presentation": {
+      "packQty": 820,
+      "packUnit": "g",
+      "detectedFrom": "820 g"
+     },
+     "priceCents": 1300,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 820,
+      "packUnit": "g",
+      "detectedFrom": "820 g"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/harina-de-maiz-maseca-820gr/p",
+     "fetchedAt": "2026-10-29T05:42:30.575Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/harina-suli-de-maiz-907gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Harina De Maíz Suli - 907 g",
+     "brand": "SULI",
+     "presentation": {
+      "packQty": 907,
+      "packUnit": "g",
+      "detectedFrom": "907 g"
+     },
+     "priceCents": 845,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 907,
+      "packUnit": "g",
+      "detectedFrom": "907 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 907,
+      "packUnit": "g",
+      "detectedFrom": "907 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/harina-suli-de-maiz-907gr/p",
+     "fetchedAt": "2026-10-29T05:42:33.571Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/avena-albay-en-hojuela-400gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Avena Alvay Hojuela Empaque  - 400 g",
+     "brand": "ALBAY",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "priceCents": 750,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/avena-albay-en-hojuela-400gr/p",
+     "fetchedAt": "2026-10-29T05:42:36.574Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/barilla-spaghetti-5-500-g-gt9608-4-1/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Pasta Barilla Spaghetti Nº5 - 500 g",
+     "brand": "BARILLA",
+     "presentation": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500 g"
+     },
+     "priceCents": 1800,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/barilla-spaghetti-5-500-g-gt9608-4-1/p",
+     "fetchedAt": "2026-10-29T05:42:39.579Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/azucar-ca-a-real-blanca-2500g/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Azúcar Blanca Caña Real, Fortificada con Vitamina A  - 2500g",
+     "brand": "CA§A REAL",
+     "presentation": {
+      "packQty": 2500,
+      "packUnit": "g",
+      "detectedFrom": "2500g"
+     },
+     "priceCents": 2020,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 2500,
+      "packUnit": "g",
+      "detectedFrom": "2500g"
+     },
+     "presentationFromSpec": {
+      "packQty": 5.43,
+      "packUnit": "lb",
+      "detectedFrom": "5.43 lb"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/azucar-ca-a-real-blanca-2500g/p",
+     "fetchedAt": "2026-10-29T05:42:42.593Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/azucar-ca-a-real-blanca-500gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Azúcar Caña Real, Blanca - 500g",
+     "brand": "CA§A REAL",
+     "presentation": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500g"
+     },
+     "priceCents": 445,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500g"
+     },
+     "presentationFromSpec": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/azucar-ca-a-real-blanca-500gr/p",
+     "fetchedAt": "2026-10-29T05:42:45.591Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/la-sirena-atun-agua-142gr-5/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Atún La Sirena trozos en agua - 142 g",
+     "brand": "LA SIRENA",
+     "presentation": {
+      "packQty": 142,
+      "packUnit": "g",
+      "detectedFrom": "142 g"
+     },
+     "priceCents": 1500,
+     "regularPriceCents": 1730,
+     "presentationFromName": {
+      "packQty": 142,
+      "packUnit": "g",
+      "detectedFrom": "142 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 142,
+      "packUnit": "g",
+      "detectedFrom": "142 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "Precio regular publicado 17.30; el precio registrado ya es el rebajado."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/la-sirena-atun-agua-142gr-5/p",
+     "fetchedAt": "2026-10-29T05:42:48.595Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/especias-sasson-pepitoria-bolsa-50gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Especias Sasson Pepitoria Bolsa - 50 g",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 50,
+      "packUnit": "g",
+      "detectedFrom": "50 g"
+     },
+     "priceCents": 1000,
+     "regularPriceCents": 1175,
+     "presentationFromName": {
+      "packQty": 50,
+      "packUnit": "g",
+      "detectedFrom": "50 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 50,
+      "packUnit": "g",
+      "detectedFrom": "50 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "Precio regular publicado 11.75; el precio registrado ya es el rebajado."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/especias-sasson-pepitoria-bolsa-50gr/p",
+     "fetchedAt": "2026-10-29T05:42:51.591Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/ajonjoli-de-la-provincia-56gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Ajonjoli  De La Provincia - 56 g",
+     "brand": "DE LA PROVINCIA",
+     "presentation": {
+      "packQty": 56,
+      "packUnit": "g",
+      "detectedFrom": "56 g"
+     },
+     "priceCents": 550,
+     "regularPriceCents": 645,
+     "presentationFromName": {
+      "packQty": 56,
+      "packUnit": "g",
+      "detectedFrom": "56 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 56,
+      "packUnit": "g",
+      "detectedFrom": "56 gr"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "Precio regular publicado 6.45; el precio registrado ya es el rebajado."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/ajonjoli-de-la-provincia-56gr/p",
+     "fetchedAt": "2026-10-29T05:42:54.591Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/especias-sasson-chile-guaque-bolsa-30gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Especias Sasson Chile Guaque Bolsa - 30 g",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "30 g"
+     },
+     "priceCents": 845,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "30 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "30 gr"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/especias-sasson-chile-guaque-bolsa-30gr/p",
+     "fetchedAt": "2026-10-29T05:42:57.593Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/especias-sasson-chile-pasa-bolsa-30gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Especias Sasson Chile Pasa Bolsa - 30 g",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "30 g"
+     },
+     "priceCents": 895,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "30 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "30 gr"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/especias-sasson-chile-pasa-bolsa-30gr/p",
+     "fetchedAt": "2026-10-29T05:43:00.598Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/filete-pio-lindo-de-pechuga-1lb/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Filete Pio Lindo Pechuga de Pollo Bandeja",
+     "brand": "PIO LINDO",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "ficha: 1 lb"
+     },
+     "priceCents": 4025,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "1 lb"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/filete-pio-lindo-de-pechuga-1lb/p",
+     "fetchedAt": "2026-10-29T05:43:03.600Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/muslos-pio-lindo-bandeja-1lb/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Muslos Pio Lindo Bandeja Lb - Precio indicado por Libra",
+     "brand": "PIO LINDO",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "priceCents": 1850,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "1 lb"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/muslos-pio-lindo-bandeja-1lb/p",
+     "fetchedAt": "2026-10-29T05:43:06.595Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/guisar-trocitos-res-don-cristobal-1lb/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Trocitos Don Cristóbal de Res para Guisar - Precio Indicado por libra",
+     "brand": "DON CRISTOBAL",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "priceCents": 3650,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "1 lb"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/guisar-trocitos-res-don-cristobal-1lb/p",
+     "fetchedAt": "2026-10-29T05:43:09.599Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/carne-molida-especial-empacado-85carne-15grasa-1lb/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Carne Molida Especial Don Cristóbal 85% Carne y 15% Grasa Empacado - Precio Indicado por libra",
+     "brand": "DON CRISTOBAL",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "priceCents": 3900,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "presentationFromSpec": {
+      "packQty": 15,
+      "packUnit": "g",
+      "detectedFrom": "15 g"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/carne-molida-especial-empacado-85carne-15grasa-1lb/p",
+     "fetchedAt": "2026-10-29T05:43:12.600Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/hilachas-de-res-don-cristobal-1lb/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Carne Don Cristobal para hilachas de res - Precio indicado por libra",
+     "brand": "DON CRISTOBAL",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "priceCents": 3700,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "1 lb"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/hilachas-de-res-don-cristobal-1lb/p",
+     "fetchedAt": "2026-10-29T05:43:15.606Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/costilla-de-cerdo-porcionado-lb-gt9390-4-5/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Costilla De Cerdo Porcionado lb",
+     "brand": "GRANEL",
+     "presentation": {
+      "packQty": 454,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 454 g"
+     },
+     "priceCents": 2250,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 454,
+      "packUnit": "g",
+      "detectedFrom": "454 g"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 0.5
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/costilla-de-cerdo-porcionado-lb-gt9390-4-5/p",
+     "fetchedAt": "2026-10-29T05:43:18.607Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/longaniza-fud-454gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Longaniza Fud - 454 g",
+     "brand": "FUD",
+     "presentation": {
+      "packQty": 454,
+      "packUnit": "g",
+      "detectedFrom": "454 g"
+     },
+     "priceCents": 3050,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 454,
+      "packUnit": "g",
+      "detectedFrom": "454 g"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/longaniza-fud-454gr/p",
+     "fetchedAt": "2026-10-29T05:43:21.610Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/huevo-don-yemo-grande-blanco-30-unidades/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Huevo de Gallina Don Yemo Blanco Grande - 30 Unidades",
+     "brand": "DON YEMO",
+     "presentation": {
+      "packQty": 30,
+      "packUnit": "u",
+      "detectedFrom": "30 unidades"
+     },
+     "priceCents": 4150,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 30,
+      "packUnit": "u",
+      "detectedFrom": "30 unidades"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/huevo-don-yemo-grande-blanco-30-unidades/p",
+     "fetchedAt": "2026-10-29T05:43:24.617Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/huevo-de-patio-tierra-nueva-15-unidades/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Huevo De Patio Tierra Nueva - 15 Uds",
+     "brand": "GRANJAS TIERRA NUEVA",
+     "presentation": {
+      "packQty": 15,
+      "packUnit": "u",
+      "detectedFrom": "15 uds"
+     },
+     "priceCents": 2600,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 15,
+      "packUnit": "u",
+      "detectedFrom": "15 uds"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/huevo-de-patio-tierra-nueva-15-unidades/p",
+     "fetchedAt": "2026-10-29T05:43:27.613Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/queso-trebolac-fresco-370-g-0/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Queso Trebolac tipo fresco - 350 g",
+     "brand": "TREBOLAC",
+     "presentation": {
+      "packQty": 350,
+      "packUnit": "g",
+      "detectedFrom": "350 g"
+     },
+     "priceCents": 3200,
+     "regularPriceCents": 3800,
+     "presentationFromName": {
+      "packQty": 350,
+      "packUnit": "g",
+      "detectedFrom": "350 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 370,
+      "packUnit": "g",
+      "detectedFrom": "370gr"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "Precio regular publicado 38.00; el precio registrado ya es el rebajado."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/queso-trebolac-fresco-370-g-0/p",
+     "fetchedAt": "2026-10-29T05:43:30.614Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/queso-seco-al-estilo-zacapa-227-g-0/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Queso Seco Al Estilo Zacapa - 227 g",
+     "brand": "ZACAPA",
+     "presentation": {
+      "packQty": 227,
+      "packUnit": "g",
+      "detectedFrom": "227 g"
+     },
+     "priceCents": 2050,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 227,
+      "packUnit": "g",
+      "detectedFrom": "227 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 227,
+      "packUnit": "g",
+      "detectedFrom": "227gr"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/queso-seco-al-estilo-zacapa-227-g-0/p",
+     "fetchedAt": "2026-10-29T05:43:33.618Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/crema-foremost-natural-450ml/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Crema Foremost Natural - 450ml",
+     "brand": "FOREMOST",
+     "presentation": {
+      "packQty": 450,
+      "packUnit": "ml",
+      "detectedFrom": "450ml"
+     },
+     "priceCents": 2125,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 450,
+      "packUnit": "ml",
+      "detectedFrom": "450ml"
+     },
+     "presentationFromSpec": {
+      "packQty": 450,
+      "packUnit": "ml",
+      "detectedFrom": "450 Ml"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/crema-foremost-natural-450ml/p",
+     "fetchedAt": "2026-10-29T05:43:36.620Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/leche-suli-entera-uht-1-l-2/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Leche Entera Suli UHT - 1 L",
+     "brand": "SULI",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "l",
+      "detectedFrom": "1 l"
+     },
+     "priceCents": 1275,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "l",
+      "detectedFrom": "1 l"
+     },
+     "presentationFromSpec": {
+      "packQty": 795,
+      "packUnit": "g",
+      "detectedFrom": "795 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/leche-suli-entera-uht-1-l-2/p",
+     "fetchedAt": "2026-10-29T05:43:39.622Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/tomate-de-cocina-libra/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Tomate De Cocina Libra - 7 Unidades Por Lb. Aproximadamente",
+     "brand": "HORTIFRUTI",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "libra"
+     },
+     "priceCents": 645,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "libra"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "kg",
+      "detectedFrom": "1 kg"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 0.25
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/tomate-de-cocina-libra/p",
+     "fetchedAt": "2026-10-29T05:43:42.624Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/cebollas-blanca-libra/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Cebollas Blanca Libra - 2 a 5 Unidades Por Lb. Aproximadamente",
+     "brand": "HORTIFRUTI",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "libra"
+     },
+     "priceCents": 1160,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "libra"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 0.25
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/cebollas-blanca-libra/p",
+     "fetchedAt": "2026-10-29T05:43:45.627Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/ajo-hortifruti-500g-0/p": {
+   "status": 422,
+   "json": {
+    "ok": false,
+    "unavailable": true,
+    "error": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+   }
+  },
+  "https://www.paiz.com.gt/chile-pimiento-libra/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Chile pimiento Hortifruti  - Precio indicado por libra",
+     "brand": "HORTIFRUTI",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "priceCents": 770,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "por libra"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 0.25
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/chile-pimiento-libra/p",
+     "fetchedAt": "2026-10-29T05:43:51.633Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/papa-super-granel-libra/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Papa Super Granel Libra - 3 a 4 Unidades por Libra Aproximadamente",
+     "brand": "SIN MARCA",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "libra"
+     },
+     "priceCents": 990,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "libra"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 0.5
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/papa-super-granel-libra/p",
+     "fetchedAt": "2026-10-29T05:43:54.629Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/guisquil-1-unidad/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Guisquil - 1 Unidad",
+     "brand": "DEL FRESCO",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1 unidad"
+     },
+     "priceCents": 585,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1 unidad"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/guisquil-1-unidad/p",
+     "fetchedAt": "2026-10-29T05:43:57.635Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/guicoyito-bandeja-1-unidad/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Guicoyito - Precio Indicado por Bandeja",
+     "brand": "DEL FRESCO",
+     "presentation": {
+      "packQty": 300,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 300 g"
+     },
+     "priceCents": 1825,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 300,
+      "packUnit": "g",
+      "detectedFrom": "300 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/guicoyito-bandeja-1-unidad/p",
+     "fetchedAt": "2026-10-29T05:44:00.636Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/ejotes-go-fresh-precortado-1lb/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Ejotes Go Fresh Precortado - 454 g",
+     "brand": "GO FRESH",
+     "presentation": {
+      "packQty": 454,
+      "packUnit": "g",
+      "detectedFrom": "454 g"
+     },
+     "priceCents": 1625,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 454,
+      "packUnit": "g",
+      "detectedFrom": "454 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 454,
+      "packUnit": "g",
+      "detectedFrom": "454 gr"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/ejotes-go-fresh-precortado-1lb/p",
+     "fetchedAt": "2026-10-29T05:44:03.642Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/zanahoria-granel-libra/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Zanahoria Granel Libra - 2 a 3 Unidades Aproximadamente",
+     "brand": "DEL FRESCO",
+     "presentation": {
+      "packQty": 3,
+      "packUnit": "u",
+      "detectedFrom": "3 unidades"
+     },
+     "priceCents": 500,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 3,
+      "packUnit": "u",
+      "detectedFrom": "3 unidades"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "1 lb"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 0.5
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/zanahoria-granel-libra/p",
+     "fetchedAt": "2026-10-29T05:44:06.642Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/repollo-blanco-1-unidad/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Repollo Blanco - 1 Unidad",
+     "brand": "HORTIFRUTI",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1 unidad"
+     },
+     "priceCents": 1310,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1 unidad"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/repollo-blanco-1-unidad/p",
+     "fetchedAt": "2026-10-29T05:44:09.645Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/remolacha-granel-media-docena/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Remolacha Media Docena",
+     "brand": "DEL FRESCO",
+     "presentation": {
+      "packQty": 6,
+      "packUnit": "u",
+      "detectedFrom": "media docena"
+     },
+     "priceCents": 1470,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 6,
+      "packUnit": "u",
+      "detectedFrom": "media docena"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/remolacha-granel-media-docena/p",
+     "fetchedAt": "2026-10-29T05:44:12.647Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/elote-criollo-bandeja/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Elote Criollo en Bolsa",
+     "brand": "DEL FRESCO",
+     "presentation": null,
+     "priceCents": 800,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/elote-criollo-bandeja/p",
+     "fetchedAt": "2026-10-29T05:44:15.655Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/aguacate-hass-unidad-3/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Aguacate Hass - unidad",
+     "brand": "SIN MARCA",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "unidad"
+     },
+     "priceCents": 445,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "unidad"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/aguacate-hass-unidad-3/p",
+     "fetchedAt": "2026-10-29T05:44:18.657Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/platano-libra-gt4562-4-5/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Platano Libra",
+     "brand": "HORTIFRUTI",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "libra"
+     },
+     "priceCents": 365,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "libra"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 0.5
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/platano-libra-gt4562-4-5/p",
+     "fetchedAt": "2026-10-29T05:44:21.659Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/cilantro-manojo-unidad/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Cilantro Manojo Unidad",
+     "brand": "SIN MARCA",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "priceCents": 850,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/cilantro-manojo-unidad/p",
+     "fetchedAt": "2026-10-29T05:44:24.656Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/cebollin-en-manojo/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Cebollin En Manojo",
+     "brand": "HORTIFRUTI",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "priceCents": 560,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/cebollin-en-manojo/p",
+     "fetchedAt": "2026-10-29T05:44:27.654Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/limon-persa-1-unidad/p": {
+   "status": 422,
+   "json": {
+    "ok": false,
+    "unavailable": true,
+    "error": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+   }
+  },
+  "https://www.paiz.com.gt/banano-libra-gt9912-4-6/p": {
+   "status": 422,
+   "json": {
+    "ok": false,
+    "unavailable": true,
+    "error": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+   }
+  },
+  "https://www.paiz.com.gt/papaya-libr-gt6-4-6/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Papaya Libr",
+     "brand": "SIN MARCA",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "ficha: 1 lb"
+     },
+     "priceCents": 560,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "lb",
+      "detectedFrom": "1 lb"
+     },
+     "measurement": {
+      "unit": "kg",
+      "multiplier": 3
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/papaya-libr-gt6-4-6/p",
+     "fetchedAt": "2026-10-29T05:44:36.668Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/mango-ataulfo-unidad/p": {
+   "status": 422,
+   "json": {
+    "ok": false,
+    "unavailable": true,
+    "error": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+   }
+  },
+  "https://www.paiz.com.gt/tortilla-tortiamigos-de-maiz-20-uds-260-g-4/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Tortilla Tortiamigos De Maiz 20 Uds - 260 g",
+     "brand": "TORTIAMIGOS",
+     "presentation": {
+      "packQty": 260,
+      "packUnit": "g",
+      "detectedFrom": "260 g"
+     },
+     "priceCents": 680,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 260,
+      "packUnit": "g",
+      "detectedFrom": "260 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 260,
+      "packUnit": "g",
+      "detectedFrom": "260 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/tortilla-tortiamigos-de-maiz-20-uds-260-g-4/p",
+     "fetchedAt": "2026-10-29T05:44:42.670Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/tostadas-d-aqui-de-maiz-25-unidades/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Tostadas D&apos; Aqui De Maíz - 25 Uds",
+     "brand": "D¾AQUI",
+     "presentation": {
+      "packQty": 25,
+      "packUnit": "u",
+      "detectedFrom": "25 uds"
+     },
+     "priceCents": 1645,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 25,
+      "packUnit": "u",
+      "detectedFrom": "25 uds"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/tostadas-d-aqui-de-maiz-25-unidades/p",
+     "fetchedAt": "2026-10-29T05:44:45.677Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/pan-frances-tradicional-fila-de-8-unidad-und-gt4006-4-1/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Pan Frances Tradicional Fila - 8 Unidades",
+     "brand": "SIN MARCA",
+     "presentation": {
+      "packQty": 8,
+      "packUnit": "u",
+      "detectedFrom": "8 unidades"
+     },
+     "priceCents": 590,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 8,
+      "packUnit": "u",
+      "detectedFrom": "8 unidades"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "La página muestra promociones con condiciones; no se aplicaron."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/pan-frances-tradicional-fila-de-8-unidad-und-gt4006-4-1/p",
+     "fetchedAt": "2026-10-29T05:44:48.681Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/pan-molido-bimbo-500-gr-6/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Pan Molido Bimbo 500 Gr",
+     "brand": "BIMBO",
+     "presentation": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500 gr"
+     },
+     "priceCents": 2215,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500 gr"
+     },
+     "presentationFromSpec": {
+      "packQty": 500,
+      "packUnit": "g",
+      "detectedFrom": "500 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/pan-molido-bimbo-500-gr-6/p",
+     "fetchedAt": "2026-10-29T05:44:51.681Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/aceite-ideal-vegetal-800ml/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Aceite Ideal Vegetal - 800 ml",
+     "brand": "IDEAL",
+     "presentation": {
+      "packQty": 800,
+      "packUnit": "ml",
+      "detectedFrom": "800 ml"
+     },
+     "priceCents": 2255,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 800,
+      "packUnit": "ml",
+      "detectedFrom": "800 ml"
+     },
+     "presentationFromSpec": {
+      "packQty": 800,
+      "packUnit": "ml",
+      "detectedFrom": "800 Ml"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/aceite-ideal-vegetal-800ml/p",
+     "fetchedAt": "2026-10-29T05:44:54.679Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/sal-refinada-sabemas-400gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Sal Refinada Sabemas - 400 g",
+     "brand": "SABEMAS",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "priceCents": 195,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/sal-refinada-sabemas-400gr/p",
+     "fetchedAt": "2026-10-29T05:44:57.681Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/knorr-consome-pollo-38-gr-7/p": {
+   "status": 422,
+   "json": {
+    "ok": false,
+    "unavailable": true,
+    "error": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+   }
+  },
+  "https://www.paiz.com.gt/consome-de-pollo-sam-bolsa-225-g/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Consomé De Pollo Sam Bolsa - 225 g",
+     "brand": "SAM",
+     "presentation": {
+      "packQty": 225,
+      "packUnit": "g",
+      "detectedFrom": "225 g"
+     },
+     "priceCents": 535,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 225,
+      "packUnit": "g",
+      "detectedFrom": "225 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 225,
+      "packUnit": "g",
+      "detectedFrom": "225 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/consome-de-pollo-sam-bolsa-225-g/p",
+     "fetchedAt": "2026-10-29T05:45:03.691Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/especias-sasson-achiote-masa-bolsa-45gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Especias Sassón achiote para masa - 45 g",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 45,
+      "packUnit": "g",
+      "detectedFrom": "45 g"
+     },
+     "priceCents": 745,
+     "regularPriceCents": 850,
+     "presentationFromName": {
+      "packQty": 45,
+      "packUnit": "g",
+      "detectedFrom": "45 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 45,
+      "packUnit": "g",
+      "detectedFrom": "45 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "Precio regular publicado 8.50; el precio registrado ya es el rebajado."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/especias-sasson-achiote-masa-bolsa-45gr/p",
+     "fetchedAt": "2026-10-29T05:45:06.694Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/salsa-regia-soya-150ml/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Salsa China De Soya Regia 150Ml Botella",
+     "brand": "REGIA",
+     "presentation": {
+      "packQty": 150,
+      "packUnit": "ml",
+      "detectedFrom": "150ml"
+     },
+     "priceCents": 490,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 150,
+      "packUnit": "ml",
+      "detectedFrom": "150ml"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/salsa-regia-soya-150ml/p",
+     "fetchedAt": "2026-10-29T05:45:09.685Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/epecias-sasson-laurel-10gr/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Epecias Sasson Laurel - 10 g",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 10,
+      "packUnit": "g",
+      "detectedFrom": "10 g"
+     },
+     "priceCents": 625,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 10,
+      "packUnit": "g",
+      "detectedFrom": "10 g"
+     },
+     "presentationFromSpec": {
+      "packQty": 10,
+      "packUnit": "g",
+      "detectedFrom": "10 g"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/epecias-sasson-laurel-10gr/p",
+     "fetchedAt": "2026-10-29T05:45:12.692Z"
+    }
+   }
+  },
+  "https://www.paiz.com.gt/canela-malher-raja-bolsa-22gr/p": {
+   "status": 422,
+   "json": {
+    "ok": false,
+    "unavailable": true,
+    "error": "La página indica que el producto no está disponible en línea (precio 0, existencia 0). No hay precio que registrar."
+   }
+  },
+  "https://www.paiz.com.gt/vinagre-sharp-767ml/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "paiz",
+    "record": {
+     "product": "Vinagre Sharp Natural - 767 ml",
+     "brand": "SHARP",
+     "presentation": {
+      "packQty": 767,
+      "packUnit": "ml",
+      "detectedFrom": "767 ml"
+     },
+     "priceCents": 1250,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 767,
+      "packUnit": "ml",
+      "detectedFrom": "767 ml"
+     },
+     "presentationFromSpec": {
+      "packQty": 767,
+      "packUnit": "ml",
+      "detectedFrom": "767 Ml"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.paiz.com.gt/vinagre-sharp-767ml/p",
+     "fetchedAt": "2026-10-29T05:45:18.695Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/arroz-blanco-molinero-87369/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Arroz Blanco Molinero",
+     "brand": "EL MOLINERO",
+     "presentation": {
+      "packQty": 10,
+      "packUnit": "lb",
+      "detectedFrom": "ficha: 10lb."
+     },
+     "priceCents": 7545,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 10,
+      "packUnit": "lb",
+      "detectedFrom": "10lb."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/arroz-blanco-molinero-87369/p",
+     "fetchedAt": "2026-10-29T05:49:08.760Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/arroz-blanco-macarena-54760/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Arroz Blanco Macarena",
+     "brand": "MACARENA",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 400gr."
+     },
+     "priceCents": 705,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/arroz-blanco-macarena-54760/p",
+     "fetchedAt": "2026-10-29T05:49:11.739Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/frijol-negro-sasson-2081295/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Frijol Negro Sassón",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 400gr."
+     },
+     "priceCents": 1220,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/frijol-negro-sasson-2081295/p",
+     "fetchedAt": "2026-10-29T05:49:14.755Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/frijoles-volteados-negros-ducal-2037961/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Frijoles Volteados Negros Ducal",
+     "brand": "DUCAL",
+     "presentation": {
+      "packQty": 993,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 993gr."
+     },
+     "priceCents": 1545,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 993,
+      "packUnit": "g",
+      "detectedFrom": "993gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/frijoles-volteados-negros-ducal-2037961/p",
+     "fetchedAt": "2026-10-29T05:49:18.882Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/lentejas-don-lazaro-2088274/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Lentejas Don Lázaro",
+     "brand": "DON LAZARO",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 400gr."
+     },
+     "priceCents": 1250,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/lentejas-don-lazaro-2088274/p",
+     "fetchedAt": "2026-10-29T05:49:20.760Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/harina-maiz-maseca-2070981/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Harina Maíz Maseca",
+     "brand": "MASECA",
+     "presentation": {
+      "packQty": 1.6,
+      "packUnit": "kg",
+      "detectedFrom": "ficha: 1.6kg."
+     },
+     "priceCents": 2575,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1.6,
+      "packUnit": "kg",
+      "detectedFrom": "1.6kg."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/harina-maiz-maseca-2070981/p",
+     "fetchedAt": "2026-10-29T05:49:23.755Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/avena-hojuelas-quaker-845/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Avena Hojuelas Quaker",
+     "brand": "QUAKER",
+     "presentation": {
+      "packQty": 360,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 360gr."
+     },
+     "priceCents": 1330,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 360,
+      "packUnit": "g",
+      "detectedFrom": "360gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/avena-hojuelas-quaker-845/p",
+     "fetchedAt": "2026-10-29T05:49:26.761Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/azucar-blanca-caña-real-4755/p": {
+   "status": 422,
+   "json": {
+    "ok": false,
+    "error": "La página no publica datos estructurados de producto; no se extrajo ningún precio."
+   }
+  },
+  "https://www.latorre.com.gt/azucar-blanca-don-justo-cabal-95749/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Azúcar Blanca Don Justo Cabal",
+     "brand": "DON JUSTO CABAL",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "kg",
+      "detectedFrom": "ficha: 1kg."
+     },
+     "priceCents": 905,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "kg",
+      "detectedFrom": "1kg."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/azucar-blanca-don-justo-cabal-95749/p",
+     "fetchedAt": "2026-10-29T05:49:32.759Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/pepitoria-sasson-doypack-10842/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Pepitoria Sassón Doypack",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 50,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 50gr."
+     },
+     "priceCents": 1055,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 50,
+      "packUnit": "g",
+      "detectedFrom": "50gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/pepitoria-sasson-doypack-10842/p",
+     "fetchedAt": "2026-10-29T05:49:37.008Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/ajonjoli-sasson-doypack-10811/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Ajonjolí Sassón Doypack",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 75,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 75gr."
+     },
+     "priceCents": 680,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 75,
+      "packUnit": "g",
+      "detectedFrom": "75gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/ajonjoli-sasson-doypack-10811/p",
+     "fetchedAt": "2026-10-29T05:49:38.770Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/chile-guaque-sasson-doypack-10843/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Chile Guaque Sassón Doypack",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 30gr."
+     },
+     "priceCents": 855,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "30gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/chile-guaque-sasson-doypack-10843/p",
+     "fetchedAt": "2026-10-29T05:49:41.762Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/chile-pasa-entero-sasson-doypack-10856/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Chile Pasa Entero Sassón Doypack",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 30gr."
+     },
+     "priceCents": 895,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 30,
+      "packUnit": "g",
+      "detectedFrom": "30gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/chile-pasa-entero-sasson-doypack-10856/p",
+     "fetchedAt": "2026-10-29T05:49:45.444Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/pechuga-pollo-deshuesada-pio-lindo-bandeja-peso-maximo-1-10lb--2007938/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Pechuga Pollo Deshuesada Pio Lindo Bandeja Peso Máximo 1.10Lb.",
+     "brand": "PIO LINDO",
+     "presentation": {
+      "packQty": 1.1,
+      "packUnit": "lb",
+      "detectedFrom": "1.10lb"
+     },
+     "priceCents": 3671,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1.1,
+      "packUnit": "lb",
+      "detectedFrom": "1.10lb"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1.1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/pechuga-pollo-deshuesada-pio-lindo-bandeja-peso-maximo-1-10lb--2007938/p",
+     "fetchedAt": "2026-10-29T05:49:47.760Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/muslos-pollo-pio-lindo-bandeja-peso-maximo-1-25lb--89807/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Muslos Pollo Pio Lindo Bandeja Peso Máximo 1.25Lb.",
+     "brand": "PIO LINDO",
+     "presentation": {
+      "packQty": 1.25,
+      "packUnit": "lb",
+      "detectedFrom": "1.25lb"
+     },
+     "priceCents": 2015,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1.25,
+      "packUnit": "lb",
+      "detectedFrom": "1.25lb"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1.25
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/muslos-pollo-pio-lindo-bandeja-peso-maximo-1-25lb--89807/p",
+     "fetchedAt": "2026-10-29T05:49:50.765Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/carne-para-guisar-bandeja-peso-maximo-1-40lb--102305/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Carne Para Guisar Bandeja Peso Máximo 1.40Lb.",
+     "brand": "UNI",
+     "presentation": {
+      "packQty": 1.4,
+      "packUnit": "lb",
+      "detectedFrom": "1.40lb"
+     },
+     "priceCents": 3833,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1.4,
+      "packUnit": "lb",
+      "detectedFrom": "1.40lb"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1.4
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/carne-para-guisar-bandeja-peso-maximo-1-40lb--102305/p",
+     "fetchedAt": "2026-10-29T05:49:53.772Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/carne-molida-especial-bandeja-peso-maximo-peso-maximo-1-20lb--2055328/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Carne Molida Especial Bandeja Peso Máximo Peso Máximo 1.20Lb.",
+     "brand": "UNIDELY",
+     "presentation": {
+      "packQty": 1.2,
+      "packUnit": "lb",
+      "detectedFrom": "1.20lb"
+     },
+     "priceCents": 2780,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1.2,
+      "packUnit": "lb",
+      "detectedFrom": "1.20lb"
+     },
+     "presentationFromSpec": {
+      "packQty": 1.2,
+      "packUnit": "lb",
+      "detectedFrom": "Precio 1.2 Lb Aproximado"
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1.2
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/carne-molida-especial-bandeja-peso-maximo-peso-maximo-1-20lb--2055328/p",
+     "fetchedAt": "2026-10-29T05:49:57.485Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/carne-hilachas-1-40lb--aprox--bandeja-102298/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Carne Hilachas 1.40Lb. Aprox. Bandeja",
+     "brand": "UNI",
+     "presentation": {
+      "packQty": 1.4,
+      "packUnit": "lb",
+      "detectedFrom": "1.40lb"
+     },
+     "priceCents": 3873,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1.4,
+      "packUnit": "lb",
+      "detectedFrom": "1.40lb"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1.4
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/carne-hilachas-1-40lb--aprox--bandeja-102298/p",
+     "fetchedAt": "2026-10-29T05:49:59.767Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/longaniza-criolla-toledo-16981/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Longaniza Criolla Toledo",
+     "brand": "TOLEDO",
+     "presentation": {
+      "packQty": 230,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 230gr."
+     },
+     "priceCents": 1565,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 230,
+      "packUnit": "g",
+      "detectedFrom": "230gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/longaniza-criolla-toledo-16981/p",
+     "fetchedAt": "2026-10-29T05:50:03.677Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/huevos-blancos-grande-fatima-2044418/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Huevos Blancos Grande Fátima",
+     "brand": "FATIMA",
+     "presentation": {
+      "packQty": 12,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 12und."
+     },
+     "priceCents": 1905,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 12,
+      "packUnit": "u",
+      "detectedFrom": "12und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/huevos-blancos-grande-fatima-2044418/p",
+     "fetchedAt": "2026-10-29T05:50:05.765Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/queso-fresco-chivolac-47569/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Queso Fresco Chivolac",
+     "brand": "CHIVOLAC",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 400gr."
+     },
+     "priceCents": 3950,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/queso-fresco-chivolac-47569/p",
+     "fetchedAt": "2026-10-29T05:50:08.774Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/queso-seco-jutiapa-san-julian-2023396/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Queso Seco Jutiapa San Julián",
+     "brand": "SAN JULIAN",
+     "presentation": {
+      "packQty": 250,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 250gr."
+     },
+     "priceCents": 3440,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 250,
+      "packUnit": "g",
+      "detectedFrom": "250gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/queso-seco-jutiapa-san-julian-2023396/p",
+     "fetchedAt": "2026-10-29T05:50:11.782Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/crema-pura-foremost-91386/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Crema Pura Foremost",
+     "brand": "FOREMOST",
+     "presentation": {
+      "packQty": 225,
+      "packUnit": "ml",
+      "detectedFrom": "ficha: 225ml."
+     },
+     "priceCents": 1340,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 225,
+      "packUnit": "ml",
+      "detectedFrom": "225ml."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/crema-pura-foremost-91386/p",
+     "fetchedAt": "2026-10-29T05:50:14.781Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/leche-entera-foremost-11601/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Leche Entera Foremost",
+     "brand": "FOREMOST",
+     "presentation": {
+      "packQty": 1.8,
+      "packUnit": "l",
+      "detectedFrom": "ficha: 1.8lt."
+     },
+     "priceCents": 2530,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1.8,
+      "packUnit": "l",
+      "detectedFrom": "1.8lt."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/leche-entera-foremost-11601/p",
+     "fetchedAt": "2026-10-29T05:50:17.779Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/tomate-cocina-red-56093/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Tomate Cocina Red",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 2,
+      "packUnit": "lb",
+      "detectedFrom": "ficha: 2lb."
+     },
+     "priceCents": 1325,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 2,
+      "packUnit": "lb",
+      "detectedFrom": "2lb."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/tomate-cocina-red-56093/p",
+     "fetchedAt": "2026-10-29T05:50:20.771Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/miltomate-marielita-bandeja-24665/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Miltomate Marielita Bandeja",
+     "brand": "MARIELITA",
+     "presentation": {
+      "packQty": 453,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 453gr."
+     },
+     "priceCents": 1475,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 453,
+      "packUnit": "g",
+      "detectedFrom": "453gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/miltomate-marielita-bandeja-24665/p",
+     "fetchedAt": "2026-10-29T05:50:23.781Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/cebolla-blanca-red-3lb--aprox--24661/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Cebolla Blanca Red 3Lb. Aprox.",
+     "brand": "MARIELITA",
+     "presentation": {
+      "packQty": 3,
+      "packUnit": "lb",
+      "detectedFrom": "3lb"
+     },
+     "priceCents": 3530,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 3,
+      "packUnit": "lb",
+      "detectedFrom": "3lb"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/cebolla-blanca-red-3lb--aprox--24661/p",
+     "fetchedAt": "2026-10-29T05:50:26.805Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/ajo-super-24274/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Ajo Súper",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 1und."
+     },
+     "priceCents": 885,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/ajo-super-24274/p",
+     "fetchedAt": "2026-10-29T05:50:29.785Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/chile-pimiento-24165true/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Chile Pimiento",
+     "brand": "BT",
+     "presentation": null,
+     "priceCents": 828,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "lb",
+      "multiplier": 0.41
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/chile-pimiento-24165true/p",
+     "fetchedAt": "2026-10-29T05:50:33.939Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/papa-24172true/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Papa",
+     "brand": "BT",
+     "presentation": null,
+     "priceCents": 904,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "lb",
+      "multiplier": 0.46
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/papa-24172true/p",
+     "fetchedAt": "2026-10-29T05:50:35.773Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/guisquil-24238/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Güisquil",
+     "brand": "BT",
+     "presentation": null,
+     "priceCents": 590,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/guisquil-24238/p",
+     "fetchedAt": "2026-10-29T05:50:38.787Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/guicoyito-el-eden-bandeja-24647/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Guicoyito El Edén Bandeja",
+     "brand": "EDEN",
+     "presentation": {
+      "packQty": 6,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 6und."
+     },
+     "priceCents": 2205,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 6,
+      "packUnit": "u",
+      "detectedFrom": "6und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/guicoyito-el-eden-bandeja-24647/p",
+     "fetchedAt": "2026-10-29T05:50:41.852Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/ejote-el-eden-bandeja-24582/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Ejote El Edén Bandeja",
+     "brand": "EDEN",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 1und."
+     },
+     "priceCents": 1765,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/ejote-el-eden-bandeja-24582/p",
+     "fetchedAt": "2026-10-29T05:50:46.050Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/zanahoria-62815true/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Zanahoria",
+     "brand": "BT",
+     "presentation": null,
+     "priceCents": 449,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "lb",
+      "multiplier": 0.9
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/zanahoria-62815true/p",
+     "fetchedAt": "2026-10-29T05:50:48.746Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/repollo-blanco-24331/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Repollo Blanco",
+     "brand": "BT",
+     "presentation": null,
+     "priceCents": 1315,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/repollo-blanco-24331/p",
+     "fetchedAt": "2026-10-29T05:50:50.791Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/remolacha-46604/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Remolacha",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 1und."
+     },
+     "priceCents": 335,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/remolacha-46604/p",
+     "fetchedAt": "2026-10-29T05:50:53.794Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/elote-criollo-frutos-del-atlantico-bandeja-24470/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Elote Criollo Frutos Del Atlántico Bandeja",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 1und."
+     },
+     "priceCents": 810,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/elote-criollo-frutos-del-atlantico-bandeja-24470/p",
+     "fetchedAt": "2026-10-29T05:50:56.795Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/aguacate-hass-red-24657/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Aguacate Hass Red",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 6,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 6und."
+     },
+     "priceCents": 2945,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 6,
+      "packUnit": "u",
+      "detectedFrom": "6und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/aguacate-hass-red-24657/p",
+     "fetchedAt": "2026-10-29T05:50:59.804Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/platano-maduro-pro-2082630/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Plátano Maduro Pro",
+     "brand": "PRO",
+     "presentation": {
+      "packQty": 70.9,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 70.9gr."
+     },
+     "priceCents": 850,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 70.9,
+      "packUnit": "g",
+      "detectedFrom": "70.9gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/platano-maduro-pro-2082630/p",
+     "fetchedAt": "2026-10-29T05:51:02.797Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/lechuga-romana-24463/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Lechuga Romana",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 1und."
+     },
+     "priceCents": 410,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/lechuga-romana-24463/p",
+     "fetchedAt": "2026-10-29T05:51:05.797Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/cilantro-manojo-107943/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Cilantro Manojo",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "priceCents": 480,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/cilantro-manojo-107943/p",
+     "fetchedAt": "2026-10-29T05:51:08.804Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/hierbabuena-manojo-24241/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Hierbabuena Manojo",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "priceCents": 530,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/hierbabuena-manojo-24241/p",
+     "fetchedAt": "2026-10-29T05:51:12.940Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/cebollin-manojo-24471/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Cebollín Manojo",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "priceCents": 590,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 1,
+      "packUnit": "manojo",
+      "detectedFrom": "manojo"
+     },
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/cebollin-manojo-24471/p",
+     "fetchedAt": "2026-10-29T05:51:14.804Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/limon-persa-24188/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Limón Persa",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "ficha: 1und."
+     },
+     "priceCents": 180,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 1,
+      "packUnit": "u",
+      "detectedFrom": "1und."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "agotado",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/limon-persa-24188/p",
+     "fetchedAt": "2026-10-29T05:51:18.437Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/banano-6-unidades-98857true/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Banano 6 Unidades",
+     "brand": "BT",
+     "presentation": {
+      "packQty": 6,
+      "packUnit": "u",
+      "detectedFrom": "6 unidades"
+     },
+     "priceCents": 308,
+     "regularPriceCents": null,
+     "presentationFromName": {
+      "packQty": 6,
+      "packUnit": "u",
+      "detectedFrom": "6 unidades"
+     },
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "lb",
+      "multiplier": 3
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/banano-6-unidades-98857true/p",
+     "fetchedAt": "2026-10-29T05:51:20.815Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/papaya-la-carreta-97036true/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Papaya La Carreta",
+     "brand": "KAYA PAYA",
+     "presentation": null,
+     "priceCents": 601,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": null,
+     "measurement": {
+      "unit": "lb",
+      "multiplier": 6
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/papaya-la-carreta-97036true/p",
+     "fetchedAt": "2026-10-29T05:51:23.795Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/tortillas-maiz-tortiamigos-81893/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Tortillas Maíz Tortiamigos",
+     "brand": "TORTIAMIGOS",
+     "presentation": {
+      "packQty": 390,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 390gr."
+     },
+     "priceCents": 780,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 390,
+      "packUnit": "g",
+      "detectedFrom": "390gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/tortillas-maiz-tortiamigos-81893/p",
+     "fetchedAt": "2026-10-29T05:51:27.502Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/tostadas-maiz-boca2-63729/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Tostadas Maíz Boca2",
+     "brand": "BOCA2",
+     "presentation": {
+      "packQty": 485,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 485gr."
+     },
+     "priceCents": 1625,
+     "regularPriceCents": 2235,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 485,
+      "packUnit": "g",
+      "detectedFrom": "485gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [
+      "Precio regular publicado 22.35; el precio registrado ya es el rebajado."
+     ],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/tostadas-maiz-boca2-63729/p",
+     "fetchedAt": "2026-10-29T05:51:29.817Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/aceite-vegetal-aureola-91970/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Aceite Vegetal Aureola",
+     "brand": "AUREOLA",
+     "presentation": {
+      "packQty": 800,
+      "packUnit": "ml",
+      "detectedFrom": "ficha: 800ml."
+     },
+     "priceCents": 1875,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 800,
+      "packUnit": "ml",
+      "detectedFrom": "800ml."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/aceite-vegetal-aureola-91970/p",
+     "fetchedAt": "2026-10-29T05:51:32.818Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/sal-yodada-refinada-salita-bolsa-94037/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Sal Yodada Refinada Salita Bolsa",
+     "brand": "SALITA",
+     "presentation": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 400gr."
+     },
+     "priceCents": 190,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 400,
+      "packUnit": "g",
+      "detectedFrom": "400gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/sal-yodada-refinada-salita-bolsa-94037/p",
+     "fetchedAt": "2026-10-29T05:51:36.691Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/consome-pollo-knorr-2081784/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Consomé Pollo Knorr",
+     "brand": "KNORR",
+     "presentation": {
+      "packQty": 9.5,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 9.5gr."
+     },
+     "priceCents": 375,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 9.5,
+      "packUnit": "g",
+      "detectedFrom": "9.5gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/consome-pollo-knorr-2081784/p",
+     "fetchedAt": "2026-10-29T05:51:38.816Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/achiote-juanitas-bolsa-49387/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Achiote Juanitas Bolsa",
+     "brand": "JUANITAS",
+     "presentation": {
+      "packQty": 35,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 35gr."
+     },
+     "priceCents": 480,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 35,
+      "packUnit": "g",
+      "detectedFrom": "35gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/achiote-juanitas-bolsa-49387/p",
+     "fetchedAt": "2026-10-29T05:51:42.609Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/salsa-soya-ina-399/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Salsa Soya Ina",
+     "brand": "INA",
+     "presentation": {
+      "packQty": 148,
+      "packUnit": "ml",
+      "detectedFrom": "ficha: 148ml."
+     },
+     "priceCents": 625,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 148,
+      "packUnit": "ml",
+      "detectedFrom": "148ml."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/salsa-soya-ina-399/p",
+     "fetchedAt": "2026-10-29T05:51:45.815Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/laurel-en-hojas-malher-de-la-huerta-2077314/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Laurel En Hojas Malher De La Huerta",
+     "brand": "MALHER",
+     "presentation": {
+      "packQty": 7,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 7gr."
+     },
+     "priceCents": 665,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 7,
+      "packUnit": "g",
+      "detectedFrom": "7gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/laurel-en-hojas-malher-de-la-huerta-2077314/p",
+     "fetchedAt": "2026-10-29T05:51:47.818Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/canela-raja-sasson-doypack-10838/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Canela Raja Sassón Doypack",
+     "brand": "SASSON",
+     "presentation": {
+      "packQty": 20,
+      "packUnit": "g",
+      "detectedFrom": "ficha: 20gr."
+     },
+     "priceCents": 900,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 20,
+      "packUnit": "g",
+      "detectedFrom": "20gr."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/canela-raja-sasson-doypack-10838/p",
+     "fetchedAt": "2026-10-29T05:51:50.822Z"
+    }
+   }
+  },
+  "https://www.latorre.com.gt/vinagre-blanco-heinz-17896/p": {
+   "status": 200,
+   "json": {
+    "ok": true,
+    "storeId": "la-torre",
+    "record": {
+     "product": "Vinagre Blanco Heinz",
+     "brand": "HEINZ",
+     "presentation": {
+      "packQty": 473,
+      "packUnit": "ml",
+      "detectedFrom": "ficha: 473ml."
+     },
+     "priceCents": 2290,
+     "regularPriceCents": null,
+     "presentationFromName": null,
+     "presentationFromSpec": {
+      "packQty": 473,
+      "packUnit": "ml",
+      "detectedFrom": "473ml."
+     },
+     "measurement": {
+      "unit": "un",
+      "multiplier": 1
+     },
+     "notes": [],
+     "isRange": false,
+     "availability": "disponible",
+     "promotion": null,
+     "channel": "online",
+     "branch": null,
+     "branchNote": "Precio publicado en la tienda en línea. La página no indica sucursal; puede no coincidir con una tienda física.",
+     "sourceUrl": "https://www.latorre.com.gt/vinagre-blanco-heinz-17896/p",
+     "fetchedAt": "2026-10-29T05:51:53.826Z"
+    }
+   }
+  }
+ },
+ "finished": "2026-10-29T05:51:53.830Z",
+ "refreshed": {
+  "la-torre": "2026-10-29T05:51:53.830Z"
+ }
+}

@@ -8,14 +8,21 @@ import { servingCost, alternativesFor, generateMenu } from './selector.js';
 import { INGREDIENTS } from '../data/ingredients.js';
 import { RECIPES, RECIPE_BY_ID } from '../data/recipes.js';
 import { sampleOffers } from '../data/sample-prices.js';
+import REAL from '../data/real-prices.js';
 import { planDays } from '../state/state.js';
 
 let SAMPLE_CACHE = null;
 const samples = () => (SAMPLE_CACHE ??= sampleOffers());
 
+/** Precios reales capturados de páginas públicas (último precio guardado). */
+export const REAL_SNAPSHOT = REAL;
+
 /** Todas las ofertas disponibles, cada una con su origen. */
 export function allOffers(state) {
-  return [...(state.demo ? samples() : []), ...state.fetchedPrices, ...state.myPrices];
+  const fetchedIds = new Set(state.fetchedPrices.map((o) => o.sourceUrl));
+  // Una consulta más reciente de la misma página reemplaza la captura guardada.
+  const saved = (state.useSavedPrices === false ? [] : REAL.offers).filter((o) => !fetchedIds.has(o.sourceUrl));
+  return [...(state.demo ? samples() : []), ...saved, ...state.fetchedPrices, ...state.myPrices];
 }
 
 export function offersByStore(state) {
@@ -96,22 +103,31 @@ export function suggestSavings(state, slots, offers, comparison, budget, purchas
       slots, prefs: state.prefs, pantry: state.pantry, recipes: RECIPES, recipeById: RECIPE_BY_ID,
       ingredients: INGREDIENTS, offers, limit: 30,
     });
-    const best = alts
-      .map((a) => ({ a, save: a.reasons.find((r) => r.kind === 'ahorro')?.cents ?? 0 }))
-      .filter((x) => x.save > 0 && x.a.cost.complete && !x.a.reasons.some((r) => r.kind === 'excede-tiempo' || r.kind === 'repetida'))
-      .sort((x, y) => y.save - x.save)[0];
-    if (best) {
-      // Ahorro real en dinero a pagar: se recalcula la compra completa con el cambio.
-      const swapped = slots.map((s) => (s.id === slot.id ? { ...s, recipeId: best.a.recipe.id } : s));
+    // Candidatas: respetan tiempo y no repiten; se ordenan por el ahorro estimado
+    // (proporcional) y se verifican recalculando la compra completa.
+    const candidates = alts
+      .filter((a) => !a.reasons.some((r) => r.kind === 'excede-tiempo' || r.kind === 'repetida'))
+      .map((a) => ({ a, est: a.reasons.find((r) => r.kind === 'ahorro')?.cents ?? 0 }))
+      .sort((x, y) => y.est - x.est)
+      .slice(0, 3);
+    let best = null;
+    for (const { a } of candidates) {
+      // Ahorro real en dinero a pagar, sin agregar productos sin precio.
+      const swapped = slots.map((s) => (s.id === slot.id ? { ...s, recipeId: a.recipe.id } : s));
       const t = purchaseFor(swapped);
       const saving = baseTotals.purchaseCents - t.purchaseCents;
-      if (saving > 0 && t.missing.length <= baseTotals.missing.length) {
-        out.push({ kind: 'receta', slotId: slot.id, recipeId: best.a.recipe.id, fromId: slot.recipeId, savingCents: saving });
+      if (saving > 0 && t.missing.length <= baseTotals.missing.length && (!best || saving > best.savingCents)) {
+        best = { kind: 'receta', slotId: slot.id, recipeId: a.recipe.id, fromId: slot.recipeId, savingCents: saving };
       }
     }
+    if (best) out.push(best);
   }
   out.sort((a, b) => b.savingCents - a.savingCents);
-  const recipeSuggestions = out.slice(0, 4);
+  // Una propuesta por receta destino y solo ahorros de al menos Q1.00.
+  const seen = new Set();
+  const recipeSuggestions = out
+    .filter((x) => x.savingCents >= 100 && !seen.has(x.recipeId) && seen.add(x.recipeId))
+    .slice(0, 4);
   const extra = [];
   if (Object.keys(state.brandLocks).length) extra.push({ kind: 'marcas', count: Object.keys(state.brandLocks).length });
   const primaryRow = comparison.rows.find((r) => r.storeId === state.stores.primary);

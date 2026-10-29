@@ -4,7 +4,7 @@ import { INGREDIENTS, CATEGORIES, ALLERGENS, PROTEINS } from '../data/ingredient
 import { REAL_STORES, SAMPLE_STORES, STORE_BY_ID, DEPARTAMENTOS, RESEARCH_DATE } from '../data/stores.js';
 import { EQUIPMENT, MEALS } from '../data/recipes.js';
 import { unitsFor, unitLabel, toBase } from '../engine/units.js';
-import { allOffers } from '../engine/index.js';
+import { allOffers, REAL_SNAPSHOT } from '../engine/index.js';
 import { stepper } from './views-plan.js';
 
 export function ingredientOptions(selected, { onlyIds = null } = {}) {
@@ -73,13 +73,15 @@ export function viewDespensa(ctx) {
 function priceRow(o, ctx) {
   const ing = INGREDIENTS[o.ingredientId];
   const st = priceStatus(o, ctx.sessionStart);
-  const deletable = o.status !== 'ejemplo';
+  const deletable = o.status !== 'ejemplo' && o.status !== 'guardado';
   return `<li class="price-row">
     <div class="pr-main">
       <h4>${esc(o.product)} <span class="muted">${esc(o.brand ?? '')}</span></h4>
       <p class="small">${esc(cap(ing.name))} · ${esc(packText(o))} · <b>${q(o.priceCents)}</b> <span class="muted">(${esc(unitPrice(o, ing))})</span></p>
       <p class="small"><span class="pill ${st.tone}">${st.label}</span> ${o.availability === 'agotado' ? '<span class="pill danger">Agotado</span>' : ''} ${o.promo ? `<span class="pill">${esc(o.promo.text ?? 'Promoción')}</span>` : ''}
       <span class="muted">${esc(st.detail)}</span></p>
+      ${o.presentationSource ? `<p class="small muted">Presentación tomada de: ${esc(o.presentationSource)}</p>` : ''}
+      ${o.notes?.length ? `<p class="small muted">${o.notes.map(esc).join(' ')}</p>` : ''}
       ${o.sourceUrl ? `<a class="small" href="${esc(o.sourceUrl)}" target="_blank" rel="noopener noreferrer">${icon('enlace')} Ver origen</a>` : ''}
     </div>
     ${deletable ? `<button class="btn icon" data-action="price-del" data-id="${esc(o.id)}" aria-label="Borrar precio">${icon('basura')}</button>` : ''}
@@ -148,6 +150,29 @@ function lookupResult(lk) {
   </div>`;
 }
 
+const EXCLUDED_LABEL = {
+  'peso-variable': 'Peso variable',
+  contradiccion: 'Datos contradictorios',
+  'sin-presentacion': 'Sin tamaño de empaque',
+  'sin-conversion': 'Sin equivalencia',
+  'no-disponible': 'No disponible en línea',
+  error: 'Error al consultar',
+};
+
+function snapshotBlock(ctx) {
+  const snap = REAL_SNAPSHOT;
+  if (!snap.offers.length && !snap.excluded.length) return '';
+  const byStore = (id) => snap.offers.filter((o) => o.storeId === id).length;
+  return `<section class="card" aria-labelledby="snap-title">
+    <h3 id="snap-title" class="h3">Precios reales guardados</h3>
+    <p class="small">Leídos el ${esc(formatDate(snap.finished))} de las páginas públicas de producto: <b>${byStore('paiz')}</b> de Paiz y <b>${byStore('la-torre')}</b> de La Torre. Se muestran como "Último precio guardado"; pueden haber cambiado.</p>
+    <p class="small muted">Son precios de la tienda en línea, sin sucursal elegida. No se verificó si cambian por sucursal ni si coinciden con la tienda física de ${esc(ctx.state.location.municipio || ctx.state.location.departamento)}.</p>
+    <details class="explain"><summary>${snap.excluded.length} productos no se cargaron y por qué</summary>
+      <ul class="plain small">${snap.excluded.map((e) => `<li><b>${esc(STORE_BY_ID[e.storeId]?.name ?? e.storeId)} · ${esc(INGREDIENTS[e.ingredientId]?.name ?? e.ingredientId)}</b>: <span class="pill warn">${EXCLUDED_LABEL[e.reason] ?? e.reason}</span> ${esc(e.detail ?? '')} <a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${icon('enlace')} Ver</a></li>`).join('')}</ul>
+    </details>
+  </section>`;
+}
+
 export function viewPrecios(ctx) {
   const { state } = ctx;
   const offers = allOffers(state);
@@ -158,12 +183,13 @@ export function viewPrecios(ctx) {
   const shown = filter && byStore.has(filter) ? [[filter, byStore.get(filter)]] : [...byStore].filter(([id]) => !id.startsWith('ejemplo'));
   return `
   <div class="toolbar"><h2 class="h2">Precios</h2></div>
+  ${snapshotBlock(ctx)}
   ${myPriceForm(ctx)}
   ${lookupBlock(ctx)}
   <section class="card" aria-labelledby="sources-title">
     <h3 id="sources-title" class="h3">Fuentes revisadas</h3>
-    <p class="small muted">Revisión del ${RESEARCH_DATE}. Ninguna conexión automática quedó comprobada desde este entorno.</p>
-    <ul class="plain sources">${REAL_STORES.map((s) => `<li><b>${esc(s.name)}</b> ${s.initial ? '<span class="pill">Cadena inicial</span>' : ''} <span class="pill warn">No verificado en vivo</span><br><span class="small">${esc(s.accessNote)}</span> <a class="small" href="${s.site}" target="_blank" rel="noopener noreferrer">${icon('enlace')} Sitio oficial</a></li>`).join('')}</ul>
+    <p class="small muted">Revisión inicial del ${RESEARCH_DATE}; consulta en vivo comprobada el 29 oct 2026 en Paiz, La Torre y Walmart.</p>
+    <ul class="plain sources">${REAL_STORES.map((s) => `<li><b>${esc(s.name)}</b> ${s.initial ? '<span class="pill">Cadena inicial</span>' : ''} ${s.access === 'verificado' ? '<span class="pill ok">Consulta verificada</span>' : '<span class="pill warn">No verificado en vivo</span>'}<br><span class="small">${esc(s.accessNote)}</span> <a class="small" href="${s.site}" target="_blank" rel="noopener noreferrer">${icon('enlace')} Sitio oficial</a></li>`).join('')}</ul>
   </section>
   <section aria-labelledby="saved-title">
     <div class="section-head"><h3 id="saved-title" class="h3">Precios guardados</h3>
@@ -171,7 +197,7 @@ export function viewPrecios(ctx) {
         <option value="">Reales y míos</option>
         ${storeIds.map((id) => `<option value="${id}" ${id === filter ? 'selected' : ''}>${esc(storeLabel(id, state))}</option>`).join('')}
       </select></label></div>
-    ${shown.length ? shown.map(([id, list]) => `<div class="card"><h4 class="store-h">${esc(storeLabel(id, state))} · ${list.length}</h4><ul class="plain">${list.map((o) => priceRow(o, ctx)).join('')}</ul></div>`).join('') : '<div class="card empty"><p>Aún no hay precios reales ni tuyos. Los de ejemplo se ven eligiendo una tienda de ejemplo en el filtro.</p></div>'}
+    ${shown.length ? shown.map(([id, list]) => `<details class="card store-prices" ${shown.length === 1 ? 'open' : ''}><summary><h4 class="store-h">${esc(storeLabel(id, state))}</h4><span class="small muted">${list.length} precio${list.length === 1 ? '' : 's'}</span></summary><ul class="plain">${list.map((o) => priceRow(o, ctx)).join('')}</ul></details>`).join('') : '<div class="card empty"><p>Aún no hay precios reales ni tuyos. Los de ejemplo se ven eligiendo una tienda de ejemplo en el filtro.</p></div>'}
   </section>`;
 }
 

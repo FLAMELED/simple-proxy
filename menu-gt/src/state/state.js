@@ -16,11 +16,11 @@ export function defaultState(today = todayISO()) {
   return {
     schema: SCHEMA_VERSION,
     onboarded: false,
-    demo: true,
+    demo: false,
     location: { departamento: 'Chiquimula', municipio: 'Chiquimula' },
     stores: {
-      selected: ['ejemplo-a', 'ejemplo-b'],
-      primary: 'ejemplo-a',
+      selected: ['paiz', 'la-torre'],
+      primary: 'paiz',
       branches: {},
     },
     household: {

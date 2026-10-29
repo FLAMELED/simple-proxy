@@ -8,26 +8,26 @@ export const REAL_STORES = [
   {
     id: 'paiz', name: 'Paiz', group: 'Walmart de México y Centroamérica', site: 'https://www.paiz.com.gt/',
     initial: true,
-    access: 'no-verificado',
+    access: 'verificado',
     accessNote:
-      'Catálogo público con páginas de producto (nombre, presentación, precio, agotado). No se pudo abrir desde este entorno: la política de red lo bloqueó. No se encontró una API documentada para terceros.',
+      'Consulta verificada el 2026-10-29: las páginas de producto publican nombre, marca, precio en GTQ, disponibilidad y tamaño (en el nombre o en la ficha). robots.txt permite páginas de producto. Precio leído sin elegir tienda. No hay API documentada para terceros.',
   },
   {
     id: 'la-torre', name: 'La Torre', group: 'Unisuper', site: 'https://www.latorre.com.gt/',
     initial: true,
-    access: 'no-verificado',
+    access: 'verificado',
     accessNote:
-      'Catálogo público con páginas de producto y marca de agotado. Su robots.txt (leído el 2026-10-29) permite páginas de producto y prohíbe la búsqueda. Las páginas de producto no se pudieron abrir desde este entorno. No se encontró una API documentada para terceros.',
+      'Consulta verificada el 2026-10-29: precio, marca y disponibilidad estructurados; el tamaño suele estar en la ficha ("Contenido Neto"). Carnes y algunas verduras son de peso variable ("peso máximo"), y el sitio permite elegir tienda. robots.txt permite páginas de producto y prohíbe la búsqueda.',
   },
   {
     id: 'walmart', name: 'Walmart', group: 'Walmart de México y Centroamérica', site: 'https://www.walmart.com.gt/',
-    access: 'no-verificado',
-    accessNote: 'Misma plataforma que Paiz y Maxi Despensa según los patrones de URL. No verificado en vivo.',
+    access: 'verificado',
+    accessNote: 'Consulta verificada el 2026-10-29 con una página de producto (mismo formato que Paiz). Sin precios guardados todavía: usa la consulta por página o "Mi precio".',
   },
   {
     id: 'maxi-despensa', name: 'Maxi Despensa', group: 'Walmart de México y Centroamérica', site: 'https://www.maxidespensa.com.gt/',
-    access: 'no-verificado',
-    accessNote: 'Catálogo público indexado. Su robots.txt (leído el 2026-10-29) permite páginas de producto. Las páginas de producto no se pudieron abrir desde este entorno.',
+    access: 'parcial',
+    accessNote: 'El sitio responde y robots.txt permite páginas de producto, pero el producto probado el 2026-10-29 aparecía sin precio ni existencia en línea. Sin precios guardados.',
   },
 ];
 

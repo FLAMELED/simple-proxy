@@ -1,0 +1,9 @@
+Consulta: 2026-10-19T17:19:26.903Z
+https://www.paiz.com.gt/arroz-blanco-albay-2000-grs/p
+  HTTP 502 → {"ok":false,"stage":"robots","error":"La política de red de este servidor rechazó la conexión al sitio (proxy respondió 403). El dominio debe estar permitido."}
+https://www.latorre.com.gt/arroz-precocido-gallo-dorado-2010451/p
+  HTTP 502 → {"ok":false,"stage":"robots","error":"La política de red de este servidor rechazó la conexión al sitio (proxy respondió 403). El dominio debe estar permitido."}
+https://www.walmart.com.gt/arroz-molinero-blanco-1000gr/p
+  HTTP 502 → {"ok":false,"stage":"robots","error":"La política de red de este servidor rechazó la conexión al sitio (proxy respondió 403). El dominio debe estar permitido."}
+https://www.maxidespensa.com.gt/arroz-gallo-dorado-precocido-400gr/p
+  HTTP 502 → {"ok":false,"stage":"robots","error":"La política de red de este servidor rechazó la conexión al sitio (proxy respondió 403). El dominio debe estar permitido."}

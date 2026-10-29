@@ -1,0 +1,326 @@
+{
+ "regions": [
+  {
+   "id": "header",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 0,
+    "y": 0,
+    "w": 1584,
+    "h": 555
+   },
+   "note": "deep blue-black ink header band behind the top of the receipt card"
+  },
+  {
+   "id": "wordmark",
+   "kind": "text",
+   "pixelBox": {
+    "x": 66,
+    "y": 76,
+    "w": 440,
+    "h": 112
+   },
+   "note": "white wordmark Mercadito"
+  },
+  {
+   "id": "location-pill",
+   "kind": "control",
+   "pixelBox": {
+    "x": 1046,
+    "y": 74,
+    "w": 474,
+    "h": 112
+   },
+   "note": "pale pill button Chiquimula \u00b7 Paiz"
+  },
+  {
+   "id": "receipt-card",
+   "kind": "chrome",
+   "container": true,
+   "pixelBox": {
+    "x": 84,
+    "y": 300,
+    "w": 1418,
+    "h": 1325
+   },
+   "note": "white receipt paper card with thin grey border, shadow and zigzag tear at the bottom"
+  },
+  {
+   "id": "budget-eyebrow",
+   "kind": "text",
+   "pixelBox": {
+    "x": 438,
+    "y": 362,
+    "w": 714,
+    "h": 62
+   },
+   "note": "small caps PRESUPUESTO \u00b7 29 OCT \u2013 4 NOV"
+  },
+  {
+   "id": "shortfall",
+   "kind": "text",
+   "pixelBox": {
+    "x": 300,
+    "y": 470,
+    "w": 990,
+    "h": 150
+   },
+   "note": "red dot-matrix display FALTAN Q2.25"
+  },
+  {
+   "id": "rules-top",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 160,
+    "y": 690,
+    "w": 1262,
+    "h": 84
+   },
+   "note": "double grey horizontal rules"
+  },
+  {
+   "id": "row-budget",
+   "kind": "text",
+   "pixelBox": {
+    "x": 160,
+    "y": 808,
+    "w": 1265,
+    "h": 72
+   },
+   "note": "Presupuesto dotted leader Q900.00"
+  },
+  {
+   "id": "row-quoted",
+   "kind": "text",
+   "pixelBox": {
+    "x": 160,
+    "y": 894,
+    "w": 1265,
+    "h": 72
+   },
+   "note": "Compra cotizada dotted leader Q902.25"
+  },
+  {
+   "id": "row-extras",
+   "kind": "text",
+   "pixelBox": {
+    "x": 160,
+    "y": 980,
+    "w": 1265,
+    "h": 72
+   },
+   "note": "Gastos adicionales dotted leader Q0.00"
+  },
+  {
+   "id": "rules-bottom",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 160,
+    "y": 1098,
+    "w": 1262,
+    "h": 28
+   },
+   "note": "double grey horizontal rules"
+  },
+  {
+   "id": "budget-bar",
+   "kind": "control",
+   "pixelBox": {
+    "x": 160,
+    "y": 1272,
+    "w": 1262,
+    "h": 50
+   },
+   "note": "progress bar ink blue then yellow with hatched end"
+  },
+  {
+   "id": "stamp",
+   "kind": "text",
+   "pixelBox": {
+    "x": 945,
+    "y": 1100,
+    "w": 636,
+    "h": 240
+   },
+   "note": "violet rotated outlined label SIN COTIZAR \u00b7 9 whose count is live data; edge roughness drawn by an SVG filter",
+   "codeDrawn": true
+  },
+  {
+   "id": "list-button",
+   "kind": "control",
+   "pixelBox": {
+    "x": 154,
+    "y": 1392,
+    "w": 1052,
+    "h": 150
+   },
+   "note": "outlined pill button Ver lista de compras"
+  },
+  {
+   "id": "count-badge",
+   "kind": "control",
+   "pixelBox": {
+    "x": 1232,
+    "y": 1364,
+    "w": 212,
+    "h": 205
+   },
+   "note": "navy circle 44 productos"
+  },
+  {
+   "id": "today-title",
+   "kind": "text",
+   "pixelBox": {
+    "x": 80,
+    "y": 1745,
+    "w": 160,
+    "h": 96
+   },
+   "note": "heading Hoy"
+  },
+  {
+   "id": "meal-tag",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1105,
+    "y": 1845,
+    "w": 420,
+    "h": 115
+   },
+   "note": "ALMUERZO label on a yellow band"
+  },
+  {
+   "id": "dish-1",
+   "kind": "plate",
+   "pixelBox": {
+    "x": 105,
+    "y": 1960,
+    "w": 212,
+    "h": 180
+   },
+   "note": "line illustration of a bowl of lentil stew"
+  },
+  {
+   "id": "dish-1-name",
+   "kind": "text",
+   "pixelBox": {
+    "x": 362,
+    "y": 1955,
+    "w": 600,
+    "h": 92
+   },
+   "note": "Lentejas guisadas"
+  },
+  {
+   "id": "dish-1-meta",
+   "kind": "text",
+   "pixelBox": {
+    "x": 362,
+    "y": 2058,
+    "w": 540,
+    "h": 78
+   },
+   "note": "45 min \u00b7 4 porciones"
+  },
+  {
+   "id": "dish-1-price",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1105,
+    "y": 1953,
+    "w": 410,
+    "h": 96
+   },
+   "note": "Q5.75/porci\u00f3n"
+  },
+  {
+   "id": "divider-1",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 75,
+    "y": 2186,
+    "w": 1435,
+    "h": 14
+   },
+   "note": "thin grey divider"
+  },
+  {
+   "id": "dish-2",
+   "kind": "plate",
+   "pixelBox": {
+    "x": 100,
+    "y": 2262,
+    "w": 222,
+    "h": 182
+   },
+   "note": "line illustration of a plate of chow mein noodles"
+  },
+  {
+   "id": "dish-2-name",
+   "kind": "text",
+   "pixelBox": {
+    "x": 362,
+    "y": 2260,
+    "w": 600,
+    "h": 96
+   },
+   "note": "Chao mein de pollo"
+  },
+  {
+   "id": "dish-2-meta",
+   "kind": "text",
+   "pixelBox": {
+    "x": 362,
+    "y": 2362,
+    "w": 540,
+    "h": 78
+   },
+   "note": "45 min \u00b7 4 porciones"
+  },
+  {
+   "id": "dish-2-price",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1105,
+    "y": 2260,
+    "w": 410,
+    "h": 96
+   },
+   "note": "Q5.75/porci\u00f3n"
+  },
+  {
+   "id": "divider-2",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 75,
+    "y": 2490,
+    "w": 1435,
+    "h": 14
+   },
+   "note": "thin grey divider"
+  },
+  {
+   "id": "next-row-peek",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 95,
+    "y": 2548,
+    "w": 180,
+    "h": 20
+   },
+   "note": "top edge of the next row peeking under the nav"
+  },
+  {
+   "id": "bottom-nav",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 0,
+    "y": 2560,
+    "w": 1584,
+    "h": 256
+   },
+   "note": "white bottom tab bar with five icon tabs Semana Men\u00fa Compras Despensa Precios"
+  }
+ ],
+ "allowUncovered": true
+}

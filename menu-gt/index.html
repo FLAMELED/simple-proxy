@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es-GT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mercadito</title>
+  <meta name="description" content="Menú semanal, lista de compras y presupuesto en quetzales para hogares de Guatemala.">
+  <meta name="theme-color" content="#0a2340">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a2340'/%3E%3Cpath d='M8 6h16v20l-2.7-2-2.6 2-2.7-2-2.6 2-2.7-2L8 26z' fill='%23fdfdfb'/%3E%3Cpath d='M11 12h10M11 16h10M11 20h6' stroke='%230a2340' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="src/ui/styles.css">
+</head>
+<body>
+  <header class="app-head" id="app-head"></header>
+  <div class="apron"><main id="main" tabindex="-1"></main></div>
+  <nav class="tabs" id="tabs" aria-label="Secciones"></nav>
+  <dialog id="sheet" aria-labelledby="sheet-title"></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="stamp-ink" x="-5%" y="-20%" width="110%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.25 1.42" result="holes"/>
+      <feComposite in="SourceGraphic" in2="holes" operator="in" result="inked"/>
+      <feDisplacementMap in="inked" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <noscript>Esta app necesita JavaScript.</noscript>
+  <script type="module" src="src/ui/app.js"></script>
+</body>
+</html>

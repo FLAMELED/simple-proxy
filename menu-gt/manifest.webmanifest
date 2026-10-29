@@ -1,0 +1,12 @@
+{
+  "name": "Mercadito",
+  "short_name": "Mercadito",
+  "description": "Menú semanal, lista de compras y presupuesto en quetzales.",
+  "lang": "es-GT",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f4f2",
+  "theme_color": "#0a2340",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

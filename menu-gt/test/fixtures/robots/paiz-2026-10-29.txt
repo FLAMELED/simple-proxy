@@ -1,0 +1,15 @@
+# Disallow all crawlers access to certain pages. 
+ User-agent: * 
+
+
+Disallow: /account/
+Disallow: /login/* 
+Disallow: /checkout/
+Disallow: /quick-view/* 
+Disallow: /espiar/* 
+Disallow: /404
+Disallow: /*?*returnUrl=
+
+ Sitemap: https://www.walmart.com.gt/sitemap.xml
+ Sitemap: https://www.maxidespensa.com.gt/sitemap.xml
+ Sitemap: https://www.paiz.com.gt/sitemap.xml

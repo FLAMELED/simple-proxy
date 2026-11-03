@@ -15,7 +15,7 @@ Tomado del afiche de la serie: titulares serif muy pesados y condensados con cur
 ### Criterios
 
 - **Contraste para proyector:** texto principal ≥ 7:1 (AAA) sobre papel, hoja y color del taller; texto secundario, estados y enlaces ≥ 4.5:1 (AA); etiquetas sobre rellenos de gráfico ≥ 4.5:1.
-- **Un color por taller** (del afiche), con siete tonos derivados de papeles fijos. La navegación usa solo neutros y el color del taller.
+- **Un color por taller** (del afiche), con ocho tonos de papel fijo (campo, sus dos textos, filete, relleno fuerte y su texto, resalte suave y acento). La navegación usa solo neutros y el color del taller.
 - **Neutros cálidos comunes** a toda la serie, sin tinte de ningún taller.
 - **Estados semánticos comunes** y distintos de los colores de taller; siempre acompañados de signo y texto (− Falta, ✓ Cuadra, + Sobra).
 - **Gráficos:** serie principal en tinta sólida; segunda en `campo`; tercera en `campo-fuerte`; pendiente o crédito con trama; negativo en `falta`. Todo relleno lleva contorno de tinta.

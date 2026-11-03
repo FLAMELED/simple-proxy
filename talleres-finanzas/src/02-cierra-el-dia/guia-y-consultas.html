@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es" data-taller="taller02">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía breve · Cierra el día con las cuentas claras</title>
+<meta name="description" content="Guía para repetir el cierre de caja en tu negocio: rutina, hoja de cierre, cómo reconocer cada movimiento y consultas para ChatGPT.">
+<style>
+/*@fuentes*/
+:root { --papel:#f6f4f0; --papel-2:#fff; --tinta:#22102a; --tinta-2:#4b3656; --regla-suave:#cbbfd3; --campo:#dcc0f5; --campo-tinta:#22102a; --acento:#6a2c86; color-scheme: light; }
+:root[data-tema="noche"] { --papel:#15101a; --papel-2:#201827; --tinta:#f2eaf7; --tinta-2:#cdbdd8; --regla-suave:#4b3b57; --campo:#3a2551; --campo-tinta:#f6ecff; --acento:#dcc0f5; color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--papel); color: var(--tinta); font: 17px/1.55 "Texto", "Segoe UI", Arial, sans-serif; font-variant-numeric: tabular-nums; }
+::selection { background: var(--campo); color: var(--campo-tinta); }
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+main { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+h1, h2 { font-family: "Titular", Georgia, serif; font-weight: 800; font-stretch: 68%; line-height: 1; letter-spacing: -0.01em; margin: 0; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); }
+h1 em { font-style: italic; }
+h2 { font-size: clamp(1.8rem, 4.5vw, 2.4rem); margin: 2.8rem 0 0.9rem; border-bottom: 3px solid var(--tinta); padding-bottom: 0.3rem; }
+h3 { font-size: 1.1rem; margin: 1.4rem 0 0.4rem; }
+p, ul, ol { margin: 0.5rem 0; }
+.cab { background: var(--campo); color: var(--campo-tinta); margin: -1.5rem -1.25rem 0; padding: 1.5rem 1.25rem 1.3rem; }
+.cab .serie { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
+.cab .serie b { font-size: 1.3em; border-bottom: 3px solid currentColor; margin-right: 0.8rem; }
+.herr { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; }
+button { font: inherit; cursor: pointer; }
+.boton { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border: 2px solid var(--tinta); background: var(--tinta); color: var(--papel); font-weight: 700; }
+.boton.sec { background: transparent; color: var(--tinta); }
+.cab .boton.sec { color: var(--campo-tinta); border-color: var(--campo-tinta); }
+.indice { columns: 2 14rem; padding-left: 1.2rem; }
+ol.pasos { padding: 0; list-style: none; counter-reset: p; }
+ol.pasos > li { counter-increment: p; display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.5rem; margin-top: 0.8rem; }
+ol.pasos > li::before { content: counter(p); font-family: "Titular", serif; font-weight: 800; font-stretch: 70%; font-size: 1.9rem; line-height: 1; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--regla-suave); vertical-align: top; }
+th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--tinta); }
+.hoja { background: var(--papel-2); border: 2px solid var(--tinta); padding: 1rem 1.1rem; }
+.hoja td, .hoja th { height: 2.1rem; }
+.hoja .num { width: 7rem; }
+.linea { border-bottom: 1.5px solid var(--tinta); display: inline-block; min-width: 9rem; height: 1.3rem; vertical-align: bottom; }
+.cuadros { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.formula { font-family: "Cifras", monospace; font-size: 0.95rem; background: var(--papel); padding: 0.5rem 0.7rem; border: 1px dashed var(--tinta); }
+.consulta { border: 2px solid var(--tinta); background: var(--papel-2); margin: 1rem 0 1.6rem; }
+.consulta-cab { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 0.6rem 0.9rem; border-bottom: 2px solid var(--tinta); }
+.consulta pre { margin: 0; padding: 0.9rem; white-space: pre-wrap; font: 0.95rem/1.5 "Texto", sans-serif; }
+.consulta .verificar { border-top: 1.5px dashed var(--tinta); padding: 0.6rem 0.9rem; font-size: 0.95rem; }
+.estado-copia { font-weight: 700; font-size: 0.9rem; min-height: 1.2em; }
+textarea.respaldo { width: 100%; min-height: 9rem; border: 0; border-top: 1.5px dashed var(--tinta); padding: 0.6rem; font: inherit; background: var(--papel); color: var(--tinta); }
+.nota { font-size: 0.92rem; color: var(--tinta-2); }
+@media (max-width: 600px) { .cuadros { grid-template-columns: 1fr; } .hoja { padding: 0.7rem; } th, td { padding: 0.35rem 0.3rem; font-size: 0.88rem; hyphens: auto; } th { font-size: 0.68rem; } }
+@media print {
+  @page { size: letter; margin: 14mm; }
+  :root, :root[data-tema="noche"] { --papel:#fff; --papel-2:#fff; --tinta:#22102a; --tinta-2:#4b3656; --regla-suave:#cbbfd3; --campo:#dcc0f5; --campo-tinta:#22102a; }
+  body { background: #fff; font-size: 11.5pt; }
+  .cab { background: #fff; border-bottom: 3px solid #000; }
+  .herr, .copiar, .estado-copia, textarea.respaldo { display: none !important; }
+  h2 { break-after: avoid; }
+  .salto { break-before: page; }
+  .consulta, .hoja, table { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<main>
+<header class="cab">
+  <p class="serie"><b>02</b>Registrar · Finanzas del negocio con IA</p>
+  <h1>Cierra el día con las <em>cuentas claras</em></h1>
+  <p>Guía breve para repetir el cierre de caja en tu negocio, sin ayuda.</p>
+  <div class="herr">
+    <button type="button" class="boton" id="imprimir">Imprimir o guardar PDF</button>
+    <button type="button" class="boton sec" id="tema" aria-pressed="false">Modo nocturno</button>
+  </div>
+</header>
+
+<nav aria-label="Contenido"><ol class="indice">
+  <li><a href="#rutina">La rutina en 5 pasos</a></li>
+  <li><a href="#hoja">Hoja de cierre</a></li>
+  <li><a href="#tipos">Cómo reconocer cada movimiento</a></li>
+  <li><a href="#errores">Errores habituales</a></li>
+  <li><a href="#consultas">Consultas para ChatGPT</a></li>
+</ol></nav>
+
+<h2 id="rutina">La rutina en 5 pasos · 10 minutos</h2>
+<ol class="pasos">
+  <li><div><b>Al abrir, cuenta y anota el fondo inicial.</b><br>Es el efectivo que hay antes de la primera venta. Si lo olvidas, el cierre de la tarde no tendrá punto de partida.</div></li>
+  <li><div><b>Durante el día, anota cada movimiento con su forma de pago.</b><br>Efectivo (E), transferencia (T) o crédito (C). Los cobros de ventas anteriores van aparte: no son ventas nuevas.</div></li>
+  <li><div><b>Al cerrar, calcula el efectivo esperado.</b>
+    <p class="formula">Fondo inicial + entradas en efectivo − salidas en efectivo = efectivo esperado</p>
+    No incluye transferencias (están en el banco) ni ventas al crédito (aún no entra el dinero).</div></li>
+  <li><div><b>Cuenta la gaveta y revisa la app del banco.</b><br>Billete por billete. Compara las transferencias anotadas con las que muestra la app.</div></li>
+  <li><div><b>Anota la diferencia y tus pendientes.</b>
+    <p class="formula">Efectivo contado − efectivo esperado = diferencia</p>
+    Negativa: falta. Positiva: sobra. Cero: cuadra. No la borres ni inventes un movimiento: revísala con un comprobante.</div></li>
+</ol>
+
+<h2 id="hoja" class="salto">Hoja de cierre</h2>
+<div class="hoja">
+  <p><b>Negocio:</b> <span class="linea" style="min-width:14rem"></span> &nbsp; <b>Fecha:</b> <span class="linea"></span></p>
+  <p><b>Fondo inicial (contado al abrir):</b> Q <span class="linea"></span></p>
+  <table>
+    <thead><tr><th style="width:3.6rem">Hora</th><th>Qué pasó</th><th style="width:7rem">Tipo</th><th style="width:3.4rem">Forma<br>E/T/C</th><th class="num">Entra a la gaveta</th><th class="num">Sale de la gaveta</th></tr></thead>
+    <tbody>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td colspan="4" style="text-align:right"><b>Totales en efectivo</b></td><td>Q</td><td>Q</td></tr>
+    </tbody>
+  </table>
+  <p class="nota">Solo las filas con forma E llevan monto en «Entra» o «Sale». Si no sabes un monto, escribe «pendiente»: no es cero.</p>
+  <div class="cuadros">
+    <div>
+      <h3>Efectivo esperado</h3>
+      <p>Q <span class="linea" style="min-width:5rem"></span> + Q <span class="linea" style="min-width:5rem"></span> − Q <span class="linea" style="min-width:5rem"></span></p>
+      <p class="nota">fondo + entradas − salidas</p>
+      <p><b>= Q</b> <span class="linea"></span></p>
+      <h3>Diferencia</h3>
+      <p>Contado Q <span class="linea" style="min-width:5rem"></span> − esperado Q <span class="linea" style="min-width:5rem"></span></p>
+      <p><b>= Q</b> <span class="linea"></span> &nbsp; ☐ cuadra ☐ falta ☐ sobra</p>
+      <h3>Banco</h3>
+      <p>Transferencias anotadas Q <span class="linea" style="min-width:5rem"></span><br>Según la app Q <span class="linea" style="min-width:5rem"></span></p>
+    </div>
+    <div>
+      <h3>Conteo de la gaveta</h3>
+      <table>
+        <thead><tr><th>Billete o moneda</th><th>Cantidad</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Q200</td><td></td><td></td></tr><tr><td>Q100</td><td></td><td></td></tr><tr><td>Q50</td><td></td><td></td></tr>
+          <tr><td>Q20</td><td></td><td></td></tr><tr><td>Q10</td><td></td><td></td></tr><tr><td>Q5</td><td></td><td></td></tr>
+          <tr><td>Q1 (billete o moneda)</td><td></td><td></td></tr><tr><td>Monedas de centavos</td><td></td><td></td></tr>
+          <tr><td colspan="2"><b>Contado</b></td><td>Q</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h3>Pendientes</h3>
+  <p class="nota">Por cobrar (fiados), por devolver (préstamos), por pagar, diferencia por revisar, datos que faltan.</p>
+  <p><span class="linea" style="width:100%"></span></p><p><span class="linea" style="width:100%"></span></p><p><span class="linea" style="width:100%"></span></p>
+  <p><b>Mi hora de cierre:</b> <span class="linea"></span> &nbsp; <b>Dónde anoto:</b> <span class="linea"></span></p>
+</div>
+
+<h2 id="tipos" class="salto">Cómo reconocer cada movimiento</h2>
+<table>
+  <thead><tr><th>Tipo</th><th>Qué es</th><th>¿Es venta?</th><th>En la gaveta</th></tr></thead>
+  <tbody>
+    <tr><td><b>Fondo inicial</b></td><td>El efectivo contado al abrir.</td><td>No</td><td>Punto de partida</td></tr>
+    <tr><td><b>Venta</b></td><td>Entregaste un producto o servicio hoy.</td><td>Sí</td><td>Entra si fue en efectivo. Transferencia: va al banco. Crédito: queda por cobrar.</td></tr>
+    <tr><td><b>Cobro de venta anterior</b></td><td>Te pagan algo que vendiste otro día.</td><td>No (ya se contó ese día)</td><td>Entra si es en efectivo</td></tr>
+    <tr><td><b>Aporte del dueño</b></td><td>Pones dinero tuyo en el negocio.</td><td>No, ni es ganancia</td><td>Entra</td></tr>
+    <tr><td><b>Préstamo recibido</b></td><td>Alguien te presta y lo devolverás.</td><td>No: es una deuda</td><td>Entra; anota cuándo lo devuelves</td></tr>
+    <tr><td><b>Compra de insumos</b></td><td>Materiales o mercadería para vender.</td><td>—</td><td>Sale hoy; su costo cuenta cuando vendes lo que hiciste con ellos</td></tr>
+    <tr><td><b>Pago de gasto del negocio</b></td><td>Teléfono, espacio, ayudante, transporte del negocio.</td><td>—</td><td>Sale</td></tr>
+    <tr><td><b>Pago por trabajo del dueño</b></td><td>Lo que decidiste pagarte por tus horas.</td><td>—</td><td>Sale; cuéntalo una sola vez</td></tr>
+    <tr><td><b>Retiro personal</b></td><td>Sacas dinero para tu casa.</td><td>—</td><td>Sale; no es gasto del negocio</td></tr>
+    <tr><td><b>Pago de deuda o préstamo</b></td><td>Devuelves lo que te prestaron.</td><td>—</td><td>Sale; no es gasto del negocio</td></tr>
+  </tbody>
+</table>
+<p class="nota">El cierre de caja mira el dinero. No es la ganancia del día ni incluye impuestos: esos se calculan aparte.</p>
+
+<h2 id="errores">Errores habituales</h2>
+<table>
+  <thead><tr><th>Error</th><th>Lo que provoca</th></tr></thead>
+  <tbody>
+    <tr><td>Sumar un cobro atrasado a las ventas</td><td>La misma venta cuenta dos veces.</td></tr>
+    <tr><td>Contar un préstamo o un aporte como venta</td><td>Parece que vendiste más y olvidas lo que debes devolver.</td></tr>
+    <tr><td>Anotar un retiro personal como gasto</td><td>Los gastos del negocio parecen más altos de lo que son.</td></tr>
+    <tr><td>Anotar una transferencia como efectivo</td><td>La gaveta «falta» aunque el dinero esté en el banco.</td></tr>
+    <tr><td>Inventar un movimiento para que cuadre</td><td>La causa real se esconde y se repite.</td></tr>
+    <tr><td>Tratar un monto desconocido como cero</td><td>El resultado parece exacto y no lo es.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="consultas" class="salto">Consultas para ChatGPT</h2>
+<p>Copia una consulta, llena lo que está entre corchetes y pégala en ChatGPT. ChatGPT necesita internet; esta guía no se conecta a ninguna IA. Las cuentas compruébalas siempre en tu hoja.</p>
+<p class="nota">No escribas nombres completos de clientes, números de cuenta, contraseñas ni códigos que te lleguen por mensaje.</p>
+
+<div class="consulta"><div class="consulta-cab"><b>1 · Ordenar mis notas del día</b><button type="button" class="boton copiar" data-copiar="g1">Copiar</button></div>
+<pre id="g1">Quiero hacer el cierre de caja de un día de mi negocio. Ayúdame a ordenar mis notas; los cálculos finales los voy a comprobar yo en mi hoja.
+
+QUÉ QUIERO RESOLVER: clasificar mis movimientos y saber qué datos me faltan.
+
+MI NEGOCIO: [qué vendes y a qué precio].
+
+CON CUÁNTO EMPECÉ EL DÍA (contado): Q[monto] — si no lo conté, escribe: «no lo conté».
+
+MIS NOTAS DEL DÍA, COMO LAS TENGO:
+[pega aquí tus notas, una por línea]
+
+LO QUE NO SÉ O NO ANOTÉ: [por ejemplo: no sé cuánto me pagaron por transferencia]
+
+USA SOLO ESTAS CATEGORÍAS: fondo inicial, venta, cobro de venta anterior, aporte del dueño, préstamo recibido, compra de insumos, pago de gasto del negocio, pago por trabajo del dueño, retiro personal, pago de deuda o préstamo. FORMAS: efectivo, transferencia o crédito.
+
+NO INVENTES movimientos ni montos. Si un monto no está, déjalo como «pendiente» y no lo cuentes como cero. No calcules ganancia ni impuestos.
+
+RESPÓNDEME CON:
+1. Una tabla: descripción, categoría, forma, monto (o «pendiente») y si entra o sale de la gaveta.
+2. La lista de datos que me faltan.
+3. La operación del efectivo esperado, solo si tengo todos los montos en efectivo.
+4. Qué debo comparar con mi gaveta y con la app del banco.</pre>
+<p class="verificar"><b>Después verifica:</b> que no agregó movimientos; que los cobros atrasados no están como ventas; que préstamos, aportes y retiros no están como ventas ni gastos; la suma, en tu hoja.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+
+<div class="consulta"><div class="consulta-cab"><b>2 · Revisar una diferencia de caja</b><button type="button" class="boton copiar" data-copiar="g2">Copiar</button></div>
+<pre id="g2">Hice el cierre de caja de mi negocio y tengo una diferencia. Ayúdame a revisarla en orden, sin borrarla.
+
+QUÉ QUIERO RESOLVER: encontrar la causa o, si no la encuentro, dejarla bien anotada como pendiente.
+
+LO QUE TENGO:
+- Fondo inicial contado: Q[monto]
+- Entradas de efectivo anotadas: [lista con montos]
+- Salidas de efectivo anotadas: [lista con montos]
+- Efectivo esperado según mis notas: Q[monto]
+- Contado en la gaveta: Q[monto]
+- Transferencias anotadas: Q[monto]. La app del banco muestra: Q[monto, o «no la he revisado»]
+
+LO QUE NO SÉ: [por ejemplo: si di mal algún vuelto]
+
+NO INVENTES movimientos para que cuadre, no me sugieras anotar «gastos varios» y no supongas robos ni culpables.
+
+RESPÓNDEME CON:
+1. Una lista de revisiones, de la más fácil de comprobar a la más difícil, y qué comprobante miro en cada una.
+2. Qué cambiaría si una venta anotada en efectivo fue por transferencia, con la operación.
+3. Cómo anoto la diferencia si no encuentro la causa.</pre>
+<p class="verificar"><b>Después verifica:</b> que no propone un movimiento sin respaldo; que cada corrección tiene un comprobante (recibo, mensaje, app).</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+
+<div class="consulta"><div class="consulta-cab"><b>3 · Explícamelo más sencillo con uno de mis productos</b><button type="button" class="boton copiar" data-copiar="g3">Copiar</button></div>
+<pre id="g3">Explícamelo más sencillo con uno de mis productos.
+
+Vendo [ESCRIBE TU PRODUCTO] a Q[PRECIO] cada uno.
+
+Con ese producto, explícame la diferencia entre:
+- vender y cobrar;
+- cobrar una venta anterior y hacer una venta nueva;
+- un retiro personal y un gasto del negocio;
+- el efectivo esperado y el efectivo contado.
+
+Usa un día inventado y sencillo, con no más de 6 movimientos, y dime claramente que esos números son de ejemplo. Muestra cada operación paso a paso, en quetzales con dos decimales. Usa frases cortas. No hables de impuestos ni de contabilidad formal.
+
+Al final, hazme 2 preguntas para comprobar que entendí, y espera mi respuesta antes de darme la solución.</pre>
+<p class="verificar"><b>Después verifica:</b> que dice que sus números son de ejemplo y que cada suma está bien hecha.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+
+<div class="consulta"><div class="consulta-cab"><b>4 · Revisar mi cierre antes de darlo por terminado</b><button type="button" class="boton copiar" data-copiar="g4">Copiar</button></div>
+<pre id="g4">Revisa mi cierre de caja antes de darlo por terminado. No lo rehagas: solo dime qué revisar.
+
+QUÉ QUIERO RESOLVER: saber si clasifiqué bien y si me faltó algún pendiente.
+
+MI CIERRE (lo copié de mi hoja o de la mesa de práctica del taller):
+[pega aquí tu resumen]
+
+LO QUE NO SÉ: [lo que todavía esté pendiente]
+
+NO INVENTES movimientos ni montos y no cambies mis cifras. Si algo no cuadra, dime dónde y por qué, y qué dato necesito para resolverlo.
+
+RESPÓNDEME CON:
+1. Movimientos que podrían estar mal clasificados (sobre todo cobros atrasados, préstamos, aportes y retiros), con la razón.
+2. Pendientes que me faltan anotar.
+3. Una pregunta que me ayude a encontrar la diferencia, si la hay.</pre>
+<p class="verificar"><b>Después verifica:</b> que no cambió tus montos; vuelve a hacer en tu hoja la suma que te señale.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+
+<p class="nota">Taller 02 de la serie «Finanzas del negocio con IA». Los casos de Ana y Lucía son ficticios. Este material no da tratamientos fiscales ni contables formales.</p>
+</main>
+<script>
+(function () {
+  'use strict';
+  var raiz = document.documentElement;
+  var bt = document.getElementById('tema');
+  function poner(t) { raiz.dataset.tema = t; bt.setAttribute('aria-pressed', t === 'noche'); bt.textContent = t === 'noche' ? 'Modo claro' : 'Modo nocturno'; }
+  var g = null; try { g = localStorage.getItem('taller02:tema'); } catch (e) {}
+  poner(g || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'noche' : 'claro'));
+  bt.addEventListener('click', function () { var t = raiz.dataset.tema === 'noche' ? 'claro' : 'noche'; poner(t); try { localStorage.setItem('taller02:tema', t); } catch (e) {} });
+  document.getElementById('imprimir').addEventListener('click', function () { try { window.print(); } catch (e) { alert('Usa Ctrl+P (o Cmd+P) para imprimir.'); } });
+  async function copiar(texto) {
+    if (navigator.clipboard && window.isSecureContext) { try { await navigator.clipboard.writeText(texto); return true; } catch (e) {} }
+    try { var ta = document.createElement('textarea'); ta.value = texto; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); var ok = document.execCommand('copy'); ta.remove(); return ok; } catch (e) { return false; }
+  }
+  document.addEventListener('click', async function (e) {
+    var b = e.target.closest('[data-copiar]'); if (!b) return;
+    var caja = b.closest('.consulta'); var texto = document.getElementById(b.dataset.copiar).innerText.trim();
+    var estado = caja.querySelector('.estado-copia');
+    if (await copiar(texto)) { estado.textContent = 'Copiada. Pégala en ChatGPT (requiere internet).'; return; }
+    var ta = caja.querySelector('textarea.respaldo');
+    if (!ta) { ta = document.createElement('textarea'); ta.className = 'respaldo'; ta.setAttribute('aria-label', 'Texto para copiar a mano'); caja.appendChild(ta); }
+    ta.value = texto; ta.focus(); ta.select();
+    estado.textContent = 'No se pudo copiar solo. El texto quedó seleccionado abajo: usa Ctrl+C, o mantén presionado y elige Copiar.';
+  });
+})();
+</script>
+</body>
+</html>

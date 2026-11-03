@@ -1,0 +1,72 @@
+<div class="barra-vista no-imprimir" role="toolbar" aria-label="Vista de todas las pantallas">
+  <strong>Vista de todas las pantallas · pasos y explicaciones desplegados</strong>
+  <label><input type="checkbox" id="vista-notas"> Incluir notas del facilitador</label>
+  <span class="fila-botones">
+    <button type="button" class="nav" id="vista-imprimir">Imprimir o guardar PDF</button>
+    <button type="button" class="nav sig" id="vista-salir">Volver a la presentación</button>
+  </span>
+</div>
+
+<nav class="barra" aria-label="Navegación de la presentación">
+  <div class="barra-izq">
+    <span class="serie"><span>TALLER</span></span>
+    <div class="progreso" id="progreso" aria-label="Secciones"></div>
+    <span class="seccion-actual" id="seccion-actual"></span>
+  </div>
+  <div class="controles" id="controles">
+    <button type="button" class="ctl opcional" id="btn-indice" title="Índice de secciones" aria-label="Índice de secciones">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="square"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    </button>
+    <button type="button" class="ctl opcional" id="btn-datos" title="Datos del caso" aria-label="Datos del caso">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="square"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/></svg>
+    </button>
+    <button type="button" class="ctl opcional" id="btn-notas" title="Notas del facilitador (tecla N): se abren en otra ventana" aria-label="Notas del facilitador">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="square"><path d="M4 4h16v12H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>
+    </button>
+    <button type="button" class="ctl opcional" id="btn-vista" title="Ver todas las pantallas e imprimir" aria-label="Ver todas las pantallas e imprimir">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="square"><path d="M3 4h8v7H3zM13 4h8v7h-8zM3 13h8v7H3zM13 13h8v7h-8z"/></svg>
+    </button>
+    <button type="button" class="ctl opcional" id="btn-tema" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+    </button>
+    <button type="button" class="ctl opcional solo-escritorio" id="btn-completa" title="Pantalla completa (tecla F)" aria-label="Pantalla completa" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="square"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+    </button>
+  </div>
+  <div class="fila-botones" style="gap:.4rem;flex-wrap:nowrap">
+    <button type="button" class="ctl solo-movil" id="btn-mas" aria-expanded="false" aria-controls="controles" aria-label="Más opciones" title="Más opciones">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+    </button>
+    <button type="button" class="nav" id="btn-ant" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M15 5l-7 7 7 7"/></svg><span class="txt">Anterior</span>
+    </button>
+    <div class="indicador" id="indicador" aria-hidden="true"></div>
+    <button type="button" class="nav sig" id="btn-sig" aria-label="Siguiente">
+      <span class="txt">Siguiente</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</nav>
+
+<p class="solo-lectores" id="anuncio" aria-live="polite"></p>
+<div class="aviso" id="aviso" role="status" hidden></div>
+
+<dialog id="dlg-info" aria-labelledby="dlg-info-titulo">
+  <div class="dlg-cab"><h2 id="dlg-info-titulo">Más información</h2>
+    <button type="button" class="cerrar" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 5l14 14M19 5L5 19"/></svg>Cerrar</button></div>
+  <div class="dlg-cuerpo"></div>
+</dialog>
+
+<dialog id="dlg-indice" class="ancho" aria-labelledby="dlg-indice-titulo">
+  <div class="dlg-cab"><h2 id="dlg-indice-titulo">Índice · <span id="total-min"></span> minutos</h2>
+    <button type="button" class="cerrar" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 5l14 14M19 5L5 19"/></svg>Cerrar</button></div>
+  <div class="dlg-cuerpo">
+    <p class="pequeno">Teclado: flechas o Re Pág / Av Pág para avanzar y retroceder · F pantalla completa · N notas · Esc cierra ventanas. Mientras escribes en un campo, las flechas no cambian de pantalla.</p>
+    <ol class="indice-lista" id="indice-lista"></ol>
+  </div>
+</dialog>
+
+<aside class="panel-notas" id="panel-notas" hidden aria-labelledby="panel-notas-titulo">
+  <div class="dlg-cab"><h2 id="panel-notas-titulo">Notas del facilitador</h2>
+    <button type="button" class="cerrar" aria-label="Cerrar notas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 5l14 14M19 5L5 19"/></svg>Cerrar</button></div>
+  <div class="dlg-cuerpo"><p class="pequeno" id="panel-notas-aviso"></p><div id="panel-notas-cuerpo"></div></div>
+</aside>

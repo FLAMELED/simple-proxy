@@ -1,0 +1,1312 @@
+<!doctype html>
+<html lang="es" data-taller="taller02" data-serie-num="02" data-serie-nombre="Cierra el día">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cierra el día con las cuentas claras · Taller 02</title>
+<meta name="description" content="Taller 02 de la serie Finanzas del negocio con IA: completar un cierre de caja, revisar una diferencia y dejar pendientes claros. Presentación interactiva para 90 minutos.">
+<style>
+/*@fuentes*/
+/*@incluir:comun/motor.css*/
+/*@incluir:02-cierra-el-dia/taller02.css*/
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="rayado" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2" height="5" fill="currentColor"/></pattern>
+    <symbol id="vaso-ef" viewBox="0 0 20 24"><path d="M2 2h16l-2.2 20H4.2z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="miter"/></symbol>
+    <symbol id="vaso-tr" viewBox="0 0 20 24"><path d="M2 2h16l-2.2 20H4.2z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6 9h8M6.5 14h7" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="vaso-cr" viewBox="0 0 20 24"><path d="M2 2h16l-2.2 20H4.2z" fill="url(#rayado)" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3 2"/></symbol>
+  </defs>
+</svg>
+
+<main class="escenario" id="escenario">
+
+<!-- ===================================================== A · EL PROBLEMA (10 min) -->
+<section class="pantalla campo portada" data-titulo="Portada" data-seccion="El problema" data-min="2" data-sin-corrido>
+  <div class="marco sin-titulo">
+    <div class="portada-grid">
+      <p class="serie-num"><b>02</b> Registrar · Finanzas del negocio con IA</p>
+      <h1 class="portada-titulo">Cierra el día con las <em>cuentas claras</em></h1>
+      <div class="portada-pie">
+        <p class="entrada">Hoy completas un cierre de caja, revisas una diferencia sin inventar nada y dejas tus pendientes claros.</p>
+        <p class="pequeno">Taller 02 de 04 · 90 minutos<br>Un caso guiado y una tarea para tu negocio</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>Bienvenida (2 min).</b> Preséntate y presenta la tarea: al salir, cada persona tendrá un cierre de caja hecho por ella.</p>
+    <ul><li>Reparte la hoja de cierre impresa (está en la guía) y un lapicero.</li>
+    <li>Quien quiera usar ChatGPT necesita celular con internet. La presentación funciona sin internet; ChatGPT no.</li>
+    <li>Pregunta rápida a mano alzada: «¿Quién cuenta el dinero al cerrar? ¿Quién lo anota?». No corrijas todavía.</li></ul>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Lo que te llevas hoy" data-seccion="El problema" data-min="2">
+  <div class="marco">
+    <h2 class="titulo">Al terminar tendrás tu propio cierre del día</h2>
+    <div class="dos" style="--cols: 1fr 1.15fr">
+      <div class="pila">
+        <ul class="lista entrada" style="font-size:calc(var(--u)*1.8)">
+          <li>Una hoja de cierre completa, hecha por ti.</li>
+          <li>Una diferencia revisada con orden, sin inventar movimientos.</li>
+          <li>Tus pendientes claros para mañana.</li>
+          <li>Una rutina de 10 minutos para repetirlo por tu cuenta.</li>
+        </ul>
+        <p class="pequeno regla-arriba">Ten a mano: la hoja de cierre impresa y un lapicero. Si quieres usar ChatGPT, tu celular con internet.</p>
+      </div>
+      <div>
+        <p class="rotulo">Recorrido de 90 minutos</p>
+        <ol class="recorrido" aria-label="Recorrido de la sesión, en minutos">
+          <li style="--m:10"><span class="letra">A</span><span class="tira">10</span><span>El problema de Ana</span></li>
+          <li style="--m:15"><span class="letra">B</span><span class="tira">15</span><span>Los datos y lo que significan</span></li>
+          <li style="--m:15"><span class="letra">C</span><span class="tira">15</span><span>El cierre, paso a paso</span></li>
+          <li style="--m:20"><span class="letra">D</span><span class="tira">20</span><span>Revisar con la app del banco y la IA</span></li>
+          <li style="--m:20"><span class="letra">E</span><span class="tira">20</span><span>Tu cierre: tus datos o el caso de Lucía</span></li>
+          <li style="--m:10"><span class="letra">F</span><span class="tira">10</span><span>Comprobar y armar tu rutina</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Lee la tarea en voz alta. Insiste en que el resultado es algo que se hace, no algo que se escucha.</p>
+    <p>Las barras del recorrido son proporcionales a los minutos. Las letras A–F coinciden con la barra de abajo de la presentación.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Seguimos con Ana" data-seccion="El problema" data-min="2" data-caso="Taller 01 · referencia" data-caso-tipo="ref">
+  <div class="marco">
+    <h2 class="titulo">Seguimos con Ana y su puesto «Jugos La Parada»</h2>
+    <div class="dos" style="--cols: 1.1fr 1fr">
+      <div class="pila">
+        <p class="texto">En el taller 01 calculamos sus números de un mes. Hoy vuelven dos datos:</p>
+        <dl class="ficha">
+          <div><dt>Precio por vaso</dt><dd class="cifra">Q20.00</dd><span class="de-donde">Dato: lo que cobra Ana por cada vaso.</span></div>
+          <div><dt>Costo por vaso <button type="button" class="i" data-info="i-costo-vaso" aria-label="De dónde sale el costo por vaso">i</button></dt><dd class="cifra">Q12.00</dd><span class="de-donde">Resultado del taller 01: Q100.00 de materiales ÷ 10 vasos + Q2.00 de empaque.</span></div>
+        </dl>
+        <p class="texto">Y una idea: <b>vender no es lo mismo que cobrar</b>. <button type="button" class="i" data-info="i-mes-t01" aria-label="Recordar las cifras del mes del taller 01">i</button></p>
+      </div>
+      <div class="hoja pila centro-v">
+        <p class="rotulo">Hoy miramos un solo día</p>
+        <p class="entrada" style="font-size:calc(var(--u)*1.85)">Un martes de Ana. Es un día nuevo: sus cifras no se suman ni se mezclan con las del mes del taller 01.</p>
+        <p class="pequeno">Mientras veas arriba a la derecha <b class="caso" data-tipo="ana" style="font-size:1em">Caso Ana · martes</b>, seguimos en ese día. Si empieza otro caso o una práctica, la etiqueta cambia.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Si el grupo no estuvo en el taller 01, basta con presentar a Ana: vende jugos en un puesto, cada vaso a Q20.00 y le cuesta Q12.00 hacerlo.</p>
+    <p>Aclara que hoy no calculamos ganancia: hoy cerramos la caja de un día. Las cifras del mes (Q2,000.00 de ventas, etc.) no se usan en los cálculos de hoy.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo" data-titulo="Las cinco de la tarde" data-seccion="El problema" data-min="2" data-caso="Caso Ana · martes">
+  <div class="marco">
+    <h2 class="titulo">Cinco de la tarde. Ana cierra el puesto y cuenta la gaveta.</h2>
+    <div class="dos" style="--cols: 1.2fr 1fr">
+      <div class="pila">
+        <p class="entrada">Preparó 20 vasos y los vendió todos. Ahora tiene billetes y monedas en la gaveta, un cuaderno con notas y la app del banco en el celular.</p>
+        <p class="entrada"><b>Ana se pregunta: ¿está bien lo que hay?</b></p>
+      </div>
+      <div class="hoja pila centro-v" style="text-align:center">
+        <p class="rotulo">Conteo de las 17:00</p>
+        <p class="cifra fuerte" style="font-size:calc(var(--u)*5.2)">Q235.00</p>
+        <p><span class="tipo-cifra" data-t="contado">Dato contado</span></p>
+        <p class="pequeno">Efectivo que hay en la gaveta al cerrar.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Cuenta la escena como una historia. Pregunta: «¿Les pasa? ¿Cuentan al final y no saben si está bien?».</p>
+    <p>Presenta el Q235.00 como dato <i>contado</i>: Ana lo contó con sus manos. Todavía no sabemos si está bien.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo pregunta" data-titulo="¿Ya sabe si está bien?" data-seccion="El problema" data-min="2" data-caso="Caso Ana · martes" data-revela="1">
+  <div class="marco">
+    <h2 class="titulo">Con Q235.00 en la mano, ¿Ana ya sabe si le falta o le sobra dinero?</h2>
+    <div class="dos" style="--cols: 1fr 1fr">
+      <ul class="opciones">
+        <li><button type="button" class="opcion"><span class="letra">A</span><span>Sí: tiene más dinero que cuando abrió.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion correcta"><span class="letra">B</span><span>No: le falta saber con cuánto abrió y qué entró y salió.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion"><span class="letra">C</span><span>Depende de si le fue bien en ventas.</span><span class="marca" data-texto=""></span></button></li>
+      </ul>
+      <div class="explica" data-paso="1">
+        <p class="entrada" style="font-size:calc(var(--u)*1.85)"><b>Respuesta B.</b> Para saberlo necesita el <b>efectivo esperado</b>: lo que debería haber según lo que entró y salió desde que abrió.</p>
+        <p class="texto">Cerrar caja es comparar lo esperado con lo contado.</p>
+        <p class="texto">Y una advertencia: el dinero de la gaveta tampoco es la ganancia del día.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Pide que el grupo vote antes de revelar (clic en la opción que elija la mayoría la marca como «Elegida»). Luego avanza para ver la respuesta.</p>
+    <p>Si alguien dice A: «más que cuando abrió» no dice si está completo; pudo entrar más y perderse una parte. Si dice C: vender bien no garantiza que el dinero esté completo.</p>
+  </aside>
+</section>
+
+<!-- ===================================================== B · LOS DATOS (15 min) -->
+<section class="pantalla" data-titulo="El cuaderno de Ana" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Lo que Ana anotó hoy en su cuaderno</h2>
+    <div class="dos" style="--cols: 0.8fr 2fr">
+      <div class="pila">
+        <p class="texto">Son <b>datos registrados</b> por Ana, tal como los escribió. Pueden tener errores: los vamos a revisar.</p>
+        <p class="texto regla-arriba">Lo que Ana sabe del día:</p>
+        <ul class="lista pequeno" style="color:inherit">
+          <li>Preparó 2 tandas: 20 vasos. Se vendieron todos.</li>
+          <li>La fruta de hoy la compró ayer.</li>
+        </ul>
+      </div>
+      <div class="cuaderno">
+        <p class="cuaderno-cab"><span>Martes · Jugos La Parada</span><span>Q</span></p>
+        <ol>
+          <li><span class="n">1</span><span class="h">7:00</span><span>Conté la gaveta al abrir</span><span class="cifra">Q150.00</span></li>
+          <li><span class="n">2</span><span class="h">7:05</span><span>Puse dinero de mi bolsa para tener vuelto</span><span class="cifra">Q100.00</span></li>
+          <li><span class="n">3</span><span class="h"></span><span>Vasos vendidos en efectivo: 13</span><span class="cifra">Q260.00</span></li>
+          <li><span class="n">4</span><span class="h"></span><span>Vasos pagados por transferencia: 5</span><span class="cifra">Q100.00</span></li>
+          <li><span class="n">5</span><span class="h"></span><span>Don Luis se llevó 2 vasos; paga el viernes</span><span class="cifra">Q40.00</span></li>
+          <li><span class="n">6</span><span class="h">10:15</span><span>Doña Marta pagó vasos de la semana pasada</span><span class="cifra">Q60.00</span></li>
+          <li><span class="n">7</span><span class="h">12:30</span><span>Mercado: fruta para mañana, en efectivo</span><span class="cifra">Q200.00</span></li>
+          <li><span class="n">8</span><span class="h">14:00</span><span>Recarga del teléfono del negocio, en efectivo</span><span class="cifra">Q50.00</span></li>
+          <li><span class="n">9</span><span class="h">15:30</span><span>Saqué para útiles de mi hijo</span><span class="cifra">Q60.00</span></li>
+          <li><span class="n">10</span><span class="h">17:00</span><span>Conté la gaveta al cerrar</span><span class="cifra">Q235.00</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Lee cada línea despacio. No clasifiques todavía: solo presenta los datos. Señala que las notas 3, 4 y 5 son vasos, con su cantidad y su monto (13 × Q20.00 = Q260.00, 5 × Q20.00 = Q100.00, 2 × Q20.00 = Q40.00).</p>
+    <p>Pregunta: «¿Ustedes anotan así? ¿Qué les falta anotar normalmente?». Escucha 2 o 3 respuestas.</p>
+    <p>Todos estos datos están en el botón «Datos del caso» de la barra inferior.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Con cuánto abres" data-seccion="Los datos" data-min="2" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">El cierre empieza en la mañana: contar con cuánto abres</h2>
+    <div class="dos" style="--cols: 1fr 1.2fr">
+      <div class="hoja pila">
+        <p class="rotulo">Nota 1 · 7:00</p>
+        <p><b style="font-size:calc(var(--u)*1.9)">Fondo inicial</b></p>
+        <p class="cifra fuerte" style="font-size:calc(var(--u)*4.2)">Q150.00</p>
+        <p><span class="tipo-cifra" data-t="contado">Dato contado</span></p>
+        <p class="pequeno">Efectivo que había en la gaveta al abrir, antes de vender.</p>
+      </div>
+      <div class="pila">
+        <p class="texto"><b>Error habitual:</b> empezar a vender sin contar.</p>
+        <p class="texto"><b>Consecuencia:</b> en la tarde no sabes qué parte del dinero es de hoy y cuál ya estaba. Cualquier diferencia queda sin explicación.</p>
+        <p class="texto regla-arriba">Los Q100.00 de las 7:05 no se suman al fondo: Ana ya había contado. Ese dinero es un movimiento aparte, y lo veremos en dos pantallas.</p>
+        <p class="pequeno">¿Y el dinero del banco? <button type="button" class="i" data-info="i-banco-saldo" aria-label="Por qué no calculamos el saldo del banco">i</button></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> «Fondo inicial» = con cuánto abres. Muchas personas usan la palabra «sencillo» o «vuelto»; está bien, lo importante es contarlo y anotarlo.</p>
+    <p>Si alguien pregunta por el banco: hoy revisamos solo las transferencias del día, porque no tenemos el saldo con que amaneció la cuenta. Ese dato queda pendiente; no lo inventamos.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Vender no es cobrar" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Vendió 20 vasos. No todo ese dinero entró hoy a la gaveta.</h2>
+    <div class="pila">
+      <p class="entrada" data-paso="1">Ventas del día: 20 vasos × Q20.00 = <b class="cifra">Q400.00</b> <span class="tipo-cifra" data-t="calculado">Resultado</span></p>
+      <div data-paso="2">
+        <div class="grupo-vasos">
+          <div><h3>Efectivo · nota 3</h3><p class="op cifra">13 × Q20.00 = Q260.00</p></div>
+          <div><div class="vasos" data-n="13" data-forma="ef" aria-label="13 vasos pagados en efectivo"></div><span class="destino" data-paso="3">Entra a la gaveta</span></div>
+        </div>
+        <div class="grupo-vasos">
+          <div><h3>Transferencia · nota 4</h3><p class="op cifra">5 × Q20.00 = Q100.00</p></div>
+          <div><div class="vasos" data-n="5" data-forma="tr" aria-label="5 vasos pagados por transferencia"></div><span class="destino" data-paso="3">Entra a la cuenta del banco</span></div>
+        </div>
+        <div class="grupo-vasos">
+          <div><h3>Fiado · nota 5 <button type="button" class="i" data-info="i-fiado" aria-label="Qué es una venta al crédito">i</button></h3><p class="op cifra">2 × Q20.00 = Q40.00</p></div>
+          <div><div class="vasos" data-n="2" data-forma="cr" aria-label="2 vasos fiados"></div><span class="destino" data-paso="3">No entra hoy: queda por cobrar el viernes</span> <span class="tipo-cifra" data-t="previsto" data-paso="3">Previsto</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> Paso 1: el total de ventas. Paso 2: cómo pagaron. Paso 3: a dónde fue el dinero.</p>
+    <p>Comprueba con el grupo: 13 + 5 + 2 = 20 vasos. Q260.00 + Q100.00 + Q40.00 = Q400.00.</p>
+    <p>Mensaje: el fiado <b>sí es venta de hoy</b> (el vaso ya se entregó), pero el dinero entra después. Por eso venta y cobro son hechos diferentes.</p>
+    <p>Los vasos se distinguen por relleno y no solo por color: lleno = efectivo, con rayas horizontales = transferencia, rayado y punteado = fiado.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo pregunta" data-titulo="Un cobro atrasado" data-seccion="Los datos" data-min="2" data-caso="Caso Ana · martes · según el cuaderno" data-revela="1">
+  <div class="marco">
+    <h2 class="titulo">Doña Marta pagó Q60.00 de vasos de la semana pasada. ¿Es venta de hoy?</h2>
+    <div class="pila">
+      <div class="tiempo">
+        <div class="punto"><h3>Semana pasada</h3><p>Se llevó 3 vasos fiados.<br><b>Venta: Q60.00.</b> Se anotó ese día.</p></div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 60 20" preserveAspectRatio="none"><path d="M0 10h54M46 3l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></div>
+        <div class="punto"><h3>Hoy · 10:15 · nota 6</h3><p>Pagó en efectivo.<br><b>Cobro: Q60.00.</b> Entra a la gaveta.</p></div>
+      </div>
+      <div class="dos" style="--cols: 1fr 1.25fr">
+        <ul class="opciones">
+          <li><button type="button" class="opcion"><span class="letra">A</span><span>Sí, se suma a las ventas.</span><span class="marca" data-texto=""></span></button></li>
+          <li><button type="button" class="opcion correcta"><span class="letra">B</span><span>No, es un cobro.</span><span class="marca" data-texto=""></span></button></li>
+        </ul>
+        <div class="explica" data-paso="1">
+          <p class="texto"><b>Es un cobro.</b> La venta ya se anotó la semana pasada. Si la sumas hoy, la misma venta cuenta dos veces y parece que Ana vendió Q460.00.</p>
+          <p class="texto">Para la gaveta sí cuenta: hoy entraron Q60.00 en efectivo. <button type="button" class="i" data-info="i-cobro-no-anotado" aria-label="Qué hacer si la venta anterior no se anotó">i</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Que voten primero. Esta es la confusión más común: «me pagaron, entonces vendí».</p>
+    <p>Consecuencia de sumarlo: las ventas se inflan (Q460.00 en lugar de Q400.00) y el negocio parece vender más de lo que vende.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Aportes y retiros" data-seccion="Los datos" data-min="2" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Dinero de Ana y dinero del negocio: se anotan, pero no son ventas ni gastos</h2>
+    <div class="pila">
+      <div class="flujo">
+        <div class="caja-flujo"><h3>Bolsa de Ana</h3><p>Su dinero personal</p></div>
+        <div class="flechas">
+          <div class="mov"><b>7:05 · nota 2 · Aporte Q100.00</b>
+            <svg viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true"><path d="M0 7h94M86 1l8 6-8 6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+            <span>Entra a la gaveta. No es venta ni ganancia.</span></div>
+          <div class="mov"><span>Sale de la gaveta. No es gasto del negocio.</span>
+            <svg viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true"><path d="M100 7H6M14 1L6 7l8 6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+            <b>15:30 · nota 9 · Retiro Q60.00</b></div>
+        </div>
+        <div class="caja-flujo"><h3>Gaveta del negocio</h3><p>El efectivo del puesto</p></div>
+      </div>
+      <div class="dos" style="--cols: 1fr 1fr">
+        <p class="texto"><b>Pago por trabajo o retiro.</b> Pagarse por las horas trabajadas no es lo mismo que sacar dinero para la casa. <button type="button" class="i" data-info="i-trabajo-retiro" aria-label="Diferencia entre pago por trabajo y retiro">i</button></p>
+        <p class="texto"><b>Un préstamo tampoco es venta:</b> es dinero que se debe devolver. <button type="button" class="i" data-info="i-prestamo" aria-label="Por qué un préstamo no es venta">i</button></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Pregunta: «Si Ana pone Q100.00 de su bolsa, ¿vendió más? ¿ganó más?». No: solo cambió de lugar su dinero.</p>
+    <p>El retiro de Q60.00 para útiles es para la casa, no para el negocio. Si se anota como gasto, los gastos del negocio parecen mayores de lo que son.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Compras y pagos" data-seccion="Los datos" data-min="2" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Lo que pagó hoy sale de la gaveta hoy, aunque se use mañana</h2>
+    <div class="dos">
+      <div class="hoja pila">
+        <p class="rotulo">Nota 7 · 12:30 · Compra de insumos</p>
+        <p class="cifra fuerte" style="font-size:calc(var(--u)*3.2)">Q200.00</p>
+        <p class="texto">Fruta para mañana. El efectivo sale hoy; esos jugos se venderán mañana y su costo contará cuando se vendan.</p>
+      </div>
+      <div class="hoja pila">
+        <p class="rotulo">Nota 8 · 14:00 · Pago de gasto</p>
+        <p class="cifra fuerte" style="font-size:calc(var(--u)*3.2)">Q50.00</p>
+        <p class="texto">Recarga del teléfono del negocio. En el taller 01 el teléfono es Q50.00 al mes: hoy tocó pagarlo.</p>
+      </div>
+    </div>
+    <p class="entrada abajo regla-arriba" style="grid-column:1/-1">El cierre de caja mira el dinero. La ganancia se calcula aparte, como en el taller 01. <button type="button" class="i" data-info="i-costo-hoy" aria-label="Cuánto costaron los vasos de hoy">i</button></p>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Punto clave: comprar insumos afecta la caja hoy; el costo de lo vendido afecta el resultado cuando se vende. No se descuentan las dos cosas como gasto del mismo producto.</p>
+    <p>Si preguntan por la ganancia del martes: abre la «i». Para calcularla bien harían falta los gastos del mes repartidos; hoy no es el objetivo.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Cinco etiquetas" data-seccion="Los datos" data-min="1">
+  <div class="marco">
+    <h2 class="titulo">Cada cifra lleva una etiqueta: fíjate en ella</h2>
+    <table class="tabla">
+      <thead><tr><th>Etiqueta</th><th>Qué quiere decir</th><th>Ejemplo de hoy</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tipo-cifra" data-t="registrado">Dato registrado</span></td><td>Lo anotó alguien: Ana, el banco, un recibo.</td><td>Q260.00 en efectivo, según el cuaderno.</td></tr>
+        <tr><td><span class="tipo-cifra" data-t="contado">Dato contado</span></td><td>Lo contaste con tus manos.</td><td>Q235.00 en la gaveta a las 17:00.</td></tr>
+        <tr><td><span class="tipo-cifra" data-t="calculado">Resultado</span></td><td>Sale de una operación con otros datos.</td><td>Ventas del día: Q400.00.</td></tr>
+        <tr><td><span class="tipo-cifra" data-t="previsto">Previsto</span></td><td>Se espera, pero todavía no pasa.</td><td>Don Luis paga Q40.00 el viernes.</td></tr>
+        <tr><td><span class="tipo-cifra" data-t="pendiente">Pendiente</span></td><td>Falta saberlo. No es cero.</td><td>El saldo total de la cuenta del banco.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notas">
+    <p><b>1 min.</b> No es para memorizar: es para que, cuando vean una cifra, se pregunten de dónde salió. Lo pendiente se queda pendiente: nunca se convierte en cero.</p>
+  </aside>
+</section>
+
+<!-- ===================================================== C · PASO A PASO (15 min) -->
+<section class="pantalla" data-titulo="¿Qué es cada nota?" data-seccion="Paso a paso" data-min="4" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo ancho">Primera parte: ¿qué es cada nota?</h2>
+    <div class="dos" style="--cols: 2.6fr 1fr">
+      <div id="clasificar">
+        <table>
+          <thead><tr><th>#</th><th>Nota de Ana</th><th style="width:30%">¿Qué es?</th><th>Respuesta</th><th></th></tr></thead>
+          <tbody>
+            <tr data-respuesta="fondo"><td class="n">1</td><td>Conté la gaveta al abrir · Q150.00</td><td><select aria-label="Nota 1: tipo"></select></td><td><span class="resp">Fondo inicial</span></td><td class="veredicto"></td></tr>
+            <tr data-respuesta="aporte"><td class="n">2</td><td>Puse dinero de mi bolsa · Q100.00</td><td><select aria-label="Nota 2: tipo"></select></td><td><span class="resp">Aporte del dueño · efectivo</span></td><td class="veredicto"></td></tr>
+            <tr data-respuesta="venta"><td class="n">3</td><td>13 vasos en efectivo · Q260.00</td><td><select aria-label="Nota 3: tipo"></select></td><td><span class="resp">Venta · efectivo</span></td><td class="veredicto"></td></tr>
+            <tr data-respuesta="venta"><td class="n">4</td><td>5 vasos por transferencia · Q100.00</td><td><select aria-label="Nota 4: tipo"></select></td><td><span class="resp">Venta · transferencia</span></td><td class="veredicto"></td></tr>
+            <tr data-respuesta="venta"><td class="n">5</td><td>Don Luis, 2 vasos, paga el viernes · Q40.00</td><td><select aria-label="Nota 5: tipo"></select></td><td><span class="resp">Venta · crédito</span></td><td class="veredicto"></td></tr>
+            <tr data-respuesta="cobro"><td class="n">6</td><td>Doña Marta pagó lo de la semana pasada · Q60.00</td><td><select aria-label="Nota 6: tipo"></select></td><td><span class="resp">Cobro de venta anterior · efectivo</span></td><td class="veredicto"></td></tr>
+            <tr data-respuesta="compra"><td class="n">7</td><td>Fruta para mañana · Q200.00</td><td><select aria-label="Nota 7: tipo"></select></td><td><span class="resp">Compra de insumos · efectivo</span></td><td class="veredicto"></td></tr>
+            <tr data-respuesta="gasto"><td class="n">8</td><td>Recarga del teléfono del negocio · Q50.00</td><td><select aria-label="Nota 8: tipo"></select></td><td><span class="resp">Pago de gasto · efectivo</span></td><td class="veredicto"></td></tr>
+            <tr data-respuesta="retiro"><td class="n">9</td><td>Saqué para útiles de mi hijo · Q60.00</td><td><select aria-label="Nota 9: tipo"></select></td><td><span class="resp">Retiro personal · efectivo</span></td><td class="veredicto"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pila">
+        <p class="texto">Elige con el grupo qué es cada nota. Luego revisa.</p>
+        <p class="pequeno" id="clasificar-cuenta" aria-live="polite"></p>
+        <div class="pila-c">
+          <button type="button" class="boton" id="clasificar-revisar">Revisar respuestas</button>
+          <button type="button" class="boton sec" id="clasificar-mostrar">Mostrar respuestas</button>
+          <button type="button" class="boton sec" id="clasificar-reiniciar">Reiniciar ejercicio</button>
+        </div>
+        <p class="pequeno regla-arriba">La nota 10 (el conteo de las 17:00) no es un movimiento: es lo que vamos a comparar.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>4 min.</b> Pide que cada persona lo haga primero en su hoja (columna «Tipo»). Después, en voz alta, elige con el grupo cada respuesta y pulsa «Revisar».</p>
+    <p>Dudas esperables: la nota 6 (cobro, no venta), la 2 (aporte, no venta) y la 9 (retiro, no gasto). La 5 es venta aunque no haya entrado dinero.</p>
+    <p>«Reiniciar ejercicio» deja todo en blanco. No cambia ningún dato del caso.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Ventas y cobros del día" data-seccion="Paso a paso" data-min="3" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Ventas del día y dinero cobrado hoy no dan lo mismo</h2>
+    <div class="barras">
+      <div class="barra-dinero" data-paso="1">
+        <h3><span>Ventas del día · notas 3, 4 y 5</span><span class="cifra">Q400.00</span></h3>
+        <div class="tira-dinero" style="--escala:420" role="img" aria-label="Ventas: Q260 en efectivo, Q100 por transferencia y Q40 fiado; total Q400">
+          <div class="seg ef" style="--v:260"><span>Efectivo</span><b>Q260.00</b></div>
+          <div class="seg tr" style="--v:100"><span>Transferencia</span><b>Q100.00</b></div>
+          <div class="seg cr" style="--v:40"><span>Fiado</span><b>Q40</b></div>
+        </div>
+      </div>
+      <div class="barra-dinero" data-paso="2">
+        <h3><span>Cobrado hoy · notas 3, 4 y 6</span><span class="cifra">Q420.00</span></h3>
+        <div class="tira-dinero" style="--escala:420" role="img" aria-label="Cobrado hoy: Q260 en efectivo, Q100 por transferencia y Q60 del cobro a Doña Marta; total Q420">
+          <div class="seg ef" style="--v:260"><span>Efectivo</span><b>Q260.00</b></div>
+          <div class="seg tr" style="--v:100"><span>Transferencia</span><b>Q100.00</b></div>
+          <div class="seg cb" style="--v:60"><span>Doña Marta</span><b>Q60.00</b></div>
+        </div>
+        <div class="escala" aria-hidden="true"><span>Q0</span><span>Q105</span><span>Q210</span><span>Q315</span><span>Q420</span></div>
+      </div>
+      <p class="entrada" data-paso="3">Hoy cobró <b class="cifra">Q20.00</b> más de lo que vendió: entró el pago atrasado de Doña Marta y quedó pendiente el de Don Luis. Otro día puede ser al revés. Por eso se anotan por separado.</p>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> Las dos barras usan la misma escala (de Q0 a Q420). La diferencia: el fiado de Don Luis (Q40.00) está en ventas pero no en cobros; el cobro de Doña Marta (Q60.00) está en cobros pero no en ventas.</p>
+    <p>Comprobación: Q420.00 − Q400.00 = Q20.00 = Q60.00 − Q40.00.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Efectivo esperado" data-seccion="Paso a paso" data-min="3" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo ancho">Efectivo esperado: lo que debería haber en la gaveta</h2>
+    <div class="dos" style="--cols: 2.3fr 1fr">
+      <table class="libro saldo">
+        <thead><tr><th></th><th>Movimiento</th><th style="text-align:right">Monto</th><th style="text-align:right">Queda</th><th>Saldo en la gaveta</th></tr></thead>
+        <tbody>
+          <tr><td class="signo"></td><td>Fondo inicial · nota 1</td><td class="num">Q150.00</td><td class="num">Q150.00</td><td class="barra-saldo"><div class="b" style="--v:150"></div></td></tr>
+          <tr class="entra" data-paso="1"><td class="signo">+</td><td>Aporte de Ana · nota 2</td><td class="num">Q100.00</td><td class="num">Q250.00</td><td class="barra-saldo"><div class="b" style="--v:250"></div></td></tr>
+          <tr class="entra" data-paso="2"><td class="signo">+</td><td>Ventas en efectivo · nota 3</td><td class="num">Q260.00</td><td class="num">Q510.00</td><td class="barra-saldo"><div class="b" style="--v:510"></div></td></tr>
+          <tr class="entra" data-paso="3"><td class="signo">+</td><td>Cobro a Doña Marta · nota 6</td><td class="num">Q60.00</td><td class="num">Q570.00</td><td class="barra-saldo"><div class="b" style="--v:570"></div></td></tr>
+          <tr class="sale" data-paso="4"><td class="signo">−</td><td>Fruta para mañana · nota 7</td><td class="num">Q200.00</td><td class="num">Q370.00</td><td class="barra-saldo"><div class="b" style="--v:370"></div></td></tr>
+          <tr class="sale" data-paso="5"><td class="signo">−</td><td>Teléfono · nota 8</td><td class="num">Q50.00</td><td class="num">Q320.00</td><td class="barra-saldo"><div class="b" style="--v:320"></div></td></tr>
+          <tr class="sale" data-paso="6"><td class="signo">−</td><td>Retiro de Ana · nota 9</td><td class="num">Q60.00</td><td class="num">Q260.00</td><td class="barra-saldo"><div class="b" style="--v:260"></div></td></tr>
+        </tbody>
+      </table>
+      <div class="pila">
+        <div class="hoja pila-c">
+          <p class="rotulo">No entran a la gaveta</p>
+          <p class="pequeno" style="color:inherit">Transferencias, nota 4: Q100.00. Van a la cuenta del banco.</p>
+          <p class="pequeno" style="color:inherit">Fiado de Don Luis, nota 5: Q40.00. Todavía no se cobra.</p>
+        </div>
+        <p class="pequeno">Barras: escala de Q0 a Q600.</p>
+      </div>
+    </div>
+    <div class="pila-c" data-paso="7" style="grid-column:1/-1">
+      <p class="resultado-linea"><b>Efectivo esperado, según el cuaderno</b><span class="cifra">Q260.00</span></p>
+      <p class="operacion">Q150.00 + Q100.00 + Q260.00 + Q60.00 − Q200.00 − Q50.00 − Q60.00 = Q260.00</p>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 7 pasos.</b> Avanza fila por fila y pide al grupo que diga el saldo antes de revelarlo. Que lo escriban en la hoja, en la sección «Efectivo esperado».</p>
+    <p>Pregunta de control antes del paso 1: «¿Las transferencias se suman aquí?». No: están en el banco.</p>
+    <p>El resultado es <b>calculado con lo que anotó Ana</b>. Todavía no sabemos si sus notas están completas.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Contar la gaveta" data-seccion="Paso a paso" data-min="2" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Contar la gaveta, billete por billete</h2>
+    <div class="dos" style="--cols: 1.5fr 1fr">
+      <div class="conteo" data-paso="1">
+        <div class="fila"><span class="billete">Q100</span><span class="cifra">1 × Q100.00</span><span class="cifra">Q100.00</span></div>
+        <div class="fila"><span class="billete">Q50</span><span class="cifra">2 × Q50.00</span><span class="cifra">Q100.00</span></div>
+        <div class="fila"><span class="billete">Q20</span><span class="cifra">1 × Q20.00</span><span class="cifra">Q20.00</span></div>
+        <div class="fila"><span class="billete">Q10</span><span class="cifra">1 × Q10.00</span><span class="cifra">Q10.00</span></div>
+        <div class="fila"><span class="moneda">Q1</span><span class="cifra">3 × Q1.00</span><span class="cifra">Q3.00</span></div>
+        <div class="fila"><span class="moneda">50c</span><span class="cifra">4 × Q0.50</span><span class="cifra">Q2.00</span></div>
+      </div>
+      <div class="pila">
+        <div class="resultado-linea" data-paso="2" style="flex-direction:column;align-items:flex-start"><b>Efectivo contado</b><span class="cifra">Q235.00</span><span class="tipo-cifra" data-t="contado">Dato contado</span></div>
+        <p class="texto">Separa billetes y monedas. Anota cuántos hay de cada uno. Cuenta dos veces.</p>
+        <p class="pequeno">La hoja de cierre trae esta tabla para llenarla.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min · 2 pasos.</b> Suma con el grupo: Q100.00 + Q100.00 + Q20.00 + Q10.00 + Q3.00 + Q2.00 = Q235.00. Es el mismo conteo de la escena inicial.</p>
+    <p>Consejo práctico: contar por denominación evita errores y deja un registro que se puede revisar.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="La diferencia" data-seccion="Paso a paso" data-min="1" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Contado menos esperado: la diferencia</h2>
+    <div class="pila">
+      <p class="ecuacion"><span><span class="cifra">Q235.00</span><small>contado</small></span><span>−</span><span><span class="cifra">Q260.00</span><small>esperado según el cuaderno</small></span><span>=</span><span><span class="cifra">−Q25.00</span><small>diferencia</small></span></p>
+      <div class="veredicto-caja" data-estado="falta" data-paso="1"><span class="icono" aria-hidden="true">−</span><b>Falta Q25.00</b><span class="pequeno">Negativo: falta. Positivo: sobra. Cero: cuadra. <button type="button" class="i" data-info="i-signo" aria-label="Cómo leer el signo de la diferencia">i</button></span></div>
+      <p class="texto" data-paso="1">Esto es con lo que anotó Ana. Todavía no revisamos si sus notas están completas.</p>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>1 min.</b> Siempre en el mismo orden: contado menos esperado. Así el signo dice si falta (−) o sobra (+).</p>
+  </aside>
+</section>
+
+<section class="pantalla campo pregunta" data-titulo="¿Qué hace con la diferencia?" data-seccion="Paso a paso" data-min="2" data-caso="Caso Ana · martes · según el cuaderno" data-revela="1">
+  <div class="marco">
+    <h2 class="titulo">¿Qué hace Ana con los Q25.00 que faltan?</h2>
+    <div class="dos" style="--cols: 1fr 1.1fr">
+      <ul class="opciones">
+        <li><button type="button" class="opcion"><span class="letra">A</span><span>Anota «gastos varios Q25.00» para que cuadre.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion"><span class="letra">B</span><span>Pone Q25.00 de su bolsa y listo.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion correcta"><span class="letra">C</span><span>La anota como diferencia y revisa en orden.</span><span class="marca" data-texto=""></span></button></li>
+      </ul>
+      <div class="explica" data-paso="1">
+        <p class="texto"><b>Respuesta C.</b> Una diferencia queda pendiente de revisión hasta encontrar la causa.</p>
+        <p class="texto"><b>A inventa un movimiento</b> y esconde la causa. Si fue un vuelto mal dado, volverá a pasar.</p>
+        <p class="texto"><b>B mezcla su dinero con el del negocio</b> y la diferencia sigue sin explicación. Si lo hace, es un aporte y se anota como tal.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Que voten. Muchas personas hacen A o B por costumbre; no las juzgues, muestra la consecuencia.</p>
+    <p>Transición: «Vamos a revisar en orden. Y vamos a ver cómo nos puede ayudar la IA, y dónde se puede equivocar».</p>
+  </aside>
+</section>
+
+<!-- ===================================================== D · REVISAR CON IA (20 min) -->
+<section class="pantalla" data-titulo="La IA ordena las notas" data-seccion="Revisar con IA" data-min="3" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">La IA puede ordenar las notas. Tú compruebas.</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Esta consulta le da a ChatGPT las notas de Ana, las categorías y lo que no debe inventar.</p>
+        <div class="verificar">
+          <h3>Después, verifica con lo que hicimos a mano</h3>
+          <ul class="lista">
+            <li>Ventas del día: Q400.00.</li>
+            <li>El cobro de Doña Marta aparece como cobro, no como venta.</li>
+            <li>El aporte y el retiro no son ventas ni gastos.</li>
+            <li>Efectivo esperado según el cuaderno: Q260.00.</li>
+          </ul>
+        </div>
+        <p class="pequeno">ChatGPT requiere internet. Esta presentación no se conecta a ninguna IA: copias y pegas. <button type="button" class="i" data-info="i-ia-conexion" aria-label="Cómo se usa la IA en el taller">i</button></p>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 1 · Ordenar las notas de un día</b>
+          <button type="button" class="boton" data-copiar="c-ordenar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-ordenar">Ayúdame a ordenar las notas de un día de mi negocio para hacer el cierre de caja.
+
+QUÉ QUIERO RESOLVER: clasificar cada movimiento y saber cuánto efectivo debería haber en la gaveta al cerrar.
+
+MI NEGOCIO: vendo jugos naturales en un puesto, a Q20.00 el vaso. Hoy preparé 2 tandas (20 vasos) y se vendieron todos. La fruta de hoy la compré ayer.
+
+MIS NOTAS DEL DÍA (en quetzales):
+1. 7:00 Conté la gaveta al abrir: Q150.00
+2. 7:05 Puse Q100.00 de mi bolsa para tener vuelto.
+3. Vasos vendidos en efectivo: 13 (Q260.00).
+4. Vasos pagados por transferencia: 5 (Q100.00).
+5. Don Luis se llevó 2 vasos; paga el viernes (Q40.00).
+6. 10:15 Doña Marta me pagó Q60.00 de vasos de la semana pasada.
+7. 12:30 Compré fruta para mañana: Q200.00 en efectivo.
+8. 14:00 Pagué la recarga del teléfono del negocio: Q50.00 en efectivo.
+9. 15:30 Saqué Q60.00 para útiles de mi hijo.
+
+USA SOLO ESTAS CATEGORÍAS: fondo inicial, venta, cobro de venta anterior, aporte del dueño, préstamo recibido, compra de insumos, pago de gasto del negocio, pago por trabajo del dueño, retiro personal. FORMAS: efectivo, transferencia o crédito.
+
+LO QUE TODAVÍA NO SÉ: el saldo total de mi cuenta del banco. Tampoco he revisado la app del banco.
+
+NO INVENTES movimientos, montos ni categorías. No calcules ganancia ni impuestos: esto es un cierre de caja. Si algo no está claro, pregúntame en lugar de suponer.
+
+RESPÓNDEME ASÍ:
+1. Una tabla: número de nota, descripción corta, categoría, forma, monto y si entra o sale de la gaveta.
+2. Ventas del día: total y cuánto fue en efectivo, transferencia y crédito.
+3. La operación del efectivo esperado, paso a paso.
+4. Una lista corta de lo que yo debo verificar.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Lee en voz alta la estructura de la consulta: qué queremos, qué tenemos, qué falta, qué no debe inventar, cómo queremos la respuesta. Lo que verificamos después está a la izquierda.</p>
+    <p>Si hay internet y alguien quiere probar en su celular, que lo haga ahora. Si no hay conexión, sigue con la pantalla siguiente, que muestra una respuesta de ejemplo.</p>
+    <p>Si el botón no copia (pasa en algunos navegadores con archivos locales), aparece un cuadro con el texto seleccionado para copiarlo a mano.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Una respuesta con errores" data-seccion="Revisar con IA" data-min="3" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Ejemplo didáctico: una respuesta con cuatro errores</h2>
+    <div class="dos" style="--cols: 1.1fr 1fr">
+      <div class="ia-demo">
+        <p class="ia-demo-cab"><span>Respuesta preescrita para el taller</span><span>No es una conexión real</span></p>
+        <ol>
+          <li><span class="m">·</span><span>Clasifiqué tus 9 notas.</span></li>
+          <li class="error"><span class="m">1</span><span>Ventas del día: Q460.00 (13 en efectivo, 5 por transferencia, 2 de Don Luis y el pago de Doña Marta).</span></li>
+          <li class="error"><span class="m">2</span><span>Gastos: fruta Q200.00, teléfono Q50.00 y útiles de tu hijo Q60.00.</span></li>
+          <li><span class="m">·</span><span>Efectivo esperado: Q260.00. Contaste Q235.00.</span></li>
+          <li class="error"><span class="m">3</span><span>Agregué «gastos varios» por Q25.00 para que cuadre.</span></li>
+          <li class="error"><span class="m">4</span><span>¡Tu ganancia del día fue de Q235.00!</span></li>
+        </ol>
+      </div>
+      <ol class="errores-ia">
+        <li data-paso="1"><b>1</b><span><b>Sumó un cobro como venta.</b> Los Q60.00 de Doña Marta son de la semana pasada. Las ventas son Q400.00.</span></li>
+        <li data-paso="2"><b>2</b><span><b>Puso el retiro como gasto.</b> Los útiles son un retiro personal, no un gasto del negocio.</span></li>
+        <li data-paso="3"><b>3</b><span><b>Inventó un movimiento.</b> Se le pidió no inventar. La diferencia de Q25.00 queda pendiente de revisión.</span></li>
+        <li data-paso="4"><b>4</b><span><b>Confundió caja con ganancia.</b> Q235.00 es lo que hay en la gaveta, no lo que ganó.</span></li>
+        <li data-paso="4" class="pequeno" style="grid-template-columns:1fr">Lo que sí hizo bien: el efectivo esperado, Q260.00, coincide con nuestro cálculo.</li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 4 pasos.</b> Antes de avanzar, da un minuto para que el grupo busque errores. Pregunta: «¿Qué cifra no coincide con lo que calculamos a mano?».</p>
+    <p>Mensaje: la IA escribe con seguridad aunque se equivoque. Por eso comprobamos con nuestra hoja, que hace las cuentas paso a paso.</p>
+    <p>Esta respuesta la escribimos nosotros para el taller; no viene de ChatGPT. Dilo con claridad.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Revisar en orden" data-seccion="Revisar con IA" data-min="2" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Para revisar una diferencia, empieza por lo que se puede comprobar</h2>
+    <div class="dos" style="--cols: 1.5fr 1fr">
+      <ol class="pasos texto" style="max-width:none">
+        <li><span><b>¿Cuadran los vasos?</b> Preparó 20; anotó 13 + 5 + 2 = 20. <span data-paso="1"><b>Sí cuadran.</b></span></span></li>
+        <li><span><b>¿La app del banco coincide con las transferencias anotadas?</b></span></li>
+        <li><span><b>¿Falta anotar algún pago o cobro?</b> Recibos, mensajes, bolsas del mercado.</span></li>
+        <li><span><b>¿Algún vuelto pudo salir mal?</b> Repasa los billetes grandes que recibió.</span></li>
+        <li><span><b>Volver a contar la gaveta</b>, sin prisa.</span></li>
+      </ol>
+      <div class="hoja pila">
+        <p class="rotulo">Lo que no se hace</p>
+        <ul class="lista texto">
+          <li>Borrar la diferencia.</li>
+          <li>Inventar un gasto para que cuadre.</li>
+          <li>Culpar a alguien sin pruebas.</li>
+        </ul>
+        <p class="pequeno">Cada corrección necesita un respaldo: un recibo, un mensaje, la app del banco. <button type="button" class="i" data-info="i-vuelto" aria-label="Cómo un vuelto mal dado crea una diferencia">i</button></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Los vasos cuadran, así que no falta registrar una venta: lo que puede estar mal es <i>cómo</i> pagaron. Eso lleva al paso 2: la app del banco.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Pedir ayuda sin borrar la diferencia" data-seccion="Revisar con IA" data-min="2" data-caso="Caso Ana · martes · según el cuaderno">
+  <div class="marco">
+    <h2 class="titulo">Pedirle a la IA que revise, no que haga cuadrar</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">La IA puede proponer una lista de revisión ordenada. No sabe lo que pasó en tu puesto: solo tú puedes comprobarlo.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que no proponga «gastos varios» ni otro movimiento sin respaldo.</li>
+            <li>Que no culpe a nadie.</li>
+            <li>Que cada revisión diga qué comprobante mirar.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 2 · Revisar una diferencia de caja</b>
+          <button type="button" class="boton" data-copiar="c-diferencia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-diferencia">Hice el cierre de caja de mi puesto de jugos y tengo una diferencia. Ayúdame a revisarla en orden, sin borrarla.
+
+QUÉ QUIERO RESOLVER: encontrar la causa de la diferencia o, si no la encuentro, dejarla bien anotada como pendiente.
+
+LO QUE TENGO:
+- Fondo inicial contado: Q150.00.
+- Entradas de efectivo anotadas: aporte mío Q100.00, ventas en efectivo Q260.00 (13 vasos), cobro de una venta anterior Q60.00.
+- Salidas de efectivo anotadas: fruta para mañana Q200.00, teléfono Q50.00, retiro personal Q60.00.
+- Efectivo esperado según mis notas: Q260.00.
+- Contado en la gaveta: Q235.00. Faltan Q25.00.
+- Anoté 5 vasos pagados por transferencia (Q100.00) y 2 fiados (Q40.00). En total vendí 20 vasos, y eso sí cuadra.
+
+LO QUE NO SÉ: todavía no reviso la app del banco. No sé si di mal algún vuelto.
+
+NO INVENTES movimientos para que cuadre, no me sugieras anotar «gastos varios» y no supongas robos ni culpables.
+
+RESPÓNDEME CON:
+1. Una lista de revisiones, de la más fácil de comprobar a la más difícil, y qué comprobante miro en cada una.
+2. Qué cambiaría si una venta anotada en efectivo en realidad fue por transferencia, con la operación.
+3. Cómo anoto la diferencia si no encuentro la causa.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Muestra que la consulta incluye lo que no sabemos («no reviso la app»). Eso evita que la IA lo suponga.</p>
+    <p>Una respuesta razonable pondrá la app del banco entre lo primero. Es justo lo que hacemos en la pantalla siguiente.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="La app del banco" data-seccion="Revisar con IA" data-min="3" data-caso="Caso Ana · martes · revisión">
+  <div class="marco">
+    <h2 class="titulo">La app del banco muestra una transferencia más</h2>
+    <div class="dos" style="--cols: 1fr 1.35fr">
+      <div class="app" role="img" aria-label="Ilustración de la app del banco: seis transferencias de Q20 cada una, total Q120">
+        <p class="app-cab"><span>Transferencias recibidas hoy</span><span>Ilustración</span></p>
+        <ul>
+          <li><span class="h">8:12</span><span>Pago jugo</span><span class="cifra">Q20.00</span></li>
+          <li><span class="h">9:40</span><span>Pago jugo</span><span class="cifra">Q20.00</span></li>
+          <li><span class="h">11:05</span><span>Pago jugo</span><span class="cifra">Q20.00</span></li>
+          <li class="marcada"><span class="h">13:20</span><span>Pago jugo</span><span class="cifra">Q20.00</span></li>
+          <li><span class="h">14:45</span><span>Pago jugo</span><span class="cifra">Q20.00</span></li>
+          <li><span class="h">16:10</span><span>Pago jugo</span><span class="cifra">Q20.00</span></li>
+        </ul>
+        <p class="app-total"><span>6 transferencias</span><span class="cifra">Q120.00</span></p>
+      </div>
+      <div class="pila">
+        <table class="comparar" data-paso="1">
+          <thead><tr><th></th><th style="text-align:right">Vasos</th><th style="text-align:right">Monto</th></tr></thead>
+          <tbody>
+            <tr><td>Anotado en el cuaderno, nota 4</td><td class="num">5</td><td class="num">Q100.00</td></tr>
+            <tr><td>Registrado en la app del banco</td><td class="num">6</td><td class="num">Q120.00</td></tr>
+            <tr><td><b>Diferencia</b></td><td class="num"><b>1</b></td><td class="num"><b>Q20.00</b></td></tr>
+          </tbody>
+        </table>
+        <p class="texto" data-paso="2">Ana recuerda: el muchacho de la 13:20 pagó por transferencia y ella lo anotó con los de efectivo.</p>
+        <div class="hoja pila-c" data-paso="3" style="padding-top:calc(var(--u)*1);padding-bottom:calc(var(--u)*1)">
+          <p class="rotulo">Corrección con respaldo</p>
+          <p>Efectivo: <span class="tachado cifra">13 vasos · Q260.00</span> → <b class="cifra">12 vasos · Q240.00</b></p>
+          <p>Transferencia: <span class="tachado cifra">5 vasos · Q100.00</span> → <b class="cifra">6 vasos · Q120.00</b></p>
+          <p class="pequeno">Las ventas del día siguen siendo Q400.00: solo cambia la forma de pago. Esto no es inventar: la app es el comprobante.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> Presenta la app como ilustración: no es de ningún banco real. Pide que cuenten las transferencias antes de avanzar.</p>
+    <p>Paso 3, comprueba con el grupo: 12 + 6 + 2 = 20 vasos; Q240.00 + Q120.00 + Q40.00 = Q400.00. Las ventas no cambian.</p>
+    <p>Diferencia con la pregunta anterior: aquí sí se corrige, porque hay un comprobante. Corregir con respaldo no es lo mismo que inventar.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Recalcular" data-seccion="Revisar con IA" data-min="2" data-caso="Caso Ana · martes · corregido con la app">
+  <div class="marco">
+    <h2 class="titulo">Con la corrección, la diferencia baja a Q5.00</h2>
+    <div class="pila">
+      <div class="antes-despues">
+        <div class="antes">
+          <h3>Antes · según el cuaderno</h3>
+          <p class="operacion">Q150.00 + Q100.00 + <b>Q260.00</b> + Q60.00 − Q200.00 − Q50.00 − Q60.00 = <b>Q260.00</b> esperado</p>
+          <p class="operacion">Q235.00 contado − Q260.00 = −Q25.00</p>
+          <p class="res">Faltaban Q25.00</p>
+        </div>
+        <div data-paso="1">
+          <h3>Después · corregido con la app</h3>
+          <p class="operacion">Q150.00 + Q100.00 + <b>Q240.00</b> + Q60.00 − Q200.00 − Q50.00 − Q60.00 = <b>Q240.00</b> esperado</p>
+          <p class="operacion">Q235.00 contado − Q240.00 = −Q5.00</p>
+          <p class="res">Faltan Q5.00 <span class="tipo-cifra" data-t="pendiente">Pendiente</span></p>
+        </div>
+      </div>
+      <p class="entrada regla-arriba" data-paso="2">Solo cambió un dato: las ventas en efectivo, de Q260.00 a Q240.00. Los Q5.00 quedan anotados como diferencia sin explicar. Mañana Ana vuelve a contar al abrir y revisa los vueltos. No se borra.</p>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min · 2 pasos.</b> Señala qué cambió y qué no: el fondo, el aporte, el cobro y las salidas son iguales.</p>
+    <p>Pregunta: «¿Y si Ana nunca encuentra los Q5.00?». Queda anotado. Si las diferencias pequeñas se repiten, esa es una pista (por ejemplo, vueltos con monedas).</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Explícamelo más sencillo" data-seccion="Revisar con IA" data-min="1" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">«Explícamelo más sencillo con uno de mis productos»</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Si alguna idea no quedó clara, pide a la IA que la explique con algo que tú vendes.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que diga que sus números son de ejemplo.</li>
+            <li>Que no sume un cobro atrasado como venta.</li>
+            <li>Que haga cada operación paso a paso.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 3 · Explícamelo más sencillo</b>
+          <button type="button" class="boton" data-copiar="c-sencillo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-sencillo">Explícamelo más sencillo con uno de mis productos.
+
+Vendo [ESCRIBE TU PRODUCTO] a Q[PRECIO] cada uno.
+
+Con ese producto, explícame la diferencia entre:
+- vender y cobrar;
+- cobrar una venta anterior y hacer una venta nueva;
+- un retiro personal y un gasto del negocio;
+- el efectivo esperado y el efectivo contado.
+
+Usa un día inventado y sencillo, con no más de 6 movimientos, y dime claramente que esos números son de ejemplo. Muestra cada operación paso a paso, en quetzales con dos decimales. Usa frases cortas. No hables de impuestos ni de contabilidad formal.
+
+Al final, hazme 2 preguntas para comprobar que entendí, y espera mi respuesta antes de darme la solución.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>1 min.</b> Pide que la guarden para después: es útil en casa, cuando repasen solos. Cada quien cambia el producto y el precio entre corchetes.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El cierre de Ana" data-seccion="Revisar con IA" data-min="2" data-caso="Caso Ana · martes · corregido con la app">
+  <div class="marco">
+    <h2 class="titulo">El cierre del martes, completo</h2>
+    <div class="dos" style="--cols: 1.15fr 1fr">
+      <div class="cierre-hoja">
+        <h3><span>Cierre · Jugos La Parada · martes</span><span>Q</span></h3>
+        <table>
+          <tr><td>Fondo inicial <span class="tipo-cifra" data-t="contado">contado</span></td><td class="num">Q150.00</td></tr>
+          <tr><td>+ Entradas de efectivo: aporte Q100.00, ventas Q240.00, cobro Q60.00</td><td class="num">Q400.00</td></tr>
+          <tr><td>− Salidas de efectivo: fruta Q200.00, teléfono Q50.00, retiro Q60.00</td><td class="num">Q310.00</td></tr>
+          <tr class="fuerte"><td>Efectivo esperado <span class="tipo-cifra" data-t="calculado">resultado</span></td><td class="num">Q240.00</td></tr>
+          <tr><td>Efectivo contado <span class="tipo-cifra" data-t="contado">contado</span></td><td class="num">Q235.00</td></tr>
+          <tr class="fuerte"><td>Diferencia: falta</td><td class="num">−Q5.00</td></tr>
+          <tr><td>Ventas del día: 12 efectivo, 6 transferencia, 2 fiado (20 vasos)</td><td class="num">Q400.00</td></tr>
+          <tr><td>Cobrado hoy: Q240.00 + Q120.00 + Q60.00</td><td class="num">Q420.00</td></tr>
+          <tr><td>Transferencias anotadas = app del banco</td><td class="num">Q120.00</td></tr>
+        </table>
+      </div>
+      <div class="pila">
+        <p class="rotulo">Pendientes para mañana</p>
+        <ul class="pendientes">
+          <li><span>Revisar la diferencia de Q5.00: contar al abrir y repasar los vueltos. <span class="tipo-cifra" data-t="pendiente">pendiente</span></span></li>
+          <li><span>Cobrar Q40.00 a Don Luis el viernes. <span class="tipo-cifra" data-t="previsto">previsto</span></span></li>
+          <li><span>Saldo total del banco: no se calculó, falta el saldo inicial. <span class="tipo-cifra" data-t="pendiente">pendiente</span></span></li>
+        </ul>
+        <p class="pequeno">Nota: la fruta de mañana ya está pagada (Q200.00).</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Esta es la hoja que cada persona va a llenar con su propio negocio. Recorre cada línea y pregunta de qué nota salió.</p>
+    <p>Comprobación: Q150.00 + Q400.00 − Q310.00 = Q240.00. Q235.00 − Q240.00 = −Q5.00.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Mi cierre diario" data-seccion="Revisar con IA" data-min="2">
+  <div class="marco">
+    <h2 class="titulo">«Mi cierre diario»: la herramienta que haremos para el uso de cada día</h2>
+    <div class="dos" style="--cols: 1.2fr 1fr">
+      <div class="pila">
+        <p class="texto"><b>Estado: en preparación.</b> Todavía no está disponible. Hoy practicas con la hoja impresa y con la mesa de práctica de esta presentación.</p>
+        <p class="rotulo">Lo que hará</p>
+        <ul class="lista texto">
+          <li>Registrar cada movimiento con su tipo y su forma de pago.</li>
+          <li>Hacer el cierre: esperado, contado, diferencia y pendientes.</li>
+          <li>Guardar el historial de tus días.</li>
+          <li>Crear una copia de respaldo en un archivo y abrirla en otro dispositivo.</li>
+        </ul>
+      </div>
+      <div class="hoja pila">
+        <p class="rotulo">Del celular a la PC, con un archivo</p>
+        <p class="texto">La copia es un archivo JSON. Lo guardas en un dispositivo y lo abres en el otro, por ejemplo enviándotelo por correo.</p>
+        <p class="texto"><b>No es sincronización automática.</b> Si cambias datos en los dos, hay que revisar cuál vale. <button type="button" class="i" data-info="i-especificacion" aria-label="Qué debe cumplir el respaldo de Mi cierre diario">i</button></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Sé claro: la herramienta no existe todavía. No prometas fechas. La especificación está en el archivo «especificacion-mi-cierre-diario.md».</p>
+    <p>JSON es solo un tipo de archivo de texto que guarda los datos ordenados. No hace falta entenderlo por dentro.</p>
+  </aside>
+</section>
+
+<!-- ===================================================== E · TU CIERRE (20 min) -->
+<section class="pantalla" data-titulo="Tu turno" data-seccion="Tu cierre" data-min="2" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Tu turno: un cierre completo en 20 minutos</h2>
+    <div class="dos" style="--cols: 1fr 1fr">
+      <div class="pila">
+        <p class="rotulo">Elige un camino</p>
+        <p class="texto"><b>A · Tu día de ayer.</b> Usa tus notas, tu memoria y la app del banco. Si no recuerdas un monto, déjalo pendiente: no es cero.</p>
+        <p class="texto"><b>B · El caso de Lucía.</b> Un caso preparado, si hoy no tienes tus datos a mano.</p>
+        <p class="pequeno regla-arriba">Si usas ChatGPT con tus datos, no escribas nombres completos de clientes, números de cuenta ni contraseñas. <button type="button" class="i" data-info="i-privacidad" aria-label="Cuidar tus datos al usar IA">i</button></p>
+      </div>
+      <div class="pila">
+        <ol class="pasos texto">
+          <li>Anota el fondo inicial y cada movimiento.</li>
+          <li>Clasifica cada uno y su forma de pago.</li>
+          <li>Calcula el efectivo esperado.</li>
+          <li>Cuenta, o usa el conteo de Lucía.</li>
+          <li>Saca la diferencia y escribe tus pendientes.</li>
+        </ol>
+        <p class="pequeno">En papel: la hoja de cierre. En pantalla: la mesa de práctica (pantallas 31 a 33).</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Forma parejas si ayuda: una persona lee sus notas, la otra pregunta «¿esto es venta o cobro?».</p>
+    <p>Quien no tenga datos de ayer usa el caso de Lucía. No obligues a nadie a mostrar sus cifras.</p>
+    <p>La mesa de práctica guarda los datos solo en este navegador, mientras la pestaña esté abierta. No se envían a ningún lado.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El caso de Lucía" data-seccion="Tu cierre" data-min="2" data-caso="Caso alternativo · Lucía" data-caso-tipo="lucia">
+  <div class="marco">
+    <h2 class="titulo">Caso alternativo: el sábado de Lucía</h2>
+    <div class="dos" style="--cols: 0.8fr 2fr">
+      <div class="pila">
+        <p class="texto">Lucía vende tostadas y atol frente al mercado. Es un caso <b>nuevo y ficticio</b>: sus cifras no se mezclan con las de Ana.</p>
+        <p class="pequeno">La app del banco de Lucía muestra <b class="cifra">Q90.00</b> en transferencias recibidas ese día.</p>
+      </div>
+      <div class="cuaderno compacto">
+        <p class="cuaderno-cab"><span>Sábado · Tostadas y atol Lucía</span><span>Q</span></p>
+        <ol>
+          <li><span class="n">1</span><span class="h">6:30</span><span>Conté la gaveta al abrir</span><span class="cifra">Q100.00</span></li>
+          <li><span class="n">2</span><span class="h">6:40</span><span>Mi hermana Carmen me prestó; se lo devuelvo el otro sábado</span><span class="cifra">Q200.00</span></li>
+          <li><span class="n">3</span><span class="h">6:50</span><span>Tostadas, frijol, aguacate y maíz para el atol, en efectivo</span><span class="cifra">Q180.00</span></li>
+          <li><span class="n">4</span><span class="h"></span><span>Ventas en efectivo</span><span class="cifra">Q310.00</span></li>
+          <li><span class="n">5</span><span class="h"></span><span>Pedidos pagados por transferencia</span><span class="cifra">Q90.00</span></li>
+          <li><span class="n">6</span><span class="h"></span><span>La maestra Elena se llevó fiado; paga el lunes</span><span class="cifra">Q30.00</span></li>
+          <li><span class="n">7</span><span class="h">9:30</span><span>Don Beto pagó lo del sábado pasado, en efectivo</span><span class="cifra">Q25.00</span></li>
+          <li><span class="n">8</span><span class="h">12:00</span><span>Le pagué a Doña Tere por ayudarme hoy, en efectivo</span><span class="cifra">Q60.00</span></li>
+          <li><span class="n">9</span><span class="h">12:30</span><span>Saqué para el pasaje y la refacción de mis hijos</span><span class="cifra">Q40.00</span></li>
+          <li><span class="n">10</span><span class="h">13:00</span><span>Conteo: 1 de Q100, 3 de Q50, 4 de Q20, 2 de Q10, 1 de Q5, 2 monedas de Q1</span><span class="cifra"></span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Lee el caso. Aviso: la nota 2 es la trampa principal (un préstamo no es venta). La nota 8 es un gasto del negocio: es el pago del trabajo de otra persona.</p>
+    <p>La respuesta está en la pantalla 34. No la muestres antes de que terminen.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Ordenar tus notas con IA" data-seccion="Tu cierre" data-min="3" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Si tus notas están desordenadas, pide ayuda para ordenarlas</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Llena lo que está entre corchetes. Pega tus notas tal como las tienes, aunque sean mensajes o papelitos.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que no haya agregado movimientos que no hiciste.</li>
+            <li>Que los montos que no sabías sigan como pendientes.</li>
+            <li>Las sumas, en tu hoja o en la mesa de práctica.</li>
+          </ul>
+        </div>
+        <p class="pequeno">Sin nombres completos ni números de cuenta.</p>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 4 · Ordenar mis notas</b>
+          <button type="button" class="boton" data-copiar="c-propias"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-propias">Quiero hacer el cierre de caja de un día de mi negocio. Ayúdame a ordenar mis notas; los cálculos finales los voy a comprobar yo en mi hoja.
+
+QUÉ QUIERO RESOLVER: clasificar mis movimientos y saber qué datos me faltan.
+
+MI NEGOCIO: [qué vendes y a qué precio].
+
+CON CUÁNTO EMPECÉ EL DÍA (contado): Q[monto] — si no lo conté, escribe: «no lo conté».
+
+MIS NOTAS DEL DÍA, COMO LAS TENGO:
+[pega aquí tus notas, una por línea]
+
+LO QUE NO SÉ O NO ANOTÉ: [por ejemplo: no sé cuánto me pagaron por transferencia]
+
+USA SOLO ESTAS CATEGORÍAS: fondo inicial, venta, cobro de venta anterior, aporte del dueño, préstamo recibido, compra de insumos, pago de gasto del negocio, pago por trabajo del dueño, retiro personal, pago de deuda o préstamo. FORMAS: efectivo, transferencia o crédito.
+
+NO INVENTES movimientos ni montos. Si un monto no está, déjalo como «pendiente» y no lo cuentes como cero. No calcules ganancia ni impuestos.
+
+RESPÓNDEME CON:
+1. Una tabla: descripción, categoría, forma, monto (o «pendiente») y si entra o sale de la gaveta.
+2. La lista de datos que me faltan.
+3. La operación del efectivo esperado, solo si tengo todos los montos en efectivo.
+4. Qué debo comparar con mi gaveta y con la app del banco.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Solo para quien tenga datos propios y conexión. Los demás pasan directo a la mesa de práctica o a la hoja.</p>
+    <p>Recorre el aula: el error más frecuente es pegar las notas sin decir qué no saben. Eso invita a la IA a suponer.</p>
+  </aside>
+</section>
+
+<!-- Mesa de práctica: tres pantallas que comparten los mismos datos -->
+<section class="pantalla" data-titulo="Mesa de práctica · movimientos" data-seccion="Tu cierre" data-min="5" data-caso="Práctica · caso Lucía" data-caso-tipo="lucia" data-mesa>
+  <div class="marco">
+    <h2 class="titulo ancho">Paso 1: anota y clasifica cada movimiento</h2>
+    <div class="mesa">
+      <div class="mesa-cab">
+        <span class="conmutador" role="group" aria-label="Datos de la práctica"><button type="button" data-conjunto="lucia" aria-pressed="true">Caso Lucía</button><button type="button" data-conjunto="propio" aria-pressed="false">Mis datos</button></span>
+        <span class="mesa-etiqueta" data-tipo="lucia"></span>
+        <span class="derecha">
+          <button type="button" class="boton sec solo-lucia" data-mesa-respuesta>Ver respuesta de Lucía</button>
+          <button type="button" class="boton sec" data-mesa-reiniciar>Reiniciar</button>
+        </span>
+      </div>
+      <div class="mesa-cuerpo" style="--cols: 1fr 3fr">
+        <div class="panel">
+          <label class="campo-texto">Fondo inicial (contado)<span class="campo-q"><span aria-hidden="true">Q</span><input type="text" inputmode="decimal" id="mesa-fondo" placeholder="0.00"></span></label>
+          <div class="solo-propio pila-c" hidden>
+            <label class="campo-texto">Negocio<input type="text" id="mesa-negocio" placeholder="Nombre corto"></label>
+            <label class="campo-texto">Fecha<input type="text" id="mesa-fecha" placeholder="Por ejemplo: lunes 9"></label>
+          </div>
+          <div class="mesa-estado" id="mesa-estado" aria-live="polite"></div>
+        </div>
+        <div class="panel">
+          <div class="desplaza sin-deslizar">
+            <table class="movs">
+              <thead><tr><th>#</th><th>Qué pasó</th><th>Tipo</th><th>Forma</th><th>Monto</th><th><span class="solo-lectores">Quitar</span></th></tr></thead>
+              <tbody id="mesa-movs"></tbody>
+            </table>
+          </div>
+          <div class="fila-botones"><button type="button" class="boton" id="mesa-agregar">Agregar movimiento</button>
+            <span class="pequeno">Monto vacío = pendiente, no cero.</span></div>
+          <ul class="mesa-avisos" aria-live="polite"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>5 min.</b> Con «Caso Lucía» el facilitador puede clasificar en vivo con el grupo. Con «Mis datos», una persona voluntaria dicta sus movimientos (si quiere).</p>
+    <p>«Ver respuesta de Lucía» carga la clasificación correcta, el conteo y lo que muestra la app. Úsalo solo para comparar al final.</p>
+    <p>Los datos de práctica viven en este navegador mientras la pestaña esté abierta. «Reiniciar» en Lucía vuelve a sus notas originales; en «Mis datos» pide confirmación antes de borrar.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Mesa de práctica · contar y comparar" data-seccion="Tu cierre" data-min="4" data-caso="Práctica · caso Lucía" data-caso-tipo="lucia" data-mesa>
+  <div class="marco">
+    <h2 class="titulo ancho">Paso 2: calcula lo esperado, cuenta y compara</h2>
+    <div class="mesa">
+      <div class="mesa-cab">
+        <span class="conmutador" role="group" aria-label="Datos de la práctica"><button type="button" data-conjunto="lucia" aria-pressed="true">Caso Lucía</button><button type="button" data-conjunto="propio" aria-pressed="false">Mis datos</button></span>
+        <span class="mesa-etiqueta" data-tipo="lucia"></span>
+      </div>
+      <div class="mesa-cuerpo" style="--cols: 1.1fr 1.15fr 1fr">
+        <div class="panel">
+          <h3>Efectivo esperado</h3>
+          <div class="desplaza sin-deslizar" id="mesa-esperado"></div>
+          <ul class="mesa-avisos" aria-live="polite"></ul>
+        </div>
+        <div class="panel">
+          <h3>Conteo de la gaveta</h3>
+          <div class="desplaza sin-deslizar">
+            <div class="dens" id="mesa-conteo"></div>
+            <p class="contado"><span>Contado</span><span class="cifra" id="mesa-contado"></span></p>
+          </div>
+          <p class="pequeno">Casillas vacías: no hay de ese billete o moneda.</p>
+        </div>
+        <div class="panel">
+          <h3>Diferencia</h3>
+          <div id="mesa-diferencia" aria-live="polite"></div>
+          <label class="campo-texto">Entradas por transferencia que muestra la app<span class="campo-q"><span aria-hidden="true">Q</span><input type="text" inputmode="decimal" id="mesa-app" placeholder="0.00"></span></label>
+          <p id="mesa-banco" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>4 min.</b> El cálculo lo hace la mesa; la persona lo compara con su hoja. Si no coinciden, buscar juntos en qué fila está la diferencia.</p>
+    <p>Si falta un dato, la mesa dice qué falta y no calcula. Es a propósito: un dato desconocido no se convierte en cero.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Mesa de práctica · pendientes" data-seccion="Tu cierre" data-min="4" data-caso="Práctica · caso Lucía" data-caso-tipo="lucia" data-mesa>
+  <div class="marco">
+    <h2 class="titulo ancho">Paso 3: deja tus pendientes claros</h2>
+    <div class="mesa">
+      <div class="mesa-cab">
+        <span class="conmutador" role="group" aria-label="Datos de la práctica"><button type="button" data-conjunto="lucia" aria-pressed="true">Caso Lucía</button><button type="button" data-conjunto="propio" aria-pressed="false">Mis datos</button></span>
+        <span class="mesa-etiqueta" data-tipo="lucia"></span>
+        <span class="derecha">
+          <button type="button" class="boton sec" id="mesa-exportar">Guardar copia (JSON)</button>
+          <button type="button" class="boton sec" id="mesa-importar">Abrir copia en «Mis datos»</button>
+          <button type="button" class="boton sec" id="mesa-deshacer" hidden>Deshacer importación</button>
+          <input type="file" id="mesa-archivo" accept=".json,application/json" hidden>
+        </span>
+      </div>
+      <div class="mesa-cuerpo" style="--cols: 1fr 1.1fr">
+        <div class="panel">
+          <h3>Resumen del cierre</h3>
+          <table class="cierre-hoja mesa-resumen"><tbody id="mesa-resumen"></tbody></table>
+          <div class="copiable pila-c">
+            <label class="campo-texto" for="mesa-texto-resumen">Resumen en texto, para revisarlo con ChatGPT («Revisar mi cierre», consulta 4 de la guía)</label>
+            <textarea id="mesa-texto-resumen" readonly></textarea>
+            <div class="fila-botones"><button type="button" class="boton" data-copiar="mesa-texto-resumen">Copiar resumen</button><span class="estado-copia" aria-live="polite"></span></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Pendientes</h3>
+          <ul class="pendientes desplaza sin-deslizar" id="mesa-pendientes" style="padding:0 .6em"></ul>
+          <label class="campo-texto">Otros pendientes que solo tú sabes<textarea id="mesa-notas" placeholder="Por ejemplo: pedir recibo de la compra del gas"></textarea></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>4 min.</b> Los pendientes se generan solos a partir de los datos: fiados por cobrar, préstamos por devolver, compras por pagar, diferencias y datos faltantes. Pide que agreguen los que solo ellos saben.</p>
+    <p>«Guardar copia» descarga un archivo JSON (formato de práctica, versión 1). «Abrir copia» lo valida, muestra una vista previa y solo reemplaza «Mis datos» si se confirma; se puede deshacer. Esto es una demostración de práctica, no la herramienta «Mi cierre diario».</p>
+  </aside>
+</section>
+
+<!-- ===================================================== F · COMPROBAR Y REPETIR (10 min) -->
+<section class="pantalla" data-titulo="Comprobación: Lucía" data-seccion="Comprobar y repetir" data-min="3" data-caso="Caso alternativo · Lucía" data-caso-tipo="lucia">
+  <div class="marco">
+    <h2 class="titulo">Comprobación del caso de Lucía</h2>
+    <div class="dos" style="--cols: 1.3fr 1fr">
+      <table class="libro">
+        <tbody>
+          <tr data-paso="1"><td>Ventas del día: Q310.00 + Q90.00 + Q30.00</td><td class="num">Q430.00</td></tr>
+          <tr data-paso="1"><td>Cobrado hoy: Q310.00 + Q90.00 + Q25.00 de Don Beto</td><td class="num">Q425.00</td></tr>
+          <tr data-paso="2"><td>Efectivo esperado: Q100.00 + Q200.00 + Q310.00 + Q25.00 − Q180.00 − Q60.00 − Q40.00</td><td class="num">Q355.00</td></tr>
+          <tr data-paso="2"><td>Contado: Q100.00 + Q150.00 + Q80.00 + Q20.00 + Q5.00 + Q2.00</td><td class="num">Q357.00</td></tr>
+          <tr data-paso="2"><td><b>Diferencia: Q357.00 − Q355.00 · sobra</b></td><td class="num"><b>+Q2.00</b></td></tr>
+          <tr data-paso="2"><td>Transferencias anotadas = app</td><td class="num">Q90.00</td></tr>
+        </tbody>
+      </table>
+      <div class="pila" data-paso="3">
+        <p class="rotulo">Pendientes de Lucía</p>
+        <ul class="pendientes">
+          <li><span>Devolver Q200.00 a Carmen el otro sábado. <span class="tipo-cifra" data-t="previsto">previsto</span></span></li>
+          <li><span>Cobrar Q30.00 a la maestra Elena el lunes. <span class="tipo-cifra" data-t="previsto">previsto</span></span></li>
+          <li><span>Revisar el sobrante de Q2.00: ¿dio vuelto de menos a alguien? <span class="tipo-cifra" data-t="pendiente">pendiente</span></span></li>
+        </ul>
+        <p class="pequeno"><b>La trampa:</b> si el préstamo se suma a ventas, parecen Q630.00 y Lucía olvida que debe Q200.00. El pago a Doña Tere es gasto del negocio; el pasaje es retiro.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> Pide primero que cada quien diga su efectivo esperado. Si alguien obtuvo Q155.00, olvidó el préstamo (dejó fuera los Q200.00 que sí entraron a la gaveta). Si obtuvo Q655.00 en ventas, sumó el préstamo y el cobro de Don Beto.</p>
+    <p>Un sobrante también se revisa: puede ser un vuelto de menos a un cliente.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Errores habituales" data-seccion="Comprobar y repetir" data-min="2">
+  <div class="marco">
+    <h2 class="titulo ancho">Seis errores habituales y lo que provocan</h2>
+    <table class="tabla">
+      <thead><tr><th>Error</th><th>Lo que provoca</th></tr></thead>
+      <tbody>
+        <tr><td>Sumar un cobro atrasado a las ventas</td><td>La misma venta cuenta dos veces.</td></tr>
+        <tr><td>Contar un préstamo o un aporte como venta</td><td>Parece que vendiste más y olvidas lo que debes devolver.</td></tr>
+        <tr><td>Anotar un retiro personal como gasto</td><td>Los gastos del negocio parecen más altos de lo que son.</td></tr>
+        <tr><td>Anotar una transferencia como efectivo</td><td>La gaveta «falta» aunque el dinero esté en el banco.</td></tr>
+        <tr><td>Inventar un movimiento para que cuadre</td><td>La causa real se esconde y se repite.</td></tr>
+        <tr><td>Tratar un monto desconocido como cero</td><td>El resultado parece exacto y no lo es.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Pregunta: «¿Cuál de estos les pasa más?». Pide que marquen uno en su hoja para vigilarlo esta semana.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo" data-titulo="Tu rutina" data-seccion="Comprobar y repetir" data-min="3" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Tu rutina de 10 minutos para cerrar cada día</h2>
+    <div class="dos" style="--cols: 1.3fr 1fr">
+      <ol class="pasos rutina">
+        <li><span>Al abrir: cuenta y anota el fondo inicial.<small>Antes de la primera venta.</small></span></li>
+        <li><span>Durante el día: anota cada movimiento con su forma de pago.<small>Efectivo, transferencia o crédito. Los cobros atrasados, aparte.</small></span></li>
+        <li><span>Al cerrar: calcula el efectivo esperado.<small>Fondo + entradas en efectivo − salidas en efectivo.</small></span></li>
+        <li><span>Cuenta la gaveta y revisa la app del banco.<small>Billete por billete. Transferencias anotadas contra las de la app.</small></span></li>
+        <li><span>Anota la diferencia y los pendientes.<small>No la borres. Revísala mañana.</small></span></li>
+      </ol>
+      <div class="decision">
+        <p class="rotulo">Decide ahora</p>
+        <p><span>Mi hora de cierre:</span><span class="linea"></span></p>
+        <p><span>Dónde anoto:</span><span class="linea"></span></p>
+        <p><span>El error que voy a vigilar:</span><span class="linea"></span></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Pide que cada persona escriba sus tres decisiones en la hoja. Lo que se decide con hora y lugar tiene más probabilidad de hacerse.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Cierre" data-seccion="Comprobar y repetir" data-min="2">
+  <div class="marco">
+    <h2 class="titulo">Lo que hiciste hoy lo puedes repetir mañana</h2>
+    <div class="dos">
+      <div class="pila">
+        <p class="rotulo">Te llevas</p>
+        <ul class="lista texto">
+          <li>Tu hoja de cierre llena, con sus pendientes.</li>
+          <li>La guía breve con la rutina y una hoja en blanco.</li>
+          <li>Las consultas para ChatGPT, listas para copiar.</li>
+        </ul>
+      </div>
+      <div class="hoja pila">
+        <p class="rotulo">Siguiente taller · 03 · ¿Me alcanza?</p>
+        <p class="texto">Con tus cierres diarios sabrás cuánto dinero entra y sale de verdad. Con eso organizaremos cuatro semanas de caja y evaluaremos una decisión antes de comprometer dinero.</p>
+        <p class="pequeno">Trae al menos 3 cierres de días distintos.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Cierra con la pregunta: «¿Qué van a hacer mañana a la hora de cerrar?». Escucha dos respuestas.</p>
+    <p>Recuerda entregar o enviar la guía (archivo «guia-y-consultas.html», que también se puede imprimir).</p>
+  </aside>
+</section>
+
+</main>
+
+/*@incluir:comun/barra.html*/
+
+<dialog id="dlg-datos" class="ancho" aria-labelledby="dlg-datos-titulo">
+  <div class="dlg-cab"><h2 id="dlg-datos-titulo">Datos de los casos</h2>
+    <button type="button" class="cerrar" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 5l14 14M19 5L5 19"/></svg>Cerrar</button></div>
+  <div class="dlg-cuerpo">
+    <div class="pestanas" role="tablist" aria-label="Casos">
+      <button type="button" role="tab" id="t-ana" aria-controls="d-ana" aria-selected="true">Ana · martes</button>
+      <button type="button" role="tab" id="t-lucia" aria-controls="d-lucia" aria-selected="false" tabindex="-1">Lucía · sábado</button>
+      <button type="button" role="tab" id="t-mes" aria-controls="d-mes" aria-selected="false" tabindex="-1">Ana · mes del taller 01</button>
+    </div>
+    <div role="tabpanel" id="d-ana" aria-labelledby="t-ana">
+      <p>Caso ficticio. Un martes de «Jugos La Parada». Precio por vaso: Q20.00. Preparó 2 tandas (20 vasos) con fruta comprada el día anterior y vendió todo.</p>
+      <h3>Notas del cuaderno (datos registrados por Ana)</h3>
+      <table><tbody>
+        <tr><td>1 · 7:00 Fondo inicial, contado</td><td class="num">Q150.00</td></tr>
+        <tr><td>2 · 7:05 Aporte de Ana para vuelto (efectivo)</td><td class="num">Q100.00</td></tr>
+        <tr><td>3 · Ventas en efectivo: 13 vasos (corregido: 12 vasos, Q240.00)</td><td class="num">Q260.00</td></tr>
+        <tr><td>4 · Ventas por transferencia: 5 vasos (corregido: 6 vasos, Q120.00)</td><td class="num">Q100.00</td></tr>
+        <tr><td>5 · Venta al crédito a Don Luis: 2 vasos, paga el viernes</td><td class="num">Q40.00</td></tr>
+        <tr><td>6 · 10:15 Cobro a Doña Marta de una venta de la semana pasada (efectivo)</td><td class="num">Q60.00</td></tr>
+        <tr><td>7 · 12:30 Compra de fruta para mañana (efectivo)</td><td class="num">Q200.00</td></tr>
+        <tr><td>8 · 14:00 Recarga del teléfono del negocio (efectivo)</td><td class="num">Q50.00</td></tr>
+        <tr><td>9 · 15:30 Retiro personal para útiles (efectivo)</td><td class="num">Q60.00</td></tr>
+        <tr><td>10 · 17:00 Conteo de la gaveta: 1×Q100, 2×Q50, 1×Q20, 1×Q10, 3×Q1, 4×Q0.50</td><td class="num">Q235.00</td></tr>
+      </tbody></table>
+      <h3>App del banco (ilustración)</h3>
+      <p>6 transferencias de Q20.00: 8:12, 9:40, 11:05, 13:20, 14:45 y 16:10. Total Q120.00. La de las 13:20 se había anotado como efectivo.</p>
+      <h3>Resultados calculados</h3>
+      <table><tbody>
+        <tr><td>Ventas del día (20 vasos)</td><td class="num">Q400.00</td></tr>
+        <tr><td>Cobrado hoy, corregido: Q240.00 + Q120.00 + Q60.00</td><td class="num">Q420.00</td></tr>
+        <tr><td>Efectivo esperado según el cuaderno</td><td class="num">Q260.00</td></tr>
+        <tr><td>Efectivo esperado corregido: Q150 + Q100 + Q240 + Q60 − Q200 − Q50 − Q60</td><td class="num">Q240.00</td></tr>
+        <tr><td>Diferencia corregida: Q235.00 − Q240.00 (falta, pendiente de revisión)</td><td class="num">−Q5.00</td></tr>
+      </tbody></table>
+      <p>Pendiente: saldo total de la cuenta del banco (no se conoce el saldo inicial). Previsto: Don Luis paga Q40.00 el viernes.</p>
+    </div>
+    <div role="tabpanel" id="d-lucia" aria-labelledby="t-lucia" hidden>
+      <p>Caso alternativo, nuevo y ficticio: un sábado de «Tostadas y atol Lucía». No se mezcla con el de Ana.</p>
+      <table><tbody>
+        <tr><td>1 · Fondo inicial, contado</td><td class="num">Q100.00</td></tr>
+        <tr><td>2 · Préstamo de su hermana Carmen (efectivo), lo devuelve el otro sábado</td><td class="num">Q200.00</td></tr>
+        <tr><td>3 · Compra de insumos (efectivo)</td><td class="num">Q180.00</td></tr>
+        <tr><td>4 · Ventas en efectivo</td><td class="num">Q310.00</td></tr>
+        <tr><td>5 · Ventas por transferencia</td><td class="num">Q90.00</td></tr>
+        <tr><td>6 · Venta al crédito a la maestra Elena, paga el lunes</td><td class="num">Q30.00</td></tr>
+        <tr><td>7 · Cobro a Don Beto de una venta anterior (efectivo)</td><td class="num">Q25.00</td></tr>
+        <tr><td>8 · Pago a Doña Tere por ayudar (gasto del negocio, efectivo)</td><td class="num">Q60.00</td></tr>
+        <tr><td>9 · Retiro personal (efectivo)</td><td class="num">Q40.00</td></tr>
+        <tr><td>10 · Conteo: 1×Q100, 3×Q50, 4×Q20, 2×Q10, 1×Q5, 2×Q1</td><td class="num">Q357.00</td></tr>
+        <tr><td>App del banco: transferencias recibidas</td><td class="num">Q90.00</td></tr>
+      </tbody></table>
+      <p>Resultados: ventas Q430.00 · cobrado hoy Q425.00 · esperado Q355.00 · diferencia +Q2.00 (sobra, pendiente de revisión).</p>
+    </div>
+    <div role="tabpanel" id="d-mes" aria-labelledby="t-mes" hidden>
+      <p>Referencia del taller 01 (un mes de Ana). No se usa en los cálculos de este taller; se muestra para mantener la continuidad.</p>
+      <table><tbody>
+        <tr><td>Precio por vaso</td><td class="num">Q20.00</td></tr>
+        <tr><td>Materiales por tanda · vasos vendibles por tanda</td><td class="num">Q100.00 · 10</td></tr>
+        <tr><td>Empaque por vaso · otros costos por vaso</td><td class="num">Q2.00 · Q0.00</td></tr>
+        <tr><td>Costo por vaso: Q100.00 ÷ 10 + Q2.00</td><td class="num">Q12.00</td></tr>
+        <tr><td>Espacio de venta · teléfono (por mes)</td><td class="num">Q150.00 · Q50.00</td></tr>
+        <tr><td>Trabajo de Ana: 20 horas × Q20.00</td><td class="num">Q400.00</td></tr>
+        <tr><td>Meta para cubrir esos pagos y trabajo</td><td class="num">Q600.00</td></tr>
+        <tr><td>Ventas del mes: 100 vasos · cobros · pendiente de cobro</td><td class="num">Q2,000.00 · Q1,600.00 · Q400.00</td></tr>
+        <tr><td>Caja final del mes: Q300.00 + Q1,600.00 − Q1,800.00</td><td class="num">Q100.00</td></tr>
+        <tr><td>Resultado antes de impuestos: Q2,000 − Q1,200 − Q200 − Q400</td><td class="num">Q200.00</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="dlg-importar" aria-labelledby="dlg-importar-titulo">
+  <div class="dlg-cab"><h2 id="dlg-importar-titulo">Vista previa de la copia</h2>
+    <button type="button" class="cerrar" aria-label="Cancelar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 5l14 14M19 5L5 19"/></svg>Cancelar</button></div>
+  <div class="dlg-cuerpo">
+    <div id="dlg-importar-cuerpo"></div>
+    <div class="fila-botones"><button type="button" class="boton" id="importar-confirmar" style="font-size:1rem">Reemplazar «Mis datos» con esta copia</button></div>
+  </div>
+</dialog>
+
+<!-- ===================================================== Explicaciones de los botones «i» -->
+<template id="i-costo-vaso"><h3>Costo por vaso: de dónde sale</h3>
+  <p>Del taller 01. Con Q100.00 de materiales salen 10 vasos que se pueden vender: Q100.00 ÷ 10 = Q10.00 por vaso. Más Q2.00 de empaque por vaso. Otros costos por vaso: Q0.00, confirmado en ese ejemplo.</p>
+  <p>Q10.00 + Q2.00 = <b>Q12.00 por vaso</b>.</p></template>
+<template id="i-mes-t01"><h3>El mes del taller 01</h3>
+  <p>En ese mes Ana vendió 100 vasos: Q2,000.00. Cobró Q1,600.00 y quedaron Q400.00 pendientes de cobro.</p>
+  <p>Son cifras de un mes. Hoy trabajamos un día distinto, con sus propias notas.</p></template>
+<template id="i-banco-saldo"><h3>¿Por qué no calculamos el saldo del banco?</h3>
+  <p>Para saber cuánto hay en la cuenta al final del día necesitaríamos saber cuánto había al empezar. Ana no lo anotó.</p>
+  <p>Ese dato queda <b>pendiente</b>. Lo que sí podemos revisar es si las transferencias de hoy que muestra la app coinciden con las que Ana anotó.</p></template>
+<template id="i-fiado"><h3>Venta al crédito (fiado)</h3>
+  <p>Entregas el producto hoy y la persona paga después. Es venta de hoy porque el vaso ya se entregó, pero el dinero todavía no entró.</p>
+  <p>Se anota quién debe, cuánto y cuándo dijo que paga. Cuando pague, se anota como <b>cobro de venta anterior</b>, no como venta nueva.</p></template>
+<template id="i-cobro-no-anotado"><h3>¿Y si la venta anterior no se anotó?</h3>
+  <p>Primero revisa tu registro de fiados. Si de verdad no estaba, anótala como venta del día en que se entregó el producto (con una nota de que se registró tarde) y la de hoy como cobro.</p>
+  <p>Así cada hecho queda en su día y nada se cuenta dos veces.</p></template>
+<template id="i-trabajo-retiro"><h3>Pago por trabajo del dueño o retiro personal</h3>
+  <p>En el taller 01, Ana se asigna Q400.00 al mes por su trabajo: 20 horas × Q20.00. Ese pago se anota como <b>pago por trabajo del dueño</b>.</p>
+  <p>Los Q60.00 de hoy no son pago por horas: los sacó para útiles. Son un <b>retiro personal</b>.</p>
+  <p>Si Ana decidiera tomarlos como adelanto de su pago del mes, lo anota así y a fin de mes recibe Q340.00. Lo que no debe hacer es contarlo dos veces.</p></template>
+<template id="i-prestamo"><h3>Un préstamo no es venta</h3>
+  <p>Si alguien te presta dinero, entra a la gaveta, pero no lo ganaste vendiendo: lo debes devolver. Se anota como <b>préstamo recibido</b> y queda como pendiente de pago.</p>
+  <p>Cuando lo devuelvas, se anota como <b>pago de deuda o préstamo</b>, no como gasto del negocio.</p></template>
+<template id="i-costo-hoy"><h3>¿Cuánto costaron los vasos de hoy?</h3>
+  <p>Supuesto del caso: la fruta de hoy se compró ayer y el empaque ya estaba en existencia.</p>
+  <p>20 vasos × Q12.00 = Q240.00 de costo de lo vendido. Aporte antes de gastos fijos: 20 × (Q20.00 − Q12.00) = Q160.00.</p>
+  <p>Eso pertenece al <b>resultado</b>. No es un movimiento de la gaveta de hoy: el dinero de esa fruta salió ayer. Y la fruta de hoy (Q200.00) contará como costo cuando se vendan esos jugos.</p></template>
+<template id="i-signo"><h3>Cómo leer la diferencia</h3>
+  <p>Siempre: <b>contado − esperado</b>.</p>
+  <ul><li>Resultado negativo: falta dinero.</li><li>Resultado positivo: sobra dinero.</li><li>Resultado cero: cuadra.</li></ul>
+  <p>Faltar y sobrar se revisan igual. Un sobrante puede ser un vuelto de menos a un cliente.</p></template>
+<template id="i-vuelto"><h3>Cómo un vuelto crea una diferencia</h3>
+  <p>Si un cliente paga un vaso de Q20.00 con un billete de Q50.00, el vuelto es Q30.00. Si por prisa se dan Q35.00, en la gaveta faltarán Q5.00 al cerrar.</p>
+  <p>No hay recibo de eso. Por eso no se corrige con un movimiento: se deja la diferencia anotada y se vigila si se repite.</p></template>
+<template id="i-ia-conexion"><h3>Cómo usamos la IA en este taller</h3>
+  <p>La presentación no está conectada a ninguna IA. Las consultas se copian y se pegan en ChatGPT, que necesita internet.</p>
+  <p>Las cuentas que se pueden comprobar las hacen la hoja y la mesa de práctica. La IA ayuda a ordenar, explicar y revisar, y su respuesta siempre se verifica.</p>
+  <p>La respuesta de la pantalla siguiente está escrita por nosotros como ejemplo.</p></template>
+<template id="i-especificacion"><h3>Lo que debe cumplir el respaldo de «Mi cierre diario»</h3>
+  <p>Así queda en la especificación. Todavía no está desarrollado ni probado:</p>
+  <ul>
+    <li>Cada movimiento con un identificador único.</li>
+    <li>Archivo de respaldo con versión de formato y nombre del negocio.</li>
+    <li>Validación y vista previa antes de abrir una copia.</li>
+    <li>Prevención de movimientos duplicados.</li>
+    <li>Respaldo automático antes de reemplazar los datos.</li>
+    <li>Revisión de conflictos si los dos dispositivos cambiaron el mismo movimiento: se muestran ambas versiones y la persona decide.</li>
+  </ul></template>
+<template id="i-privacidad"><h3>Cuidar tus datos al usar IA</h3>
+  <p>Lo que escribes en ChatGPT sale de tu celular. Para ordenar un cierre no hace falta dar nombres completos: «cliente 1» o «la vecina» funciona igual.</p>
+  <p>Nunca escribas contraseñas, números de cuenta ni códigos que te llegan por mensaje.</p></template>
+
+<script>
+/*@incluir:comun/motor.js*/
+/*@incluir:02-cierra-el-dia/taller02.js*/
+</script>
+</body>
+</html>

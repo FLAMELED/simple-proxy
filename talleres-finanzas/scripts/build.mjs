@@ -5,7 +5,7 @@
 //   /*@fuentes*/                -> @font-face con las fuentes en base64 (funcionan sin internet)
 //   /*@incluir:comun/archivo*/  -> contenido de src/comun/archivo
 // La salida va a <taller>/<archivo>.html. No edites la salida: edita src/ y vuelve a construir.
-import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -33,6 +33,7 @@ let total = 0;
 for (const taller of readdirSync(src)) {
   if (taller === 'comun' || !statSync(join(src, taller)).isDirectory()) continue;
   for (const archivo of readdirSync(join(src, taller)).filter((a) => a.endsWith('.html'))) {
+    mkdirSync(join(raiz, taller), { recursive: true });
     const salida = join(raiz, taller, archivo);
     const html = expandir(readFileSync(join(src, taller, archivo), 'utf8'));
     if (html.includes('/*@')) throw new Error(`Quedó una inclusión sin resolver en ${archivo}`);

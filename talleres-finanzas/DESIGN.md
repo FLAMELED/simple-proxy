@@ -14,7 +14,7 @@ Tomado del afiche de la serie: titulares serif muy pesados y condensados con cur
 |---|---|---|
 | 01 | rojo naranja (afiche) | — |
 | 02 | lila `#dcc0f5`, tinta `#22102a` | `#3a2551`, tinta `#f6ecff` |
-| 03 | amarillo verdoso (afiche) | por definir |
+| 03 | amarillo verdoso `#e8f35a`, tinta `#16190a` | `#3b4113`, tinta `#f4f8d2` |
 | 04 | azul (afiche) | por definir |
 
 El papel (`#f6f4f0` / `#15101a`) y la tinta son comunes. Falta / cuadra / sobra siempre llevan texto y signo, además de color.

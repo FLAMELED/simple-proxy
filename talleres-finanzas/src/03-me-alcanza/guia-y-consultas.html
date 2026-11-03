@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es" data-taller="taller03">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía breve · ¿Me alcanza?</title>
+<meta name="description" content="Guía para armar un plan de caja de 4 semanas y probar una decisión: rutina del lunes, hoja en blanco y consultas para ChatGPT.">
+<style>
+/*@fuentes*/
+:root { --papel:#f6f4f0; --papel-2:#fff; --tinta:#22102a; --tinta-2:#4b3656; --regla-suave:#cbbfd3; --campo:#e8f35a; --campo-tinta:#16190a; --acento:#4d5600; color-scheme: light; }
+:root[data-tema="noche"] { --papel:#15101a; --papel-2:#201827; --tinta:#f2eaf7; --tinta-2:#cdbdd8; --regla-suave:#4b3b57; --campo:#3b4113; --campo-tinta:#f4f8d2; --acento:#e8f35a; color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--papel); color: var(--tinta); font: 17px/1.55 "Texto", "Segoe UI", Arial, sans-serif; font-variant-numeric: tabular-nums; }
+::selection { background: var(--campo); color: var(--campo-tinta); }
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+main { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+h1, h2 { font-family: "Titular", Georgia, serif; font-weight: 800; font-stretch: 68%; line-height: 1; letter-spacing: -0.01em; margin: 0; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); }
+h1 em { font-style: italic; }
+h2 { font-size: clamp(1.8rem, 4.5vw, 2.4rem); margin: 2.8rem 0 0.9rem; border-bottom: 3px solid var(--tinta); padding-bottom: 0.3rem; }
+h3 { font-size: 1.1rem; margin: 1.4rem 0 0.4rem; }
+p, ul, ol { margin: 0.5rem 0; }
+.cab { background: var(--campo); color: var(--campo-tinta); margin: -1.5rem -1.25rem 0; padding: 1.5rem 1.25rem 1.3rem; }
+.cab .serie { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
+.cab .serie b { font-size: 1.3em; border-bottom: 3px solid currentColor; margin-right: 0.8rem; }
+.herr { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; }
+button { font: inherit; cursor: pointer; }
+.boton { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border: 2px solid var(--tinta); background: var(--tinta); color: var(--papel); font-weight: 700; }
+.boton.sec { background: transparent; color: var(--tinta); }
+.cab .boton.sec { color: var(--campo-tinta); border-color: var(--campo-tinta); }
+.indice { columns: 2 14rem; padding-left: 1.2rem; }
+ol.pasos { padding: 0; list-style: none; counter-reset: p; }
+ol.pasos > li { counter-increment: p; display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.5rem; margin-top: 0.8rem; }
+ol.pasos > li::before { content: counter(p); font-family: "Titular", serif; font-weight: 800; font-stretch: 70%; font-size: 1.9rem; line-height: 1; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--regla-suave); vertical-align: top; }
+th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--tinta); }
+.hoja { background: var(--papel-2); border: 2px solid var(--tinta); padding: 1rem 1.1rem; }
+.hoja td, .hoja th { height: 2.1rem; }
+.hoja .num { width: 7rem; }
+.semana { margin-top: 1rem; }
+.semana th:first-child { width: 4.2rem; }
+.linea { border-bottom: 1.5px solid var(--tinta); display: inline-block; min-width: 9rem; height: 1.3rem; vertical-align: bottom; }
+.cuadros { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.formula { font-family: "Cifras", monospace; font-size: 0.95rem; background: var(--papel); padding: 0.5rem 0.7rem; border: 1px dashed var(--tinta); }
+.consulta { border: 2px solid var(--tinta); background: var(--papel-2); margin: 1rem 0 1.6rem; }
+.consulta-cab { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 0.6rem 0.9rem; border-bottom: 2px solid var(--tinta); }
+.consulta pre { margin: 0; padding: 0.9rem; white-space: pre-wrap; font: 0.95rem/1.5 "Texto", sans-serif; }
+.consulta .verificar { border-top: 1.5px dashed var(--tinta); padding: 0.6rem 0.9rem; font-size: 0.95rem; }
+.estado-copia { font-weight: 700; font-size: 0.9rem; min-height: 1.2em; }
+textarea.respaldo { width: 100%; min-height: 9rem; border: 0; border-top: 1.5px dashed var(--tinta); padding: 0.6rem; font: inherit; background: var(--papel); color: var(--tinta); }
+.nota { font-size: 0.92rem; color: var(--tinta-2); }
+@media (max-width: 600px) { .cuadros { grid-template-columns: 1fr; } .hoja { padding: 0.7rem; } th, td { padding: 0.35rem 0.3rem; font-size: 0.88rem; hyphens: auto; } th { font-size: 0.68rem; } }
+@media print {
+  @page { size: letter; margin: 14mm; }
+  :root, :root[data-tema="noche"] { --papel:#fff; --papel-2:#fff; --tinta:#22102a; --tinta-2:#4b3656; --regla-suave:#cbbfd3; --campo:#e8f35a; --campo-tinta:#16190a; }
+  body { background: #fff; font-size: 11.5pt; }
+  .cab { background: #fff; border-bottom: 3px solid #000; }
+  .herr, .copiar, .estado-copia, textarea.respaldo { display: none !important; }
+  h2 { break-after: avoid; }
+  .salto { break-before: page; }
+  .consulta, .hoja, table { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<main>
+<header class="cab">
+  <p class="serie"><b>03</b>Planificar · Finanzas del negocio con IA</p>
+  <h1>¿Me <em>alcanza?</em></h1>
+  <p>Guía breve para armar tu plan de caja de 4 semanas y probar una decisión antes de comprometer dinero.</p>
+  <div class="herr">
+    <button type="button" class="boton" id="imprimir">Imprimir o guardar PDF</button>
+    <button type="button" class="boton sec" id="tema" aria-pressed="false">Modo nocturno</button>
+  </div>
+</header>
+
+<nav aria-label="Contenido"><ol class="indice">
+  <li><a href="#rutina">La revisión del lunes</a></li>
+  <li><a href="#ideas">Cinco ideas para no equivocarte</a></li>
+  <li><a href="#hoja">Hoja de 4 semanas</a></li>
+  <li><a href="#decision">Probar una decisión</a></li>
+  <li><a href="#errores">Errores habituales</a></li>
+  <li><a href="#consultas">Consultas para ChatGPT</a></li>
+</ol></nav>
+
+<h2 id="rutina">La revisión del lunes · 15 minutos</h2>
+<ol class="pasos">
+  <li><div><b>Cuenta lo que tienes hoy: efectivo y banco.</b><br>Dato contado o visto en la app, no recordado.</div></li>
+  <li><div><b>Corrige la semana que pasó con tus cierres diarios.</b><br>Lo previsto que no pasó se borra o se mueve a su nueva fecha.</div></li>
+  <li><div><b>Agrega una semana nueva</b>, para tener siempre 4 semanas adelante.<br>Cada cobro, en la fecha en que esperas recibirlo; no en la de la venta.</div></li>
+  <li><div><b>Busca el día más bajo y compáralo con tu colchón.</b>
+    <p class="formula">Saldo de cada día = saldo anterior + lo que entra − lo que sale</p>
+    Dentro del día: primero lo de la mañana, luego lo de durante el día, luego lo de la tarde.</div></li>
+  <li><div><b>Antes de decir que sí a algo, pruébalo.</b><br>Una decisión a la vez: el plan sin ella y con ella.</div></li>
+</ol>
+
+<h2 id="ideas">Cinco ideas para no equivocarte</h2>
+<table>
+  <tbody>
+    <tr><td><b>El saldo de hoy no es dinero libre</b></td><td>Resta lo que ya tiene destino antes de tu próxima venta. Lo que queda tampoco es «libre»: solo considera lo que anotaste.</td></tr>
+    <tr><td><b>Lo más bajo importa más que el final</b></td><td>Terminar el mes con más no sirve si un día no tienes para comprar.</td></tr>
+    <tr><td><b>El colchón lo decides tú</b></td><td>Es lo mínimo que quieres tener siempre, por si algo sale mal. Alcanza si lo más bajo no baja del colchón.</td></tr>
+    <tr><td><b>Todo lo que mueve dinero va en el plan</b></td><td>Retiros, préstamos, cuotas y compras de equipo, aunque no sean gastos del negocio.</td></tr>
+    <tr><td><b>Lo que no sabes queda pendiente</b></td><td>No lo pongas en cero. Si falta un monto, todavía no puedes saber si alcanza.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="hoja" class="salto">Hoja de 4 semanas</h2>
+<div class="hoja">
+  <p><b>Negocio:</b> <span class="linea" style="min-width:14rem"></span> &nbsp; <b>Lunes 1 = fecha:</b> <span class="linea"></span></p>
+  <p><b>Hoy tengo:</b> efectivo Q <span class="linea" style="min-width:5rem"></span> + banco Q <span class="linea" style="min-width:5rem"></span> = Q <span class="linea" style="min-width:5rem"></span> &nbsp; <b>Mi colchón:</b> Q <span class="linea" style="min-width:5rem"></span></p>
+  <h3>Lo que se repite cada semana</h3>
+  <table><thead><tr><th>Día</th><th>Qué es</th><th class="num">Entra</th><th class="num">Sale</th></tr></thead><tbody>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+  </tbody></table>
+  <table class="semana"><thead><tr><th>Semana 1 · día</th><th>Qué es</th><th class="num">Entra</th><th class="num">Sale</th><th style="width:5.5rem">Previsto / confirmado</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="2" style="text-align:right"><b>Empieza Q____ + entra − sale = termina</b></td><td>Q</td><td>Q</td><td>Q</td></tr></tbody></table><table class="semana"><thead><tr><th>Semana 2 · día</th><th>Qué es</th><th class="num">Entra</th><th class="num">Sale</th><th style="width:5.5rem">Previsto / confirmado</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="2" style="text-align:right"><b>Empieza Q____ + entra − sale = termina</b></td><td>Q</td><td>Q</td><td>Q</td></tr></tbody></table><table class="semana"><thead><tr><th>Semana 3 · día</th><th>Qué es</th><th class="num">Entra</th><th class="num">Sale</th><th style="width:5.5rem">Previsto / confirmado</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="2" style="text-align:right"><b>Empieza Q____ + entra − sale = termina</b></td><td>Q</td><td>Q</td><td>Q</td></tr></tbody></table><table class="semana"><thead><tr><th>Semana 4 · día</th><th>Qué es</th><th class="num">Entra</th><th class="num">Sale</th><th style="width:5.5rem">Previsto / confirmado</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="2" style="text-align:right"><b>Empieza Q____ + entra − sale = termina</b></td><td>Q</td><td>Q</td><td>Q</td></tr></tbody></table>
+  <h3>Lo más bajo</h3>
+  <p>Día <span class="linea" style="min-width:4rem"></span> &nbsp; saldo Q <span class="linea"></span> &nbsp; ☐ arriba del colchón ☐ bajo el colchón ☐ falta dinero</p>
+</div>
+
+<h2 id="decision">Probar una decisión</h2>
+<div class="hoja">
+  <p><b>La decisión:</b> <span class="linea" style="width:100%"></span></p>
+  <p><b>Qué cambia en el plan</b> (fechas y montos): <span class="linea" style="width:100%"></span></p>
+  <table><thead><tr><th></th><th>Sin la decisión</th><th>Con la decisión</th></tr></thead><tbody>
+    <tr><td>Lo más bajo (Q y día)</td><td></td><td></td></tr>
+    <tr><td>Días bajo el colchón</td><td></td><td></td></tr>
+    <tr><td>Saldo al final de la semana 4</td><td></td><td></td></tr>
+  </tbody></table>
+  <p><b>Una prueba (solo una):</b> ☐ un cliente paga una semana tarde ☐ un imprevisto de Q <span class="linea" style="min-width:4rem"></span> ☐ vendo menos: <span class="linea" style="min-width:6rem"></span></p>
+  <p><b>Mi decisión y sus condiciones:</b> <span class="linea" style="width:100%"></span></p>
+</div>
+<p class="nota">Ejemplo del taller: Ana aceptó un pedido solo si la oficina paga cada entrega, y no compra para la siguiente si la anterior no se pagó.</p>
+
+<h2 id="errores">Errores habituales</h2>
+<table>
+  <thead><tr><th>Error</th><th>Lo que provoca</th></tr></thead>
+  <tbody>
+    <tr><td>Mirar solo el saldo al final del mes</td><td>No ves el día en que te quedas sin dinero.</td></tr>
+    <tr><td>Llamar «libre» al saldo de hoy</td><td>Gastas lo que ya tenía destino.</td></tr>
+    <tr><td>Anotar el cobro el día de la venta o de la entrega</td><td>Cuentas con dinero que todavía no llega.</td></tr>
+    <tr><td>Dejar fuera retiros, préstamos o compras de equipo</td><td>El plan parece más holgado de lo que es.</td></tr>
+    <tr><td>Probar varios cambios a la vez</td><td>No sabes cuál causó el resultado.</td></tr>
+    <tr><td>Tratar un monto que no sabes como cero</td><td>El plan dice que alcanza sin saberlo.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="consultas" class="salto">Consultas para ChatGPT</h2>
+<p>Copia una consulta, llena lo que está entre corchetes y pégala en ChatGPT. ChatGPT necesita internet; esta guía no se conecta a ninguna IA. Las sumas hazlas en tu hoja o en el planificador.</p>
+<p class="nota">No escribas nombres completos, números de cuenta, contraseñas ni códigos que te lleguen por mensaje.</p>
+<div class="consulta"><div class="consulta-cab"><b>1 · Ordenar mis compromisos de 4 semanas</b><button type="button" class="boton copiar" data-copiar="g1">Copiar</button></div>
+<pre id="g1">Quiero armar el plan de caja de mi negocio para las próximas 4 semanas. Ayúdame a ordenar mis cobros y pagos; los cálculos los haré yo.
+
+QUÉ QUIERO RESOLVER: tener una lista por fecha de lo que entra y sale, y saber qué datos me faltan.
+
+MI NEGOCIO: [qué vendes y qué días vendes].
+
+CON CUÁNTO EMPIEZO (hoy, contado y en el banco): Q[monto]
+
+LO QUE SE REPITE CADA SEMANA: [por ejemplo: compro insumos el lunes por Q300.00; vendo unos Q800.00 por semana]
+
+PAGOS Y COBROS CON FECHA: [por ejemplo: alquiler el día 5; un cliente me paga el día 12]
+
+LA DECISIÓN QUE QUIERO PROBAR: [por ejemplo: comprar una vitrina de Q1,200.00]
+
+LO QUE NO SÉ: [por ejemplo: cuánto voy a vender la última semana]
+
+NO INVENTES montos, fechas ni pagos que no mencioné. Si algo no tiene fecha o monto, márcalo como «pendiente» y no lo cuentes como cero. No calcules ganancia ni impuestos.
+
+RESPÓNDEME CON:
+1. Una tabla por fecha: día, qué es, entra o sale, monto (o «pendiente»), previsto o confirmado, y si es parte de la decisión.
+2. Lo que se repite cada semana, aparte.
+3. La lista de datos que me faltan.</pre>
+<p class="verificar"><b>Después verifica:</b> que no agregó cobros ni pagos; que lo que no sabes sigue como pendiente; que separa previsto de confirmado.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+<div class="consulta"><div class="consulta-cab"><b>2 · Revisar una decisión con mis datos</b><button type="button" class="boton copiar" data-copiar="g2">Copiar</button></div>
+<pre id="g2">Ayúdame a revisar una decisión de mi negocio antes de comprometer dinero. Las cuentas ya las hice; no las rehagas.
+
+QUÉ QUIERO RESOLVER: decidir si [la decisión] y con qué condiciones.
+
+MI NEGOCIO: [qué vendes]. Hoy tengo Q[monto]. Mi colchón: no quiero bajar de Q[monto].
+
+SIN LA DECISIÓN: lo más bajo es Q[monto] el día [día]; termino la semana 4 con Q[monto].
+
+CON LA DECISIÓN: lo más bajo es Q[monto] el día [día]; termino con Q[monto].
+
+LA PRUEBA QUE HICE (una sola): [por ejemplo: si el cliente paga una semana tarde, lo más bajo es Q[monto] el día [día]]
+
+LO QUE NO SÉ: [por ejemplo: si el proveedor acepta pagos en dos partes]
+
+NO INVENTES cifras, tasas ni costumbres de pago. No cambies mis cálculos; si ves un error, dime dónde. No hables de impuestos.
+
+RESPÓNDEME CON:
+1. Los riesgos de cada opción, en frases cortas.
+2. Condiciones o cambios de fecha que podría pedir, del más útil al menos útil.
+3. Qué haría si algo se atrasa.
+4. Qué datos me faltan para decidir con más seguridad.</pre>
+<p class="verificar"><b>Después verifica:</b> que no dice que alcanza solo porque el final es mayor; que no llama libre al saldo; que no inventa que te pagarán puntual.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+<div class="consulta"><div class="consulta-cab"><b>3 · Explícamelo más sencillo con uno de mis productos</b><button type="button" class="boton copiar" data-copiar="g3">Copiar</button></div>
+<pre id="g3">Explícamelo más sencillo con uno de mis productos.
+
+Vendo [ESCRIBE TU PRODUCTO] a Q[PRECIO] cada uno, y para hacerlo gasto Q[COSTO] en materiales.
+
+Con ese producto, explícame:
+- por qué el dinero que tengo hoy no es todo dinero libre;
+- qué es «lo más bajo» de mi saldo en un mes y por qué importa más que el saldo final;
+- qué pasa si un cliente me paga una semana tarde.
+
+Usa un ejemplo inventado de 2 semanas, con no más de 8 movimientos, y dime claramente que esos números son de ejemplo. Ordena los movimientos por fecha y muestra el saldo después de cada uno, en quetzales con dos decimales. Usa frases cortas. No hables de impuestos ni de préstamos.
+
+Al final, hazme 2 preguntas para comprobar que entendí, y espera mi respuesta antes de darme la solución.</pre>
+<p class="verificar"><b>Después verifica:</b> que dice que sus números son de ejemplo y que cada suma está bien.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+<div class="consulta"><div class="consulta-cab"><b>4 · Revisar mi plan antes de decidir</b><button type="button" class="boton copiar" data-copiar="g4">Copiar</button></div>
+<pre id="g4">Revisa mi plan de caja de 4 semanas antes de tomar una decisión. No lo rehagas: solo dime qué revisar.
+
+QUÉ QUIERO RESOLVER: saber si me falta anotar algo o si alguna fecha está mal puesta.
+
+MI PLAN (lo copié de mi hoja o del planificador del taller):
+[pega aquí tu resumen]
+
+LO QUE NO SÉ: [lo que todavía esté pendiente]
+
+NO INVENTES movimientos ni montos y no cambies mis cifras.
+
+RESPÓNDEME CON:
+1. Pagos o cobros que suelen olvidarse en un negocio como el mío y que no veo en la lista (solo como pregunta, sin montos).
+2. Cobros que quizá puse antes de la fecha en que llegarán.
+3. Una pregunta que me ayude a mejorar el plan.</pre>
+<p class="verificar"><b>Después verifica:</b> que no cambió tus montos; que sus sugerencias son preguntas, no datos.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+<p class="nota">Taller 03 de la serie «Finanzas del negocio con IA». Los casos de Ana y Lucía son ficticios. Este material no da tratamientos fiscales ni contables formales.</p>
+</main>
+<script>
+(function () {
+  'use strict';
+  var raiz = document.documentElement;
+  var bt = document.getElementById('tema');
+  function poner(t) { raiz.dataset.tema = t; bt.setAttribute('aria-pressed', t === 'noche'); bt.textContent = t === 'noche' ? 'Modo claro' : 'Modo nocturno'; }
+  var g = null; try { g = localStorage.getItem('taller03:tema'); } catch (e) {}
+  poner(g || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'noche' : 'claro'));
+  bt.addEventListener('click', function () { var t = raiz.dataset.tema === 'noche' ? 'claro' : 'noche'; poner(t); try { localStorage.setItem('taller03:tema', t); } catch (e) {} });
+  document.getElementById('imprimir').addEventListener('click', function () { try { window.print(); } catch (e) { alert('Usa Ctrl+P (o Cmd+P) para imprimir.'); } });
+  async function copiar(texto) {
+    if (navigator.clipboard && window.isSecureContext) { try { await navigator.clipboard.writeText(texto); return true; } catch (e) {} }
+    try { var ta = document.createElement('textarea'); ta.value = texto; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); var ok = document.execCommand('copy'); ta.remove(); return ok; } catch (e) { return false; }
+  }
+  document.addEventListener('click', async function (e) {
+    var b = e.target.closest('[data-copiar]'); if (!b) return;
+    var caja = b.closest('.consulta'); var texto = document.getElementById(b.dataset.copiar).innerText.trim();
+    var estado = caja.querySelector('.estado-copia');
+    if (await copiar(texto)) { estado.textContent = 'Copiada. Pégala en ChatGPT (requiere internet).'; return; }
+    var ta = caja.querySelector('textarea.respaldo');
+    if (!ta) { ta = document.createElement('textarea'); ta.className = 'respaldo'; ta.setAttribute('aria-label', 'Texto para copiar a mano'); caja.appendChild(ta); }
+    ta.value = texto; ta.focus(); ta.select();
+    estado.textContent = 'No se pudo copiar solo. El texto quedó seleccionado abajo: usa Ctrl+C, o mantén presionado y elige Copiar.';
+  });
+})();
+</script>
+</body>
+</html>

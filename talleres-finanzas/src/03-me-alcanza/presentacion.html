@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="es" data-taller="taller03" data-serie-num="03" data-serie-nombre="¿Me alcanza?">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Me alcanza? · Taller 03</title>
+<meta name="description" content="Taller 03 de la serie Finanzas del negocio con IA: organizar cuatro semanas de caja y evaluar una decisión antes de comprometer dinero. Presentación interactiva para 90 minutos.">
+<style>
+/*@fuentes*/
+/*@incluir:comun/motor.css*/
+/*@incluir:comun/componentes.css*/
+/*@incluir:03-me-alcanza/taller03.css*/
+</style>
+</head>
+<body>
+<main class="escenario" id="escenario">
+
+<!-- ===================================================== A · EL PROBLEMA (10 min) -->
+<section class="pantalla campo portada" data-titulo="Portada" data-seccion="El problema" data-min="2" data-sin-corrido>
+  <div class="marco sin-titulo">
+    <div class="portada-grid">
+      <p class="serie-num"><b>03</b> Planificar · Finanzas del negocio con IA</p>
+      <h1 class="portada-titulo" style="max-width:7ch">¿Me <em>alcanza?</em></h1>
+      <div class="portada-pie">
+        <p class="entrada">Hoy organizas cuatro semanas de caja y pruebas una decisión antes de comprometer dinero.</p>
+        <p class="pequeno">Taller 03 de 04 · 90 minutos<br>Un caso guiado y una tarea para tu negocio</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>Bienvenida (2 min).</b> Pregunta a mano alzada: «¿Alguna vez dijeron que sí a algo y a la semana no tenían para pagar?». Escucha sin corregir.</p>
+    <ul><li>Reparte la hoja de 4 semanas impresa (está en la guía) y un lapicero.</li>
+    <li>Si hicieron el taller 02, pide sus cierres diarios: sirven para estimar cuánto entra y sale.</li>
+    <li>ChatGPT necesita internet. La presentación y el simulador funcionan sin internet.</li></ul>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Lo que te llevas hoy" data-seccion="El problema" data-min="2">
+  <div class="marco">
+    <h2 class="titulo">Al terminar tendrás tu plan de cuatro semanas y una decisión revisada</h2>
+    <div class="dos" style="--cols: 1fr 1.15fr">
+      <div class="pila">
+        <ul class="lista entrada" style="font-size:calc(var(--u)*1.8)">
+          <li>Tus cobros y pagos de las próximas 4 semanas, con fecha.</li>
+          <li>El día en que tu dinero llega más bajo.</li>
+          <li>Una decisión comparada: con ella y sin ella.</li>
+          <li>Una revisión de 15 minutos para cada lunes.</li>
+        </ul>
+        <p class="pequeno regla-arriba">Ten a mano: la hoja de 4 semanas y, si los tienes, tus cierres diarios del taller 02.</p>
+      </div>
+      <div>
+        <p class="rotulo">Recorrido de 90 minutos</p>
+        <ol class="recorrido" aria-label="Recorrido de la sesión, en minutos">
+          <li style="--m:10"><span class="letra">A</span><span class="tira">10</span><span>El pedido que recibe Ana</span></li>
+          <li style="--m:15"><span class="letra">B</span><span class="tira">15</span><span>Lo que entra, lo que sale y cuándo</span></li>
+          <li style="--m:15"><span class="letra">C</span><span class="tira">15</span><span>Cuatro semanas, paso a paso</span></li>
+          <li style="--m:20"><span class="letra">D</span><span class="tira">20</span><span>Simular, comparar y revisar con IA</span></li>
+          <li style="--m:20"><span class="letra">E</span><span class="tira">20</span><span>Tu plan: tus datos o el caso de Lucía</span></li>
+          <li style="--m:10"><span class="letra">F</span><span class="tira">10</span><span>Comprobar y armar tu rutina</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Lee la tarea. La pregunta del taller no es «¿gano?», es «¿tengo el dinero el día que lo necesito?».</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Seguimos con Ana" data-seccion="El problema" data-min="2" data-caso="Talleres 01 y 02 · referencia" data-caso-tipo="ref">
+  <div class="marco">
+    <h2 class="titulo">Ana ya conoce sus costos y cierra cada día</h2>
+    <div class="dos" style="--cols: 1.1fr 1fr">
+      <dl class="ficha">
+        <div><dt>Precio por vaso</dt><dd class="cifra">Q20.00</dd><span class="de-donde">Dato del taller 01.</span></div>
+        <div><dt>Fruta por tanda de 10 vasos</dt><dd class="cifra">Q100.00</dd><span class="de-donde">Dato del taller 01: Q10.00 de fruta por vaso.</span></div>
+        <div><dt>Empaque por vaso</dt><dd class="cifra">Q2.00</dd><span class="de-donde">Dato del taller 01. Costo total por vaso: Q12.00.</span></div>
+        <div><dt>Su trabajo</dt><dd class="cifra">Q20.00 / hora</dd><span class="de-donde">Dato del taller 01.</span></div>
+      </dl>
+      <div class="hoja pila centro-v">
+        <p class="rotulo">Hoy miramos hacia adelante</p>
+        <p class="entrada" style="font-size:calc(var(--u)*1.85)">Un plan de las próximas 4 semanas. Son cifras <b>previstas</b>: lo que Ana espera, no lo que ya pasó.</p>
+        <p class="pequeno">No se mezclan con el mes del taller 01 ni con el martes del taller 02. Mientras veas <b class="caso" data-tipo="ana" style="font-size:1em">Caso Ana · plan</b> arriba a la derecha, seguimos en este plan.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Si el grupo no vino a los talleres anteriores: Ana vende jugos a Q20.00 el vaso; hacerlo le cuesta Q12.00. Con eso basta.</p>
+    <p>Recalca la palabra <b>previsto</b>. En un plan casi todo es previsto; parte del trabajo es saber qué es firme y qué no.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo" data-titulo="La oferta de la oficina" data-seccion="El problema" data-min="2" data-caso="Caso Ana · plan">
+  <div class="marco">
+    <h2 class="titulo">Una oficina le ofrece a Ana un pedido de tres semanas</h2>
+    <div class="dos" style="--cols: 1.1fr 1fr">
+      <div class="pila">
+        <p class="entrada">«Necesitamos 30 vasos cada viernes, durante tres semanas. Le pagamos Q18.00 cada uno, todo junto al final.»</p>
+        <p class="texto">Ana hace la cuenta rápida: 90 vasos × Q18.00 = <b class="cifra">Q1,620.00</b>. Le parece mucho dinero.</p>
+        <p class="entrada"><b>Pero se pregunta: ¿me alcanza para cumplir mientras me pagan?</b></p>
+      </div>
+      <div class="hoja pila centro-v">
+        <p class="rotulo">Hoy, lunes 1</p>
+        <p>Tiene <b class="cifra" style="font-size:calc(var(--u)*3)">Q650.00</b></p>
+        <p><span class="tipo-cifra" data-t="contado">Contado</span> <span class="tipo-cifra" data-t="registrado">Registrado</span></p>
+        <p class="pequeno">Q250.00 en efectivo, contados esta mañana, y Q400.00 en la cuenta, según la app del banco.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Cuenta la oferta como una buena noticia. Pregunta: «¿Ustedes aceptarían?». Deja que digan que sí.</p>
+    <p>Presenta las dos partes del Q650.00: el efectivo es dato contado; el banco es dato registrado por la app.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo pregunta" data-titulo="¿Le alcanza?" data-seccion="El problema" data-min="2" data-caso="Caso Ana · plan" data-revela="1">
+  <div class="marco">
+    <h2 class="titulo">Con Q650.00 hoy y Q1,620.00 por cobrar, ¿le alcanza?</h2>
+    <div class="dos" style="--cols: 1fr 1fr">
+      <ul class="opciones">
+        <li><button type="button" class="opcion"><span class="letra">A</span><span>Sí: Q650.00 + Q1,620.00 es bastante.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion"><span class="letra">B</span><span>No: el pedido deja muy poco.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion correcta"><span class="letra">C</span><span>Depende de cuándo paga y cuándo cobra cada cosa.</span><span class="marca" data-texto=""></span></button></li>
+      </ul>
+      <div class="explica" data-paso="1">
+        <p class="entrada" style="font-size:calc(var(--u)*1.85)"><b>Respuesta C.</b> Lo que importa es si tiene el dinero <b>el día</b> que debe pagar.</p>
+        <p class="texto">Los Q1,620.00 llegan al final. La fruta del pedido hay que comprarla antes de cada entrega.</p>
+        <p class="texto">Para saberlo hay que ordenar los cobros y pagos en un calendario.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Que voten antes de revelar. A suma dinero que llega en fechas distintas. B juzga sin datos: el pedido sí deja dinero (lo veremos), el problema es el orden.</p>
+  </aside>
+</section>
+
+<!-- ===================================================== B · LOS DATOS (15 min) -->
+<section class="pantalla" data-titulo="Ya tiene destino" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · plan">
+  <div class="marco">
+    <h2 class="titulo">Tiene Q650.00, pero Q450.00 ya tienen destino antes de vender</h2>
+    <div class="pila">
+      <p class="texto" data-paso="1">Antes de su primera venta, el martes 2, Ana tiene que pagar:</p>
+      <table class="libro" data-paso="1" style="max-width:calc(var(--u)*60)">
+        <tbody>
+          <tr><td>Lunes 1 · espacio de venta del mes</td><td class="num">Q150.00</td></tr>
+          <tr><td>Lunes 1 · empaque: paquete de 100 vasos × Q2.00</td><td class="num">Q200.00</td></tr>
+          <tr><td>Martes 2, en la mañana · fruta: 1 tanda</td><td class="num">Q100.00</td></tr>
+        </tbody>
+        <tfoot><tr><td>Compromisos antes de la primera venta</td><td class="num">Q450.00</td></tr></tfoot>
+      </table>
+      <div class="reparto" data-paso="2">
+        <div class="tira-dinero" style="--escala:650" role="img" aria-label="De Q650, Q450 ya comprometidos y Q200 restantes">
+          <div class="seg comp" style="--v:450"><span>Ya comprometido</span><b>Q450.00</b></div>
+          <div class="seg resto" style="--v:200"><span>Queda</span><b>Q200.00</b></div>
+        </div>
+        <div class="leyenda"><span>Q0</span><span>Q650.00 hoy</span></div>
+      </div>
+      <p class="texto" data-paso="3">Esos Q200.00 <b>no son dinero libre</b>: solo restan lo que anotamos. Si falta anotar algo, quedará menos. <button type="button" class="i" data-info="i-libre" aria-label="Por qué no es dinero libre">i</button></p>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> El saldo de hoy no es lo mismo que el dinero que puedes usar. Pregunta: «¿Qué pagos tienen ustedes esta semana antes de su primera venta?».</p>
+    <p>Q150.00 + Q200.00 + Q100.00 = Q450.00. Q650.00 − Q450.00 = Q200.00.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Una semana normal" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · plan">
+  <div class="marco">
+    <h2 class="titulo ancho">Una semana normal de Ana</h2>
+    <div class="pila">
+      <div class="semana-tipo">
+        <div><h3><span>Lun</span></h3><small>No vende</small></div>
+        <div class="venta-dia"><h3><span>Mar</span></h3><span class="sal">Fruta, 1 tanda: Q100.00<small>en la mañana</small></span><span class="ent">10 vasos × Q20.00: Q200.00<small>durante el día</small></span></div>
+        <div><h3><span>Mié</span></h3><small>No vende</small></div>
+        <div class="venta-dia"><h3><span>Jue</span></h3><span class="sal">Fruta: Q100.00</span><span class="ent">Ventas: Q200.00</span></div>
+        <div><h3><span>Vie</span></h3><small>No vende</small></div>
+        <div class="venta-dia"><h3><span>Sáb</span></h3><span class="sal">Fruta: Q100.00</span><span class="ent">Ventas: Q200.00</span><span class="sal">Su trabajo: 5 h × Q20.00 = Q100.00<small>en la tarde</small></span></div>
+        <div><h3><span>Dom</span></h3><small>Descansa</small></div>
+      </div>
+      <p class="texto" data-paso="1">Por semana: entran 3 × Q200.00 = <b class="cifra">Q600.00</b>. Salen 3 × Q100.00 + Q100.00 = <b class="cifra">Q400.00</b>. <span class="tipo-cifra" data-t="previsto">Previsto</span></p>
+      <p class="texto" data-paso="2">Supuesto del plan: todo se cobra el mismo día; no hay fiados. Compra la fruta en la mañana, antes de vender. <button type="button" class="i" data-info="i-orden" aria-label="Por qué importa el orden dentro del día">i</button></p>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 2 pasos.</b> 30 vasos por semana, 120 en 4 semanas. Ana se paga 5 horas cada sábado: 20 horas al mes, como en el taller 01.</p>
+    <p>Si alguien pregunta por los fiados: en este plan suponemos que no hay. Si los hubiera, el cobro se anota en la fecha en que se espera, no el día de la venta.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Lo que se paga una vez" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · plan">
+  <div class="marco">
+    <h2 class="titulo">Lo que se paga una sola vez en el mes</h2>
+    <div class="dos" style="--cols: 1.3fr 1fr">
+      <table class="libro">
+        <thead><tr><th>Fecha</th><th>Qué</th><th style="text-align:right">Monto</th></tr></thead>
+        <tbody>
+          <tr><td>Lunes 1</td><td>Espacio de venta del mes</td><td class="num">Q150.00</td></tr>
+          <tr><td>Lunes 1</td><td>Empaque: 100 vasos</td><td class="num">Q200.00</td></tr>
+          <tr><td>Lunes 15</td><td>Teléfono del mes</td><td class="num">Q50.00</td></tr>
+          <tr><td>Sábado 20</td><td>Retiro personal para la casa</td><td class="num">Q150.00</td></tr>
+          <tr><td>Lunes 22</td><td>Empaque: otros 100 vasos</td><td class="num">Q200.00</td></tr>
+        </tbody>
+      </table>
+      <div class="pila">
+        <p class="texto">El espacio (Q150.00) y el teléfono (Q50.00) son los mismos del taller 01. Se registran una sola vez en el mes.</p>
+        <p class="texto">El retiro es dinero para la casa: no es gasto del negocio, pero <b>sí sale de la caja</b>. Por eso va en el plan.</p>
+        <p class="pequeno">El empaque se compra por paquete: sale todo el dinero el día de la compra, aunque se use varias semanas.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Pide que cada persona anote en su hoja dos pagos de su negocio que hace una sola vez al mes. Insiste: en un plan de caja entra todo lo que mueve dinero, aunque no sea gasto del negocio (retiros, préstamos, compras de equipo).</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El colchón" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · plan">
+  <div class="marco">
+    <h2 class="titulo">Ana decide no bajar de Q100.00: su colchón</h2>
+    <div class="dos" style="--cols: 1fr 1.1fr">
+      <div class="pila">
+        <p class="texto">El <b>colchón</b> es el dinero que quieres tener siempre, por si algo sale mal: se arruina la licuadora, llueve y no vende, un cliente no paga.</p>
+        <p class="texto">No hay una cifra correcta para todos. Ana elige <b class="cifra">Q100.00</b>. <span class="tipo-cifra" data-t="previsto">Decisión de Ana</span></p>
+        <p class="entrada regla-arriba" style="font-size:calc(var(--u)*1.8)">Regla del taller: <b>alcanza</b> si el saldo más bajo del mes no baja del colchón.</p>
+      </div>
+      <table class="tabla">
+        <thead><tr><th>Etiqueta</th><th>En un plan quiere decir</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tipo-cifra" data-t="contado">Contado</span></td><td>Lo que tienes hoy y contaste.</td></tr>
+          <tr><td><span class="tipo-cifra" data-t="previsto">Previsto</span></td><td>Lo que esperas que pase. Puede cambiar.</td></tr>
+          <tr><td><span class="tipo-cifra" data-t="registrado">Confirmado</span></td><td>Ya acordado o con fecha fija: el alquiler, una cuota.</td></tr>
+          <tr><td><span class="tipo-cifra" data-t="calculado">Resultado</span></td><td>Sale de sumar y restar los anteriores.</td></tr>
+          <tr><td><span class="tipo-cifra" data-t="pendiente">Simulación</span></td><td>«¿Qué pasaría si…?». No es el plan.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Pregunta: «¿Cuánto les gustaría tener siempre, por si acaso?». Que escriban su cifra en la hoja. Es una decisión personal.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El pedido, con sus números" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · plan con el pedido">
+  <div class="marco">
+    <h2 class="titulo">Lo que cuesta cumplir cada entrega, antes de cobrarla</h2>
+    <div class="dos" style="--cols: 1.25fr 1fr">
+      <table class="libro">
+        <thead><tr><th>Cada entrega · 30 vasos</th><th>Cuándo</th><th style="text-align:right">Monto</th></tr></thead>
+        <tbody>
+          <tr data-paso="1"><td>Fruta: 3 tandas × Q100.00</td><td>jueves antes</td><td class="num">Q300.00</td></tr>
+          <tr data-paso="1"><td>Vasos: 30 × Q2.00</td><td>jueves antes</td><td class="num">Q60.00</td></tr>
+          <tr data-paso="2"><td>Trabajo extra de Ana: 3 h × Q20.00</td><td>sábado después</td><td class="num">Q60.00</td></tr>
+          <tr data-paso="3"><td><b>Cobro: 30 × Q18.00</b></td><td>¿cuándo?</td><td class="num"><b>Q540.00</b></td></tr>
+        </tbody>
+      </table>
+      <div class="pila">
+        <p class="texto" data-paso="1">Entregas: viernes 12, 19 y 26. Cada jueves Ana tiene que tener <b class="cifra">Q360.00</b> para comprar, además de su compra normal.</p>
+        <p class="texto" data-paso="3">Como lo ofrecen, la oficina paga todo el viernes 26: <b class="cifra">Q1,620.00</b>. Antes de eso, Ana habrá pagado 3 × Q360.00 + 2 × Q60.00 = <b class="cifra">Q1,200.00</b>.</p>
+        <p class="pequeno" data-paso="3">Es el <b>dinero necesario para operar antes de cobrar</b>. <button type="button" class="i" data-info="i-aporte-pedido" aria-label="Cuánto deja el pedido">i</button></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> Todas las cifras salen de datos ya presentados: Q100.00 por tanda, Q2.00 por vaso, Q20.00 por hora. Las 3 horas extra por entrega son un supuesto de Ana.</p>
+    <p>Los Q1,200.00: tres compras de Q360.00 (días 11, 18 y 25) y dos pagos de trabajo extra (13 y 20). El tercero (27) es después del cobro.</p>
+  </aside>
+</section>
+
+<!-- ===================================================== C · PASO A PASO (15 min) -->
+<section class="pantalla" data-titulo="Semana por semana" data-seccion="Paso a paso" data-min="4" data-caso="Caso Ana · plan original">
+  <div class="marco">
+    <h2 class="titulo ancho">Primero el plan sin el pedido, semana por semana</h2>
+    <div class="dos" style="--cols: 1.6fr 1fr">
+      <table class="libro semanas">
+        <thead><tr><th>Semana</th><th class="num">Empieza</th><th class="num">+ Entra</th><th class="num">− Sale</th><th class="num">= Termina</th></tr></thead>
+        <tbody>
+          <tr data-paso="1"><td>1 · días 1–7</td><td class="num">Q650.00</td><td class="num">Q600.00</td><td class="num">Q750.00</td><td class="num">Q500.00</td></tr>
+          <tr data-paso="2"><td>2 · días 8–14</td><td class="num">Q500.00</td><td class="num">Q600.00</td><td class="num">Q400.00</td><td class="num">Q700.00</td></tr>
+          <tr data-paso="3"><td>3 · días 15–21</td><td class="num">Q700.00</td><td class="num">Q600.00</td><td class="num">Q600.00</td><td class="num">Q700.00</td></tr>
+          <tr data-paso="4"><td>4 · días 22–28</td><td class="num">Q700.00</td><td class="num">Q600.00</td><td class="num">Q600.00</td><td class="num">Q700.00</td></tr>
+        </tbody>
+      </table>
+      <div class="pila pequeno" style="color:inherit">
+        <p data-paso="1"><b>Semana 1 sale:</b> Q400.00 normales + espacio Q150.00 + empaque Q200.00 = Q750.00.</p>
+        <p data-paso="2"><b>Semana 2:</b> solo lo normal, Q400.00.</p>
+        <p data-paso="3"><b>Semana 3:</b> Q400.00 + teléfono Q50.00 + retiro Q150.00 = Q600.00.</p>
+        <p data-paso="4"><b>Semana 4:</b> Q400.00 + empaque Q200.00 = Q600.00.</p>
+      </div>
+    </div>
+    <p class="entrada" data-paso="5" style="grid-column:1/-1">Termina cada semana con dinero. ¿Ya sabemos que alcanza? Todavía no.</p>
+  </div>
+  <aside class="notas">
+    <p><b>4 min · 5 pasos.</b> Pide que llenen la tabla de su hoja con el grupo. Cada fila: empieza + entra − sale = termina, y lo que termina es lo que empieza la semana siguiente.</p>
+    <p>Comprobación: 650 + 600 − 750 = 500; 500 + 600 − 400 = 700; 700 + 600 − 600 = 700 (dos veces).</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El punto más bajo" data-seccion="Paso a paso" data-min="3" data-caso="Caso Ana · plan original">
+  <div class="marco">
+    <h2 class="titulo ancho">Dentro de la semana, el dinero baja antes de subir</h2>
+    <div class="dos" style="--cols: 1.6fr 1fr">
+      <table class="libro saldo">
+        <thead><tr><th></th><th>Semana 1, en orden</th><th class="num" style="text-align:right">Monto</th><th class="num" style="text-align:right">Queda</th><th>Saldo</th></tr></thead>
+        <tbody>
+          <tr><td class="signo"></td><td>Lunes 1 · empieza</td><td class="num"></td><td class="num">Q650.00</td><td class="barra-saldo"><div class="b" style="--v:650"></div></td></tr>
+          <tr class="sale" data-paso="1"><td class="signo">−</td><td>Lunes 1 · espacio y empaque</td><td class="num">Q350.00</td><td class="num">Q300.00</td><td class="barra-saldo"><div class="b" style="--v:300"></div></td></tr>
+          <tr class="sale" data-paso="2"><td class="signo">−</td><td>Martes 2, mañana · fruta</td><td class="num">Q100.00</td><td class="num"><b>Q200.00</b></td><td class="barra-saldo"><div class="b" style="--v:200"></div></td></tr>
+          <tr class="entra" data-paso="3"><td class="signo">+</td><td>Martes 2 · ventas</td><td class="num">Q200.00</td><td class="num">Q400.00</td><td class="barra-saldo"><div class="b" style="--v:400"></div></td></tr>
+          <tr class="entra" data-paso="4"><td class="signo"></td><td>Jueves 4 · fruta y ventas</td><td class="num">+Q100.00</td><td class="num">Q500.00</td><td class="barra-saldo"><div class="b" style="--v:500"></div></td></tr>
+          <tr class="sale" data-paso="5"><td class="signo"></td><td>Sábado 6 · fruta, ventas y trabajo</td><td class="num">±Q0.00</td><td class="num">Q500.00</td><td class="barra-saldo"><div class="b" style="--v:500"></div></td></tr>
+        </tbody>
+      </table>
+      <div class="pila">
+        <p class="resultado-linea" data-paso="2" style="flex-direction:column;align-items:flex-start"><b>Lo más bajo del mes</b><span class="cifra">Q200.00</span><span class="pequeno" style="color:inherit">martes 2, antes de vender</span></p>
+        <p class="texto" data-paso="5">Q200.00 está arriba del colchón de Q100.00: el plan original <b>alcanza</b>.</p>
+        <p class="pequeno" data-paso="5">Barras: escala de Q0 a Q600. Las semanas 2 a 4 no bajan de Q300.00.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 5 pasos.</b> Fila 4: jueves −Q100.00 + Q200.00 = +Q100.00. Fila 5: sábado −Q100.00 + Q200.00 − Q100.00 = Q0.00.</p>
+    <p>El concepto clave es <b>lo más bajo</b>, no el saldo final. Pide que marquen en su hoja el día más bajo de cada semana.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo pregunta" data-titulo="¿El final de semana basta?" data-seccion="Paso a paso" data-min="2" data-caso="Caso Ana · plan con el pedido" data-revela="1">
+  <div class="marco">
+    <h2 class="titulo">Con el pedido, Ana terminaría el mes con más dinero. ¿Entonces le alcanza?</h2>
+    <div class="dos" style="--cols: 1fr 1.1fr">
+      <ul class="opciones">
+        <li><button type="button" class="opcion"><span class="letra">A</span><span>Sí: si al final hay más, alcanza.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion correcta"><span class="letra">B</span><span>Hay que ver cada día antes del cobro.</span><span class="marca" data-texto=""></span></button></li>
+      </ul>
+      <div class="explica" data-paso="1">
+        <p class="texto"><b>Respuesta B.</b> Terminar el mes con más no sirve si un jueves no tiene para comprar la fruta.</p>
+        <p class="texto">Por eso medimos lo más bajo de cada día, no solo el final.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Es la confusión de la respuesta A de la pantalla 5, con otras palabras. Que voten.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El pedido como lo ofrecen" data-seccion="Paso a paso" data-min="4" data-caso="Caso Ana · plan con el pedido">
+  <div class="marco">
+    <h2 class="titulo ancho">Con el pedido pagado al final, el jueves 25 faltan Q700.00</h2>
+    <div class="dos" style="--cols: 2fr 1fr">
+      <div class="pila-c">
+        <div class="grafico" data-grafico-fijo="final:ninguna:original" data-aria="Saldo más bajo de cada día con el pedido pagado al final, comparado con el plan original. Baja de cero desde el jueves 18 y llega a menos Q700 el jueves 25; sube el viernes 26 con el cobro."></div>
+        <p class="leyenda-g"><span><i class="l-ok"></i>arriba del colchón</span><span><i class="l-bajo"></i>bajo el colchón</span><span><i class="l-neg"></i>falta dinero</span><span><i class="l-ref"></i>plan original</span><span><i class="l-col"></i>colchón</span></p>
+      </div>
+      <div class="pila">
+        <table class="libro semanas">
+          <thead><tr><th>Semana</th><th class="num" style="text-align:right">Termina</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="num">Q500.00</td></tr>
+            <tr><td>2 · −Q420.00 del pedido</td><td class="num">Q280.00</td></tr>
+            <tr class="bajo"><td>3 · −Q420.00 del pedido</td><td class="num">−Q140.00</td></tr>
+            <tr><td>4 · −Q420.00 + Q1,620.00</td><td class="num">Q1,060.00</td></tr>
+          </tbody>
+        </table>
+        <p class="texto" data-paso="1">El dinero no alcanza desde el <b>jueves 18</b>. Lo más bajo: <b class="cifra">−Q700.00</b> el <b>jueves 25</b>.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>4 min · 1 paso.</b> Lee el gráfico de izquierda a derecha. Cada barra es lo más bajo de ese día. Las rayas finas son el plan original, para comparar.</p>
+    <p>Comprobación del jueves 25: el plan original tendría Q500.00 esa mañana; menos los Q1,200.00 adelantados del pedido da −Q700.00.</p>
+    <p>Un saldo negativo significa que el dinero no existe: Ana no podría comprar la fruta.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Qué nos dice" data-seccion="Paso a paso" data-min="2" data-caso="Caso Ana · plan con el pedido">
+  <div class="marco">
+    <h2 class="titulo">El pedido deja dinero, pero así no se puede cumplir</h2>
+    <div class="antes-despues">
+      <div>
+        <h3>Al final del mes</h3>
+        <p class="operacion">Con el pedido Q1,060.00 · sin el pedido Q700.00</p>
+        <p class="res">Le queda Q360.00 más</p>
+        <p class="pequeno">90 vasos × (Q18.00 − Q12.00) = Q540.00, menos 3 × Q60.00 de su trabajo extra.</p>
+      </div>
+      <div>
+        <h3>Durante el mes</h3>
+        <p class="operacion">Del jueves 18 al jueves 25 el saldo es negativo</p>
+        <p class="res">Le faltan hasta Q800.00 para no bajar del colchón</p>
+        <p class="pequeno">Q700.00 para llegar a cero + Q100.00 de colchón.</p>
+      </div>
+    </div>
+    <p class="entrada abajo regla-arriba" style="grid-column:1/-1">La decisión no es solo «sí» o «no». Se pueden negociar las condiciones. Vamos a probarlo.</p>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Dos verdades a la vez: el pedido conviene y, tal como viene, no se puede financiar. Pregunta: «¿Qué le pedirían a la oficina?».</p>
+  </aside>
+</section>
+
+<!-- ===================================================== D · SIMULAR Y REVISAR (20 min) -->
+<section class="pantalla" data-titulo="Simulador de caja" data-seccion="Simular y revisar" data-min="4" data-caso="Caso Ana · simulación">
+  <div class="marco">
+    <h2 class="titulo ancho">Simulador: el mismo plan con distintas condiciones</h2>
+    <div class="sim">
+      <div class="pila-c">
+        <p><span class="escenario-actual ana-escenario"></span></p>
+        <div class="grafico" id="ana-grafico"></div>
+        <p class="leyenda-g"><span><i class="l-ok"></i>arriba del colchón</span><span><i class="l-bajo"></i>bajo el colchón</span><span><i class="l-neg"></i>falta dinero</span><span><i class="l-ref"></i>plan original</span><span><i class="l-col"></i>colchón Q100</span></p>
+      </div>
+      <div class="sim-ctl">
+        <p class="rotulo">Decisión</p>
+        <div class="grupo-b" role="group" aria-label="Decisión">
+          <button type="button" data-ana-plan="original">Sin el pedido</button>
+          <button type="button" data-ana-plan="final">Pedido: paga todo el 26</button>
+          <button type="button" data-ana-plan="entrega">Pedido: paga cada entrega</button>
+        </div>
+        <p class="rotulo">Una prueba a la vez</p>
+        <div class="grupo-b" role="group" aria-label="Prueba">
+          <button type="button" data-ana-prueba="ninguna">Ninguna</button>
+          <button type="button" data-ana-prueba="atraso">Pagan una semana tarde</button>
+          <button type="button" data-ana-prueba="imprevisto">Licuadora: Q250.00 el martes 16</button>
+        </div>
+        <div id="ana-veredicto" aria-live="polite"></div>
+        <button type="button" class="boton sec" data-ana-reiniciar>Reiniciar simulador</button>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>4 min.</b> Empieza en «Pedido: paga todo el 26» (lo que ya vimos). Luego pide al grupo que elija: «¿Qué cambiarían?». Prueba «paga cada entrega».</p>
+    <p>Las pruebas se aplican una a la vez, para saber qué causa cada cambio. Ninguna modifica los datos del caso; «Reiniciar» vuelve al inicio.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Calendario del escenario" data-seccion="Simular y revisar" data-min="2" data-caso="Caso Ana · simulación">
+  <div class="marco">
+    <h2 class="titulo ancho">El calendario muestra qué pasa cada día</h2>
+    <div class="cal">
+      <div class="pila-c">
+        <p><span class="escenario-actual ana-escenario"></span> <span class="pequeno">Cambia el escenario en la pantalla anterior.</span></p>
+        <div id="ana-calendario" class="sin-deslizar"></div>
+      </div>
+      <div class="pila-c" style="min-height:0">
+        <div class="detalle" id="ana-dia" aria-live="polite"></div>
+        <table class="mini"><tbody id="ana-resumen"></tbody></table>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Toca un día para ver sus movimientos en orden: mañana, durante el día, tarde. Muestra el jueves 11 o el 25 según el escenario.</p>
+    <p>Cada cifra al pie del día es con cuánto termina ese día. Las tramas marcan los días bajo el colchón o con saldo negativo.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="La alternativa" data-seccion="Simular y revisar" data-min="2" data-caso="Caso Ana · alternativa: pago por entrega">
+  <div class="marco">
+    <h2 class="titulo">Un solo cambio: que la oficina pague cada entrega</h2>
+    <div class="dos" style="--cols: 2fr 1fr">
+      <div class="pila-c">
+        <div class="grafico" data-grafico-fijo="entrega:ninguna:original" data-aria="Saldo más bajo de cada día con pago por entrega. No baja del colchón; lo más bajo es Q140 el jueves 11."></div>
+        <p class="leyenda-g"><span><i class="l-ok"></i>arriba del colchón</span><span><i class="l-ref"></i>plan original</span><span><i class="l-col"></i>colchón</span></p>
+      </div>
+      <div class="pila">
+        <p class="texto"><b>Qué cambió:</b> los Q1,620.00 llegan en tres partes de Q540.00, los viernes 12, 19 y 26.</p>
+        <p class="texto"><b>Lo más bajo:</b> <b class="cifra">Q140.00</b>, el jueves 11, antes de la primera entrega.</p>
+        <p class="texto">Queda arriba del colchón: <b>alcanza</b>. Al final del mes tiene lo mismo, Q1,060.00.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> El dinero total es igual; solo cambia la fecha de los cobros. Ese cambio de fecha decide si se puede cumplir.</p>
+    <p>Jueves 11: Q600.00 al empezar el día − Q100.00 de su fruta − Q360.00 del pedido = Q140.00.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Prueba: un atraso" data-seccion="Simular y revisar" data-min="2" data-caso="Caso Ana · simulación: atraso">
+  <div class="marco">
+    <h2 class="titulo">¿Y si la oficina paga la primera entrega una semana tarde?</h2>
+    <div class="dos" style="--cols: 2fr 1fr">
+      <div class="pila-c">
+        <div class="grafico" data-grafico-fijo="entrega:atraso:entrega" data-aria="Con atraso del primer pago, el jueves 18 el saldo llega a menos Q130."></div>
+        <p class="leyenda-g"><span><i class="l-ok"></i>arriba del colchón</span><span><i class="l-bajo"></i>bajo el colchón</span><span><i class="l-neg"></i>falta dinero</span><span><i class="l-ref"></i>pago por entrega sin atraso</span></p>
+      </div>
+      <div class="pila">
+        <p class="texto"><b>Simulación.</b> Solo cambia una cosa: el cobro del viernes 12 llega el viernes 19.</p>
+        <p class="texto">El jueves 18 Ana tendría que comprar para la segunda entrega sin haber cobrado la primera: <b class="cifra">−Q130.00</b>.</p>
+        <p class="entrada" data-paso="1" style="font-size:calc(var(--u)*1.75)"><b>Condición:</b> si no pagó la entrega anterior, no compra para la siguiente.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min · 1 paso.</b> Deja claro que es una simulación, no un dato. Sirve para decidir qué condición poner antes de aceptar.</p>
+    <p>La prueba del imprevisto (licuadora, Q250.00 el martes 16) se puede mostrar en el simulador: con pago por entrega, el colchón y los cobros la cubren.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Revisar la decisión con IA" data-seccion="Simular y revisar" data-min="3" data-caso="Caso Ana · plan">
+  <div class="marco">
+    <h2 class="titulo">La IA revisa tu decisión; las cuentas ya las hizo el simulador</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Le damos los resultados calculados y le pedimos que busque riesgos y condiciones, sin rehacer las cuentas.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que no diga que alcanza solo porque el final es mayor.</li>
+            <li>Que no trate los Q650.00 como dinero libre.</li>
+            <li>Que no suponga que la oficina siempre paga puntual.</li>
+            <li>Que no confunda cobrar Q1,620.00 con ganar Q1,620.00.</li>
+          </ul>
+        </div>
+        <p class="pequeno">ChatGPT requiere internet. La presentación no se conecta a ninguna IA. <button type="button" class="i" data-info="i-ia" aria-label="Cómo usamos la IA">i</button></p>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 1 · Revisar una decisión con mis datos</b>
+          <button type="button" class="boton" data-copiar="c-decision"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-decision">Ayúdame a revisar una decisión de mi negocio antes de comprometer dinero. Las cuentas ya las hice; no las rehagas.
+
+QUÉ QUIERO RESOLVER: decidir si acepto un pedido y con qué condiciones.
+
+MI NEGOCIO: vendo jugos a Q20.00 el vaso. Hoy tengo Q650.00 (Q250.00 en efectivo y Q400.00 en el banco). Mi colchón: no quiero bajar de Q100.00.
+
+MI PLAN SIN EL PEDIDO (4 semanas, previsto): lo más bajo es Q200.00 el martes 2; termino con Q700.00.
+
+EL PEDIDO: una oficina quiere 30 vasos cada viernes (días 12, 19 y 26) a Q18.00 cada uno. Cada entrega me cuesta Q360.00 de fruta y vasos el jueves anterior y Q60.00 de mi trabajo extra el sábado.
+
+LO QUE CALCULÉ:
+- Si pagan todo el viernes 26 (Q1,620.00): lo más bajo es −Q700.00 el jueves 25. Termino con Q1,060.00.
+- Si pagan cada entrega (Q540.00 cada viernes): lo más bajo es Q140.00 el jueves 11. Termino con Q1,060.00.
+- Si pagan por entrega pero la primera llega una semana tarde: lo más bajo es −Q130.00 el jueves 18.
+
+LO QUE NO SÉ: si la oficina acepta pagar por entrega ni qué tan puntual es.
+
+NO INVENTES cifras, tasas ni costumbres de pago de la oficina. No cambies mis cálculos; si ves un error, dime dónde. No hables de impuestos.
+
+RESPÓNDEME CON:
+1. Los riesgos de cada opción, en frases cortas.
+2. Las condiciones que podría pedir a la oficina, de la más útil a la menos útil.
+3. Qué haría si pagan tarde.
+4. Qué datos me faltan para decidir con más seguridad.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Diferencia clave con el taller 02: aquí la IA recibe resultados ya calculados y se le pide que no los rehaga. La IA aporta ideas (condiciones, riesgos); el simulador aporta las cuentas.</p>
+    <p>Si hay conexión, alguien puede probarla ahora. Si no, la pantalla siguiente muestra una respuesta de ejemplo.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Una respuesta con errores" data-seccion="Simular y revisar" data-min="3" data-caso="Caso Ana · plan">
+  <div class="marco">
+    <h2 class="titulo">Ejemplo didáctico: una respuesta con cuatro errores</h2>
+    <div class="dos" style="--cols: 1.1fr 1fr">
+      <div class="ia-demo">
+        <p class="ia-demo-cab"><span>Respuesta preescrita para el taller</span><span>No es una conexión real</span></p>
+        <ol>
+          <li class="error"><span class="m">1</span><span>¡Te alcanza! Al final de las 4 semanas tendrás Q1,060.00, más que los Q700.00 sin el pedido.</span></li>
+          <li class="error"><span class="m">2</span><span>Además empiezas con Q650.00 libres para invertir.</span></li>
+          <li class="error"><span class="m">3</span><span>Con el pedido ganarás Q1,620.00.</span></li>
+          <li class="error"><span class="m">4</span><span>Las oficinas suelen pagar a tiempo, así que no hace falta pensar en atrasos.</span></li>
+          <li><span class="m">·</span><span>Pedir que paguen cada entrega reduce lo que tienes que adelantar.</span></li>
+        </ol>
+      </div>
+      <ol class="errores-ia">
+        <li data-paso="1"><b>1</b><span><b>Miró solo el final.</b> Si pagan el 26, el jueves 25 faltan Q700.00.</span></li>
+        <li data-paso="2"><b>2</b><span><b>Llamó «libre» al saldo.</b> Q450.00 ya tienen destino antes de la primera venta.</span></li>
+        <li data-paso="3"><b>3</b><span><b>Confundió cobro con ganancia.</b> Cobrará Q1,620.00; le queda Q360.00 más que sin el pedido.</span></li>
+        <li data-paso="4"><b>4</b><span><b>Inventó una costumbre.</b> No sabemos si esa oficina paga puntual. Por eso probamos el atraso.</span></li>
+        <li data-paso="4" class="pequeno" style="grid-template-columns:1fr">Lo que sí hizo bien: pagar por entrega reduce lo que Ana debe adelantar.</li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 4 pasos.</b> Da un minuto para buscar errores antes de revelarlos. Pregunta: «¿Qué frase contradice lo que vimos en el gráfico?».</p>
+    <p>Aclara que esta respuesta la escribimos para el taller.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Explícamelo más sencillo" data-seccion="Simular y revisar" data-min="1" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">«Explícamelo más sencillo con uno de mis productos»</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Para repasar en casa la idea más importante de hoy: tener dinero el día que se necesita.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que diga que sus números son de ejemplo.</li>
+            <li>Que ordene los movimientos por fecha.</li>
+            <li>Que haga cada suma paso a paso.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 2 · Explícamelo más sencillo</b>
+          <button type="button" class="boton" data-copiar="c-sencillo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-sencillo">Explícamelo más sencillo con uno de mis productos.
+
+Vendo [ESCRIBE TU PRODUCTO] a Q[PRECIO] cada uno, y para hacerlo gasto Q[COSTO] en materiales.
+
+Con ese producto, explícame:
+- por qué el dinero que tengo hoy no es todo dinero libre;
+- qué es «lo más bajo» de mi saldo en un mes y por qué importa más que el saldo final;
+- qué pasa si un cliente me paga una semana tarde.
+
+Usa un ejemplo inventado de 2 semanas, con no más de 8 movimientos, y dime claramente que esos números son de ejemplo. Ordena los movimientos por fecha y muestra el saldo después de cada uno, en quetzales con dos decimales. Usa frases cortas. No hables de impuestos ni de préstamos.
+
+Al final, hazme 2 preguntas para comprobar que entendí, y espera mi respuesta antes de darme la solución.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>1 min.</b> Pide que la guarden. Cada quien cambia producto, precio y costo.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo" data-titulo="La decisión de Ana" data-seccion="Simular y revisar" data-min="2" data-caso="Caso Ana · plan con el pedido">
+  <div class="marco">
+    <h2 class="titulo">Ana acepta, con dos condiciones</h2>
+    <div class="dos" style="--cols: 1.2fr 1fr">
+      <ol class="pasos texto" style="max-width:none">
+        <li><span><b>Pago por cada entrega, el mismo viernes.</b> Si la oficina no acepta, no toma el pedido completo: le faltarían hasta Q800.00.</span></li>
+        <li><span><b>Si una entrega no se pagó, no compra para la siguiente.</b> Así un atraso no la deja sin dinero.</span></li>
+        <li><span><b>Cada lunes revisa su plan</b> con lo que realmente cobró y pagó.</span></li>
+      </ol>
+      <div class="hoja pila">
+        <p class="rotulo">Lo que todavía no sabe</p>
+        <ul class="lista texto">
+          <li>Si la oficina acepta pagar por entrega. <span class="tipo-cifra" data-t="pendiente">pendiente</span></li>
+          <li>Si las 3 horas extra por entrega son suficientes. <span class="tipo-cifra" data-t="previsto">supuesto</span></li>
+        </ul>
+        <p class="pequeno">Una decisión con datos no elimina la incertidumbre: dice qué condición pedir y qué vigilar.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Pregunta: «¿Qué condición habrían puesto ustedes?». Otras válidas: anticipo de la primera entrega, empezar con menos vasos.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El simulador de caja" data-seccion="Simular y revisar" data-min="1">
+  <div class="marco">
+    <h2 class="titulo">«Simulador de caja»: la herramienta para usar cada semana</h2>
+    <div class="dos" style="--cols: 1.2fr 1fr">
+      <div class="pila">
+        <p class="texto"><b>Estado: en preparación.</b> Todavía no está disponible como herramienta aparte. Hoy practicas con la hoja de 4 semanas y con el planificador de esta presentación.</p>
+        <p class="rotulo">Lo que hará</p>
+        <ul class="lista texto">
+          <li>Un calendario de cobros y pagos con fecha.</li>
+          <li>Escenarios: tu plan y una alternativa, una prueba a la vez.</li>
+          <li>Lo más bajo de tu saldo y si respeta tu colchón.</li>
+          <li>Usar los cierres de «Mi cierre diario» para corregir el plan.</li>
+        </ul>
+      </div>
+      <div class="hoja pila">
+        <p class="rotulo">Lo que no hará</p>
+        <p class="texto">No decide por ti ni promete resultados: compara lo que tú anotas. Si un dato falta, lo dice y no calcula.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>1 min.</b> Sé claro: no existe todavía. No prometas fechas.</p>
+  </aside>
+</section>
+
+<!-- ===================================================== E · TU PLAN (20 min) -->
+<section class="pantalla" data-titulo="Tu turno" data-seccion="Tu plan" data-min="2" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Tu turno: cuatro semanas y una decisión</h2>
+    <div class="dos">
+      <div class="pila">
+        <p class="rotulo">Elige un camino</p>
+        <p class="texto"><b>A · Tu negocio.</b> Una decisión que estés pensando: una compra grande, un pedido, un retiro, un pago.</p>
+        <p class="texto"><b>B · El caso de Lucía.</b> Si hoy no tienes tus datos a mano.</p>
+        <p class="pequeno regla-arriba">Una sola decisión a la vez. Si un monto no lo sabes, déjalo en blanco: no es cero, y el plan te dirá que falta.</p>
+      </div>
+      <ol class="pasos texto">
+        <li>Anota con cuánto empiezas y tu colchón.</li>
+        <li>Anota lo que entra y sale, con su día.</li>
+        <li>Marca lo que se repite cada semana.</li>
+        <li>Marca las filas de la decisión.</li>
+        <li>Compara: sin la decisión y con ella.</li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Ayuda a elegir decisiones pequeñas y concretas. «Crecer el negocio» no se puede simular; «comprar una refrigeradora de Q1,500.00 el día 10» sí.</p>
+    <p>Los datos del planificador viven solo en este navegador mientras la pestaña esté abierta.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El caso de Lucía" data-seccion="Tu plan" data-min="3" data-caso="Caso alternativo · Lucía" data-caso-tipo="lucia">
+  <div class="marco">
+    <h2 class="titulo">Caso alternativo: Lucía quiere una plancha nueva</h2>
+    <div class="dos" style="--cols: 0.9fr 2fr">
+      <div class="pila">
+        <p class="texto">Lucía vende tostadas y atol los sábados y domingos. Caso <b>ficticio</b>, distinto del de Ana.</p>
+        <p class="texto">Hoy, lunes 1, tiene <b class="cifra">Q500.00</b>. Su colchón: <b class="cifra">Q100.00</b>.</p>
+        <p class="texto regla-arriba"><b>La decisión:</b> comprar una plancha de <b class="cifra">Q600.00</b> al contado. ¿Hoy, o más adelante?</p>
+      </div>
+      <div class="cuaderno compacto">
+        <p class="cuaderno-cab"><span>Próximas 4 semanas · previsto</span><span>Q</span></p>
+        <ol>
+          <li><span class="n">1</span><span class="h">Lun 1</span><span>Cobra a la maestra Elena lo que quedó fiado</span><span class="cifra">+Q30.00</span></li>
+          <li><span class="n">2</span><span class="h">Vie 5</span><span>Recarga de gas (otra el viernes 19)</span><span class="cifra">−Q135.00</span></li>
+          <li><span class="n">3</span><span class="h">Sáb 6</span><span>Devuelve el préstamo a su hermana Carmen</span><span class="cifra">−Q200.00</span></li>
+          <li><span class="n">4</span><span class="h">Sáb</span><span>Insumos en la mañana · cada sábado</span><span class="cifra">−Q180.00</span></li>
+          <li><span class="n">5</span><span class="h">Sáb</span><span>Ventas cobradas · cada sábado</span><span class="cifra">+Q400.00</span></li>
+          <li><span class="n">6</span><span class="h">Sáb</span><span>Pago a Doña Tere y retiro personal · cada sábado</span><span class="cifra">−Q100.00</span></li>
+          <li><span class="n">7</span><span class="h">Dom</span><span>Insumos en la mañana · cada domingo</span><span class="cifra">−Q180.00</span></li>
+          <li><span class="n">8</span><span class="h">Dom</span><span>Ventas cobradas · cada domingo</span><span class="cifra">+Q400.00</span></li>
+          <li><span class="n">9</span><span class="h">Dom</span><span>Retiro personal · cada domingo</span><span class="cifra">−Q40.00</span></li>
+        </ol>
+        <p class="nota-pie">Fila 6: Q60.00 a Doña Tere + Q40.00 de retiro. Precio de la plancha: ficticio.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Quien hizo el taller 02 reconocerá a Lucía: el cobro a Elena y la devolución a Carmen eran sus pendientes. Aquí son un caso nuevo de 4 semanas.</p>
+    <p>La plancha es equipo: saca todo el dinero el día que se compra, aunque dure años. En la caja cuenta completa ese día.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Ordenar tus compromisos con IA" data-seccion="Tu plan" data-min="2" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Si tus pagos y cobros están dispersos, pide ayuda para ordenarlos</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Llena lo que está entre corchetes. La IA ordena por fecha; tú anotas el resultado en tu hoja o en el planificador.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que no haya agregado pagos o cobros que no mencionaste.</li>
+            <li>Que lo que no sabes siga como «pendiente».</li>
+            <li>Que separe lo previsto de lo confirmado.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 3 · Ordenar mis compromisos</b>
+          <button type="button" class="boton" data-copiar="c-compromisos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-compromisos">Quiero armar el plan de caja de mi negocio para las próximas 4 semanas. Ayúdame a ordenar mis cobros y pagos; los cálculos los haré yo.
+
+QUÉ QUIERO RESOLVER: tener una lista por fecha de lo que entra y sale, y saber qué datos me faltan.
+
+MI NEGOCIO: [qué vendes y qué días vendes].
+
+CON CUÁNTO EMPIEZO (hoy, contado y en el banco): Q[monto]
+
+LO QUE SE REPITE CADA SEMANA: [por ejemplo: compro insumos el lunes por Q300.00; vendo unos Q800.00 por semana]
+
+PAGOS Y COBROS CON FECHA: [por ejemplo: alquiler el día 5; un cliente me paga el día 12]
+
+LA DECISIÓN QUE QUIERO PROBAR: [por ejemplo: comprar una vitrina de Q1,200.00]
+
+LO QUE NO SÉ: [por ejemplo: cuánto voy a vender la última semana]
+
+NO INVENTES montos, fechas ni pagos que no mencioné. Si algo no tiene fecha o monto, márcalo como «pendiente» y no lo cuentes como cero. No calcules ganancia ni impuestos.
+
+RESPÓNDEME CON:
+1. Una tabla por fecha: día, qué es, entra o sale, monto (o «pendiente»), previsto o confirmado, y si es parte de la decisión.
+2. Lo que se repite cada semana, aparte.
+3. La lista de datos que me faltan.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Solo para quien tenga datos propios y conexión. Los demás pasan directo al planificador.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Planificador · movimientos" data-seccion="Tu plan" data-min="6" data-caso="Práctica · caso Lucía" data-caso-tipo="lucia" data-plan>
+  <div class="marco">
+    <h2 class="titulo ancho">Paso 1: anota lo que entra y sale, con su día</h2>
+    <div class="mesa">
+      <div class="mesa-cab plan-cab">
+        <span class="conmutador" role="group" aria-label="Datos de la práctica"><button type="button" data-conjunto3="lucia" aria-pressed="true">Caso Lucía</button><button type="button" data-conjunto3="propio" aria-pressed="false">Mis datos</button></span>
+        <span class="mesa-etiqueta plan-etiqueta" data-tipo="lucia"></span>
+        <label class="campo-texto">Empiezo con<span class="campo-q"><span aria-hidden="true">Q</span><input type="text" inputmode="decimal" id="plan-saldo" placeholder="0.00"></span></label>
+        <label class="campo-texto">Colchón<span class="campo-q"><span aria-hidden="true">Q</span><input type="text" inputmode="decimal" id="plan-colchon" placeholder="0.00"></span></label>
+        <span class="derecha"><button type="button" class="boton sec" data-plan-reiniciar>Reiniciar</button></span>
+      </div>
+      <div class="panel">
+        <div class="desplaza sin-deslizar">
+          <table class="plan-filas">
+            <thead><tr><th>#</th><th>Día</th><th>Momento</th><th>Qué es</th><th>Entra / sale</th><th>Monto</th><th>Estado</th><th>Cada semana</th><th>Decisión</th><th><span class="solo-lectores">Quitar</span></th></tr></thead>
+            <tbody id="plan-filas"></tbody>
+          </table>
+        </div>
+        <div class="fila-botones"><button type="button" class="boton" id="plan-agregar">Agregar fila</button><span class="pequeno" id="plan-cuenta"></span></div>
+        <ul class="mesa-avisos plan-avisos" aria-live="polite"></ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>6 min.</b> En el caso Lucía las filas ya están cargadas; la plancha está marcada como decisión, el lunes 1. En «Mis datos», una persona voluntaria puede dictar su plan.</p>
+    <p>«Cada semana» repite la fila los días +7, +14 y +21 (sin pasar del 28). «Momento» ordena el día: mañana, durante el día, tarde. Si dos cosas pasan en el mismo momento, se cuenta primero lo que sale.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Planificador · resultado" data-seccion="Tu plan" data-min="7" data-caso="Práctica · caso Lucía" data-caso-tipo="lucia" data-plan>
+  <div class="marco">
+    <h2 class="titulo ancho">Paso 2: compara sin la decisión y con ella</h2>
+    <div class="mesa">
+      <div class="mesa-cab">
+        <span class="conmutador" role="group" aria-label="Datos de la práctica"><button type="button" data-conjunto3="lucia" aria-pressed="true">Caso Lucía</button><button type="button" data-conjunto3="propio" aria-pressed="false">Mis datos</button></span>
+        <span class="mesa-etiqueta plan-etiqueta" data-tipo="lucia"></span>
+        <span class="pequeno solo-lucia3">Prueba cambiar el día de la plancha en el paso 1: el 15, el 22.</span>
+      </div>
+      <div class="plan-res">
+        <div class="pila-c">
+          <div class="grafico" id="plan-grafico"></div>
+          <p class="leyenda-g"><span><i class="l-ok"></i>arriba del colchón</span><span><i class="l-bajo"></i>bajo el colchón</span><span><i class="l-neg"></i>falta dinero</span><span><i class="l-ref"></i>sin la decisión</span><span><i class="l-col"></i>colchón</span></p>
+          <div class="copiable pila-c">
+            <label class="campo-texto" for="plan-texto">Resumen para revisar con ChatGPT</label>
+            <textarea id="plan-texto" readonly></textarea>
+            <div class="fila-botones"><button type="button" class="boton" data-copiar="plan-texto">Copiar resumen</button><span class="estado-copia" aria-live="polite"></span></div>
+          </div>
+        </div>
+        <div class="pila-c">
+          <div class="dos-veredictos"><div><p class="rotulo">Sin la decisión</p><div id="plan-sin" aria-live="polite"></div></div><div><p class="rotulo">Con la decisión</p><div id="plan-con" aria-live="polite"></div></div></div>
+          <table class="mini"><tbody id="plan-tabla"></tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>7 min.</b> Con Lucía: primero que lean el veredicto con la plancha el lunes 1. Luego, en el paso 1, cambien el día de la plancha y vuelvan aquí. Un cambio a la vez.</p>
+    <p>El resumen sirve para la consulta «Revisar mi plan» de la guía.</p>
+  </aside>
+</section>
+
+<!-- ===================================================== F · COMPROBAR Y REPETIR (10 min) -->
+<section class="pantalla" data-titulo="Comprobación: Lucía" data-seccion="Comprobar y repetir" data-min="3" data-caso="Caso alternativo · Lucía" data-caso-tipo="lucia">
+  <div class="marco">
+    <h2 class="titulo">Comprobación: la misma plancha, en otra fecha</h2>
+    <table class="libro semanas">
+      <thead><tr><th>Plan de Lucía</th><th class="num" style="text-align:right">Lo más bajo</th><th>Cuándo</th><th class="num" style="text-align:right">Día 28</th><th>¿Alcanza con Q100.00?</th></tr></thead>
+      <tbody>
+        <tr data-paso="1"><td>Sin la plancha</td><td class="num">Q135.00</td><td>domingo 7, en la mañana</td><td class="num">Q1,260.00</td><td>Sí</td></tr>
+        <tr data-paso="2"><td>Plancha el lunes 1</td><td class="num">−Q465.00</td><td>domingo 7, en la mañana</td><td class="num">Q660.00</td><td><b>No: falta dinero</b></td></tr>
+        <tr data-paso="3"><td>Plancha el lunes 15</td><td class="num">−Q120.00</td><td>sábado 20, en la mañana</td><td class="num">Q660.00</td><td><b>No: falta dinero</b></td></tr>
+        <tr data-paso="4"><td>Plancha el lunes 22</td><td class="num">Q135.00</td><td>domingo 7, en la mañana</td><td class="num">Q660.00</td><td>Sí</td></tr>
+      </tbody>
+    </table>
+    <p class="entrada" data-paso="4" style="grid-column:1/-1">El precio no cambió; cambió la fecha. Esperando a la semana 4, Lucía compra la plancha sin bajar de su colchón.</p>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 4 pasos.</b> El día 28 queda igual en las tres fechas: Q1,260.00 − Q600.00 = Q660.00. Lo que cambia es si pasa por un día sin dinero.</p>
+    <p>Lunes 15: Q795.00 − Q600.00 = Q195.00. Viernes 19, gas Q135.00: queda Q60.00 (ya bajo el colchón). Sábado 20 en la mañana, insumos Q180.00: −Q120.00, antes de vender.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Errores habituales" data-seccion="Comprobar y repetir" data-min="2">
+  <div class="marco">
+    <h2 class="titulo ancho">Seis errores al planificar y lo que provocan</h2>
+    <table class="tabla">
+      <thead><tr><th>Error</th><th>Lo que provoca</th></tr></thead>
+      <tbody>
+        <tr><td>Mirar solo el saldo al final del mes</td><td>No ves el día en que te quedas sin dinero.</td></tr>
+        <tr><td>Llamar «libre» al saldo de hoy</td><td>Gastas lo que ya tenía destino.</td></tr>
+        <tr><td>Anotar el cobro el día de la venta o de la entrega</td><td>Cuentas con dinero que todavía no llega.</td></tr>
+        <tr><td>Dejar fuera retiros, préstamos o compras de equipo</td><td>El plan parece más holgado de lo que es.</td></tr>
+        <tr><td>Probar varios cambios a la vez</td><td>No sabes cuál causó el resultado.</td></tr>
+        <tr><td>Tratar un monto que no sabes como cero</td><td>El plan dice que alcanza sin saberlo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Pide que marquen uno para vigilar en su próximo plan.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo" data-titulo="Tu rutina del lunes" data-seccion="Comprobar y repetir" data-min="3" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Tu revisión de 15 minutos cada lunes</h2>
+    <div class="dos" style="--cols: 1.3fr 1fr">
+      <ol class="pasos rutina">
+        <li><span>Cuenta lo que tienes hoy: efectivo y banco.<small>Dato contado, no recordado.</small></span></li>
+        <li><span>Corrige la semana que pasó con tus cierres diarios.<small>Lo previsto que no pasó, se borra o se mueve.</small></span></li>
+        <li><span>Agrega la semana nueva, para tener siempre 4 adelante.<small>Con fechas de cobro, no de venta.</small></span></li>
+        <li><span>Busca lo más bajo y compáralo con tu colchón.</span></li>
+        <li><span>Antes de decir que sí a algo, pruébalo como decisión.<small>Una a la vez: con ella y sin ella.</small></span></li>
+      </ol>
+      <div class="decision">
+        <p class="rotulo">Decide ahora</p>
+        <p><span>Mi colchón:</span><span class="linea"></span></p>
+        <p><span>Mi hora del lunes:</span><span class="linea"></span></p>
+        <p><span>La decisión que voy a probar:</span><span class="linea"></span></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min.</b> Que escriban sus tres decisiones en la hoja. El plan se corrige cada semana: no tiene que ser perfecto el primer día.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Cierre" data-seccion="Comprobar y repetir" data-min="2">
+  <div class="marco">
+    <h2 class="titulo">Antes de comprometer dinero, ya sabes probarlo</h2>
+    <div class="dos">
+      <div class="pila">
+        <p class="rotulo">Te llevas</p>
+        <ul class="lista texto">
+          <li>Tu plan de 4 semanas y una decisión comparada.</li>
+          <li>La guía con la hoja en blanco y la rutina del lunes.</li>
+          <li>Las consultas para ChatGPT, listas para copiar.</li>
+        </ul>
+      </div>
+      <div class="hoja pila">
+        <p class="rotulo">Siguiente taller · 04 · ¿Qué me conviene vender?</p>
+        <p class="texto">Compararemos de tres a cinco productos o servicios: lo que deja cada uno, el tiempo que pide y cuánto se vende. Saldrás con una mejora para probar.</p>
+        <p class="pequeno">Trae el precio y los costos de tus productos principales.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Pregunta final: «¿Qué decisión van a probar esta semana antes de decir que sí?». Entrega o envía la guía («guia-y-consultas.html»).</p>
+  </aside>
+</section>
+
+</main>
+
+/*@incluir:comun/barra.html*/
+
+<dialog id="dlg-datos" class="ancho" aria-labelledby="dlg-datos-titulo">
+  <div class="dlg-cab"><h2 id="dlg-datos-titulo">Datos de los casos</h2>
+    <button type="button" class="cerrar" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 5l14 14M19 5L5 19"/></svg>Cerrar</button></div>
+  <div class="dlg-cuerpo">
+    <div class="pestanas" role="tablist" aria-label="Casos">
+      <button type="button" role="tab" id="t-ana" aria-controls="d-ana" aria-selected="true">Ana · plan</button>
+      <button type="button" role="tab" id="t-pedido" aria-controls="d-pedido" aria-selected="false" tabindex="-1">Ana · pedido</button>
+      <button type="button" role="tab" id="t-lucia" aria-controls="d-lucia" aria-selected="false" tabindex="-1">Lucía</button>
+    </div>
+    <div role="tabpanel" id="d-ana" aria-labelledby="t-ana">
+      <p>Caso ficticio. Plan previsto de 4 semanas. Día 1 = lunes. Colchón decidido por Ana: Q100.00.</p>
+      <table><tbody>
+        <tr><td>Saldo hoy, lunes 1: Q250.00 efectivo (contado) + Q400.00 banco (app)</td><td class="num">Q650.00</td></tr>
+        <tr><td>Martes, jueves y sábado, mañana: fruta, 1 tanda</td><td class="num">−Q100.00</td></tr>
+        <tr><td>Martes, jueves y sábado: 10 vasos × Q20.00, cobrados el mismo día</td><td class="num">+Q200.00</td></tr>
+        <tr><td>Cada sábado, tarde: pago por trabajo de Ana, 5 h × Q20.00</td><td class="num">−Q100.00</td></tr>
+        <tr><td>Lunes 1: espacio de venta del mes</td><td class="num">−Q150.00</td></tr>
+        <tr><td>Lunes 1 y lunes 22: empaque, 100 vasos × Q2.00</td><td class="num">−Q200.00 c/u</td></tr>
+        <tr><td>Lunes 15: teléfono del mes</td><td class="num">−Q50.00</td></tr>
+        <tr><td>Sábado 20, tarde: retiro personal</td><td class="num">−Q150.00</td></tr>
+      </tbody></table>
+      <p>Resultado del plan original: semanas terminan en Q500.00, Q700.00, Q700.00 y Q700.00. Lo más bajo: Q200.00, martes 2.</p>
+    </div>
+    <div role="tabpanel" id="d-pedido" aria-labelledby="t-pedido" hidden>
+      <p>Oferta: 30 vasos cada viernes (12, 19 y 26) a Q18.00.</p>
+      <table><tbody>
+        <tr><td>Jueves 11, 18 y 25, mañana: fruta 3 tandas</td><td class="num">−Q300.00</td></tr>
+        <tr><td>Jueves 11, 18 y 25, mañana: vasos, 30 × Q2.00</td><td class="num">−Q60.00</td></tr>
+        <tr><td>Sábado 13, 20 y 27, tarde: trabajo extra, 3 h × Q20.00 (supuesto)</td><td class="num">−Q60.00</td></tr>
+        <tr><td>Como lo ofrecen: viernes 26, todo</td><td class="num">+Q1,620.00</td></tr>
+        <tr><td>Alternativa: viernes 12, 19 y 26</td><td class="num">+Q540.00 c/u</td></tr>
+      </tbody></table>
+      <p>Resultados: pago al final, lo más bajo −Q700.00 (jueves 25). Pago por entrega, Q140.00 (jueves 11). Pago por entrega con la 1.ª atrasada una semana (simulación), −Q130.00 (jueves 18). Día 28 con pedido: Q1,060.00.</p>
+    </div>
+    <div role="tabpanel" id="d-lucia" aria-labelledby="t-lucia" hidden>
+      <p>Caso alternativo, ficticio. Saldo lunes 1: Q500.00. Colchón: Q100.00.</p>
+      <table><tbody>
+        <tr><td>Lunes 1: cobro a la maestra Elena</td><td class="num">+Q30.00</td></tr>
+        <tr><td>Viernes 5 y viernes 19, mañana: recarga de gas</td><td class="num">−Q135.00 c/u</td></tr>
+        <tr><td>Sábado 6, tarde: devolver préstamo a Carmen</td><td class="num">−Q200.00</td></tr>
+        <tr><td>Cada sábado y domingo, mañana: insumos</td><td class="num">−Q180.00</td></tr>
+        <tr><td>Cada sábado y domingo: ventas cobradas</td><td class="num">+Q400.00</td></tr>
+        <tr><td>Cada sábado, tarde: pago a Doña Tere</td><td class="num">−Q60.00</td></tr>
+        <tr><td>Cada sábado y domingo, tarde: retiro personal</td><td class="num">−Q40.00</td></tr>
+        <tr><td>Decisión: plancha al contado (precio ficticio)</td><td class="num">−Q600.00</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</dialog>
+
+<template id="i-libre"><h3>¿Por qué no es «dinero libre»?</h3>
+  <p>Los Q200.00 salen de restar solo los compromisos que anotamos. Si olvidamos un pago, o una venta sale peor, quedará menos.</p>
+  <p>Por eso lo llamamos <b>saldo después de los compromisos anotados</b>, y lo revisamos cada semana.</p></template>
+<template id="i-orden"><h3>El orden dentro del día</h3>
+  <p>Si Ana compra la fruta en la mañana y cobra durante el día, en la mañana su dinero baja antes de subir.</p>
+  <p>El plan usa ese orden: mañana, durante el día, tarde. Y si dos cosas pasan al mismo tiempo, cuenta primero lo que sale. Es una forma prudente de no contar con dinero antes de tenerlo.</p></template>
+<template id="i-aporte-pedido"><h3>¿Cuánto deja el pedido?</h3>
+  <p>Cada vaso del pedido: Q18.00 − Q12.00 de costo = Q6.00 de aporte antes de gastos fijos. 90 vasos × Q6.00 = Q540.00.</p>
+  <p>Menos el trabajo extra de Ana: 3 entregas × Q60.00 = Q180.00. Quedan Q360.00 más en la caja al final del mes.</p>
+  <p>Que deje dinero no significa que se pueda pagar a tiempo: eso es lo que revisa este taller.</p></template>
+<template id="i-ia"><h3>Cómo usamos la IA en este taller</h3>
+  <p>El simulador calcula. La IA ayuda a pensar riesgos, condiciones y datos que faltan, a partir de los resultados que le damos.</p>
+  <p>La presentación no está conectada a ninguna IA; ChatGPT necesita internet. La respuesta de la pantalla siguiente está escrita por nosotros como ejemplo.</p></template>
+
+<script>
+/*@incluir:comun/motor.js*/
+/*@incluir:03-me-alcanza/taller03.js*/
+</script>
+</body>
+</html>

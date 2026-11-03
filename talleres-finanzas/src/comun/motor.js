@@ -378,9 +378,9 @@
     ventanaNotas = w;
     w.document.open();
     w.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Notas del facilitador · ${document.title}</title>
-<style>body{font:17px/1.55 system-ui,sans-serif;margin:0;padding:1.2rem 1.4rem;background:#fbfaf7;color:#22102a}
-.reloj{position:sticky;top:0;background:#22102a;color:#fff;margin:-1.2rem -1.4rem 1rem;padding:.6rem 1.4rem;display:flex;justify-content:space-between;font-weight:700}
-.meta{border-bottom:2px solid #22102a;padding-bottom:.6rem}.sig{border-top:1px dashed #22102a;padding-top:.6rem;color:#4b3656}
+<style>body{font:17px/1.55 system-ui,sans-serif;margin:0;padding:1.2rem 1.4rem;background:#fbfaf7;color:#1b1916}
+.reloj{position:sticky;top:0;background:#1b1916;color:#fff;margin:-1.2rem -1.4rem 1rem;padding:.6rem 1.4rem;display:flex;justify-content:space-between;font-weight:700}
+.meta{border-bottom:2px solid #1b1916;padding-bottom:.6rem}.sig{border-top:1px dashed #1b1916;padding-top:.6rem;color:#4d4943}
 button{font:inherit;padding:.3rem .8rem;border:2px solid #fff;background:transparent;color:#fff;cursor:pointer}
 ul{padding-left:1.2rem}li+li{margin-top:.3rem}</style></head>
 <body><div class="reloj"><span>Tiempo transcurrido: <span id="reloj">0:00</span></span><span><button id="ant">Anterior</button> <button id="sig">Siguiente</button></span></div><div id="contenido"></div></body></html>`);

@@ -31,7 +31,7 @@
 .cuaderno {
   position: relative; background: var(--papel-2); color: var(--tinta);
   border: 1.5px solid var(--regla); padding: calc(var(--u) * 1.1) calc(var(--u) * 1.8) calc(var(--u) * 1.2) calc(var(--u) * 4.4);
-  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 1.8) rgb(34 16 42 / 0.14);
+  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 1.8) rgb(0 0 0 / 0.13);
   min-height: 0;
 }
 .cuaderno::before { content: ""; position: absolute; left: calc(var(--u) * 3.2); top: 0; bottom: 0; width: 2px; background: var(--campo-fuerte); }

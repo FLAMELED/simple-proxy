@@ -7,9 +7,8 @@
 <meta name="description" content="Guía para repetir el cierre de caja en tu negocio: rutina, hoja de cierre, cómo reconocer cada movimiento y consultas para ChatGPT.">
 <style>
 /*@fuentes*/
-:root { --papel:#f6f4f0; --papel-2:#fff; --tinta:#22102a; --tinta-2:#4b3656; --regla-suave:#cbbfd3; --campo:#dcc0f5; --campo-tinta:#22102a; --acento:#6a2c86; color-scheme: light; }
-:root[data-tema="noche"] { --papel:#15101a; --papel-2:#201827; --tinta:#f2eaf7; --tinta-2:#cdbdd8; --regla-suave:#4b3b57; --campo:#3a2551; --campo-tinta:#f6ecff; --acento:#dcc0f5; color-scheme: dark; }
-* { box-sizing: border-box; }
+/*@paleta*/
+ * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 body { margin: 0; background: var(--papel); color: var(--tinta); font: 17px/1.55 "Texto", "Segoe UI", Arial, sans-serif; font-variant-numeric: tabular-nums; }
 ::selection { background: var(--campo); color: var(--campo-tinta); }
@@ -52,7 +51,6 @@ textarea.respaldo { width: 100%; min-height: 9rem; border: 0; border-top: 1.5px 
 @media (max-width: 600px) { .cuadros { grid-template-columns: 1fr; } .hoja { padding: 0.7rem; } th, td { padding: 0.35rem 0.3rem; font-size: 0.88rem; hyphens: auto; } th { font-size: 0.68rem; } }
 @media print {
   @page { size: letter; margin: 14mm; }
-  :root, :root[data-tema="noche"] { --papel:#fff; --papel-2:#fff; --tinta:#22102a; --tinta-2:#4b3656; --regla-suave:#cbbfd3; --campo:#dcc0f5; --campo-tinta:#22102a; }
   body { background: #fff; font-size: 11.5pt; }
   .cab { background: #fff; border-bottom: 3px solid #000; }
   .herr, .copiar, .estado-copia, textarea.respaldo { display: none !important; }

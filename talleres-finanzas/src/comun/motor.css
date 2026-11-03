@@ -6,35 +6,13 @@
   --barra-h: 3.5rem;
   --u: min(1vw, calc((100dvh - var(--barra-h)) * 0.0177778));
 
-  --papel: #f6f4f0;
-  --papel-2: #ffffff;
-  --tinta: #22102a;
-  --tinta-2: #4b3656;
-  --regla: #22102a;
-  --regla-suave: #cbbfd3;
-  --falta: #8c1d2c;
-  --cuadra: #1e5a39;
-  --sobra: #6b4500;
-
+  /* Los colores vienen de paleta.json (marcador @paleta en cada HTML). */
   --f-titular: "Titular", "Georgia", serif;
   --f-texto: "Texto", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --f-cifras: "Cifras", "Consolas", "Menlo", monospace;
 
   --dur: 220ms;
   --sal: cubic-bezier(0.16, 1, 0.3, 1);
-  color-scheme: light;
-}
-:root[data-tema="noche"] {
-  --papel: #15101a;
-  --papel-2: #201827;
-  --tinta: #f2eaf7;
-  --tinta-2: #cdbdd8;
-  --regla: #f2eaf7;
-  --regla-suave: #4b3b57;
-  --falta: #ff9fab;
-  --cuadra: #92dcae;
-  --sobra: #f2c46b;
-  color-scheme: dark;
 }
 @media (prefers-reduced-motion: reduce) {
   :root { --dur: 0ms; }
@@ -146,10 +124,9 @@ ol.pasos > li::before { content: counter(p); font-family: var(--f-titular); font
   background: var(--papel-2); color: var(--tinta);
   border: 1.5px solid var(--regla);
   padding: calc(var(--u) * 1.6) calc(var(--u) * 2);
-  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 1.8) rgb(34 16 42 / 0.14);
+  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 1.8) rgb(0 0 0 / 0.13);
 }
-.campo .hoja { --tinta-2: #4b3656; --regla: #22102a; }
-:root[data-tema="noche"] .campo .hoja { --tinta-2: #cdbdd8; --regla: #f2eaf7; }
+.campo .hoja { --tinta-2: var(--hoja-tinta-2); --regla: var(--tinta); --regla-suave: var(--hoja-regla-suave); }
 
 /* ---------- Etiquetas de tipo de cifra ---------- */
 .tipo-cifra {
@@ -266,11 +243,11 @@ ol.pasos > li::before { content: counter(p); font-family: var(--f-titular); font
 dialog {
   border: 2px solid var(--tinta); padding: 0; background: var(--papel-2); color: var(--tinta);
   width: min(44rem, calc(100vw - 2rem)); max-height: calc(100dvh - 3rem);
-  box-shadow: 0 1.2rem 3rem rgb(20 8 26 / 0.35);
+  box-shadow: 0 1.2rem 3rem rgb(0 0 0 / 0.35);
   font-size: 1.12rem; line-height: 1.5;
 }
 dialog.ancho { width: min(64rem, calc(100vw - 2rem)); }
-dialog::backdrop { background: rgb(26 12 32 / 0.55); }
+dialog::backdrop { background: rgb(10 9 8 / 0.58); }
 dialog[open] { display: flex; flex-direction: column; animation: entra var(--dur) var(--sal); }
 .dlg-cab { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem; border-bottom: 2px solid var(--tinta); background: var(--campo); color: var(--campo-tinta); }
 .dlg-cab h2 { font-family: var(--f-titular); font-weight: 800; font-stretch: 70%; font-size: 1.7rem; line-height: 1.05; }
@@ -345,7 +322,7 @@ body.vista .explicaciones:empty { display: none; }
 
 @media print {
   @page { size: letter landscape; margin: 9mm; }
-  :root, :root[data-tema="noche"] { --papel: #ffffff; --papel-2: #ffffff; --tinta: #22102a; --tinta-2: #4b3656; --regla: #22102a; --regla-suave: #cbbfd3; --falta: #8c1d2c; --cuadra: #1e5a39; --sobra: #6b4500; color-scheme: light; }
+  :root, :root[data-tema="noche"] { --papel: #ffffff; }
   body, body.vista { --u: 2.55mm; overflow: visible; height: auto; background: #fff; }
   body.vista .escenario { padding: 0; display: block; }
   body.vista .barra-vista, .barra, .aviso, .panel-notas, dialog { display: none !important; }

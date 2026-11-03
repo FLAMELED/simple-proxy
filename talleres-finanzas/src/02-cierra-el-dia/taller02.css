@@ -1,22 +1,5 @@
 /* ===== Identidad del taller 02 · Registrar · lila ===== */
-:root {
-  --campo: #dcc0f5;
-  --campo-tinta: #22102a;
-  --campo-tinta-2: #44284f;
-  --campo-regla: #a283bb;
-  --campo-fuerte: #9b6cc9;
-  --campo-suave: #efe3fb;
-  --acento: #6a2c86;
-}
-:root[data-tema="noche"] {
-  --campo: #3a2551;
-  --campo-tinta: #f6ecff;
-  --campo-tinta-2: #dccbec;
-  --campo-regla: #6f5787;
-  --campo-fuerte: #b892e0;
-  --campo-suave: #2a1d36;
-  --acento: #dcc0f5;
-}
+/* Colores: ver paleta.json (familia «campo» del taller). */
 
 /* ---------- Vasos ---------- */
 .vasos { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 0.35); }
@@ -51,7 +34,7 @@
 .seg.ef { background: var(--tinta); color: var(--papel); }
 .seg.tr { background: var(--campo); color: var(--campo-tinta); }
 .seg.cr { background: repeating-linear-gradient(135deg, transparent 0 6px, var(--regla-suave) 6px 8px), var(--papel-2); color: var(--tinta); border-style: dashed; }
-.seg.cb { background: var(--campo-fuerte); color: #1b0a22; }
+.seg.cb { background: var(--campo-fuerte); color: var(--campo-fuerte-tinta); }
 .escala { display: flex; justify-content: space-between; font-family: var(--f-cifras); font-size: calc(var(--u) * 1.05); color: var(--tinta-2); border-top: 1px solid var(--regla-suave); margin-top: 0.3em; padding-top: 0.15em; }
 
 /* ---------- Billetes y monedas ---------- */
@@ -173,6 +156,3 @@
   .app { max-width: none; }
 }
 
-@media print {
-  :root, :root[data-tema="noche"] { --campo: #dcc0f5; --campo-tinta: #22102a; --campo-tinta-2: #44284f; --campo-regla: #a283bb; --campo-fuerte: #9b6cc9; --campo-suave: #efe3fb; --acento: #6a2c86; }
-}

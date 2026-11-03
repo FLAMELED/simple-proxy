@@ -1,22 +1,5 @@
 /* ===== Identidad del taller 03 · Planificar · amarillo verdoso ===== */
-:root {
-  --campo: #e8f35a;
-  --campo-tinta: #16190a;
-  --campo-tinta-2: #3a4012;
-  --campo-regla: #9ea53a;
-  --campo-fuerte: #b9c22a;
-  --campo-suave: #f5f9cf;
-  --acento: #4d5600;
-}
-:root[data-tema="noche"] {
-  --campo: #3b4113;
-  --campo-tinta: #f4f8d2;
-  --campo-tinta-2: #dfe5ad;
-  --campo-regla: #6f7630;
-  --campo-fuerte: #c9d23b;
-  --campo-suave: #262a10;
-  --acento: #e8f35a;
-}
+/* Colores: ver paleta.json (familia «campo» del taller). */
 
 /* ---------- Saldo y compromisos ---------- */
 .reparto { display: grid; gap: calc(var(--u) * 0.6); }
@@ -160,7 +143,4 @@
   .plan-filas td:nth-child(8)::after { content: "cada semana"; }
   .plan-filas td:nth-child(9)::after { content: "decisión"; }
   .plan-filas input[type="text"], .plan-filas select { font-size: 16px; }
-}
-@media print {
-  :root, :root[data-tema="noche"] { --campo: #e8f35a; --campo-tinta: #16190a; --campo-tinta-2: #3a4012; --campo-regla: #9ea53a; --campo-fuerte: #b9c22a; --campo-suave: #f5f9cf; --acento: #4d5600; }
 }

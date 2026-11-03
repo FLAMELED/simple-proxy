@@ -1,0 +1,127 @@
+{
+  "_nota": "Fuente única de color de la serie. scripts/build.mjs valida los contrastes y genera src/comun (paleta) y paleta.html. Si un contraste no cumple, el armado se detiene.",
+  "comun": {
+    "claro": {
+      "papel": "#f6f4ef",
+      "papel-2": "#ffffff",
+      "tinta": "#1b1916",
+      "tinta-2": "#4d4943",
+      "regla-suave": "#cdc7bc",
+      "falta": "#a1202f",
+      "cuadra": "#1d6a3c",
+      "sobra": "#7a4e00"
+    },
+    "noche": {
+      "papel": "#141311",
+      "papel-2": "#1f1d1a",
+      "tinta": "#f3f0e9",
+      "tinta-2": "#c5bfb4",
+      "regla-suave": "#46423b",
+      "falta": "#ff9aa3",
+      "cuadra": "#8fdcab",
+      "sobra": "#f1c46b"
+    }
+  },
+  "talleres": {
+    "01": {
+      "nombre": "Entender los números del negocio",
+      "etapa": "Taller base",
+      "color": "Rojo naranja",
+      "claro": {
+        "campo": "#ff6a45",
+        "campo-tinta": "#000000",
+        "campo-tinta-2": "#3a1408",
+        "campo-regla": "#a8361c",
+        "campo-fuerte": "#c93d1d",
+        "campo-suave": "#fde3db",
+        "acento": "#a8301a",
+        "campo-fuerte-tinta": "#ffffff"
+      },
+      "noche": {
+        "campo": "#5c1f10",
+        "campo-tinta": "#ffe9e1",
+        "campo-tinta-2": "#f6c4b3",
+        "campo-regla": "#8f3a24",
+        "campo-fuerte": "#ff7552",
+        "campo-suave": "#2d1610",
+        "acento": "#ff9a7d",
+        "campo-fuerte-tinta": "#1b1916"
+      }
+    },
+    "02": {
+      "nombre": "Cierra el día con las cuentas claras",
+      "etapa": "Registrar",
+      "color": "Lila",
+      "claro": {
+        "campo": "#dcc0f5",
+        "campo-tinta": "#1b1916",
+        "campo-tinta-2": "#46294f",
+        "campo-regla": "#a283bb",
+        "campo-fuerte": "#a77fd3",
+        "campo-suave": "#f0e5fb",
+        "acento": "#6a2c86",
+        "campo-fuerte-tinta": "#1b1916"
+      },
+      "noche": {
+        "campo": "#3a2551",
+        "campo-tinta": "#f6ecff",
+        "campo-tinta-2": "#dccbec",
+        "campo-regla": "#6f5787",
+        "campo-fuerte": "#b892e0",
+        "campo-suave": "#28203a",
+        "acento": "#d8bcf5",
+        "campo-fuerte-tinta": "#1b1916"
+      }
+    },
+    "03": {
+      "nombre": "¿Me alcanza?",
+      "etapa": "Planificar",
+      "color": "Amarillo verdoso",
+      "claro": {
+        "campo": "#e8f35a",
+        "campo-tinta": "#1b1916",
+        "campo-tinta-2": "#3a4012",
+        "campo-regla": "#9ea53a",
+        "campo-fuerte": "#c3cc2e",
+        "campo-suave": "#f5f9cf",
+        "acento": "#4d5600",
+        "campo-fuerte-tinta": "#1b1916"
+      },
+      "noche": {
+        "campo": "#3b4113",
+        "campo-tinta": "#f4f8d2",
+        "campo-tinta-2": "#dfe5ad",
+        "campo-regla": "#6f7630",
+        "campo-fuerte": "#c9d23b",
+        "campo-suave": "#262a10",
+        "acento": "#e0eb5a",
+        "campo-fuerte-tinta": "#1b1916"
+      }
+    },
+    "04": {
+      "nombre": "¿Qué me conviene vender?",
+      "etapa": "Decidir",
+      "color": "Azul",
+      "claro": {
+        "campo": "#1f3fbf",
+        "campo-tinta": "#ffffff",
+        "campo-tinta-2": "#d7defc",
+        "campo-regla": "#5f78d8",
+        "campo-fuerte": "#5c7cf0",
+        "campo-suave": "#e3e9fd",
+        "acento": "#1f3fbf",
+        "campo-fuerte-tinta": "#1b1916"
+      },
+      "noche": {
+        "campo": "#1a2a6e",
+        "campo-tinta": "#eef1ff",
+        "campo-tinta-2": "#c4cdf5",
+        "campo-regla": "#3f53a3",
+        "campo-fuerte": "#7f98ff",
+        "campo-suave": "#171f3d",
+        "acento": "#9db0ff",
+        "campo-fuerte-tinta": "#1b1916"
+      }
+    }
+  }
+}

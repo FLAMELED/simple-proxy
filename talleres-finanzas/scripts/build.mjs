@@ -8,6 +8,7 @@
 import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { cargarPaleta, validar, cssPaleta, htmlReferencia } from './paleta.mjs';
 
 const raiz = join(dirname(fileURLToPath(import.meta.url)), '..');
 const src = join(raiz, 'src');
@@ -23,10 +24,14 @@ const fuentes = [
   cara('Cifras', 'atkinson-hyperlegible-mono-latin-wght-normal.woff2', 'normal', '200 800'),
 ].join('\n');
 
-function expandir(texto) {
+const paleta = cargarPaleta(join(raiz, 'paleta.json'));
+const contrastes = validar(paleta); // se detiene si algún contraste no cumple
+
+function expandir(texto, taller) {
   return texto
     .replace('/*@fuentes*/', () => fuentes)
-    .replace(/\/\*@incluir:([\w./-]+)\*\//g, (_, ruta) => expandir(readFileSync(join(src, ruta), 'utf8')));
+    .replace('/*@paleta*/', () => cssPaleta(paleta, taller))
+    .replace(/\/\*@incluir:([\w./-]+)\*\//g, (_, ruta) => expandir(readFileSync(join(src, ruta), 'utf8'), taller));
 }
 
 let total = 0;
@@ -35,7 +40,7 @@ for (const taller of readdirSync(src)) {
   for (const archivo of readdirSync(join(src, taller)).filter((a) => a.endsWith('.html'))) {
     mkdirSync(join(raiz, taller), { recursive: true });
     const salida = join(raiz, taller, archivo);
-    const html = expandir(readFileSync(join(src, taller, archivo), 'utf8'));
+    const html = expandir(readFileSync(join(src, taller, archivo), 'utf8'), taller.slice(0, 2));
     if (html.includes('/*@')) throw new Error(`Quedó una inclusión sin resolver en ${archivo}`);
     writeFileSync(salida, html);
     total++;
@@ -43,3 +48,5 @@ for (const taller of readdirSync(src)) {
   }
 }
 if (!total) throw new Error('No se generó ningún archivo');
+writeFileSync(join(raiz, 'paleta.html'), htmlReferencia(paleta, contrastes, fuentes));
+console.log(`✓ paleta.html  ${contrastes.length} contrastes comprobados`);

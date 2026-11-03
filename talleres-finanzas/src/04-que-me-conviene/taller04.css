@@ -1,0 +1,110 @@
+/* ===== Taller 04 · Decidir · azul. Colores: ver paleta.json (familia «campo»). ===== */
+
+/* Línea de cierre de cada pantalla: la interpretación aplicable */
+.pie { grid-column: 1 / -1; align-self: end; border-top: 2px solid var(--regla); padding-top: calc(var(--u) * 0.7); font-size: calc(var(--u) * 1.5); font-weight: 600; max-width: none; }
+
+/* ---------- Menú (ficha de productos) ---------- */
+.menu { width: 100%; border-collapse: collapse; }
+.menu th { text-align: left; font-size: calc(var(--u) * 1.12); text-transform: uppercase; letter-spacing: 0.05em; color: var(--tinta-2); border-bottom: 2px solid var(--regla); padding: 0 0.5em 0.35em; }
+.menu td { padding: 0.5em; border-bottom: 1px solid var(--regla-suave); font-size: calc(var(--u) * 1.55); vertical-align: baseline; }
+.menu td.num, .menu th.num { text-align: right; font-family: var(--f-cifras); font-weight: 600; white-space: nowrap; }
+.menu th.num { font-family: var(--f-texto); }
+.menu td small { display: block; font-size: 0.78em; color: var(--tinta-2); }
+.menu tfoot td { border-top: 2.5px solid var(--regla); border-bottom: 0; font-weight: 800; }
+.menu tr.resalte td { background: var(--campo-suave); color: var(--tinta); }
+
+/* ---------- Rankings ---------- */
+.rankings { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--u) * 2.2); }
+.ranking h3 { font-size: calc(var(--u) * 1.6); border-bottom: 2.5px solid var(--regla); padding-bottom: 0.2em; margin-bottom: 0.5em; }
+.ranking h3 small { display: block; font-weight: 400; font-size: 0.75em; color: var(--tinta-2); }
+.ranking ol { list-style: none; padding: 0; counter-reset: r; display: grid; gap: calc(var(--u) * 0.55); }
+.ranking li { counter-increment: r; display: grid; grid-template-columns: 1.5em 1fr; gap: 0.3em 0.5em; align-items: center; font-size: calc(var(--u) * 1.35); }
+.ranking li::before { content: counter(r); font-family: var(--f-titular); font-weight: 800; font-stretch: 70%; font-size: 1.4em; line-height: 1; grid-row: span 2; }
+.ranking li .rb { grid-column: 2; display: flex; align-items: center; gap: 0.4em; }
+.ranking li .rb i { display: block; height: calc(var(--u) * 1.1); background: var(--campo-fuerte); border: 1.5px solid var(--tinta); }
+.ranking li .rb b { font-family: var(--f-cifras); font-size: 0.95em; white-space: nowrap; }
+.ranking li.ens span:first-of-type { font-weight: 800; }
+
+/* ---------- Barras por producto ---------- */
+.barras-prod { display: grid; gap: calc(var(--u) * 0.55); }
+.bp-cab, .bp-fila { display: grid; grid-template-columns: calc(var(--u) * 15) 1fr 1fr; gap: calc(var(--u) * 1.2); align-items: center; }
+.bp-cab span { font-size: calc(var(--u) * 1.05); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; color: var(--tinta-2); border-bottom: 2px solid var(--regla); padding-bottom: 0.2em; }
+.bp-n { font-weight: 700; font-size: calc(var(--u) * 1.32); }
+.bp-barra { display: flex; align-items: center; gap: 0.4em; min-width: 0; }
+.bp-barra i { display: block; height: calc(var(--u) * 1.9); border: 1.5px solid var(--tinta); transition: width var(--dur) var(--sal); }
+.bp-barra b { font-size: calc(var(--u) * 1.2); white-space: nowrap; }
+.bp-a { background: var(--campo-fuerte); }
+.bp-h { background: repeating-linear-gradient(135deg, var(--papel-2) 0 5px, var(--regla-suave) 5px 8px); }
+
+/* ---------- Meta común (aporte frente a lo que hay que cubrir) ---------- */
+.meta-fila { display: grid; grid-template-columns: calc(var(--u) * 18) 1fr calc(var(--u) * 10); gap: calc(var(--u) * 1); align-items: center; margin-bottom: calc(var(--u) * 0.7); font-size: calc(var(--u) * 1.32); }
+.meta-fila > b { text-align: right; font-size: calc(var(--u) * 1.4); }
+.meta-tira { display: flex; height: calc(var(--u) * 3.4); border-left: 2px solid var(--tinta); }
+.mseg { display: flex; align-items: center; padding: 0 0.4em; overflow: hidden; white-space: nowrap; font-style: normal; font-size: calc(var(--u) * 1.05); font-weight: 700; border: 1.5px solid var(--tinta); margin-left: -1.5px; }
+.mseg.s0 { background: var(--tinta); color: var(--papel); }
+.mseg.s1 { background: var(--campo); color: var(--campo-tinta); }
+.mseg.s2 { background: var(--campo-fuerte); color: var(--campo-fuerte-tinta); }
+.mseg.s3 { background: var(--campo-suave); color: var(--tinta); }
+.mseg.fijo { background: repeating-linear-gradient(135deg, var(--papel-2) 0 6px, var(--regla-suave) 6px 9px); color: var(--tinta); }
+.mseg.trab { background: var(--papel-2); color: var(--tinta); }
+.mseg.exc { background: var(--papel); color: var(--cuadra); border-style: dashed; }
+
+/* ---------- Porcentajes ---------- */
+.dos-porc { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 3); }
+.dos-porc > div { border-top: 3px solid var(--regla); padding-top: calc(var(--u) * 0.8); }
+.dos-porc h3 { font-size: calc(var(--u) * 1.8); margin-bottom: 0.3em; }
+.dos-porc .operacion { font-size: calc(var(--u) * 1.6); color: var(--tinta); }
+.dos-porc .res { font-family: var(--f-titular); font-weight: 800; font-stretch: 70%; font-size: calc(var(--u) * 3.2); line-height: 1; margin: 0.25em 0; }
+
+/* ---------- Comparador ---------- */
+.comp { display: grid; grid-template-columns: 1.15fr 1fr calc(var(--u) * 24); gap: calc(var(--u) * 2.2); min-height: 0; }
+.comp .mini td, .comp .mini th { font-size: calc(var(--u) * 1.08); padding: 0.16em 0.3em; }
+.comp-filas { width: 100%; border-collapse: collapse; }
+.comp-filas th { position: sticky; top: 0; background: var(--papel-2); text-align: left; font-size: calc(var(--u) * 1); text-transform: uppercase; letter-spacing: 0.04em; padding: 0.35em 0.25em; border-bottom: 2px solid var(--regla); z-index: 1; }
+.comp-filas td { padding: 0.18em 0.2em; border-bottom: 1px solid var(--regla-suave); font-size: calc(var(--u) * 1.22); }
+.comp-filas td.n { font-family: var(--f-cifras); font-weight: 700; color: var(--tinta-2); text-align: center; width: 1.6em; }
+.comp-filas input { width: 100%; font-size: calc(var(--u) * 1.22); padding: 0.22em 0.3em; border: 1.5px solid var(--regla-suave); background: var(--papel); color: var(--tinta); }
+.comp-filas td:nth-child(2) { width: 21%; }
+.comp-filas td:nth-child(3), .comp-filas td:nth-child(4) { width: 12%; }
+.comp-filas td:nth-child(5), .comp-filas td:nth-child(6) { width: 9%; }
+.comp-cab .campo-texto { grid-template-columns: auto 6.5em; align-items: center; gap: 0.5em; }
+.tabla-comp { width: 100%; border-collapse: collapse; }
+.tabla-comp th { text-align: left; font-size: calc(var(--u) * 0.98); text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 2px solid var(--regla); padding: 0 0.35em 0.3em; color: var(--tinta-2); }
+.tabla-comp th.num, .tabla-comp td.num { text-align: right; }
+.tabla-comp td { padding: 0.32em 0.35em; border-bottom: 1px solid var(--regla-suave); font-size: calc(var(--u) * 1.25); }
+.tabla-comp td.num { font-family: var(--f-cifras); font-weight: 600; white-space: nowrap; }
+.tabla-comp tfoot td { border-top: 2.5px solid var(--regla); font-weight: 800; }
+.tabla-comp tr.pierde td { color: var(--falta); font-weight: 700; }
+.cambio { border: 2px solid var(--regla); background: var(--papel-2); color: var(--tinta); padding: calc(var(--u) * 0.6) calc(var(--u) * 0.9); display: grid; gap: calc(var(--u) * 0.35); }
+.cambio .boton { min-height: 2em; padding: 0.25em 0.7em; font-size: calc(var(--u) * 1.15); }
+.cambio select, .cambio input { width: 100%; font-size: calc(var(--u) * 1.25); padding: 0.2em 0.35em; border: 1.5px solid var(--regla); background: var(--papel); color: var(--tinta); }
+.cambio .fila-cambio { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4em; }
+#comp-cambio-nota { font-size: calc(var(--u) * 1.15); }
+#comp-texto { width: 100%; height: calc(var(--u) * 3.4); font-family: var(--f-cifras); font-size: calc(var(--u) * 0.95); border: 1.5px solid var(--regla); background: var(--papel); color: var(--tinta); padding: 0.4em; }
+
+/* ---------- Plan de prueba ---------- */
+.prueba { border: 2.5px solid var(--regla); padding: calc(var(--u) * 1.2) calc(var(--u) * 1.5); background: var(--papel-2); color: var(--tinta); }
+.prueba dl { display: grid; grid-template-columns: auto 1fr; gap: 0.45em 1em; margin: 0; font-size: calc(var(--u) * 1.45); }
+.prueba dt { font-weight: 800; }
+.prueba dd { margin: 0; }
+
+@media (max-width: 760px), (max-height: 520px) {
+  .rankings, .dos-porc, .comp { grid-template-columns: 1fr; }
+  .bp-cab, .bp-fila { grid-template-columns: 6.5rem 1fr 1fr; gap: 0.4rem; }
+  .bp-barra { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+  .bp-barra i { height: 0.9rem; }
+  .meta-fila { grid-template-columns: 1fr; gap: 0.2rem; }
+  .meta-fila > b { text-align: left; }
+  .menu td { font-size: 0.95rem; padding: 0.35em 0.25em; }
+  table.menu, table.tabla-comp, table.mini, table.libro { display: block; overflow-x: auto; max-width: 100%; }
+  .libro td, .libro th { padding: 0.3em 0.25em; font-size: 0.92rem; }
+  .comp-filas, .comp-filas tbody, .comp-filas tr, .comp-filas td { display: block; width: 100% !important; }
+  .comp-filas thead { display: none; }
+  .comp-filas tr { display: grid; grid-template-columns: 1.6em 1fr 1fr 2.2em; gap: 0.3rem; padding: 0.5rem 0.2rem; border-bottom: 2px solid var(--regla); }
+  .comp-filas td { border: 0; padding: 0; }
+  .comp-filas td:nth-child(1) { grid-row: span 4; }
+  .comp-filas td:nth-child(2), .comp-filas td:nth-child(7) { grid-column: 2 / 4; }
+  .comp-filas td:nth-child(8) { grid-column: 4; grid-row: 1; }
+  .comp-filas input, .cambio select, .cambio input { font-size: 16px; }
+  .prueba dl { grid-template-columns: 1fr; }
+}

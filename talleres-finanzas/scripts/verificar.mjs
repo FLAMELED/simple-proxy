@@ -17,7 +17,7 @@ const capturas = process.argv[3];
 if (capturas) mkdirSync(capturas, { recursive: true });
 const url = 'file://' + join(raiz, taller, 'presentacion.html');
 // Pantallas que usan las pruebas generales (índice desde 0)
-const CONF = { '02': { pasos: 7, editar: [30, '#mesa-fondo'], info: 2 }, '03': { pasos: 5, editar: [27, '#plan-saldo'], info: 5 } }[taller.slice(0, 2)];
+const CONF = { '02': { pasos: 7, editar: [30, '#mesa-fondo'], info: 2 }, '03': { pasos: 5, editar: [27, '#plan-saldo'], info: 5 }, '04': { pasos: 6, editar: [28, '#comp-fijos'], info: 6 } }[taller.slice(0, 2)];
 const fallos = [];
 const falla = (m) => { fallos.push(m); console.log('  ✗ ' + m); };
 const ok = (m) => console.log('  ✓ ' + m);
@@ -114,6 +114,70 @@ async function pruebas02(page) {
   await page.click('.pantalla.es-actual [data-copiar]');
   const alt = await page.evaluate(() => { const t = document.querySelector('.pantalla.es-actual textarea.respaldo'); return t && t.value.length > 200; });
   alt ? ok('si el portapapeles falla, aparece el texto seleccionado para copiar a mano') : falla('alternativa de copia');
+}
+
+async function pruebas04(page) {
+  const igual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  const esc = await page.evaluate(() => Object.fromEntries(['original', 'sin', 'lote', 'precio'].map((k) => {
+    const r = window.escenarioAna4(k);
+    return [k, [r.aporteMes, r.minMes, r.pagoTrabajo, r.resultado, r.paraDuena, r.cabe]];
+  })));
+  igual(esc.original, [224000, 2070, 69000, 135000, 204000, false]) ? ok('Ana menú actual: aporte Q2,240, 34.5 h, resultado Q1,350, para Ana Q2,040') : falla('original: ' + JSON.stringify(esc.original));
+  igual(esc.sin, [184000, 1320, 44000, 120000, 164000, true]) ? ok('A sin ensalada: 22 h, resultado Q1,200, para Ana Q1,640') : falla('A: ' + JSON.stringify(esc.sin));
+  igual(esc.lote, [224000, 1770, 59000, 145000, 204000, true]) ? ok('B en lote: 29.5 h, resultado Q1,450, para Ana Q2,040') : falla('B: ' + JSON.stringify(esc.lote));
+  igual(esc.precio, [228000, 1920, 64000, 144000, 208000, false]) ? ok('C a Q18 vendiendo 40: 32 h, resultado Q1,440, para Ana Q2,080') : falla('C: ' + JSON.stringify(esc.precio));
+  const filas = await page.evaluate(() => window.escenarioAna4('original').filas.map((f) => [f.aporte, Math.round(f.margen * 1000) / 10, Math.round(f.porHora), f.aporteMes]));
+  igual(filas, [[800, 40, 9600, 96000], [1000, 40, 5000, 40000], [800, 53.3, 3200, 40000], [600, 40, 12000, 48000]]) ? ok('aporte, margen, aporte por hora y al mes de los 4 productos coinciden con las pantallas') : falla('filas: ' + JSON.stringify(filas));
+  const ordenes = await page.evaluate(() => { const r = window.escenarioAna4('original'); return [r.ordenUnidad[0], r.ordenHora[0], r.ordenMes[0], r.ordenHora[3]]; });
+  igual(ordenes, ['Licuado con leche', 'Limonada', 'Jugo de naranja', 'Ensalada de frutas']) ? ok('tres órdenes distintos: licuado por unidad, limonada por hora, jugo al mes') : falla('órdenes: ' + JSON.stringify(ordenes));
+  // Comparador del caso
+  await page.evaluate(() => window.presentacion.ir(16, 0));
+  await page.click('[data-esc4="lote"]');
+  /Cabe en 30 h/.test(await page.textContent('#ana4-veredicto')) ? ok('comparador: en lote «Cabe en 30 h»') : falla('veredicto lote');
+  await page.click('[data-esc4="precio"]');
+  /No cabe/.test(await page.textContent('#ana4-veredicto')) ? ok('comparador: a Q18 «No cabe»') : falla('veredicto precio');
+  await page.click('[data-ana4-reiniciar]');
+  (await page.getAttribute('[data-esc4="original"]', 'aria-pressed')) === 'true' ? ok('reiniciar comparador vuelve al menú actual') : falla('reinicio comparador');
+  // Práctica Lucía
+  const luc = await page.evaluate(() => {
+    const m = JSON.parse(sessionStorage.getItem('taller04:comparador'));
+    const p = window.prepararComparador(m.datos.lucia, false);
+    const r = window.evaluarProductos(p.entrada);
+    const d = JSON.parse(JSON.stringify(m.datos.lucia));
+    d.cambio = { id: d.productos[1].id, campo: 'precio', valor: '7' };
+    const r7 = window.evaluarProductos(window.prepararComparador(d, true).entrada);
+    d.cambio = { id: d.productos[1].id, campo: 'unidades', valor: '90' };
+    const p90 = window.prepararComparador(d, true).entrada; p90.productos[1].precio = 700;
+    const r90 = window.evaluarProductos(p90);
+    return [r.aporteMes, r.minMes, r.resultado, r7.aporteMes, r7.resultado, r90.aporteMes];
+  });
+  igual(luc, [142000, 1140, 53000, 154000, 65000, 143500]) ? ok('Lucía: aporte Q1,420, 19 h, resultado Q530; guacamol a Q7: Q1,540; con 90 ventas: Q1,435') : falla('Lucía: ' + JSON.stringify(luc));
+  await page.evaluate(() => window.presentacion.ir(29, 0));
+  await page.selectOption('#comp-cambio-prod', { index: 2 });
+  await page.selectOption('#comp-cambio-campo', 'precio');
+  await page.fill('#comp-cambio-valor', '7');
+  /Simulación/.test(await page.textContent('#comp-cambio-nota')) && /\+Q120\.00/.test(await page.textContent('#comp-cambio-nota')) ? ok('probar un cambio: guacamol a Q7 muestra +Q120.00 como simulación') : falla('cambio: ' + await page.textContent('#comp-cambio-nota'));
+  await page.click('#comp-quitar-cambio');
+  // Datos propios con faltantes
+  await page.evaluate(() => window.presentacion.ir(28, 0));
+  await page.click('.pantalla.es-actual [data-conjunto4="propio"]');
+  await page.fill('#comp-fijos', '300');
+  await page.fill('#comp-filas tr:first-child [data-campo="nombre"]', 'Pan dulce');
+  await page.fill('#comp-filas tr:first-child [data-campo="precio"]', '2');
+  await page.evaluate(() => window.presentacion.ir(29, 0));
+  /Todavía no se puede comparar/.test(await page.textContent('#comp-tabla')) ? ok('dato vacío: «Todavía no se puede comparar», no se toma como cero') : falla('faltante');
+  await page.evaluate(() => window.presentacion.ir(28, 0));
+  await page.fill('#comp-filas tr:first-child [data-campo="costo"]', 'dos');
+  (await page.getAttribute('#comp-filas tr:first-child [data-campo="costo"]', 'aria-invalid')) === 'true' ? ok('costo inválido marcado con error') : falla('inválido');
+  await page.fill('#comp-filas tr:first-child [data-campo="costo"]', '2.50');
+  await page.fill('#comp-filas tr:first-child [data-campo="min"]', '2');
+  await page.fill('#comp-filas tr:first-child [data-campo="unidades"]', '100');
+  const pierde = await page.evaluate(() => { const m = JSON.parse(sessionStorage.getItem('taller04:comparador')); const p = window.prepararComparador(m.datos.propio, false); return p.entrada.productos.length === 1 && window.evaluarProductos(p.entrada).filas[0].pierde; });
+  pierde ? ok('un producto con costo mayor que el precio se marca «pierde»') : falla('pierde');
+  page.once('dialog', (d) => d.accept());
+  await page.click('.pantalla.es-actual [data-comp-reiniciar]');
+  (await page.evaluate(() => JSON.parse(sessionStorage.getItem('taller04:comparador')).datos.propio.fijos === '')) ? ok('reiniciar «Mis datos» deja todo en blanco') : falla('reinicio propio');
+  await page.click('.pantalla.es-actual [data-conjunto4="lucia"]');
 }
 
 async function pruebas03(page) {
@@ -291,6 +355,7 @@ console.log('\nFunciones');
   await page.keyboard.press('Escape');
   if (taller.startsWith('02')) await pruebas02(page);
   if (taller.startsWith('03')) await pruebas03(page);
+  if (taller.startsWith('04')) await pruebas04(page);
   // Vista de todas las pantallas
   await page.click('#btn-vista');
   const vista = await page.evaluate(() => [document.body.classList.contains('vista'), [...document.querySelectorAll('.pantalla')].filter((p) => getComputedStyle(p).display !== 'none').length, document.querySelectorAll('.explicaciones h4').length]);

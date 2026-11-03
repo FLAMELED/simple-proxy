@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es" data-taller="taller04">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía breve · ¿Qué me conviene vender?</title>
+<meta name="description" content="Guía para comparar de 3 a 5 productos o servicios y probar una mejora: cuatro medidas, hoja de comparación, plan de prueba y consultas para ChatGPT.">
+<style>
+/*@fuentes*/
+/*@paleta*/
+ * { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--papel); color: var(--tinta); font: 17px/1.55 "Texto", "Segoe UI", Arial, sans-serif; font-variant-numeric: tabular-nums; }
+::selection { background: var(--campo); color: var(--campo-tinta); }
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+main { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+h1, h2 { font-family: "Titular", Georgia, serif; font-weight: 800; font-stretch: 68%; line-height: 1; letter-spacing: -0.01em; margin: 0; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); }
+h1 em { font-style: italic; }
+h2 { font-size: clamp(1.8rem, 4.5vw, 2.4rem); margin: 2.8rem 0 0.9rem; border-bottom: 3px solid var(--tinta); padding-bottom: 0.3rem; }
+h3 { font-size: 1.1rem; margin: 1.4rem 0 0.4rem; }
+p, ul, ol { margin: 0.5rem 0; }
+.cab { background: var(--campo); color: var(--campo-tinta); margin: -1.5rem -1.25rem 0; padding: 1.5rem 1.25rem 1.3rem; }
+.cab .serie { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
+.cab .serie b { font-size: 1.3em; border-bottom: 3px solid currentColor; margin-right: 0.8rem; }
+.herr { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; }
+button { font: inherit; cursor: pointer; }
+.boton { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border: 2px solid var(--tinta); background: var(--tinta); color: var(--papel); font-weight: 700; }
+.boton.sec { background: transparent; color: var(--tinta); }
+.cab .boton.sec { color: var(--campo-tinta); border-color: var(--campo-tinta); }
+.indice { columns: 2 14rem; padding-left: 1.2rem; }
+ol.pasos { padding: 0; list-style: none; counter-reset: p; }
+ol.pasos > li { counter-increment: p; display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.5rem; margin-top: 0.8rem; }
+ol.pasos > li::before { content: counter(p); font-family: "Titular", serif; font-weight: 800; font-stretch: 70%; font-size: 1.9rem; line-height: 1; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--regla-suave); vertical-align: top; }
+th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--tinta); }
+.hoja { background: var(--papel-2); border: 2px solid var(--tinta); padding: 1rem 1.1rem; }
+.hoja td, .hoja th { height: 2.1rem; }
+.hoja .num { width: 7rem; }
+.semana { margin-top: 1rem; }
+.semana th:first-child { width: 4.2rem; }
+.linea { border-bottom: 1.5px solid var(--tinta); display: inline-block; min-width: 9rem; height: 1.3rem; vertical-align: bottom; }
+.cuadros { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.formula { font-family: "Cifras", monospace; font-size: 0.95rem; background: var(--papel); padding: 0.5rem 0.7rem; border: 1px dashed var(--tinta); }
+.consulta { border: 2px solid var(--tinta); background: var(--papel-2); margin: 1rem 0 1.6rem; }
+.consulta-cab { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 0.6rem 0.9rem; border-bottom: 2px solid var(--tinta); }
+.consulta pre { margin: 0; padding: 0.9rem; white-space: pre-wrap; font: 0.95rem/1.5 "Texto", sans-serif; }
+.consulta .verificar { border-top: 1.5px dashed var(--tinta); padding: 0.6rem 0.9rem; font-size: 0.95rem; }
+.estado-copia { font-weight: 700; font-size: 0.9rem; min-height: 1.2em; }
+textarea.respaldo { width: 100%; min-height: 9rem; border: 0; border-top: 1.5px dashed var(--tinta); padding: 0.6rem; font: inherit; background: var(--papel); color: var(--tinta); }
+.nota { font-size: 0.92rem; color: var(--tinta-2); }
+@media (max-width: 600px) { .hoja table { display: block; overflow-x: auto; } .cuadros { grid-template-columns: 1fr; } .hoja { padding: 0.7rem; } th, td { padding: 0.35rem 0.3rem; font-size: 0.88rem; hyphens: auto; } th { font-size: 0.68rem; } }
+@media print {
+  @page { size: letter; margin: 14mm; }
+  body { background: #fff; font-size: 11.5pt; }
+  .cab { background: #fff; border-bottom: 3px solid #000; }
+  .herr, .copiar, .estado-copia, textarea.respaldo { display: none !important; }
+  h2 { break-after: avoid; }
+  .salto { break-before: page; }
+  .consulta, .hoja, table { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<main>
+<header class="cab">
+  <p class="serie"><b>04</b>Decidir · Finanzas del negocio con IA</p>
+  <h1>¿Qué me <em>conviene</em> vender?</h1>
+  <p>Guía breve para comparar tus productos o servicios y probar una mejora antes de cambiar tu negocio.</p>
+  <div class="herr">
+    <button type="button" class="boton" id="imprimir">Imprimir o guardar PDF</button>
+    <button type="button" class="boton sec" id="tema" aria-pressed="false">Modo nocturno</button>
+  </div>
+</header>
+
+<nav aria-label="Contenido"><ol class="indice">
+  <li><a href="#medidas">Las cuatro medidas</a></li>
+  <li><a href="#hoja">Hoja de comparación</a></li>
+  <li><a href="#prueba">Plan de prueba</a></li>
+  <li><a href="#errores">Errores habituales</a></li>
+  <li><a href="#consultas">Consultas para ChatGPT</a></li>
+</ol></nav>
+
+<h2 id="medidas">Las cuatro medidas</h2>
+<ol class="pasos">
+  <li><div><b>Aporte por unidad</b>
+    <p class="formula">Precio − costo de esa unidad (materiales + empaque) = aporte</p>
+    No metas aquí tu trabajo, el alquiler ni otros pagos del mes: se cuentan una vez, en el mes.</div></li>
+  <li><div><b>Margen sobre la venta y porcentaje agregado al costo</b>
+    <p class="formula">Aporte ÷ precio = % del precio &nbsp;·&nbsp; Aporte ÷ costo = % agregado al costo</p>
+    Di siempre sobre qué es el porcentaje. Ejemplo: Q8.00 de aporte en algo de Q15.00 que cuesta Q7.00 es 53.3 % del precio y 114.3 % sobre el costo.</div></li>
+  <li><div><b>Aporte por hora</b>
+    <p class="formula">Aporte × (60 ÷ minutos por unidad) = aporte por hora</p>
+    Cuando el tiempo es lo que te falta, esta medida pesa más.</div></li>
+  <li><div><b>Aporte al mes</b>
+    <p class="formula">Aporte × unidades vendidas en el mes</p>
+    Todos los aportes juntos cubren una sola meta: tus pagos fijos + tu trabajo (horas × valor de tu hora). Lo que sobra es el resultado antes de impuestos.</div></li>
+</ol>
+<p class="nota">Antes de quitar un producto, revisa también para qué sirve: si atrae clientes, si acompaña otra venta, si es por encargo. Esa columna no tiene número, pero cuenta.</p>
+
+<h2 id="hoja" class="salto">Hoja de comparación</h2>
+<div class="hoja">
+  <p><b>Negocio:</b> <span class="linea" style="min-width:14rem"></span> &nbsp; <b>Mes:</b> <span class="linea"></span></p>
+  <p><b>Pagos fijos del mes:</b> Q <span class="linea" style="min-width:5rem"></span> &nbsp; <b>Valor de mi hora:</b> Q <span class="linea" style="min-width:4rem"></span> &nbsp; <b>Horas que quiero trabajar:</b> <span class="linea" style="min-width:4rem"></span></p>
+  <table><thead><tr><th>Producto</th><th>Precio</th><th>Costo por unidad</th><th>Aporte</th><th>Minutos</th><th>Aporte por hora</th><th>Al mes (unid.)</th><th>Aporte al mes</th></tr></thead>
+  <tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="6" style="text-align:right"><b>Totales</b></td><td></td><td>Q</td></tr></tbody></table>
+  <p><b>Horas al mes</b> (minutos × unidades ÷ 60, sumado): <span class="linea" style="min-width:5rem"></span></p>
+  <p><b>Resultado antes de impuestos:</b> aporte total Q <span class="linea" style="min-width:5rem"></span> − fijos Q <span class="linea" style="min-width:5rem"></span> − trabajo Q <span class="linea" style="min-width:5rem"></span> = Q <span class="linea" style="min-width:5rem"></span></p>
+  <h3>Para qué sirve cada producto</h3>
+  <p><span class="linea" style="width:100%"></span></p><p><span class="linea" style="width:100%"></span></p>
+</div>
+
+<h2 id="prueba">Plan de prueba · dos semanas</h2>
+<div class="hoja">
+  <p><b>Producto:</b> <span class="linea" style="min-width:12rem"></span> &nbsp; <b>Un solo cambio:</b> ☐ precio ☐ costo ☐ proceso ☐ tamaño</p>
+  <p><b>Qué cambia exactamente:</b> <span class="linea" style="width:100%"></span></p>
+  <p><b>Punto de comparación</b> (aporte al mes de hoy ÷ aporte nuevo por unidad = unidades que necesito vender para no perder): <span class="linea" style="min-width:8rem"></span></p>
+  <p><b>Qué mido cada día:</b> ☐ ventas ☐ minutos ☐ lo que se pierde ☐ otro: <span class="linea" style="min-width:8rem"></span></p>
+  <p><b>Funciona si:</b> <span class="linea" style="width:100%"></span></p>
+  <p><b>A las dos semanas:</b> ☐ se queda ☐ se ajusta ☐ vuelvo atrás</p>
+</div>
+<p class="nota">Ejemplo del taller: Ana prepara la ensalada en lote para bajar de 15 a 9 minutos por vaso; funciona si baja a 10 minutos o menos y no sobra más de una ensalada por lote.</p>
+
+<h2 id="errores">Errores habituales</h2>
+<table><thead><tr><th>Error</th><th>Lo que provoca</th></tr></thead><tbody>
+  <tr><td>Quitar el producto que menos deja por unidad</td><td>Pierdes un producto que quizá deja más por hora o atrae clientes.</td></tr>
+  <tr><td>Decir un porcentaje sin decir sobre qué</td><td>«Le gano 114 %» parece mucho más de lo que queda de cada venta.</td></tr>
+  <tr><td>Poner el trabajo en el costo y también en el mes</td><td>Lo restas dos veces y todo parece dejar menos.</td></tr>
+  <tr><td>Repartir los pagos fijos entre los productos</td><td>Un producto parece perder aunque ayude a cubrir la meta.</td></tr>
+  <tr><td>Suponer que se venderá lo mismo con otro precio</td><td>La prueba promete un resultado que nadie midió.</td></tr>
+  <tr><td>Cambiar varias cosas a la vez</td><td>No sabes cuál funcionó.</td></tr>
+</tbody></table>
+
+<h2 id="consultas" class="salto">Consultas para ChatGPT</h2>
+<p>Copia una consulta, llena lo que está entre corchetes y pégala en ChatGPT. ChatGPT necesita internet; esta guía no se conecta a ninguna IA. Las cuentas compruébalas en tu hoja.</p>
+<p class="nota">No escribas nombres completos, números de cuenta, contraseñas ni códigos que te lleguen por mensaje.</p>
+<div class="consulta"><div class="consulta-cab"><b>1 · Sacar el costo de mis productos</b><button type="button" class="boton copiar" data-copiar="g1">Copiar</button></div>
+<pre id="g1">Ayúdame a calcular el costo por unidad de mis productos para compararlos. Las cuentas finales las revisaré yo.
+
+QUÉ QUIERO RESOLVER: saber cuánto me cuesta cada unidad y qué datos me faltan.
+
+MIS PRODUCTOS (de 3 a 5):
+[para cada uno: nombre, precio, qué compro para hacerlo, cuánto pago y cuántas unidades me rinde, empaque por unidad]
+
+EL TIEMPO: [minutos que tardo por unidad, si lo sé; si no, escribe «no lo he medido»]
+
+LO QUE VENDO AL MES: [cantidad aproximada de cada uno]
+
+NO INVENTES precios ni rendimientos. Si un dato falta, márcalo como «pendiente» y no lo cuentes como cero. No incluyas mi trabajo, el alquiler ni otros pagos del mes dentro del costo por unidad. No calcules impuestos.
+
+RESPÓNDEME CON:
+1. Una tabla: producto, precio, costo por unidad (con la operación), aporte por unidad.
+2. La lista de datos que me faltan.
+3. Cómo medir mis minutos por unidad esta semana.</pre>
+<p class="verificar"><b>Después verifica:</b> que cada costo dice de dónde sale; que no metió tu trabajo ni el alquiler; que lo que falta queda pendiente.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+<div class="consulta"><div class="consulta-cab"><b>2 · Comparar alternativas con mis resultados</b><button type="button" class="boton copiar" data-copiar="g2">Copiar</button></div>
+<pre id="g2">Ayúdame a comparar alternativas para mi negocio. Las cuentas ya las hice; no las rehagas.
+
+QUÉ QUIERO RESOLVER: [por ejemplo: trabajar menos horas sin perder dinero / mejorar un producto que deja poco]
+
+MIS PRODUCTOS (datos de un mes): mi trabajo vale Q[monto] por hora y lo cuento una sola vez en el mes. Mis pagos fijos del mes son Q[monto].
+- [producto]: precio Q[ ], costo Q[ ], [ ] min, [ ] al mes. Para qué sirve: [ ]
+- [repite para cada producto]
+
+ALTERNATIVAS QUE CALCULÉ (para mí: resultado + mi trabajo):
+- Como estoy hoy: [ ] horas, Q[ ].
+- [alternativa A]: [ ] horas, Q[ ].
+- [alternativa B]: [ ] horas, Q[ ].
+
+LO QUE NO SÉ: [por ejemplo: cuántos venderé con el precio nuevo]
+
+NO INVENTES ventas, precios ni porcentajes. No cambies mis cálculos; si ves un error, dime dónde. No hables de impuestos.
+
+RESPÓNDEME CON:
+1. Los riesgos de cada alternativa, en frases cortas.
+2. Cuál probarías primero y por qué, sin darlo por seguro.
+3. Qué debo medir durante la prueba y por cuántos días.
+4. Qué dato me haría cambiar de opinión.</pre>
+<p class="verificar"><b>Después verifica:</b> que no recomienda quitar un producto por una sola medida; que no supone ventas; que no suma tu trabajo dos veces.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+<div class="consulta"><div class="consulta-cab"><b>3 · Explícamelo más sencillo con uno de mis productos</b><button type="button" class="boton copiar" data-copiar="g3">Copiar</button></div>
+<pre id="g3">Explícamelo más sencillo con uno de mis productos.
+
+Vendo [PRODUCTO] a Q[PRECIO]. Cada uno me cuesta Q[COSTO] en materiales y empaque, y tardo [MINUTOS] minutos en hacerlo. Vendo unos [CANTIDAD] al mes.
+
+Con ese producto, explícame:
+- qué es el aporte por unidad y cómo se calcula;
+- qué es el aporte por hora y por qué puede cambiar el orden de mis productos;
+- la diferencia entre el porcentaje del precio y el porcentaje agregado al costo.
+
+Muestra cada operación paso a paso, en quetzales con dos decimales. Usa frases cortas. No cuentes mi trabajo dentro del costo de la unidad. No hables de impuestos.
+
+Al final, hazme 2 preguntas para comprobar que entendí, y espera mi respuesta antes de darme la solución.</pre>
+<p class="verificar"><b>Después verifica:</b> que usa tus números o dice que son de ejemplo, y que cada operación está bien.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+<div class="consulta"><div class="consulta-cab"><b>4 · Revisar mi plan de prueba</b><button type="button" class="boton copiar" data-copiar="g4">Copiar</button></div>
+<pre id="g4">Revisa mi plan de prueba antes de empezar. No lo cambies por otro: solo dime qué mejorar.
+
+QUÉ QUIERO RESOLVER: que la prueba me dé una respuesta clara en dos semanas.
+
+MI PLAN:
+- Producto: [ ]
+- Un solo cambio: [ ]
+- Punto de comparación: [unidades que necesito vender para no perder frente a hoy]
+- Qué mido cada día: [ ]
+- Funciona si: [ ]
+
+LO QUE NO SÉ: [ ]
+
+NO INVENTES resultados ni porcentajes de éxito.
+
+RESPÓNDEME CON:
+1. Si estoy cambiando más de una cosa sin darme cuenta.
+2. Qué más conviene anotar cada día.
+3. Una señal de alerta para detener la prueba antes de tiempo.</pre>
+<p class="verificar"><b>Después verifica:</b> que no te promete resultados; que sus sugerencias se pueden medir.</p>
+<p class="estado-copia" aria-live="polite" style="padding:0 .9rem"></p></div>
+<p class="nota">Taller 04 de la serie «Finanzas del negocio con IA». Los casos de Ana y Lucía son ficticios. Los resultados son antes de impuestos; este material no da tratamientos fiscales ni contables formales.</p>
+</main>
+<script>
+(function () {
+  'use strict';
+  var raiz = document.documentElement;
+  var bt = document.getElementById('tema');
+  function poner(t) { raiz.dataset.tema = t; bt.setAttribute('aria-pressed', t === 'noche'); bt.textContent = t === 'noche' ? 'Modo claro' : 'Modo nocturno'; }
+  var g = null; try { g = localStorage.getItem('taller04:tema'); } catch (e) {}
+  poner(g || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'noche' : 'claro'));
+  bt.addEventListener('click', function () { var t = raiz.dataset.tema === 'noche' ? 'claro' : 'noche'; poner(t); try { localStorage.setItem('taller04:tema', t); } catch (e) {} });
+  document.getElementById('imprimir').addEventListener('click', function () { try { window.print(); } catch (e) { alert('Usa Ctrl+P (o Cmd+P) para imprimir.'); } });
+  async function copiar(texto) {
+    if (navigator.clipboard && window.isSecureContext) { try { await navigator.clipboard.writeText(texto); return true; } catch (e) {} }
+    try { var ta = document.createElement('textarea'); ta.value = texto; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); var ok = document.execCommand('copy'); ta.remove(); return ok; } catch (e) { return false; }
+  }
+  document.addEventListener('click', async function (e) {
+    var b = e.target.closest('[data-copiar]'); if (!b) return;
+    var caja = b.closest('.consulta'); var texto = document.getElementById(b.dataset.copiar).innerText.trim();
+    var estado = caja.querySelector('.estado-copia');
+    if (await copiar(texto)) { estado.textContent = 'Copiada. Pégala en ChatGPT (requiere internet).'; return; }
+    var ta = caja.querySelector('textarea.respaldo');
+    if (!ta) { ta = document.createElement('textarea'); ta.className = 'respaldo'; ta.setAttribute('aria-label', 'Texto para copiar a mano'); caja.appendChild(ta); }
+    ta.value = texto; ta.focus(); ta.select();
+    estado.textContent = 'No se pudo copiar solo. El texto quedó seleccionado abajo: usa Ctrl+C, o mantén presionado y elige Copiar.';
+  });
+})();
+</script>
+</body>
+</html>

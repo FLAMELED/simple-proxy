@@ -4,10 +4,10 @@ Serie de talleres de 90 minutos para emprendedores de pequeños negocios de Guat
 
 | # | Taller | Estado |
 |---|---|---|
-| 01 | Entender los números del negocio | Taller base existente (no está en este repositorio) |
+| 01 | Entender los números del negocio | Taller base existente (no está en este repositorio; se usó como referencia de cifras y vocabulario) |
 | 02 | Cierra el día con las cuentas claras | `02-cierra-el-dia/` |
 | 03 | ¿Me alcanza? | `03-me-alcanza/` |
-| 04 | ¿Qué me conviene vender? | Pendiente |
+| 04 | ¿Qué me conviene vender? | `04-que-me-conviene/` |
 
 ## Estructura
 

@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="es" data-taller="taller04" data-serie-num="04" data-serie-nombre="¿Qué me conviene vender?">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Qué me conviene vender? · Taller 04</title>
+<meta name="description" content="Taller 04 de la serie Finanzas del negocio con IA: comparar de tres a cinco productos o servicios y elegir una mejora fundamentada para probar. Presentación interactiva para 90 minutos.">
+<style>
+/*@fuentes*/
+/*@paleta*/
+/*@incluir:comun/motor.css*/
+/*@incluir:comun/componentes.css*/
+/*@incluir:04-que-me-conviene/taller04.css*/
+</style>
+</head>
+<body>
+<main class="escenario" id="escenario">
+
+<!-- ===================================================== A · EL PROBLEMA (10 min) -->
+<section class="pantalla campo portada" data-titulo="Portada" data-seccion="El problema" data-min="2" data-sin-corrido>
+  <div class="marco sin-titulo">
+    <div class="portada-grid">
+      <p class="serie-num"><b>04</b> Decidir · Finanzas del negocio con IA</p>
+      <h1 class="portada-titulo" style="max-width:9ch">¿Qué me <em>conviene</em> vender?</h1>
+      <div class="portada-pie">
+        <p class="entrada">Hoy comparas tus productos con cuatro medidas y eliges una mejora para probar.</p>
+        <p class="pequeno">Taller 04 de 04 · 90 minutos<br>Un caso guiado y una tarea para tu negocio</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>Bienvenida (2 min).</b> Pregunta: «¿Quién vende algo que siente que no le deja?». Escucha dos o tres casos sin opinar todavía.</p>
+    <ul><li>Reparte la hoja de comparación (está en la guía) y un lapicero.</li>
+    <li>Pide que tengan a mano el precio y el costo de 3 a 5 productos o servicios suyos.</li>
+    <li>ChatGPT necesita internet; la presentación y el comparador funcionan sin internet.</li></ul>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Lo que te llevas hoy" data-seccion="El problema" data-min="2">
+  <div class="marco">
+    <h2 class="titulo">Al terminar tendrás tus productos comparados y una mejora para probar</h2>
+    <div class="dos" style="--cols: 1fr 1.15fr">
+      <div class="pila">
+        <ul class="lista entrada" style="font-size:calc(var(--u)*1.8)">
+          <li>Cuánto aporta cada producto, por unidad, por hora y al mes.</li>
+          <li>Cuánto de tu tiempo se lleva cada uno.</li>
+          <li>Un cambio de precio, costo o proceso, probado antes de hacerlo.</li>
+          <li>Un plan de prueba de dos semanas.</li>
+        </ul>
+        <p class="pequeno regla-arriba">Ten a mano: la hoja de comparación y los precios y costos de tus productos.</p>
+      </div>
+      <div>
+        <p class="rotulo">Recorrido de 90 minutos</p>
+        <ol class="recorrido" aria-label="Recorrido de la sesión, en minutos">
+          <li style="--m:10"><span class="letra">A</span><span class="tira">10</span><span>La duda de Ana</span></li>
+          <li style="--m:15"><span class="letra">B</span><span class="tira">15</span><span>Precio, costo, aporte y tiempo</span></li>
+          <li style="--m:15"><span class="letra">C</span><span class="tira">15</span><span>Tres formas de comparar</span></li>
+          <li style="--m:20"><span class="letra">D</span><span class="tira">20</span><span>Probar cambios y revisar con IA</span></li>
+          <li style="--m:20"><span class="letra">E</span><span class="tira">20</span><span>Tus productos o el caso de Lucía</span></li>
+          <li style="--m:10"><span class="letra">F</span><span class="tira">10</span><span>Comprobar y armar tu prueba</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> La pregunta del taller no es «¿cuál quito?», es «¿qué mejora pruebo primero?».</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Seguimos con Ana" data-seccion="El problema" data-min="2" data-caso="Talleres 01 a 03 · referencia" data-caso-tipo="ref">
+  <div class="marco">
+    <h2 class="titulo">Ana ya calcula su aporte, cierra cada día y planifica su caja</h2>
+    <div class="dos" style="--cols: 1.1fr 1fr">
+      <dl class="ficha">
+        <div><dt>Jugo de naranja, vaso de 500 ml</dt><dd class="cifra">Q20.00</dd><span class="de-donde">Del taller 01: costo Q12.00 (Q100.00 ÷ 10 vasos + Q2.00 de empaque). Aporte: Q8.00.</span></div>
+        <div><dt>Pagos del negocio en el mes</dt><dd class="cifra">Q200.00</dd><span class="de-donde">Del taller 01: espacio Q150.00 + teléfono Q50.00.</span></div>
+        <div><dt>Valor de su hora de trabajo</dt><dd class="cifra">Q20.00</dd><span class="de-donde">Del taller 01. Su trabajo se cuenta una vez, en el mes.</span></div>
+      </dl>
+      <div class="hoja pila centro-v">
+        <p class="rotulo">Hoy: el menú de un mes</p>
+        <p class="entrada" style="font-size:calc(var(--u)*1.8)">Ana ahora vende cuatro productos. Es un caso nuevo: un mes con su menú completo.</p>
+        <p class="pequeno">En el taller 01 imaginamos una limonada a Q15.00 con costo Q9.00. Ahora Ana sí la vende, con esos mismos números. Mientras veas <b class="caso" data-tipo="ana" style="font-size:1em">Caso Ana · menú</b>, seguimos en este mes.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> Si el grupo no estuvo en los talleres anteriores: «aporte» es lo que queda de cada venta después del costo de ese producto. Todavía no es la ganancia.</p>
+    <p>Las cifras de este mes no se mezclan con las de los talleres 01 a 03.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo" data-titulo="La duda de Ana" data-seccion="El problema" data-min="2" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo">Ana trabaja 34 horas y media al mes. Quiere bajar a 30.</h2>
+    <div class="dos" style="--cols: 1.15fr 1fr">
+      <div class="pila">
+        <p class="entrada">Preparar y servir sus cuatro productos le toma más tiempo del que quiere dedicar.</p>
+        <p class="entrada"><b>Piensa: «Quito la ensalada de frutas, que es la que más tarda. ¿O quito la limonada, que es la que menos deja?»</b></p>
+      </div>
+      <div class="hoja pila centro-v">
+        <p class="rotulo">Su meta para el próximo mes</p>
+        <p class="cifra fuerte" style="font-size:calc(var(--u)*4)">30 horas</p>
+        <p><span class="tipo-cifra" data-t="previsto">Decisión de Ana</span></p>
+        <p class="pequeno">Sin perder dinero, si se puede. Las horas salen de cronometrar una semana de trabajo.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Presenta la meta de horas como una decisión personal: es tiempo con su familia. No hay una cifra correcta.</p></aside>
+</section>
+
+<section class="pantalla campo pregunta" data-titulo="¿Cuál quitar?" data-seccion="El problema" data-min="2" data-caso="Caso Ana · menú" data-revela="1">
+  <div class="marco">
+    <h2 class="titulo">¿Qué producto le conviene dejar de vender?</h2>
+    <div class="dos" style="--cols: 1fr 1fr">
+      <ul class="opciones">
+        <li><button type="button" class="opcion"><span class="letra">A</span><span>La limonada: es la que menos deja por vaso.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion"><span class="letra">B</span><span>La ensalada: es la que más tiempo pide.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion correcta"><span class="letra">C</span><span>Todavía no se sabe: falta medir tiempo, ventas y lo que aporta cada uno.</span><span class="marca" data-texto=""></span></button></li>
+      </ul>
+      <div class="explica" data-paso="1">
+        <p class="entrada" style="font-size:calc(var(--u)*1.85)"><b>Respuesta C.</b> Lo que deja un vaso es solo una de las medidas.</p>
+        <p class="texto">También cuentan el tiempo que pide, cuánto se vende y para qué sirve en el negocio.</p>
+        <p class="texto">Y quizá no haga falta quitar nada: se puede cambiar el precio, el costo o la forma de prepararlo.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Que voten. Guarda la votación: en la pantalla 14 vuelve la pregunta con los datos y suele cambiar.</p></aside>
+</section>
+
+<!-- ===================================================== B · LOS DATOS (15 min) -->
+<section class="pantalla" data-titulo="El menú de Ana" data-seccion="Los datos" data-min="2" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo ancho">El menú de Ana y lo que vendió el mes pasado</h2>
+    <table class="menu">
+      <thead><tr><th>Producto</th><th class="num">Precio</th><th class="num">Vendió en el mes</th><th>Para qué le sirve al negocio</th></tr></thead>
+      <tbody>
+        <tr><td>Jugo de naranja<small>vaso de 500 ml</small></td><td class="num">Q20.00</td><td class="num">120</td><td>Lo que más vende. Por él llegan los clientes.</td></tr>
+        <tr><td>Licuado con leche<small>vaso de 500 ml</small></td><td class="num">Q25.00</td><td class="num">40</td><td>Lo piden en la mañana, como desayuno.</td></tr>
+        <tr><td>Ensalada de frutas<small>vaso con tenedor</small></td><td class="num">Q15.00</td><td class="num">50</td><td>Muchos la compran junto con un jugo.</td></tr>
+        <tr><td>Limonada<small>vaso de 500 ml</small></td><td class="num">Q15.00</td><td class="num">80</td><td>Rápida de servir cuando hay fila.</td></tr>
+      </tbody>
+    </table>
+    <p class="pie">Precios: datos. Ventas: registradas en sus cierres diarios del mes pasado; para el próximo mes son una previsión.</p>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> La última columna importa: un producto puede aportar al negocio aunque deje poco, porque atrae o acompaña otras ventas. Pregunta: «¿Qué producto suyo trae clientes?».</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Lo que cuesta cada venta" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo ancho">Lo que cuesta cada unidad, desde su compra</h2>
+    <table class="menu">
+      <thead><tr><th>Producto</th><th>De dónde sale el costo</th><th class="num">Costo por unidad</th></tr></thead>
+      <tbody>
+        <tr data-paso="1"><td>Jugo de naranja</td><td>Q100.00 de materiales ÷ 10 vasos = Q10.00 + empaque Q2.00</td><td class="num">Q12.00</td></tr>
+        <tr data-paso="2"><td>Licuado con leche</td><td>Fruta: Q40.00 ÷ 5 = Q8.00 · leche: Q12.50 el litro ÷ 2.5 = Q5.00 · empaque Q2.00</td><td class="num">Q15.00</td></tr>
+        <tr data-paso="3"><td>Ensalada de frutas</td><td>Bandeja de fruta: Q55.00 ÷ 10 = Q5.50 · vaso y tenedor Q1.50</td><td class="num">Q7.00</td></tr>
+        <tr data-paso="4"><td>Limonada</td><td>Limones y azúcar: Q70.00 ÷ 10 = Q7.00 · empaque Q2.00</td><td class="num">Q9.00</td></tr>
+      </tbody>
+    </table>
+    <p class="pie" data-paso="4">Solo lo que se gasta por cada unidad. El espacio, el teléfono y el trabajo de Ana no van aquí: se cuentan una vez, en el mes. <button type="button" class="i" data-info="i-costo" aria-label="Qué entra en el costo por unidad">i</button></p>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 4 pasos.</b> Cada costo se arma con lo que se compra y cuántas unidades rinde. Ana lo midió en su cocina; son datos del caso.</p>
+    <p>Pregunta de control: «¿Por qué no sumamos aquí los Q20.00 por hora de Ana?». Porque su trabajo se cuenta una sola vez en el mes; si lo pusiéramos en los dos lugares, lo restaríamos dos veces.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Aporte por unidad" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo ancho">Aporte por unidad: precio menos lo que cuesta esa unidad</h2>
+    <div class="dos" style="--cols: 1.4fr 1fr">
+      <table class="libro">
+        <thead><tr><th>Producto</th><th class="num" style="text-align:right">Precio</th><th class="num" style="text-align:right">− Costo</th><th class="num" style="text-align:right">= Aporte</th></tr></thead>
+        <tbody>
+          <tr data-paso="1"><td>Jugo de naranja</td><td class="num">Q20.00</td><td class="num">Q12.00</td><td class="num"><b>Q8.00</b></td></tr>
+          <tr data-paso="1"><td>Licuado con leche</td><td class="num">Q25.00</td><td class="num">Q15.00</td><td class="num"><b>Q10.00</b></td></tr>
+          <tr data-paso="1"><td>Ensalada de frutas</td><td class="num">Q15.00</td><td class="num">Q7.00</td><td class="num"><b>Q8.00</b></td></tr>
+          <tr data-paso="1"><td>Limonada</td><td class="num">Q15.00</td><td class="num">Q9.00</td><td class="num"><b>Q6.00</b></td></tr>
+        </tbody>
+      </table>
+      <div class="pila" data-paso="2">
+        <p class="texto">El licuado deja más por vaso. La limonada, menos.</p>
+        <p class="texto">El aporte todavía <b>no es ganancia</b>: con él se pagan el espacio, el teléfono y el trabajo de Ana.</p>
+      </div>
+    </div>
+    <p class="pie" data-paso="2">Si solo miráramos esta columna, Ana quitaría la limonada. Falta ver el tiempo.</p>
+  </div>
+  <aside class="notas"><p><b>3 min · 2 pasos.</b> Pide que calculen en su hoja el aporte de uno de sus productos mientras tanto.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Dos porcentajes distintos" data-seccion="Los datos" data-min="3" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo">La ensalada: ¿deja 53% o 114%? Las dos, según con qué se compare</h2>
+    <div class="pila">
+      <div class="dos-porc">
+        <div data-paso="1">
+          <h3>Porcentaje del precio</h3>
+          <p class="operacion">Q8.00 de aporte ÷ Q15.00 de precio</p>
+          <p class="res cifra">53.3 %</p>
+          <p class="texto">De cada Q15.00 que cobra, Q8.00 quedan como aporte. Es el <b>margen sobre la venta</b>.</p>
+        </div>
+        <div data-paso="2">
+          <h3>Porcentaje agregado al costo</h3>
+          <p class="operacion">Q8.00 de aporte ÷ Q7.00 de costo</p>
+          <p class="res cifra">114.3 %</p>
+          <p class="texto">Sobre lo que le cuesta, le agrega un poco más del doble.</p>
+        </div>
+      </div>
+      <p class="texto" data-paso="3"><b>Error habitual:</b> decir «le gano 114 %» y creer que de cada venta queda más de lo que se cobra. Hay que decir siempre <b>sobre qué</b> es el porcentaje. <button type="button" class="i" data-info="i-porcentajes" aria-label="Los porcentajes del taller 01">i</button></p>
+    </div>
+    <p class="pie" data-paso="3">Un porcentaje alto no dice si un producto conviene: no dice cuánto se vende ni cuánto tiempo pide.</p>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> En el taller 01 vimos lo mismo con el precio: «agregar 25 % a la base» no es lo mismo que «que 25 % del precio sea resultado».</p>
+    <p>Margen sobre la venta de los cuatro: jugo 40 %, licuado 40 %, ensalada 53.3 %, limonada 40 %.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="El tiempo de cada uno" data-seccion="Los datos" data-min="2" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo ancho">El tiempo que pide cada producto</h2>
+    <table class="menu">
+      <thead><tr><th>Producto</th><th class="num">Minutos por unidad</th><th class="num">× vendidas</th><th class="num">= Horas al mes</th></tr></thead>
+      <tbody>
+        <tr><td>Jugo de naranja</td><td class="num">5</td><td class="num">120</td><td class="num">600 min = 10 h</td></tr>
+        <tr><td>Licuado con leche</td><td class="num">12</td><td class="num">40</td><td class="num">480 min = 8 h</td></tr>
+        <tr class="resalte"><td>Ensalada de frutas</td><td class="num">15</td><td class="num">50</td><td class="num">750 min = 12 h 30 min</td></tr>
+        <tr><td>Limonada</td><td class="num">3</td><td class="num">80</td><td class="num">240 min = 4 h</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td></td><td></td><td class="num">34 h 30 min</td></tr></tfoot>
+    </table>
+    <p class="pie">Ana cronometró una semana: lavar, picar, preparar y servir. La ensalada se lleva más de un tercio de su tiempo. <span class="tipo-cifra" data-t="contado">Medido</span></p>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Pregunta: «¿Han medido cuánto tardan en hacer lo que venden?». Muchos nunca lo han hecho; es la tarea más útil para llevar a casa.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Una sola meta" data-seccion="Los datos" data-min="2" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo">Todos los productos cubren la misma meta del mes</h2>
+    <div class="dos" style="--cols: 1fr 1.1fr">
+      <table class="libro">
+        <tbody>
+          <tr><td>Pagos del negocio: espacio Q150.00 + teléfono Q50.00</td><td class="num">Q200.00</td></tr>
+          <tr><td>Trabajo de Ana: 34.5 h × Q20.00</td><td class="num">Q690.00</td></tr>
+        </tbody>
+        <tfoot><tr><td>Lo que hay que cubrir en el mes</td><td class="num">Q890.00</td></tr></tfoot>
+      </table>
+      <div class="pila">
+        <p class="texto">Estos pagos son <b>del negocio</b>, no de un producto. No se reparten Q200.00 a cada uno.</p>
+        <p class="texto">El trabajo de Ana se cuenta aquí, una sola vez: por las horas que de verdad trabaja.</p>
+      </div>
+    </div>
+    <p class="pie">Si Ana trabaja menos horas, se paga menos por su trabajo; su dinero total es resultado + trabajo.</p>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> En el taller 01 la meta era Q600.00 con 20 horas de trabajo. Ahora trabaja 34.5 horas: su meta es otra porque su mes es otro.</p></aside>
+</section>
+
+<!-- ===================================================== C · TRES FORMAS DE COMPARAR (15 min) -->
+<section class="pantalla" data-titulo="Aporte por hora" data-seccion="Comparar" data-min="4" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo ancho">Aporte por hora: cuánto deja cada hora de trabajo</h2>
+    <div class="dos" style="--cols: 1.5fr 1fr">
+      <table class="libro">
+        <thead><tr><th>Producto</th><th class="num" style="text-align:right">Aporte</th><th class="num" style="text-align:right">Unidades en 60 min</th><th class="num" style="text-align:right">Por hora</th></tr></thead>
+        <tbody>
+          <tr data-paso="1"><td>Jugo de naranja</td><td class="num">Q8.00</td><td class="num">60 ÷ 5 = 12</td><td class="num"><b>Q96.00</b></td></tr>
+          <tr data-paso="2"><td>Licuado con leche</td><td class="num">Q10.00</td><td class="num">60 ÷ 12 = 5</td><td class="num"><b>Q50.00</b></td></tr>
+          <tr data-paso="3"><td>Ensalada de frutas</td><td class="num">Q8.00</td><td class="num">60 ÷ 15 = 4</td><td class="num"><b>Q32.00</b></td></tr>
+          <tr data-paso="4"><td>Limonada</td><td class="num">Q6.00</td><td class="num">60 ÷ 3 = 20</td><td class="num"><b>Q120.00</b></td></tr>
+        </tbody>
+      </table>
+      <div class="pila" data-paso="4">
+        <p class="texto">La limonada, que menos deja por vaso, es la que más deja <b>por hora</b>.</p>
+        <p class="texto">La ensalada deja lo mismo que un jugo por unidad, pero tarda el triple.</p>
+      </div>
+    </div>
+    <p class="pie" data-paso="4">Cuando el tiempo es lo que falta, el aporte por hora pesa más que el aporte por unidad.</p>
+  </div>
+  <aside class="notas">
+    <p><b>4 min · 4 pasos.</b> Operación: aporte × (60 ÷ minutos). Pide al grupo que calcule la limonada antes de revelarla: Q6.00 × 20 = Q120.00.</p>
+    <p>Que lo calculen para uno de sus productos en la hoja.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Tres órdenes distintos" data-seccion="Comparar" data-min="3" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo ancho">El mismo menú, ordenado de tres maneras</h2>
+    <div class="rankings">
+      <div class="ranking" data-paso="1"><h3>Por unidad<small>lo que deja cada venta</small></h3><ol>
+        <li><span>Licuado</span><span class="rb"><i style="width:100%"></i><b>Q10.00</b></span></li>
+        <li><span>Jugo</span><span class="rb"><i style="width:80%"></i><b>Q8.00</b></span></li>
+        <li class="ens"><span>Ensalada</span><span class="rb"><i style="width:80%"></i><b>Q8.00</b></span></li>
+        <li><span>Limonada</span><span class="rb"><i style="width:60%"></i><b>Q6.00</b></span></li></ol></div>
+      <div class="ranking" data-paso="2"><h3>Por hora<small>lo que deja el tiempo de Ana</small></h3><ol>
+        <li><span>Limonada</span><span class="rb"><i style="width:100%"></i><b>Q120.00</b></span></li>
+        <li><span>Jugo</span><span class="rb"><i style="width:80%"></i><b>Q96.00</b></span></li>
+        <li><span>Licuado</span><span class="rb"><i style="width:41.7%"></i><b>Q50.00</b></span></li>
+        <li class="ens"><span>Ensalada</span><span class="rb"><i style="width:26.7%"></i><b>Q32.00</b></span></li></ol></div>
+      <div class="ranking" data-paso="3"><h3>Al mes<small>aporte × unidades vendidas</small></h3><ol>
+        <li><span>Jugo</span><span class="rb"><i style="width:100%"></i><b>Q960.00</b></span></li>
+        <li><span>Limonada</span><span class="rb"><i style="width:50%"></i><b>Q480.00</b></span></li>
+        <li><span>Licuado</span><span class="rb"><i style="width:41.7%"></i><b>Q400.00</b></span></li>
+        <li class="ens"><span>Ensalada</span><span class="rb"><i style="width:41.7%"></i><b>Q400.00</b></span></li></ol></div>
+    </div>
+    <p class="pie" data-paso="3">Ningún orden sirve solo. Cada uno responde una pregunta distinta. Las barras de cada columna se comparan dentro de esa columna.</p>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> Al mes: jugo 120 × Q8.00; limonada 80 × Q6.00; licuado 40 × Q10.00; ensalada 50 × Q8.00.</p>
+    <p>La ensalada queda última por hora, pero aporta Q400.00 al mes, igual que el licuado. Quitarla tiene un costo.</p>
+  </aside>
+</section>
+
+<section class="pantalla campo pregunta" data-titulo="¿Quitamos la limonada?" data-seccion="Comparar" data-min="2" data-caso="Caso Ana · menú" data-revela="1">
+  <div class="marco">
+    <h2 class="titulo">La limonada deja menos por vaso. ¿La quitamos?</h2>
+    <div class="dos" style="--cols: 1fr 1.1fr">
+      <ul class="opciones">
+        <li><button type="button" class="opcion"><span class="letra">A</span><span>Sí: Q6.00 es el aporte más bajo.</span><span class="marca" data-texto=""></span></button></li>
+        <li><button type="button" class="opcion correcta"><span class="letra">B</span><span>No: es la que más deja por hora y aporta Q480.00 al mes.</span><span class="marca" data-texto=""></span></button></li>
+      </ul>
+      <div class="explica" data-paso="1">
+        <p class="texto"><b>Respuesta B.</b> Quitarla le quitaría a Ana Q480.00 al mes y le ahorraría solo 4 horas.</p>
+        <p class="texto">Además, sirve a la fila: se entrega rápido. Un producto no se elimina solo porque deja menos por unidad.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Compara con la votación de la pantalla 5. Pregunta: «¿Qué cambió en lo que pensaban?».</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="El resultado del mes" data-seccion="Comparar" data-min="4" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo ancho">Los cuatro aportes juntos cubren la meta y dejan excedente</h2>
+    <div class="pila">
+      <div data-meta-fija="original"></div>
+      <table class="libro" style="max-width:calc(var(--u)*62)" data-paso="1">
+        <tbody>
+          <tr><td>Aporte de los cuatro productos</td><td class="num">Q2,240.00</td></tr>
+          <tr><td>− Pagos del negocio</td><td class="num">Q200.00</td></tr>
+          <tr><td>− Trabajo de Ana (34.5 h × Q20.00)</td><td class="num">Q690.00</td></tr>
+        </tbody>
+        <tfoot><tr><td>Resultado antes de impuestos <button type="button" class="i" data-info="i-impuestos" aria-label="Sobre los impuestos">i</button></td><td class="num">Q1,350.00</td></tr></tfoot>
+      </table>
+    </div>
+    <p class="pie" data-paso="1">Para Ana, en total: Q1,350.00 de resultado + Q690.00 por su trabajo = Q2,040.00 al mes.</p>
+  </div>
+  <aside class="notas">
+    <p><b>4 min · 1 paso.</b> La barra de arriba muestra el aporte de cada producto con su color; la de abajo, lo que hay que cubrir, y el excedente a la vista (no se corta).</p>
+    <p>Q960.00 + Q400.00 + Q400.00 + Q480.00 = Q2,240.00. Q2,240.00 − Q890.00 = Q1,350.00.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Qué nos dice" data-seccion="Comparar" data-min="2" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo">El problema de Ana no es un producto: es el tiempo de la ensalada</h2>
+    <div class="dos">
+      <ul class="lista texto">
+        <li>Todos sus productos dejan aporte: ninguno pierde.</li>
+        <li>La ensalada aporta Q400.00 al mes y acompaña ventas de jugo.</li>
+        <li>Pero pide 12.5 de sus 34.5 horas, a Q32.00 por hora.</li>
+      </ul>
+      <div class="hoja pila">
+        <p class="rotulo">Tres caminos para probar</p>
+        <p class="texto"><b>A.</b> Dejar de vender la ensalada.</p>
+        <p class="texto"><b>B.</b> Cambiar el proceso: prepararla en lote.</p>
+        <p class="texto"><b>C.</b> Cambiar el precio: Q18.00.</p>
+      </div>
+    </div>
+    <p class="pie">Probaremos uno a la vez, para saber qué causa cada resultado.</p>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Pregunta: «¿Qué otro camino se les ocurre?». Anótalo; se puede probar en el comparador de práctica.</p></aside>
+</section>
+
+<!-- ===================================================== D · PROBAR Y REVISAR (20 min) -->
+<section class="pantalla" data-titulo="Comparador" data-seccion="Probar y revisar" data-min="5" data-caso="Caso Ana · simulación">
+  <div class="marco">
+    <h2 class="titulo ancho">Comparador: un cambio a la vez</h2>
+    <div class="sim">
+      <div class="pila-c">
+        <p><span class="escenario-actual esc4-nombre"></span></p>
+        <div class="barras-prod" id="ana4-barras"></div>
+        <table class="mini"><tbody id="ana4-numeros"></tbody></table>
+      </div>
+      <div class="sim-ctl">
+        <p class="rotulo">Probar</p>
+        <div class="grupo-b" role="group" aria-label="Cambio a probar">
+          <button type="button" data-esc4="original">Menú actual</button>
+          <button type="button" data-esc4="sin">A · Dejar la ensalada</button>
+          <button type="button" data-esc4="lote">B · Ensalada en lote</button>
+          <button type="button" data-esc4="precio">C · Ensalada a Q18</button>
+        </div>
+        <div id="ana4-veredicto" aria-live="polite"></div>
+        <button type="button" class="boton sec" data-ana4-reiniciar>Reiniciar comparador</button>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>5 min.</b> Recorre A, B y C con el grupo. En cada uno pregunta: «¿Cabe en 30 horas? ¿Cuánto recibe Ana en total?».</p>
+    <p>La tabla compara con el menú actual. Los cambios no modifican los datos del caso.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="A · Dejar la ensalada" data-seccion="Probar y revisar" data-min="2" data-caso="Caso Ana · alternativa A">
+  <div class="marco">
+    <h2 class="titulo">Dejar la ensalada libera horas, pero cuesta Q400.00 al mes</h2>
+    <div class="dos" style="--cols: 1.2fr 1fr">
+      <table class="libro">
+        <thead><tr><th></th><th class="num" style="text-align:right">Menú actual</th><th class="num" style="text-align:right">Sin ensalada</th></tr></thead>
+        <tbody>
+          <tr><td>Horas al mes</td><td class="num">34.5 h</td><td class="num">22 h</td></tr>
+          <tr><td>Aporte del mes</td><td class="num">Q2,240.00</td><td class="num">Q1,840.00</td></tr>
+          <tr><td>Resultado antes de impuestos</td><td class="num">Q1,350.00</td><td class="num">Q1,200.00</td></tr>
+          <tr><td><b>Para Ana, en total</b></td><td class="num"><b>Q2,040.00</b></td><td class="num"><b>Q1,640.00</b></td></tr>
+        </tbody>
+      </table>
+      <div class="pila">
+        <p class="texto"><b>Lo que no sabemos:</b> cuántos clientes compran el jugo <i>porque</i> también hay ensalada. <span class="tipo-cifra" data-t="pendiente">pendiente</span></p>
+        <p class="texto">Si algunos dejan de venir, perdería también ventas de jugo. Ese dato no está en la tabla.</p>
+      </div>
+    </div>
+    <p class="pie">Ahorra 12.5 horas, más de las que buscaba, pero recibe Q400.00 menos. Es el camino más caro para ganar tiempo.</p>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Q1,640.00 = Q1,200.00 + 22 h × Q20.00. La diferencia con Q2,040.00 es exactamente el aporte de la ensalada.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="B · Ensalada en lote" data-seccion="Probar y revisar" data-min="2" data-caso="Caso Ana · alternativa B">
+  <div class="marco">
+    <h2 class="titulo">Preparar la ensalada en lote: mismo dinero, 5 horas menos</h2>
+    <div class="dos" style="--cols: 1.2fr 1fr">
+      <table class="libro">
+        <thead><tr><th></th><th class="num" style="text-align:right">Menú actual</th><th class="num" style="text-align:right">En lote</th></tr></thead>
+        <tbody>
+          <tr><td>Minutos por ensalada</td><td class="num">15</td><td class="num">9</td></tr>
+          <tr><td>Horas al mes</td><td class="num">34.5 h</td><td class="num">29.5 h ✓</td></tr>
+          <tr><td>Aporte por hora de la ensalada</td><td class="num">Q32.00</td><td class="num">Q53.33</td></tr>
+          <tr><td>Resultado antes de impuestos</td><td class="num">Q1,350.00</td><td class="num">Q1,450.00</td></tr>
+          <tr><td><b>Para Ana, en total</b></td><td class="num"><b>Q2,040.00</b></td><td class="num"><b>Q2,040.00</b></td></tr>
+        </tbody>
+      </table>
+      <div class="pila">
+        <p class="texto"><b>Qué cambia:</b> pica la fruta de 10 vasos de una vez, antes de abrir, en lugar de vaso por vaso.</p>
+        <p class="texto"><b>Supuesto:</b> baja a 9 minutos por vaso. Hay que medirlo. <span class="tipo-cifra" data-t="previsto">supuesto</span></p>
+        <p class="pequeno"><b>Riesgo:</b> si sobra fruta picada, se pierde. Eso subiría el costo por vaso.</p>
+      </div>
+    </div>
+    <p class="pie">El resultado sube Q100.00 solo porque se paga 5 horas menos; el dinero total de Ana es el mismo y gana 5 horas.</p>
+  </div>
+  <aside class="notas">
+    <p><b>2 min.</b> 50 ensaladas × 6 minutos menos = 300 minutos = 5 horas. Aporte por hora: Q8.00 × 60 ÷ 9 = Q53.33.</p>
+    <p>Insiste en la lectura correcta: no «gana Q100.00 más», sino «gana lo mismo trabajando 5 horas menos».</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="C · Ensalada a Q18" data-seccion="Probar y revisar" data-min="2" data-caso="Caso Ana · simulación C">
+  <div class="marco">
+    <h2 class="titulo">Subir el precio a Q18.00 depende de cuántas siga vendiendo</h2>
+    <div class="dos" style="--cols: 1.1fr 1fr">
+      <div class="pila">
+        <p class="texto">Aporte nuevo: Q18.00 − Q7.00 = <b class="cifra">Q11.00</b> por ensalada.</p>
+        <p class="texto">Para aportar lo mismo que hoy (Q400.00): Q400.00 ÷ Q11.00 = 36.4. Necesita vender <b>al menos 37</b> al mes.</p>
+        <p class="texto"><b>Simulación:</b> si vendiera 40, aportaría Q440.00 y trabajaría 32 horas.</p>
+      </div>
+      <div class="hoja pila">
+        <p class="rotulo">Lo que dice y lo que no</p>
+        <p class="texto">Gana Q40.00 más al mes, pero <b>no cabe en 30 horas</b>.</p>
+        <p class="texto">Nadie sabe cuántas vendería a Q18.00: los 40 son un supuesto. <span class="tipo-cifra" data-t="pendiente">por probar</span></p>
+      </div>
+    </div>
+    <p class="pie">Un cambio de precio se prueba contando ventas; el número 37 es la referencia para saber si funcionó.</p>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> El «punto de comparación» (37 ensaladas) es igual al punto de equilibrio del taller 01, aplicado a un solo producto: lo que se necesita para no perder frente a hoy.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Comparar alternativas con IA" data-seccion="Probar y revisar" data-min="3" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo">La IA compara y busca riesgos; las cuentas ya están hechas</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Le damos los resultados del comparador y le pedimos que piense en riesgos, datos faltantes y cómo probar.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que no recomiende quitar un producto solo por su aporte por unidad.</li>
+            <li>Que diga sobre qué es cada porcentaje.</li>
+            <li>Que no sume el trabajo de Ana dos veces.</li>
+            <li>Que no suponga ventas que nadie midió.</li>
+          </ul>
+        </div>
+        <p class="pequeno">ChatGPT requiere internet. La presentación no se conecta a ninguna IA. <button type="button" class="i" data-info="i-ia" aria-label="Cómo usamos la IA">i</button></p>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 1 · Comparar alternativas</b>
+          <button type="button" class="boton" data-copiar="c-alternativas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-alternativas">Ayúdame a comparar tres alternativas para mi negocio. Las cuentas ya las hice; no las rehagas.
+
+QUÉ QUIERO RESOLVER: trabajar 30 horas al mes en lugar de 34.5, sin perder dinero si se puede, y elegir una mejora para probar.
+
+MI NEGOCIO (datos de un mes): vendo jugos y otros productos en un puesto. Mi trabajo lo valoro en Q20.00 por hora y lo cuento una sola vez en el mes. Mis pagos fijos del mes son Q200.00.
+- Jugo de naranja: Q20.00, costo Q12.00, 5 min, 120 al mes.
+- Licuado: Q25.00, costo Q15.00, 12 min, 40 al mes.
+- Ensalada de frutas: Q15.00, costo Q7.00, 15 min, 50 al mes. Muchos la compran con un jugo.
+- Limonada: Q15.00, costo Q9.00, 3 min, 80 al mes.
+
+RESULTADOS QUE CALCULÉ (para mí: resultado + mi trabajo):
+- Menú actual: 34.5 h, Q2,040.00.
+- A · Quitar la ensalada: 22 h, Q1,640.00.
+- B · Ensalada en lote (9 min, sin medir aún): 29.5 h, Q2,040.00.
+- C · Ensalada a Q18.00 (si vendiera 40, sin saberlo): 32 h, Q2,080.00.
+
+LO QUE NO SÉ: cuántos clientes compran jugo por la ensalada; si en lote baja de verdad a 9 minutos; cuántas ensaladas vendería a Q18.00.
+
+NO INVENTES ventas, precios ni porcentajes. No cambies mis cálculos; si ves un error, dime dónde. No hables de impuestos.
+
+RESPÓNDEME CON:
+1. Los riesgos de cada alternativa, en frases cortas.
+2. Cuál probarías primero y por qué, sin darlo por seguro.
+3. Qué debo medir durante la prueba y por cuántos días.
+4. Qué dato me haría cambiar de opinión.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>3 min.</b> Si hay conexión, alguien puede probarla. Si no, sigue con la respuesta de ejemplo de la pantalla siguiente.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Una respuesta con errores" data-seccion="Probar y revisar" data-min="3" data-caso="Caso Ana · menú">
+  <div class="marco">
+    <h2 class="titulo">Ejemplo didáctico: una respuesta con cuatro errores</h2>
+    <div class="dos" style="--cols: 1.1fr 1fr">
+      <div class="ia-demo">
+        <p class="ia-demo-cab"><span>Respuesta preescrita para el taller</span><span>No es una conexión real</span></p>
+        <ol>
+          <li class="error"><span class="m">1</span><span>Quita la limonada: es la que menos te deja por vaso, solo Q6.00.</span></li>
+          <li class="error"><span class="m">2</span><span>Tu producto estrella es la ensalada: le ganas 114 %.</span></li>
+          <li class="error"><span class="m">3</span><span>Suma Q20.00 por hora al costo de cada producto y resta también tu trabajo del mes.</span></li>
+          <li class="error"><span class="m">4</span><span>Sube la ensalada a Q18.00: venderás las mismas 50.</span></li>
+          <li><span class="m">·</span><span>El aporte por unidad está bien calculado: precio menos costo.</span></li>
+        </ol>
+      </div>
+      <ol class="errores-ia">
+        <li data-paso="1"><b>1</b><span><b>Miró solo una medida.</b> La limonada es la que más deja por hora (Q120.00) y aporta Q480.00 al mes.</span></li>
+        <li data-paso="2"><b>2</b><span><b>No dijo sobre qué es el porcentaje.</b> 114 % es sobre el costo; del precio, 53.3 %. Y por hora es la última.</span></li>
+        <li data-paso="3"><b>3</b><span><b>Contó el trabajo dos veces.</b> Va una sola vez: en el mes, por las horas trabajadas.</span></li>
+        <li data-paso="4"><b>4</b><span><b>Inventó la demanda.</b> Nadie sabe cuántas se venderán a Q18.00. Hay que probar y contar.</span></li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notas"><p><b>3 min · 4 pasos.</b> Da un minuto para buscar errores. Aclara que esta respuesta la escribimos para el taller.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Explícamelo más sencillo" data-seccion="Probar y revisar" data-min="1" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">«Explícamelo más sencillo con uno de mis productos»</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Para repasar en casa la diferencia entre aporte por unidad, por hora y al mes.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que use tus números o diga que son de ejemplo.</li>
+            <li>Que no cuente tu trabajo en el costo por unidad.</li>
+            <li>Que haga cada operación paso a paso.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 2 · Explícamelo más sencillo</b>
+          <button type="button" class="boton" data-copiar="c-sencillo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-sencillo">Explícamelo más sencillo con uno de mis productos.
+
+Vendo [PRODUCTO] a Q[PRECIO]. Cada uno me cuesta Q[COSTO] en materiales y empaque, y tardo [MINUTOS] minutos en hacerlo. Vendo unos [CANTIDAD] al mes.
+
+Con ese producto, explícame:
+- qué es el aporte por unidad y cómo se calcula;
+- qué es el aporte por hora y por qué puede cambiar el orden de mis productos;
+- la diferencia entre el porcentaje del precio y el porcentaje agregado al costo.
+
+Muestra cada operación paso a paso, en quetzales con dos decimales. Usa frases cortas. No cuentes mi trabajo dentro del costo de la unidad. No hables de impuestos.
+
+Al final, hazme 2 preguntas para comprobar que entendí, y espera mi respuesta antes de darme la solución.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>1 min.</b> Que la guarden y cambien lo que está entre corchetes.</p></aside>
+</section>
+
+<section class="pantalla campo" data-titulo="La mejora que Ana prueba" data-seccion="Probar y revisar" data-min="1" data-caso="Caso Ana · plan de prueba">
+  <div class="marco">
+    <h2 class="titulo">Ana prueba la ensalada en lote durante dos semanas</h2>
+    <div class="prueba">
+      <dl>
+        <dt>Qué cambia</dt><dd>Pica la fruta de 10 ensaladas de una vez, antes de abrir.</dd>
+        <dt>Qué no cambia</dt><dd>Precio (Q15.00), tamaño y los demás productos.</dd>
+        <dt>Qué mide</dt><dd>Minutos por ensalada (cronometra 3 lotes), ensaladas vendidas, fruta picada que sobra.</dd>
+        <dt>Funciona si</dt><dd>Baja a 10 minutos o menos y no sobra más de 1 ensalada por lote.</dd>
+        <dt>Después</dt><dd>Vuelve al comparador con lo medido. Si funciona y quiere, prueba el precio en otro mes.</dd>
+      </dl>
+    </div>
+  </div>
+  <aside class="notas"><p><b>1 min.</b> Una mejora fundamentada dice qué cambia, qué se mide y cuándo se considera lograda. Una sola a la vez.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="El comparador de productos" data-seccion="Probar y revisar" data-min="1">
+  <div class="marco">
+    <h2 class="titulo">«Comparador de productos»: la herramienta para revisar tu menú</h2>
+    <div class="dos" style="--cols: 1.2fr 1fr">
+      <div class="pila">
+        <p class="texto"><b>Estado: en preparación.</b> Todavía no está disponible como herramienta aparte. Hoy practicas con la hoja y con el comparador de esta presentación.</p>
+        <p class="rotulo">Lo que hará</p>
+        <ul class="lista texto">
+          <li>Comparar de 3 a 5 productos o servicios con las mismas medidas.</li>
+          <li>Probar un cambio de precio, costo, tiempo o ventas, uno a la vez.</li>
+          <li>Guardar tus pruebas y lo que mediste.</li>
+          <li>Usar los costos de «Mi Negocio Finanzas IA» y las ventas de «Mi cierre diario».</li>
+        </ul>
+      </div>
+      <div class="hoja pila">
+        <p class="rotulo">Lo que no hará</p>
+        <p class="texto">No decide qué producto quitar. Muestra las cuentas; la decisión considera también lo que la tabla no ve.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>1 min.</b> No existe todavía. No prometas fechas.</p></aside>
+</section>
+
+<!-- ===================================================== E · TUS PRODUCTOS (20 min) -->
+<section class="pantalla" data-titulo="Tu turno" data-seccion="Tus productos" data-min="2" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Tu turno: compara de 3 a 5 productos</h2>
+    <div class="dos">
+      <div class="pila">
+        <p class="rotulo">Elige un camino</p>
+        <p class="texto"><b>A · Tus productos o servicios.</b> Precio, costo por unidad, minutos y cuántos vendes al mes.</p>
+        <p class="texto"><b>B · El caso de Lucía.</b> Si hoy no tienes tus datos.</p>
+        <p class="pequeno regla-arriba">Si no sabes los minutos, estímalos y márcalo como supuesto; mídelos esta semana. Si falta un dato, el comparador no lo convierte en cero.</p>
+      </div>
+      <ol class="pasos texto">
+        <li>Anota tus pagos fijos del mes y el valor de tu hora.</li>
+        <li>Anota cada producto con sus cuatro datos.</li>
+        <li>Mira los tres órdenes: por unidad, por hora, al mes.</li>
+        <li>Prueba un solo cambio.</li>
+        <li>Escribe tu plan de prueba.</li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Para servicios (corte de cabello, reparación), la unidad es un servicio; el tiempo suele ser el dato que más pesa.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="El caso de Lucía" data-seccion="Tus productos" data-min="2" data-caso="Caso alternativo · Lucía" data-caso-tipo="lucia">
+  <div class="marco">
+    <h2 class="titulo">Caso alternativo: el aguacate subió y Lucía duda</h2>
+    <div class="dos" style="--cols: 0.9fr 2fr">
+      <div class="pila">
+        <p class="texto">Lucía vende tostadas, atol y chuchitos los fines de semana. Caso <b>ficticio</b>, con sus propios datos.</p>
+        <p class="texto">Pagos fijos del mes: <b class="cifra">Q510.00</b> (gas Q270.00 + Doña Tere Q240.00). Su hora: <b class="cifra">Q20.00</b>. Quiere trabajar hasta 20 horas.</p>
+        <p class="texto regla-arriba"><b>Su duda:</b> la tostada de guacamol ahora deja poco. ¿La quita, le sube el precio a Q7.00 o la deja?</p>
+      </div>
+      <table class="menu">
+        <thead><tr><th>Producto</th><th class="num">Precio</th><th class="num">Costo</th><th class="num">Min</th><th class="num">Al mes</th></tr></thead>
+        <tbody>
+          <tr><td>Tostada de frijol<small>la más pedida</small></td><td class="num">Q5.00</td><td class="num">Q2.00</td><td class="num">1.5</td><td class="num">160</td></tr>
+          <tr><td>Tostada de guacamol<small>la piden con el atol</small></td><td class="num">Q6.00</td><td class="num">Q3.50</td><td class="num">2</td><td class="num">120</td></tr>
+          <tr><td>Atol de elote<small>se vende con todo</small></td><td class="num">Q6.00</td><td class="num">Q2.00</td><td class="num">3</td><td class="num">100</td></tr>
+          <tr><td>Chuchito<small>por encargo, domingos</small></td><td class="num">Q7.00</td><td class="num">Q3.00</td><td class="num">6</td><td class="num">60</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Los minutos del atol incluyen cocinar la olla, repartidos entre los vasos. Los pagos fijos son los de Lucía en el taller 03 (dos recargas de gas y cuatro sábados de Doña Tere), aquí como datos de un mes.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Ordenar tus productos con IA" data-seccion="Tus productos" data-min="2" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Si no sabes tu costo por unidad, pide ayuda para sacarlo</h2>
+    <div class="dos con-consulta">
+      <div class="pila">
+        <p class="texto">Describe lo que compras y cuántas unidades te rinde. La IA arma la cuenta; tú la revisas.</p>
+        <div class="verificar">
+          <h3>Después, verifica</h3>
+          <ul class="lista">
+            <li>Que cada costo diga de dónde sale.</li>
+            <li>Que no meta tu trabajo ni el alquiler en el costo por unidad.</li>
+            <li>Que lo que no sabes quede pendiente.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="consulta">
+        <div class="consulta-cab"><b>Consulta 3 · Sacar el costo de mis productos</b>
+          <button type="button" class="boton" data-copiar="c-costos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 8h11v13H8z"/><path d="M5 16V3h11"/></svg>Copiar consulta</button></div>
+<pre id="c-costos">Ayúdame a calcular el costo por unidad de mis productos para compararlos. Las cuentas finales las revisaré yo.
+
+QUÉ QUIERO RESOLVER: saber cuánto me cuesta cada unidad y qué datos me faltan.
+
+MIS PRODUCTOS (de 3 a 5):
+[para cada uno: nombre, precio, qué compro para hacerlo, cuánto pago y cuántas unidades me rinde, empaque por unidad]
+
+EL TIEMPO: [minutos que tardo por unidad, si lo sé; si no, escribe «no lo he medido»]
+
+LO QUE VENDO AL MES: [cantidad aproximada de cada uno]
+
+NO INVENTES precios ni rendimientos. Si un dato falta, márcalo como «pendiente» y no lo cuentes como cero. No incluyas mi trabajo, el alquiler ni otros pagos del mes dentro del costo por unidad. No calcules impuestos.
+
+RESPÓNDEME CON:
+1. Una tabla: producto, precio, costo por unidad (con la operación), aporte por unidad.
+2. La lista de datos que me faltan.
+3. Cómo medir mis minutos por unidad esta semana.</pre>
+        <p class="estado-copia" aria-live="polite" style="padding:0 calc(var(--u)*1.3) calc(var(--u)*.6)"></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Solo para quien tenga datos propios y conexión.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Comparador · productos" data-seccion="Tus productos" data-min="7" data-caso="Práctica · caso Lucía" data-caso-tipo="lucia" data-comp>
+  <div class="marco">
+    <h2 class="titulo ancho">Paso 1: anota tus productos y su tiempo</h2>
+    <div class="mesa">
+      <div class="mesa-cab comp-cab">
+        <span class="conmutador" role="group" aria-label="Datos de la práctica"><button type="button" data-conjunto4="lucia" aria-pressed="true">Caso Lucía</button><button type="button" data-conjunto4="propio" aria-pressed="false">Mis datos</button></span>
+        <span class="mesa-etiqueta comp-etiqueta" data-tipo="lucia"></span>
+        <span class="derecha"><button type="button" class="boton sec" data-comp-reiniciar>Reiniciar</button></span>
+      </div>
+      <div class="panel">
+        <div class="fila-botones">
+          <label class="campo-texto">Pagos fijos del mes<span class="campo-q"><span aria-hidden="true">Q</span><input type="text" inputmode="decimal" id="comp-fijos" placeholder="0.00"></span></label>
+          <label class="campo-texto">Valor de tu hora<span class="campo-q"><span aria-hidden="true">Q</span><input type="text" inputmode="decimal" id="comp-hora" placeholder="0.00"></span></label>
+          <label class="campo-texto">Horas que quieres trabajar al mes<input type="text" inputmode="decimal" id="comp-horas" placeholder="opcional"></label>
+        </div>
+        <div class="desplaza sin-deslizar">
+          <table class="comp-filas">
+            <thead><tr><th>#</th><th>Producto</th><th>Precio</th><th>Costo por unidad</th><th>Minutos</th><th>Al mes</th><th>Para qué sirve</th><th><span class="solo-lectores">Quitar</span></th></tr></thead>
+            <tbody id="comp-filas"></tbody>
+          </table>
+        </div>
+        <div class="fila-botones"><button type="button" class="boton" id="comp-agregar">Agregar producto</button><span class="pequeno">Hasta 5. Un dato vacío queda pendiente, no es cero.</span></div>
+        <ul class="mesa-avisos comp-avisos" aria-live="polite"></ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>7 min.</b> Con «Caso Lucía» los datos ya están; revísalos con el grupo. Con «Mis datos», una persona voluntaria puede dictar los suyos.</p>
+    <p>«Costo por unidad» es solo materiales y empaque de esa unidad. Los pagos fijos y el trabajo van arriba, una sola vez.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Comparador · resultado" data-seccion="Tus productos" data-min="7" data-caso="Práctica · caso Lucía" data-caso-tipo="lucia" data-comp>
+  <div class="marco">
+    <h2 class="titulo ancho">Paso 2: compara y prueba un solo cambio</h2>
+    <div class="mesa">
+      <div class="mesa-cab">
+        <span class="conmutador" role="group" aria-label="Datos de la práctica"><button type="button" data-conjunto4="lucia" aria-pressed="true">Caso Lucía</button><button type="button" data-conjunto4="propio" aria-pressed="false">Mis datos</button></span>
+        <span class="mesa-etiqueta comp-etiqueta" data-tipo="lucia"></span>
+      </div>
+      <div class="comp">
+        <div class="pila-c" style="grid-column: span 2; min-height:0">
+          <div class="desplaza sin-deslizar" style="border:0;background:transparent"><table class="tabla-comp" id="comp-tabla"></table></div>
+          <div class="copiable pila-c">
+            <label class="campo-texto" for="comp-texto">Resumen para revisar con ChatGPT</label>
+            <textarea id="comp-texto" readonly></textarea>
+            <div class="fila-botones"><button type="button" class="boton" data-copiar="comp-texto">Copiar resumen</button><span class="estado-copia" aria-live="polite"></span></div>
+          </div>
+        </div>
+        <div class="pila-c">
+          <div class="cambio">
+            <p class="rotulo" style="margin:0">Probar un cambio</p>
+            <label class="campo-texto">Producto<select id="comp-cambio-prod"></select></label>
+            <div class="fila-cambio">
+              <label class="campo-texto">Qué cambia<select id="comp-cambio-campo"><option value="precio">Precio</option><option value="costo">Costo por unidad</option><option value="min">Minutos</option><option value="unidades">Ventas al mes</option></select></label>
+              <label class="campo-texto">Nuevo valor<input type="text" inputmode="decimal" id="comp-cambio-valor" placeholder="0"></label>
+            </div>
+            <p id="comp-cambio-nota" aria-live="polite"></p>
+            <button type="button" class="boton sec" id="comp-quitar-cambio">Quitar el cambio</button>
+          </div>
+          <table class="mini"><tbody id="comp-numeros"></tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>7 min.</b> Con Lucía: primero que lean la tabla y digan cuál deja más por hora. Luego prueben «Tostada de guacamol → precio → 7» y después, en su lugar, «ventas al mes → 90» con el precio original, para ver el efecto de una venta menor.</p>
+    <p>El cambio es una simulación y no modifica los datos de la tabla del paso 1.</p>
+  </aside>
+</section>
+
+<!-- ===================================================== F · COMPROBAR Y REPETIR (10 min) -->
+<section class="pantalla" data-titulo="Comprobación: Lucía" data-seccion="Comprobar y repetir" data-min="3" data-caso="Caso alternativo · Lucía" data-caso-tipo="lucia">
+  <div class="marco">
+    <h2 class="titulo ancho">Comprobación: el guacamol no se quita; se prueba su precio</h2>
+    <div class="dos" style="--cols: 1.45fr 1fr">
+      <table class="libro" data-paso="1">
+        <thead><tr><th>Producto</th><th class="num" style="text-align:right">Aporte</th><th class="num" style="text-align:right">Margen</th><th class="num" style="text-align:right">Por hora</th><th class="num" style="text-align:right">Al mes</th></tr></thead>
+        <tbody>
+          <tr><td>Tostada de frijol</td><td class="num">Q3.00</td><td class="num">60.0 %</td><td class="num">Q120.00</td><td class="num">Q480.00</td></tr>
+          <tr><td>Tostada de guacamol</td><td class="num">Q2.50</td><td class="num">41.7 %</td><td class="num">Q75.00</td><td class="num">Q300.00</td></tr>
+          <tr><td>Atol de elote</td><td class="num">Q4.00</td><td class="num">66.7 %</td><td class="num">Q80.00</td><td class="num">Q400.00</td></tr>
+          <tr><td>Chuchito</td><td class="num">Q4.00</td><td class="num">57.1 %</td><td class="num">Q40.00</td><td class="num">Q240.00</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total · 19 h</td><td></td><td></td><td></td><td class="num">Q1,420.00</td></tr></tfoot>
+      </table>
+      <div class="pila">
+        <p class="texto" data-paso="2">Resultado: Q1,420.00 − Q510.00 − Q380.00 (19 h) = <b class="cifra">Q530.00</b> antes de impuestos.</p>
+        <p class="texto" data-paso="3"><b>Guacamol a Q7.00:</b> aporte Q3.50. Para no perder frente a hoy necesita vender Q300.00 ÷ Q3.50 = 85.7, es decir <b>86 al mes</b>. Si vende 120, gana Q120.00 más; si vende 90, solo Q15.00.</p>
+        <p class="pequeno" data-paso="3">El chuchito es el último por hora, pero es por encargo: venta segura los domingos. Tampoco se quita por una sola medida.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas">
+    <p><b>3 min · 3 pasos.</b> Mejora fundamentada para Lucía: probar el guacamol a Q7.00 dos semanas y contar. Si vende 22 o más por semana (≈ 86 al mes), le conviene.</p>
+    <p>Comprobación del caso de 90: 90 × Q3.50 = Q315.00, frente a Q300.00 hoy.</p>
+  </aside>
+</section>
+
+<section class="pantalla" data-titulo="Errores habituales" data-seccion="Comprobar y repetir" data-min="2">
+  <div class="marco">
+    <h2 class="titulo ancho">Seis errores al comparar productos y lo que provocan</h2>
+    <table class="tabla">
+      <thead><tr><th>Error</th><th>Lo que provoca</th></tr></thead>
+      <tbody>
+        <tr><td>Quitar el producto que menos deja por unidad</td><td>Pierdes un producto que quizá deja más por hora o atrae clientes.</td></tr>
+        <tr><td>Decir un porcentaje sin decir sobre qué</td><td>«Le gano 114 %» parece mucho más de lo que queda de cada venta.</td></tr>
+        <tr><td>Poner el trabajo en el costo y también en el mes</td><td>Lo restas dos veces y todo parece dejar menos.</td></tr>
+        <tr><td>Repartir los pagos fijos entre los productos</td><td>Un producto parece perder aunque ayude a cubrir la meta.</td></tr>
+        <tr><td>Suponer que se venderá lo mismo con otro precio</td><td>La prueba promete un resultado que nadie midió.</td></tr>
+        <tr><td>Cambiar varias cosas a la vez</td><td>No sabes cuál funcionó.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Pide que marquen el que más se parece a lo que hacían antes del taller.</p></aside>
+</section>
+
+<section class="pantalla campo" data-titulo="Tu plan de prueba" data-seccion="Comprobar y repetir" data-min="3" data-caso="Para tu negocio" data-caso-tipo="propio">
+  <div class="marco">
+    <h2 class="titulo">Tu mejora, lista para probar dos semanas</h2>
+    <div class="dos" style="--cols: 1.2fr 1fr">
+      <ol class="pasos rutina">
+        <li><span>Elige un solo cambio.<small>Precio, costo, proceso o tamaño de un producto.</small></span></li>
+        <li><span>Calcula tu punto de comparación.<small>Cuánto tienes que vender para no perder frente a hoy.</small></span></li>
+        <li><span>Mide cada día lo que importa.<small>Ventas en tu cierre diario; minutos con el reloj del celular.</small></span></li>
+        <li><span>A las dos semanas, vuelve a comparar.<small>Con lo medido, no con lo que esperabas.</small></span></li>
+        <li><span>Decide: se queda, se ajusta o vuelves atrás.</span></li>
+      </ol>
+      <div class="decision">
+        <p class="rotulo">Decide ahora</p>
+        <p><span>Producto:</span><span class="linea"></span></p>
+        <p><span>Cambio:</span><span class="linea"></span></p>
+        <p><span>Qué mido:</span><span class="linea"></span></p>
+        <p><span>Funciona si:</span><span class="linea"></span></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>3 min.</b> Que cada persona llene su plan en la hoja. Si no tiene datos de minutos, su primera prueba puede ser simplemente medir.</p></aside>
+</section>
+
+<section class="pantalla" data-titulo="Cierre de la serie" data-seccion="Comprobar y repetir" data-min="2">
+  <div class="marco">
+    <h2 class="titulo">Cuatro preguntas que ahora puedes responder con tus números</h2>
+    <div class="dos">
+      <ol class="pasos texto">
+        <li><span><b>01 · Entender:</b> ¿cuánto me cuesta y cuánto me deja cada venta?</span></li>
+        <li><span><b>02 · Registrar:</b> ¿cuadra mi caja hoy?</span></li>
+        <li><span><b>03 · Planificar:</b> ¿me alcanza para lo que viene?</span></li>
+        <li><span><b>04 · Decidir:</b> ¿qué me conviene vender y qué pruebo primero?</span></li>
+      </ol>
+      <div class="hoja pila">
+        <p class="rotulo">Te llevas</p>
+        <ul class="lista texto">
+          <li>Tus productos comparados y tu plan de prueba.</li>
+          <li>La guía con la hoja en blanco y las consultas.</li>
+        </ul>
+        <p class="pequeno">La IA ayuda a ordenar y a explicar. Las cuentas se comprueban. La decisión es tuya.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notas"><p><b>2 min.</b> Pregunta final: «¿Qué cambio van a probar primero?». Entrega o envía la guía («guia-y-consultas.html»).</p></aside>
+</section>
+
+</main>
+
+/*@incluir:comun/barra.html*/
+
+<dialog id="dlg-datos" class="ancho" aria-labelledby="dlg-datos-titulo">
+  <div class="dlg-cab"><h2 id="dlg-datos-titulo">Datos de los casos</h2>
+    <button type="button" class="cerrar" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 5l14 14M19 5L5 19"/></svg>Cerrar</button></div>
+  <div class="dlg-cuerpo">
+    <div class="pestanas" role="tablist" aria-label="Casos">
+      <button type="button" role="tab" id="t-ana" aria-controls="d-ana" aria-selected="true">Ana · menú</button>
+      <button type="button" role="tab" id="t-esc" aria-controls="d-esc" aria-selected="false" tabindex="-1">Ana · cambios</button>
+      <button type="button" role="tab" id="t-lucia" aria-controls="d-lucia" aria-selected="false" tabindex="-1">Lucía</button>
+    </div>
+    <div role="tabpanel" id="d-ana" aria-labelledby="t-ana">
+      <p>Caso ficticio: un mes con el menú completo de Ana. Pagos del negocio Q200.00 (espacio y teléfono, del taller 01). Hora de trabajo Q20.00, contada una vez en el mes. Meta de Ana: trabajar 30 horas.</p>
+      <table><tbody>
+        <tr><td>Jugo de naranja 500 ml · Q20.00 · costo Q12.00 · 5 min · 120 al mes</td><td class="num">aporte Q8.00</td></tr>
+        <tr><td>Licuado con leche · Q25.00 · costo Q15.00 (fruta Q8, leche Q5, empaque Q2) · 12 min · 40</td><td class="num">aporte Q10.00</td></tr>
+        <tr><td>Ensalada de frutas · Q15.00 · costo Q7.00 (fruta Q5.50, vaso Q1.50) · 15 min · 50</td><td class="num">aporte Q8.00</td></tr>
+        <tr><td>Limonada · Q15.00 · costo Q9.00 (limón y azúcar Q7, empaque Q2) · 3 min · 80</td><td class="num">aporte Q6.00</td></tr>
+      </tbody></table>
+      <p>Aporte del mes Q2,240.00 · 34.5 h · trabajo Q690.00 · resultado antes de impuestos Q1,350.00 · para Ana Q2,040.00.</p>
+    </div>
+    <div role="tabpanel" id="d-esc" aria-labelledby="t-esc" hidden>
+      <table><tbody>
+        <tr><td>A · Sin ensalada: 22 h · aporte Q1,840.00 · resultado Q1,200.00</td><td class="num">para Ana Q1,640.00</td></tr>
+        <tr><td>B · Ensalada en lote, 9 min (supuesto): 29.5 h · aporte Q2,240.00 · resultado Q1,450.00</td><td class="num">para Ana Q2,040.00</td></tr>
+        <tr><td>C · Ensalada a Q18.00 vendiendo 40 (simulación): 32 h · aporte Q2,280.00 · resultado Q1,440.00</td><td class="num">para Ana Q2,080.00</td></tr>
+      </tbody></table>
+      <p>Punto de comparación de C: Q400.00 ÷ Q11.00 = 36.4 → al menos 37 ensaladas al mes.</p>
+    </div>
+    <div role="tabpanel" id="d-lucia" aria-labelledby="t-lucia" hidden>
+      <p>Caso alternativo, ficticio. Pagos fijos Q510.00 (gas Q270.00 y Doña Tere Q240.00). Hora Q20.00. Hasta 20 horas.</p>
+      <table><tbody>
+        <tr><td>Tostada de frijol · Q5.00 · costo Q2.00 · 1.5 min · 160</td><td class="num">Q120.00 / h</td></tr>
+        <tr><td>Tostada de guacamol · Q6.00 · costo Q3.50 · 2 min · 120</td><td class="num">Q75.00 / h</td></tr>
+        <tr><td>Atol de elote · Q6.00 · costo Q2.00 · 3 min · 100</td><td class="num">Q80.00 / h</td></tr>
+        <tr><td>Chuchito · Q7.00 · costo Q3.00 · 6 min · 60</td><td class="num">Q40.00 / h</td></tr>
+      </tbody></table>
+      <p>Aporte Q1,420.00 · 19 h · resultado Q530.00. Guacamol a Q7.00: punto de comparación 86 al mes.</p>
+    </div>
+  </div>
+</dialog>
+
+<template id="i-costo"><h3>Qué entra en el costo por unidad</h3>
+  <p>Solo lo que se gasta por cada unidad que se vende: materiales, empaque y otros costos que dependan de esa unidad. Igual que en el taller 01.</p>
+  <p>Si se pierde parte de una tanda, el costo sube: con 9 vasos vendibles en lugar de 10, el jugo costaría Q100.00 ÷ 9 + Q2.00 = Q13.11.</p>
+  <p>No entran el espacio, el teléfono ni el trabajo de la dueña: se cuentan una vez, en el mes.</p></template>
+<template id="i-porcentajes"><h3>Los dos porcentajes del taller 01</h3>
+  <p>En el taller 01, para pedir 25 %: «agregar 25 % a la base» da Q18.00 × 1.25 = Q22.50; «que 25 % del precio sea resultado» da Q18.00 ÷ 0.75 = Q24.00.</p>
+  <p>Aquí es lo mismo al revés: 114.3 % agregado al costo y 53.3 % del precio describen la misma ensalada.</p></template>
+<template id="i-impuestos"><h3>Antes de impuestos</h3>
+  <p>El resultado es una estimación de gestión con los datos del caso. La reserva para impuestos queda pendiente: no fijamos una tasa ni un régimen, como en el taller 01.</p></template>
+<template id="i-ia"><h3>Cómo usamos la IA en este taller</h3>
+  <p>El comparador calcula. La IA ayuda a pensar riesgos, datos que faltan y cómo probar, a partir de los resultados que le damos.</p>
+  <p>La presentación no está conectada a ninguna IA; ChatGPT necesita internet. La respuesta de la pantalla siguiente está escrita por nosotros como ejemplo.</p></template>
+
+<script>
+/*@incluir:comun/motor.js*/
+/*@incluir:04-que-me-conviene/taller04.js*/
+</script>
+</body>
+</html>

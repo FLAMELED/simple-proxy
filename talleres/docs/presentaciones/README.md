@@ -1,5 +1,18 @@
 # Presentaciones didácticas de los talleres
 
+**Presentaciones en HTML** (un archivo independiente por taller, con capturas y fuentes incluidas; funciona sin internet):
+- `Taller-Fichero-Mide-una-vez.html`
+- `Taller-Cortes-Planea-antes-de-cortar.html`
+
+Atajos de teclado:
+- `→`/`Espacio` siguiente, `←` anterior.
+- `Inicio`/`Fin` primera o última; número + `Enter` va a esa diapositiva.
+- `N` muestra u oculta las notas del facilitador.
+- `F` pantalla completa; `?` muestra la ayuda.
+- Al imprimir sale una diapositiva por página.
+
+Las mismas presentaciones están también en PowerPoint editable:
+
 | Taller | Presentación (PowerPoint editable, 16:9, con notas) | Guion del facilitador | Hoja de práctica con respuestas | Prompts |
 |---|---|---|---|---|
 | Mide una vez, encuéntralo siempre (Fichero) | `Taller-Fichero-Mide-una-vez.pptx` · 27 diapositivas | `word/guion-fichero.docx` | `word/hoja-practica-fichero.docx` | `word/prompts-fichero.docx` |
@@ -33,7 +46,8 @@ cd talleres
 node scripts/build-web.mjs
 node scripts/capturas-fichero.mjs && node scripts/capturas-cortes.mjs && node scripts/comprobar-ejercicio-fichero.mjs
 # pptxgenjs instalado en alguna carpeta (npm install pptxgenjs@3.12.0):
-NODE_PATH=/ruta/node_modules PPTXGENJS=/ruta/node_modules/pptxgenjs node docs/presentaciones/build-decks.mjs
+node docs/presentaciones/build-html.mjs   # HTML (no necesita dependencias)
+NODE_PATH=/ruta/node_modules PPTXGENJS=/ruta/node_modules/pptxgenjs node docs/presentaciones/build-decks.mjs   # PowerPoint
 cd docs/presentaciones && for f in guion-fichero guion-cortes hoja-practica-fichero hoja-practica-cortes prompts-fichero prompts-cortes; do pandoc $f.md -o word/$f.docx --resource-path=.; done
 ```
 

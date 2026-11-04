@@ -7,3 +7,4 @@ android/out/
 
 # Los APK firmados se versionan (la raíz del repo ignora dist/)
 !dist/
+package-lock.json

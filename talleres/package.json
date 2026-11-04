@@ -5,16 +5,16 @@
   "type": "module",
   "description": "Mi fichero de trabajos a medida y Mi plan de cortes: apps personales Android, sin conexión.",
   "scripts": {
+    "pretest": "node scripts/link-shared.mjs",
     "build:web": "node scripts/build-web.mjs",
     "test": "node --test tests/unit/*.test.mjs",
-    "test:e2e": "node scripts/build-web.mjs && node --test --test-concurrency=1 tests/e2e/*.test.mjs",
+    "test:e2e": "node scripts/link-shared.mjs && node scripts/build-web.mjs && node --test --test-concurrency=1 tests/e2e/*.test.mjs",
     "serve": "node scripts/build-web.mjs && node scripts/serve.mjs",
     "icons": "node scripts/render-icons.mjs",
     "build:apk": "node scripts/build-web.mjs && bash android/build.sh fichero && bash android/build.sh cortes",
     "ci": "npm test && npm run test:e2e"
   },
-  "devDependencies": {
-    "@fontsource/fraunces": "5.1.0",
-    "@fontsource/source-sans-3": "5.1.0"
+  "engines": {
+    "node": ">=20"
   }
 }

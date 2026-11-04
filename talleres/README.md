@@ -11,6 +11,8 @@ Las dos apps funcionan sin internet, sin cuentas y sin servidores. Guardan todo 
 
 ---
 
+Dónde se guardan los datos, uso sin internet y cómo funcionan las copias: [docs/datos-y-copias.md](docs/datos-y-copias.md).
+
 ## 1. Decisiones de alcance y tecnología
 
 **Por qué una app web local dentro de un APK nativo propio.**
@@ -71,9 +73,10 @@ La app nunca llama «óptimo» a un plano y explica sus condiciones en «Cómo s
 
 ## 3. Ejecutar y probar
 
+No hace falta `npm install`: las fuentes vienen incluidas en `shared/fonts/` y no hay dependencias. Basta Node 20 o más nuevo. Para las pruebas en navegador hace falta Playwright con Chromium.
+
 ```bash
 cd talleres
-npm install            # solo fuentes de desarrollo; Playwright se usa el del sistema
 npm test               # 32 pruebas unitarias
 npm run test:e2e       # 9 recorridos en Chromium (necesita Playwright + Chromium)
 npm run serve          # http://127.0.0.1:8080/fichero/  y  /cortes/

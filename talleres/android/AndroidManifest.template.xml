@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="@PKG@" android:versionCode="@VCODE@" android:versionName="@VNAME@">
+  <uses-sdk android:minSdkVersion="24" android:targetSdkVersion="34" />
+  <!-- Sin permiso de internet: la app funciona solo con lo que trae dentro. -->
+  <application android:label="@LABEL@" android:icon="@mipmap/ic_launcher"
+      android:allowBackup="false" android:hardwareAccelerated="true"
+      android:theme="@style/AppTheme" android:supportsRtl="false">
+    <meta-data android:name="statusBarColor" android:value="@COLOR@" />
+    <activity android:name="taller.shell.MainActivity" android:exported="true"
+        android:launchMode="singleTask"
+        android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|keyboard|uiMode"
+        android:windowSoftInputMode="adjustResize">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <provider android:name="taller.shell.PhotoProvider" android:authorities="@PKG@.fotos"
+        android:exported="false" android:grantUriPermissions="true" />
+  </application>
+</manifest>

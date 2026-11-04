@@ -4,3 +4,6 @@ android/out/
 *.jks
 *.keystore
 .test-profile*/
+
+# Los APK firmados se versionan (la raíz del repo ignora dist/)
+!dist/

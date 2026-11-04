@@ -144,6 +144,8 @@ async function vNuevoProyecto({ query }) {
       <label class="field"><span class="label">Nombre del proyecto <span class="req">(obligatorio)</span></span><input class="input" name="name" placeholder="Ej.: Cortinas sala y comedor" autocomplete="off"></label>
       <label class="field"><span class="label">Lugar</span><input class="input" name="place" placeholder="Ej.: Casa de la clienta, oficina" autocomplete="off"></label>
       <label class="field"><span class="label">Notas</span><textarea class="input" name="notes"></textarea></label>
+      <label class="check"><input type="checkbox" name="practice"> Es de práctica: marcarlo como <span class="tag tag-demo">Ejemplo</span></label>
+      <p class="hint">Lo marcado como ejemplo se puede quitar de una vez en «Copias» sin tocar tus trabajos reales.</p>
       <button class="btn btn-primary btn-block" type="submit">Crear proyecto</button>
     </form>
   </section>`;
@@ -705,8 +707,9 @@ view.addEventListener('submit', async (ev) => {
     } else if (form.dataset.form === 'new-project') {
       if (f.clientId === '__new' && !f.clientName.trim()) return fieldError(form, 'clientName', 'Escribe el nombre del cliente o elige uno de la lista.');
       if (!f.name.trim()) return fieldError(form, 'name', 'Escribe el nombre del proyecto.');
-      let client = f.clientId !== '__new' ? await store.getClient(f.clientId) : await store.saveClient({ name: f.clientName });
-      const p = await store.saveProject({ clientId: client.id, name: f.name, place: f.place, notes: f.notes, demo: client.demo });
+      const practice = f.practice === 'on';
+      const client = f.clientId !== '__new' ? await store.getClient(f.clientId) : await store.saveClient({ name: f.clientName, demo: practice });
+      const p = await store.saveProject({ clientId: client.id, name: f.name, place: f.place, notes: f.notes, demo: client.demo || practice });
       toast('Proyecto creado.'); go(`#/proyecto/${p.id}`);
     } else if (form.dataset.form === 'new-sheet') {
       if (!f.title.trim()) return fieldError(form, 'title', 'Escribe un nombre para la ficha.');

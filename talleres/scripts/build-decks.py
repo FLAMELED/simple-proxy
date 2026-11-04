@@ -1,6 +1,8 @@
 # Genera docs/taller-*/presentacion.html: una idea por pantalla, navegación con flechas, toque o deslizamiento.
-import html, pathlib
+import html, pathlib, base64
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+# Las fuentes van incrustadas: el archivo se abre solo, sin conexión y sin carpetas al lado.
+def font(name): return 'data:font/woff2;base64,' + base64.b64encode((ROOT/'shared/fonts'/name).read_bytes()).decode()
 
 def deck(title, colors, slides):
     paper, ink, accent, accent2 = colors
@@ -14,10 +16,10 @@ def deck(title, colors, slides):
                     + f'<h2>{s["h"]}</h2>' + (f'<div class="body">{body}</div>' if body else '') + src + '</div></section>')
     return f'''<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)}</title><style>
-@font-face{{font-family:Fraunces;font-weight:900;src:url(../../shared/fonts/fraunces-latin-900-normal.woff2)}}
-@font-face{{font-family:Fraunces;font-weight:900;font-style:italic;src:url(../../shared/fonts/fraunces-latin-900-italic.woff2)}}
-@font-face{{font-family:'Source Sans 3';font-weight:400;src:url(../../shared/fonts/source-sans-3-latin-400-normal.woff2)}}
-@font-face{{font-family:'Source Sans 3';font-weight:700;src:url(../../shared/fonts/source-sans-3-latin-700-normal.woff2)}}
+@font-face{{font-family:Fraunces;font-weight:900;src:url({font('fraunces-latin-900-normal.woff2')})}}
+@font-face{{font-family:Fraunces;font-weight:900;font-style:italic;src:url({font('fraunces-latin-900-italic.woff2')})}}
+@font-face{{font-family:'Source Sans 3';font-weight:400;src:url({font('source-sans-3-latin-400-normal.woff2')})}}
+@font-face{{font-family:'Source Sans 3';font-weight:700;src:url({font('source-sans-3-latin-700-normal.woff2')})}}
 :root{{--paper:{paper};--ink:{ink};--accent:{accent};--a2:{accent2}}}
 *{{box-sizing:border-box;border-radius:0}}html,body{{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',sans-serif;overflow:hidden}}
 .slide{{position:absolute;inset:0;display:none;padding:6vh 7vw 10vh;overflow:auto}}.slide.on{{display:flex;align-items:center}}

@@ -18,10 +18,14 @@ esac
 
 ANDROID_JAR="${ANDROID_JAR:-/usr/lib/android-sdk/platforms/android-23/android.jar}"
 KEYSTORE="${KEYSTORE:-$HERE/keystore/talleres.jks}"
-KS_PASS="${KS_PASS:-cambia-esta-clave}"
 OUT="$HERE/out/$APP"
 WWW="$ROOT/build/$APP"
 [ -f "$WWW/index.html" ] || { echo "Falta $WWW. Ejecuta antes: node scripts/build-web.mjs $APP"; exit 1; }
+# La contraseña de la clave nunca va en el código: se pasa en la variable KS_PASS.
+[ -n "${KS_PASS:-}" ] || { echo "Falta la contraseña de la clave de firma: KS_PASS='…' bash android/build.sh $APP"; exit 1; }
+# Huella del certificado con el que se firmaron las versiones publicadas. Android solo instala
+# una actualización encima (conservando los datos) si la firma coincide.
+EXPECTED_CERT="${EXPECTED_CERT_SHA256:-$(tr -d ' \n' < "$HERE/firma-esperada.txt" 2>/dev/null || true)}"
 export JAVA_TOOL_OPTIONS=""
 
 rm -rf "$OUT"; mkdir -p "$OUT/classes" "$OUT/assets" "$OUT/res/values" "$ROOT/dist"
@@ -50,14 +54,30 @@ aapt package -f -M "$OUT/AndroidManifest.xml" -S "$OUT/res" -A "$OUT/assets" -I 
 zipalign -f -p 4 "$OUT/sin-firmar.apk" "$OUT/alineado.apk"
 
 if [ ! -f "$KEYSTORE" ]; then
-  echo "→ Creando clave de firma nueva en $KEYSTORE (guárdala: sin ella no se pueden instalar actualizaciones encima)"
+  if [ "${NEW_KEYSTORE:-}" != "1" ]; then
+    echo "No se encontró la clave de firma en $KEYSTORE."
+    echo "Sin la misma clave, Android no instala la actualización encima y obliga a desinstalar (se pierden los datos del teléfono)."
+    echo "Usa KEYSTORE=/ruta/a/la/clave.jks. Solo para una app nueva, crea otra con NEW_KEYSTORE=1."
+    exit 1
+  fi
+  echo "→ Creando una clave de firma NUEVA en $KEYSTORE (NEW_KEYSTORE=1). Las apps firmadas con ella no actualizan las anteriores."
   mkdir -p "$(dirname "$KEYSTORE")"
   keytool -genkeypair -keystore "$KEYSTORE" -storepass "$KS_PASS" -keypass "$KS_PASS" -alias talleres \
     -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Talleres, O=Talleres con IA" > /dev/null 2>&1
+  EXPECTED_CERT=""
 fi
 echo "→ Firmando"
 DEST="$ROOT/dist/$APP-$VNAME.apk"
 apksigner sign --ks "$KEYSTORE" --ks-pass "pass:$KS_PASS" --ks-key-alias talleres --out "$DEST" "$OUT/alineado.apk"
 rm -f "$DEST.idsig"
 apksigner verify "$DEST"
+CERT="$(apksigner verify --print-certs "$DEST" | sed -n 's/^Signer #1 certificate SHA-256 digest: //p')"
+echo "→ Certificado: $CERT"
+if [ -n "$EXPECTED_CERT" ] && [ "$CERT" != "$EXPECTED_CERT" ]; then
+  rm -f "$DEST"
+  echo "✗ La firma NO coincide con la de las versiones anteriores ($EXPECTED_CERT). Se borró el APK: no actualizaría las instaladas."
+  exit 1
+fi
+[ -n "$EXPECTED_CERT" ] && echo "✓ Misma firma que las versiones anteriores: se puede instalar encima conservando los datos."
+echo "→ Paquete $PKG · versión $VNAME · versionCode $VCODE"
 echo "✓ $DEST ($(du -h "$DEST" | cut -f1))"

@@ -39,7 +39,7 @@ Tus datos viven solo en este teléfono. Si lo pierdes, lo cambias o desinstalas 
 
 - **Guardar una copia:** Copias → «Guardar una copia» → elige dónde. Lo mejor es Drive o el correo, fuera del teléfono. La copia es un solo archivo con todas tus fichas, su historial, las fotos y las plantillas. Hazlo **una vez por semana** y después de cada trabajo importante.
 - **Recuperar una copia:** Copias → «Recuperar una copia» → elige el archivo. Antes de cambiar nada, la app te muestra qué contiene. Hay dos maneras de recuperar:
-  - **Agregar lo nuevo:** suma lo que falta y no toca nada de lo que ya tienes.
+  - **Agregar lo nuevo:** Agrega registros que no existen en este teléfono. No actualiza los que ya existen, aunque la copia contenga cambios más recientes. La vista previa dice, por tipo, cuántos se agregan y cuántos se omiten.
   - **Reemplazar todo:** deja el teléfono igual que la copia. Pide confirmación, y si te equivocas, en la misma pantalla aparece «Deshacer».
 - **Pasar a otro teléfono:**
   1. Guarda una copia en Drive.

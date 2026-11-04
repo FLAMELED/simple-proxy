@@ -11,6 +11,7 @@ La app no necesita internet ni cuenta.
 1. **Proyecto.** En Proyectos, toca «+ Nuevo proyecto» y escribe un nombre.
 2. **01 Material.**
    - Elige la unidad de todo el proyecto: mm, cm o pulgadas.
+   - Si cambias la unidad después, la app pide confirmación y convierte todas las medidas (1 pulgada = 25,4 mm). Las cantidades no cambian y el plano guardado queda desactualizado: genéralo de nuevo.
    - Escribe el **ancho** (→) y el **largo** (↓) del material, y cuántas planchas tienes.
    - **Separación de corte:** lo que se pierde en cada corte. Con sierra, el grosor del disco; con cúter, un margen de seguridad. Puede ser 0.
    - **Margen del borde:** la franja del borde que no vas a usar.
@@ -38,7 +39,7 @@ La app no necesita internet ni cuenta.
 ## Copias
 - **Guardar una copia:** Copias → «Guardar una copia» → elige dónde. Mejor fuera del teléfono: Drive o el correo.
 - **Recuperar una copia:** Copias → «Recuperar una copia». Antes de cambiar nada, la app muestra qué contiene. Hay dos maneras:
-  - **Agregar lo nuevo:** no toca lo que ya tienes.
+  - **Agregar lo nuevo:** Agrega registros que no existen en este teléfono. No actualiza los que ya existen, aunque la copia contenga cambios más recientes. La vista previa dice cuántos proyectos se agregan y cuántos se omiten.
   - **Reemplazar todo:** pide confirmación y se puede deshacer.
 - **Pasar a otro teléfono:** guarda la copia, instala la app en el teléfono nuevo y recupérala.
 

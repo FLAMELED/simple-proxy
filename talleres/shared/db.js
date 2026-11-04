@@ -13,7 +13,9 @@ export function openDB(name, version, upgrade) {
 }
 
 const done = (req) => new Promise((res, rej) => { req.onsuccess = () => res(req.result); req.onerror = () => rej(req.error); });
-const txDone = (tx) => new Promise((res, rej) => { tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || new Error('Operación cancelada')); });
+// Un error en cualquier escritura cancela la transacción completa (no se usa preventDefault):
+// se rechaza en onabort, cuando IndexedDB ya deshizo todo.
+const txDone = (tx) => new Promise((res, rej) => { tx.oncomplete = () => res(); tx.onabort = () => rej(tx.error || new Error('La operación se canceló y no se cambió nada.')); });
 
 function wrap(db) {
   return {
@@ -23,12 +25,25 @@ function wrap(db) {
     byIndex: (store, index, value) => done(db.transaction(store).objectStore(store).index(index).getAll(value)),
     async put(store, value) { const tx = db.transaction(store, 'readwrite'); tx.objectStore(store).put(value); await txDone(tx); return value; },
     async del(store, key) { const tx = db.transaction(store, 'readwrite'); tx.objectStore(store).delete(key); await txDone(tx); },
-    /** Ejecuta varias escrituras de forma atómica: o se guardan todas o ninguna. */
+    /**
+     * Ejecuta varias escrituras de forma atómica: o se guardan todas o ninguna.
+     * `fn` debe ser síncrona: todos los datos se preparan antes (una espera dentro
+     * cerraría la transacción). Si `fn` lanza un error, o falla cualquier escritura,
+     * la transacción se cancela y los datos quedan como estaban.
+     */
     async tx(stores, fn) {
       const tx = db.transaction(stores, 'readwrite');
+      const done = txDone(tx);
       const api = Object.fromEntries(stores.map((s) => [s, tx.objectStore(s)]));
-      fn(api);
-      await txDone(tx);
+      try {
+        const r = fn(api);
+        if (r && typeof r.then === 'function') throw new Error('La función de la transacción no puede esperar.');
+      } catch (e) {
+        try { tx.abort(); } catch {}
+        await done.catch(() => {});
+        throw e;
+      }
+      await done;
     },
   };
 }

@@ -1,6 +1,6 @@
 # Dónde se guardan los datos, uso sin internet y copias
 
-Este documento describe lo que hace el código de la versión 1.0.0.
+Este documento describe lo que hace el código de la versión 1.1.0.
 
 - **Comprobado en Chromium con pruebas automáticas:** el guardado, la recuperación y las copias.
 - **Todavía no comprobado en un teléfono real:** lo marcado con *(sin probar en teléfono)*.
@@ -98,13 +98,18 @@ Cada archivo dentro del zip lleva su **CRC**, que permite detectar una copia da�
    - Si viene de una versión más nueva: pide actualizar la app.
    - Si falta alguna foto citada en las fichas, lo avisa.
 3. Muestra qué contiene la copia (fecha, clientes, proyectos, fichas, versiones y fotos) y qué pasaría:
-   - **Agregar lo nuevo:** suma solo lo que no existe en el teléfono, según su identificador. **Nada de lo que ya hay se modifica.** Si una ficha existe en los dos lados, se queda la del teléfono.
+   - **Agregar lo nuevo:** «Agrega registros que no existen en este teléfono. No actualiza los que ya existen, aunque la copia contenga cambios más recientes.»
+     - La vista previa muestra, por tipo de registro, cuántos se agregan y cuántos se omiten por existir ya.
+     - En Fichero tampoco agrega lo que quedaría sin su relación: un proyecto sin su cliente, una ficha sin su proyecto o una foto que ninguna ficha usa. Esos casos se cuentan aparte como «sin relación».
+     - Todo se agrega en una sola transacción: o entran todos los registros, o ninguno.
+     - No es una sincronización: nunca sustituye versiones existentes.
    - **Reemplazar todo:**
      - Pide una segunda confirmación.
-     - Antes de borrar, guarda dentro del teléfono una copia del estado actual.
-     - Luego deja el teléfono igual que la copia.
-     - En Copias aparece **«Deshacer y volver a como estaba»**.
-   - Si el teléfono está vacío, solo ofrece «Recuperar».
+     - Antes de tocar nada, valida la copia (identificadores y relaciones) y prepara una copia del estado actual para poder deshacer.
+     - Luego, en **una sola transacción** de IndexedDB, borra los datos, inserta la copia y guarda el estado anterior. Si falla cualquier escritura, IndexedDB cancela la transacción completa y quedan los datos de antes.
+     - En Copias aparece **«Deshacer y volver a como estaba»**. Deshacer también es una sola transacción; el estado guardado se borra dentro de ella, así que solo desaparece si la restauración terminó bien.
+     - Si la copia tiene registros sin su relación, «Reemplazar todo» no se ofrece; solo «Agregar lo nuevo» con lo que esté completo.
+   - Si el teléfono está vacío, solo ofrece «Agregar lo nuevo».
 4. Al recuperar se conservan las fichas con todas sus versiones e historial, las fotos y su relación con cada ficha, las plantillas y los planos de corte.
 
 ### Pasar a otro teléfono
@@ -115,10 +120,21 @@ Cada archivo dentro del zip lleva su **CRC**, que permite detectar una copia da�
 ### Qué está comprobado
 Las pruebas automáticas (`tests/e2e/`) comprueban:
 - que se guarda una copia y se recupera en un perfil vacío, con fichas, foto, 3 versiones e historial;
-- que «Agregar lo nuevo» conserva la versión local más nueva;
+- que «Agregar lo nuevo» conserva la versión local más nueva y cuenta agregados y omitidos;
 - que «Reemplazar» se puede deshacer;
+- que un fallo inducido a mitad de «Reemplazar todo» o de «Deshacer» deja todos los datos anteriores y el estado guardado para deshacer;
+- que las copias ZIP hechas con la versión 1.0.0 se recuperan completas, y que los datos guardados por la 1.0.0 siguen al abrir la 1.1.0;
 - que un archivo que no es una copia da un mensaje claro y no cambia nada;
 - que el ejemplo queda fuera de la copia;
 - que en cortes la copia va y vuelve sin duplicar.
 
 *(sin probar en teléfono: el selector de Android, guardar en Drive y recuperar en un segundo teléfono)*
+
+## 4. Unidades en Mi plan de cortes
+
+- **Al cambiar la unidad de un proyecto, la app convierte todas las longitudes:** material, piezas, separación de corte, margen y sobrante mínimo. Usa 1 pulgada = 25,4 mm y 1 cm = 10 mm. Antes muestra un ejemplo («70 cm → 700 mm») y pide confirmación.
+- **Las cantidades de piezas y planchas no cambian.** Lo pendiente sigue pendiente.
+- **El plano guardado queda desactualizado** y hay que generarlo de nuevo.
+- **Los valores se muestran con 3 decimales,** pero el proyecto guarda el valor exacto en mm. Por eso cm → pulg → cm vuelve exactamente al número original, y una pieza que cabía justo sigue cabiendo.
+- **El motor y el verificador calculan con enteros exactos** (0,1 µm), sin tolerancias.
+- **El plano se marca desactualizado si cambia cualquier dato que afecta el resultado,** también el sobrante mínimo.

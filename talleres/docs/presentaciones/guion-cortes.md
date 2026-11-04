@@ -67,7 +67,7 @@
 ### Diapositiva 5 · Medidas: ancho, largo y una sola unidad  
 **Minuto 10–13** (3 min)
 
-**Qué decir.** La app dibuja el material con el ancho hacia la derecha y el largo hacia abajo, y así hay que escribir las piezas. Todo el proyecto usa una sola unidad; si la cambias, la app no convierte los números: hay que revisarlos. Algunas medidas salen de una cuenta: el lateral corto de la caja va entre los dos largos, así que mide 20 menos dos grosores de 0,2 cm: 19,6 cm.
+**Qué decir.** La app dibuja el material con el ancho hacia la derecha y el largo hacia abajo, y así hay que escribir las piezas. Todo el proyecto usa una sola unidad. Si la cambias, la app pide confirmación y convierte todas las medidas (1 pulgada = 25,4 mm); las cantidades no cambian y el plano guardado queda desactualizado. Algunas medidas salen de una cuenta: el lateral corto de la caja va entre los dos largos, así que mide 20 menos dos grosores de 0,2 cm: 19,6 cm.
 
 **Pregunta o actividad.** Si tu cartón mide 3 mm, ¿cuánto mide el lateral corto de una caja de 20 cm? 
 
@@ -186,7 +186,7 @@
 ### Diapositiva 18 · Paso 7 · Respaldo: guardar, borrar y recuperar  
 **Minuto 43–45** (2 min)
 
-**Qué decir.** La app guarda los proyectos en el teléfono, sin internet. Eso no es una copia de seguridad: si desinstalas la app, borras sus datos o pierdes el teléfono, se va todo, y la app no usa el respaldo automático de Google. Hagamos la prueba completa: Copias, marca «Incluir también el ejemplo», «Guardar una copia». Luego eliminamos un proyecto a propósito y lo recuperamos: la app muestra qué contiene la copia; «Agregar lo nuevo» suma lo que falta y no toca lo demás. «Reemplazar todo» pide confirmación y se puede deshacer.
+**Qué decir.** La app guarda los proyectos en el teléfono, sin internet. Eso no es una copia de seguridad: si desinstalas la app, borras sus datos o pierdes el teléfono, se va todo, y la app no usa el respaldo automático de Google. Hagamos la prueba completa: Copias, marca «Incluir también el ejemplo», «Guardar una copia». Luego eliminamos un proyecto a propósito y lo recuperamos: la app muestra qué contiene la copia; «Agregar lo nuevo» agrega lo que no existe en el teléfono y no actualiza lo que ya existe, aunque la copia tenga cambios más recientes; la vista previa dice cuántos se agregan y cuántos se omiten. «Reemplazar todo» pide confirmación y se puede deshacer.
 
 **Qué hacer.** En la demostración puedes eliminar el ejemplo y recuperarlo. En el ejercicio, cada participante lo hace con su propio proyecto de práctica.
 

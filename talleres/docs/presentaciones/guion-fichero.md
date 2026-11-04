@@ -193,7 +193,7 @@
 ### Diapositiva 17 · Paso 8 · Respaldo: guardar, borrar y recuperar  
 **Minuto 43–45** (2 min)
 
-**Qué decir.** Hacemos la prueba que casi nadie hace: comprobar que la copia sirve. Como nuestro proyecto es de práctica, hay que marcar «Incluir también los datos de ejemplo»; si no, la copia sale sin él. Guardamos, borramos a propósito la ficha del comedor y recuperamos. La app primero muestra qué contiene la copia. «Agregar lo nuevo» suma solo lo que falta y no modifica nada de lo que ya está. «Reemplazar todo» deja el teléfono igual que la copia, pide confirmación y se puede deshacer.
+**Qué decir.** Hacemos la prueba que casi nadie hace: comprobar que la copia sirve. Como nuestro proyecto es de práctica, hay que marcar «Incluir también los datos de ejemplo»; si no, la copia sale sin él. Guardamos, borramos a propósito la ficha del comedor y recuperamos. La app primero muestra qué contiene la copia. «Agregar lo nuevo» agrega registros que no existen en este teléfono y no actualiza los que ya existen, aunque la copia tenga cambios más recientes; la vista previa dice cuántos se agregan y cuántos se omiten. «Reemplazar todo» deja el teléfono igual que la copia, pide confirmación y se puede deshacer.
 
 **Respuesta esperada.** Aviso esperado: «Copia recuperada: se agregaron 1 ficha y 0 fotos». La ficha del comedor vuelve con su versión 1.
 

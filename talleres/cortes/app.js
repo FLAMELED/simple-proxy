@@ -3,13 +3,14 @@ import * as store from './src/store.js';
 import * as backup from './src/backup.js';
 import { pack, validate, inputKey, pieceCode, ALGO_VERSION, UNIT_LABEL } from './src/engine.js';
 import { verifyPlan } from './src/verify.js';
+import { convertProject, conversionExample, forgetExact, UNIT_NAMES } from './src/units.js';
 import { demoProject, DEMO_NAME } from './src/demo.js';
 import { html, raw, esc, toast, ask, confirmAction, route, go, fmtDate, stampedName } from './shared/ui.js';
 import { parseAmount, formatNumber, defaultDecimalSep } from './shared/numbers.js';
 import { saveFile, printPage } from './shared/native.js';
 import { askPersistence } from './shared/db.js';
 
-export const APP_VERSION = '1.0.0';
+export const APP_VERSION = '1.1.0';
 const view = document.getElementById('view');
 const settings = { sep: '.' };
 const n = (v) => formatNumber(v, settings.sep);
@@ -83,7 +84,7 @@ function projectHtml() {
     <label class="field"><span class="label">Material</span><input class="input" data-t="material.name" value="${p.material.name}" placeholder="Ej.: Cartón gris 2 mm" autocomplete="off"></label>
     <fieldset class="field"><legend class="label">Unidad de todo el proyecto</legend>
       <div class="seg">${['mm', 'cm', 'in'].map((x) => html`<label class="seg-opt"><input type="radio" name="unit" value="${x}" data-t="unit" ${p.unit === x ? 'checked' : ''}><span>${x === 'in' ? 'pulgadas' : x === 'cm' ? 'centímetros' : 'milímetros'}</span></label>`)}</div>
-      <span class="hint">Cambiar la unidad no convierte los números: revísalos.</span></fieldset>
+      <span class="hint">Al cambiar la unidad, las medidas se convierten (1 pulg = 25,4 mm). Las cantidades no cambian.</span></fieldset>
     <div class="two">
       ${numField('material.width', 'Ancho (→)', p.material.width, { unit: u })}
       ${numField('material.height', 'Largo (↓)', p.material.height, { unit: u })}
@@ -147,7 +148,7 @@ function setPath(obj, path, value) { const ks = path.split('.'); let o = obj; wh
 function onInput(t) {
   const p = ed.p;
   if (t.dataset.t) {
-    if (t.dataset.t === 'unit') { if (t.checked) { p.unit = t.value; refreshUnits(); } }
+    if (t.dataset.t === 'unit') return; // se maneja en changeUnit(), con confirmación
     else if (t.dataset.t === 'demo') p.demo = t.checked;
     else setPath(p, t.dataset.t, t.value);
   } else if (t.dataset.pt) {
@@ -160,12 +161,27 @@ function onInput(t) {
     const err = view.querySelector(`[data-err="${CSS.escape(id)}"]`);
     if (r.ok) {
       ed.invalid.delete(id); t.setAttribute('aria-invalid', 'false'); err.hidden = true;
-      if (id.includes(':')) { const [pid, f] = id.split(':'); p.pieces.find((x) => x.id === pid)[f] = r.value; } else setPath(p, key, r.value);
+      if (id.includes(':')) { const [pid, f] = id.split(':'); p.pieces.find((x) => x.id === pid)[f] = r.value; forgetExact(p, `pieces.${pid}.${f}`); } else { setPath(p, key, r.value); forgetExact(p, key); }
     } else { ed.invalid.set(id, t.value); t.setAttribute('aria-invalid', 'true'); err.hidden = false; err.textContent = r.error; }
   } else return;
   saveSoon();
 }
-function refreshUnits() { for (const el of view.querySelectorAll('.num-unit')) if (el.textContent !== 'unid.') el.textContent = U(ed.p); }
+/** Cambiar de unidad convierte todas las longitudes (no las cantidades) y deja el plano desactualizado. */
+async function changeUnit(radio) {
+  const p = ed.p; const to = radio.value; const from = p.unit;
+  const revert = () => { const old = view.querySelector(`input[data-t="unit"][value="${from}"]`); if (old) old.checked = true; };
+  if (to === from) return;
+  if (ed.invalid.size) { revert(); toast('Corrige primero los números marcados; luego cambia la unidad.', 'error'); return; }
+  await saveSoon.flush();
+  const ex = conversionExample(p, to);
+  const ok = await confirmAction(`Convertir a ${UNIT_NAMES[to]}`, String(html`<p>Las medidas se convertirán a ${UNIT_NAMES[to]}${ex ? html`, por ejemplo: <strong>${n(ex.from)} ${UNIT_LABEL[from]} → ${n(ex.to)} ${UNIT_LABEL[to]}</strong>` : ''}. El tamaño real no cambia.</p>
+    <p>Las cantidades de piezas y planchas no cambian. Los datos pendientes siguen pendientes.${p.plan ? ' El plano guardado quedará desactualizado: hay que generarlo de nuevo.' : ''}</p>`), 'Convertir');
+  if (!ok) { revert(); return; }
+  Object.assign(p, convertProject(p, to));
+  await store.save(p);
+  await rerender();
+  toast(`Medidas convertidas a ${UNIT_NAMES[to]}.${p.plan ? ' Genera el plano de nuevo.' : ''}`);
+}
 
 async function generate() {
   if (ed.invalid.size) { toast('Hay números que no son válidos. Revisa los campos marcados.', 'error'); view.querySelector('[aria-invalid="true"]')?.focus(); return; }
@@ -331,20 +347,24 @@ async function doRestore(file) {
   const plan = await backup.planMerge(m);
   const local = await store.all();
   const body = String(html`<p>Copia del <strong>${fmtDate(m.createdAt)}</strong> con ${plural(m.projects.length, 'proyecto', 'proyectos')}.</p>
-    ${local.length ? html`<p><strong>Si eliges «Agregar lo nuevo»</strong>: se suman ${plural(plan.add.length, 'proyecto nuevo', 'proyectos nuevos')}.${plan.kept ? ` ${plural(plan.kept, 'proyecto ya existe', 'proyectos ya existen')} aquí y se conserva${plan.kept === 1 ? '' : 'n'} como está${plan.kept === 1 ? '' : 'n'} en este teléfono.` : ' Nada de lo que ya tienes se modifica.'}</p>` : html`<p>Este teléfono no tiene proyectos, así que no se borra nada.</p>`}`);
+    <p><strong>«Agregar lo nuevo»:</strong> Agrega registros que no existen en este teléfono. No actualiza los que ya existen, aunque la copia contenga cambios más recientes.</p>
+    <table class="merge-table"><thead><tr><th>Registro</th><th>Se agregan</th><th>Se omiten: ya existen</th></tr></thead><tbody><tr><th scope="row">Proyectos</th><td>${plan.add.length}</td><td>${plan.existing.length}</td></tr></tbody></table>
+    ${local.length ? html`<p><strong>«Reemplazar todo»:</strong> deja este teléfono igual que la copia. Pide confirmación y se puede deshacer.</p>` : html`<p>Este teléfono no tiene proyectos: no se borra nada.</p>`}`);
   const options = local.length
     ? [{ label: 'Cancelar', value: null }, { label: 'Reemplazar todo', value: 'replace', kind: 'danger' }, { label: 'Agregar lo nuevo', value: 'merge', kind: 'primary' }]
-    : [{ label: 'Cancelar', value: null }, { label: 'Recuperar', value: 'merge', kind: 'primary' }];
+    : [{ label: 'Cancelar', value: null }, { label: 'Agregar lo nuevo', value: 'merge', kind: 'primary' }];
   const choice = await ask({ title: 'Recuperar una copia', body, options });
   if (!choice) { toast('No se cambió nada.', 'info'); return; }
-  if (choice === 'replace') {
-    if (!await confirmAction('¿Reemplazar todo?', String(html`<p>Se quitarán ${plural(local.length, 'proyecto', 'proyectos')} de este teléfono y quedará solo el contenido de la copia.</p><p>Antes se guarda internamente el estado actual para poder deshacerlo.</p>`), 'Sí, reemplazar', true)) { toast('No se cambió nada.', 'info'); return; }
-    await backup.applyReplace(m);
-    toast(`Copia recuperada: ${plural(m.projects.length, 'proyecto', 'proyectos')}.`);
-  } else {
-    const res = await backup.applyMerge(m);
-    toast(`Copia recuperada: se agregaron ${plural(res.add.length, 'proyecto', 'proyectos')}.`);
-  }
+  try {
+    if (choice === 'replace') {
+      if (!await confirmAction('¿Reemplazar todo?', String(html`<p>Se quitarán ${plural(local.length, 'proyecto', 'proyectos')} de este teléfono y quedará solo el contenido de la copia.</p><p>Antes se guarda internamente el estado actual para poder deshacerlo.</p>`), 'Sí, reemplazar', true)) { toast('No se cambió nada.', 'info'); return; }
+      await backup.applyReplace(m);
+      toast(`Copia recuperada: ${plural(m.projects.length, 'proyecto', 'proyectos')}.`);
+    } else {
+      const res = await backup.applyMerge(m);
+      toast(`Copia recuperada: se agregaron ${plural(res.add.length, 'proyecto', 'proyectos')}.${res.existing.length ? ` Se omitieron ${plural(res.existing.length, 'proyecto que ya existía', 'proyectos que ya existían')}.` : ''}`);
+    }
+  } catch (e) { toast(`No se pudo recuperar la copia. No se cambió nada. ${e.message}`, 'error'); return; }
   render();
 }
 
@@ -354,6 +374,7 @@ view.addEventListener('change', async (ev) => {
   const t = ev.target;
   if (t.matches('[data-restore-input]') && t.files.length) { const f = t.files[0]; t.value = ''; await doRestore(f); return; }
   if (t.matches('[data-sep]')) { settings.sep = t.value; await store.setMeta('settings', { ...settings }); toast('Ajuste guardado.'); return; }
+  if (ed && t.dataset.t === 'unit') { await changeUnit(t); return; }
   if (ed && (t.type === 'checkbox' || t.type === 'radio')) onInput(t);
 });
 view.addEventListener('submit', async (ev) => { ev.preventDefault(); if (ed) await generate(); });
@@ -393,7 +414,10 @@ document.addEventListener('click', async (ev) => {
         toast(`Copia guardada: ${plural(count, 'proyecto', 'proyectos')}.`);
         render(); break;
       }
-      case 'undo-restore': if (await confirmAction('¿Deshacer la recuperación?', '<p>Los proyectos vuelven a como estaban justo antes de reemplazarlos.</p>', 'Deshacer')) { await backup.undoReplace(); toast('Se volvió al estado anterior.'); render(); } break;
+      case 'undo-restore': if (await confirmAction('¿Deshacer la recuperación?', '<p>Los proyectos vuelven a como estaban justo antes de reemplazarlos.</p>', 'Deshacer')) {
+        try { await backup.undoReplace(); } catch (e) { toast(`No se pudo deshacer. No se cambió nada y el estado guardado se conserva. ${e.message}`, 'error'); break; }
+        toast('Se volvió al estado anterior.'); render();
+      } break;
     }
   } catch (e) { console.error(e); toast(e.message || 'Algo salió mal.', 'error'); }
 });

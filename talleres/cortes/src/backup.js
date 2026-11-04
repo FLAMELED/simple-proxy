@@ -19,7 +19,14 @@ export async function buildBackup({ includeDemo = false, appVersion = '' } = {})
 export function validateManifest(m) {
   if (!m || m.kind !== BACKUP_KIND) throw new Error('Este archivo no es una copia de «Mi plan de cortes».');
   if (typeof m.schema !== 'number' || m.schema > SCHEMA) throw new Error('La copia viene de una versión más nueva de la aplicación. Actualiza la app para recuperarla.');
-  if (!Array.isArray(m.projects) || m.projects.some((p) => !p.id || !p.material || !Array.isArray(p.pieces))) throw new Error('La copia está incompleta.');
+  if (!Array.isArray(m.projects)) throw new Error('La copia está incompleta.');
+  const ids = new Set();
+  for (const p of m.projects) {
+    if (!p || typeof p.id !== 'string' || !p.id || !p.material || !Array.isArray(p.pieces)) throw new Error('La copia está incompleta.');
+    if (ids.has(p.id)) throw new Error(`La copia está dañada: el proyecto ${p.id} está repetido.`);
+    if (!['mm', 'cm', 'in'].includes(p.unit)) throw new Error(`La copia está dañada: el proyecto «${p.name}» tiene una unidad desconocida.`);
+    ids.add(p.id);
+  }
   return m;
 }
 
@@ -31,21 +38,25 @@ export async function readBackup(bytes) {
   return validateManifest(m);
 }
 
+/** Agrega solo proyectos que no existen en este teléfono. No actualiza los que ya existen. */
 export async function planMerge(m) {
   const have = new Set((await store.all()).map((p) => p.id));
   const add = m.projects.filter((p) => !have.has(p.id));
-  return { add, kept: m.projects.length - add.length };
+  const existing = m.projects.filter((p) => have.has(p.id));
+  return { add, existing, kept: existing.length };
 }
 export async function applyMerge(m) { const plan = await planMerge(m); await store.insert(plan.add); return plan; }
+
+/** Reemplaza todo en una sola transacción; antes prepara la copia del estado actual para deshacer. */
 export async function applyReplace(m) {
   const before = await buildBackup({ includeDemo: true });
-  await store.setMeta('antesDeRecuperar', { at: nowIso(), blob: new Blob([before.bytes], { type: 'application/zip' }) });
-  await store.wipe(); await store.insert(m.projects);
+  await store.replaceAll(m.projects, { metaPut: [{ key: 'antesDeRecuperar', value: { at: nowIso(), blob: new Blob([before.bytes], { type: 'application/zip' }) } }] });
 }
+
+/** Deshace «Reemplazar todo» en una sola transacción; el estado guardado se borra solo si todo sale bien. */
 export async function undoReplace() {
   const snap = await store.getMeta('antesDeRecuperar');
   if (!snap) throw new Error('No hay nada que deshacer.');
   const m = await readBackup(new Uint8Array(await snap.blob.arrayBuffer()));
-  await store.wipe(); await store.insert(m.projects);
-  await store.setMeta('antesDeRecuperar', null);
+  await store.replaceAll(m.projects, { metaDelete: ['antesDeRecuperar'] });
 }

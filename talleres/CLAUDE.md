@@ -23,3 +23,8 @@ Dos apps personales para Android, sin conexión, para los talleres «Del taller 
 - Migraciones de IndexedDB: solo agregar (`if (oldVersion < N)`), nunca borrar almacenes. Cambiar el formato de copia sube `SCHEMA_VERSION` y sigue leyendo los anteriores.
 - Mantener el mismo `package` y la misma clave de firma: si cambian, Android no instala la actualización encima y los datos no se conservan.
 - Sin bordes redondeados; tipografía expresiva (Fraunces) solo en títulos; datos en Source Sans 3 con números tabulares.
+- Cortes: `inputKey()` debe incluir todo lo que cambia el resultado de `pack()`. Las longitudes pasan por `cortes/src/units.js` (rejilla entera de 0,1 µm y valor exacto en mm). Nunca comparar longitudes con tolerancias.
+- Reemplazar y deshacer copias: una sola transacción (`replaceAll`). Preparar y validar todo antes; dentro de `db.tx` no se espera nada.
+- «Agregar lo nuevo» agrega solo lo que no existe y no actualiza lo existente. En Fichero, nunca agrega registros sin su relación (`planMerge`).
+- Firma: `KS_PASS` por variable de entorno y nunca en el código; `android/firma-esperada.txt` con la huella del certificado publicado. No crear claves nuevas sin `NEW_KEYSTORE=1`.
+- Compatibilidad: `tests/fixtures/` tiene la versión 1.0.0 y copias reales hechas con ella; las pruebas de `tests/e2e/regresiones.test.mjs` deben seguir pasando.

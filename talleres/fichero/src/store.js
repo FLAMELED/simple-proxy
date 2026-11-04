@@ -127,13 +127,26 @@ export async function everything() {
   return { clients, projects, sheets, photos, templates };
 }
 
-export async function wipeAll() {
-  await db.tx(['clients', 'projects', 'sheets', 'photos', 'templates'], (s) => { for (const k of Object.keys(s)) s[k].clear(); });
+const DATA_STORES = ['clients', 'projects', 'sheets', 'photos', 'templates'];
+
+/** Agrega registros en una sola transacción (o se guardan todos o ninguno). */
+export async function insertAll(data) {
+  await db.tx(DATA_STORES, (s) => {
+    for (const k of DATA_STORES) for (const r of data[k] || []) s[k].put(r);
+  });
 }
 
-export async function insertAll(data) {
-  await db.tx(['clients', 'projects', 'sheets', 'photos', 'templates'], (s) => {
-    for (const k of ['clients', 'projects', 'sheets', 'photos', 'templates']) for (const r of data[k]) s[k].put(r);
+/**
+ * Reemplaza todos los datos en UNA transacción: borra, inserta y escribe/borra
+ * entradas de `meta`. Si algo falla, IndexedDB deshace todo y quedan los datos anteriores.
+ * `data` debe venir completamente preparado (fotos ya como Blob): aquí no se espera nada.
+ */
+export async function replaceAll(data, { metaPut = [], metaDelete = [] } = {}) {
+  await db.tx([...DATA_STORES, 'meta'], (s) => {
+    for (const k of DATA_STORES) s[k].clear();
+    for (const k of DATA_STORES) for (const r of data[k] || []) s[k].put(r);
+    for (const m of metaPut) s.meta.put(m);
+    for (const key of metaDelete) s.meta.delete(key);
   });
 }
 

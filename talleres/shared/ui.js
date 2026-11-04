@@ -60,7 +60,9 @@ export function ask({ title, body = '', options }) {
     d.addEventListener('cancel', (ev) => { ev.preventDefault(); close(null); });
     d.showModal();
     const first = d.querySelector('.btn-primary') || d.querySelector('button');
-    first && first.focus();
+    // Enfocar sin desplazar: si el diálogo es más alto que la pantalla, se lee desde el título.
+    if (first) first.focus({ preventScroll: true });
+    d.scrollTop = 0;
   });
 }
 export const confirmAction = (title, body, yes = 'Sí, continuar', danger = false) =>

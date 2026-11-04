@@ -2,8 +2,8 @@
 
 | App | Taller | APK |
 |---|---|---|
-| **Mi fichero de trabajos a medida** | Crea tu archivo de medidas y especificaciones | `dist/fichero-1.0.0.apk` (paquete `com.talleres.mifichero`) |
-| **Mi plan de cortes** | Planea tus cortes y aprovecha el material | `dist/cortes-1.0.0.apk` (paquete `com.talleres.miplandecortes`) |
+| **Mi fichero de trabajos a medida** | Crea tu archivo de medidas y especificaciones | `dist/fichero-1.1.0.apk` (paquete `com.talleres.mifichero`) |
+| **Mi plan de cortes** | Planea tus cortes y aprovecha el material | `dist/cortes-1.1.0.apk` (paquete `com.talleres.miplandecortes`) |
 
 Las dos apps funcionan sin internet, sin cuentas y sin servidores. Guardan todo en el teléfono, generan hojas imprimibles o PDF y permiten **Guardar una copia** y **Recuperar una copia** para pasar los datos a otro teléfono.
 
@@ -34,7 +34,7 @@ Dónde se guardan los datos, uso sin internet y cómo funcionan las copias: [doc
 - `LEEME.txt`: instrucciones para recuperarla.
 
 Cada archivo dentro del zip lleva su CRC, así una copia dañada se detecta antes de tocar nada. Al recuperar, primero se muestra qué contiene la copia y qué pasará:
-- **Agregar lo nuevo:** suma solo lo que no existe y no modifica nada de lo que ya está en el teléfono.
+- **Agregar lo nuevo:** Agrega registros que no existen en este teléfono. No actualiza los que ya existen, aunque la copia contenga cambios más recientes. Muestra cuántos registros se agregan y cuántos se omiten, y no agrega nada que quede sin su relación (en Fichero: proyecto sin cliente, ficha sin proyecto o foto que ninguna ficha usa).
 - **Reemplazar todo:** pide una segunda confirmación y guarda internamente el estado anterior. Desde la misma pantalla se ofrece **Deshacer**.
 
 **Cálculo de cortes.** El método es una guillotina con mejor ajuste por área (`cortes/src/engine.js`):
@@ -77,8 +77,8 @@ No hace falta `npm install`: las fuentes vienen incluidas en `shared/fonts/` y n
 
 ```bash
 cd talleres
-npm test               # 32 pruebas unitarias
-npm run test:e2e       # 9 recorridos en Chromium (necesita Playwright + Chromium)
+npm test               # 50 pruebas unitarias
+npm run test:e2e       # 17 recorridos en Chromium (necesita Playwright + Chromium)
 npm run serve          # http://127.0.0.1:8080/fichero/  y  /cortes/
 ```
 
@@ -89,30 +89,60 @@ En Ubuntu o Debian:
 ```bash
 sudo apt-get install -y openjdk-17-jdk android-sdk-platform-23 aapt dalvik-exchange zipalign apksigner
 cd talleres
-KS_PASS='una-clave-larga' npm run build:apk
+KS_PASS='la-contraseña-de-tu-clave' KEYSTORE=/ruta/segura/talleres.jks npm run build:apk
 ```
 
-- La versión sale de `package.json` (`1.0.0` → `versionCode 10000`). Súbela en cada entrega.
+- **Versión:** sale de `package.json` (`1.1.0` → `versionCode 10100`). Súbela en cada entrega: Android solo actualiza a un versionCode mayor.
+- **Contraseña:** nunca va en el código. `build.sh` la pide en la variable `KS_PASS` y se detiene si falta.
 - **Clave de firma:**
-  - La primera compilación crea `android/keystore/talleres.jks`. No se versiona.
-  - Android solo instala una actualización encima, conservando los datos, si está firmada con **la misma clave** y lleva el mismo paquete. Guarda la clave y su contraseña en un lugar seguro.
-  - Los APK de `dist/` de esta entrega están firmados con una clave **de prueba**. Antes de entregarlos a participantes, compila con tu propia clave y conserva siempre esa misma.
+  - **No se versiona ni va en el ZIP del código** (`*.jks` está en `.gitignore`).
+  - Si `build.sh` no encuentra la clave, se detiene en vez de crear otra. Solo crea una nueva con `NEW_KEYSTORE=1`, y eso es solo para una app nueva: no actualiza las instaladas.
+- **Comprobación de firma:** `android/firma-esperada.txt` guarda la huella SHA-256 del certificado de las versiones publicadas. No es secreta. Después de firmar, `build.sh` compara la huella y **borra el APK si no coincide**, para no repartir uno que obligaría a desinstalar.
+
+### Actualizar de 1.0.0 a 1.1.0
+
+Los APK 1.1.0 de `dist/` están firmados con **la misma clave** que los 1.0.0. Es el mismo certificado, `aaef3cd2…25b1c7`, comprobado con `apksigner verify --print-certs`. Usan el mismo paquete y un versionCode mayor (10100 > 10000). Por eso Android los instala **encima**, sin desinstalar, y conserva los datos.
+
+1. **Antes de actualizar, guarda una copia por seguridad:** Copias → «Guardar una copia» → Drive o correo. En Fichero, marca «Incluir también los datos de ejemplo» si quieres conservar las prácticas.
+2. Abre `fichero-1.1.0.apk` o `cortes-1.1.0.apk` en el teléfono y toca **Actualizar**. No desinstales antes.
+3. Abre la app: deben estar tus fichas o proyectos. En Cortes, los planos guardados con la 1.0.0 aparecen como «plano desactualizado», porque cambió la forma de calcular la huella del plano: tócalos y genera el plano de nuevo.
+4. Si Android dice que la app «no se instaló» o que hay un conflicto de paquete, **no desinstales**. Significa que el APK no está firmado con la misma clave. Primero guarda una copia desde la app vieja; luego desinstala, instala la nueva y usa «Recuperar una copia».
+
+Las copias ZIP hechas con la 1.0.0 se recuperan en la 1.1.0. Hay copias reales en `tests/fixtures/` y una prueba que lo comprueba.
 
 **Instalar en un teléfono:**
 1. Copia el `.apk` al teléfono.
 2. Ábrelo y acepta «Instalar apps de origen desconocido» para el administrador de archivos o el navegador.
 3. Toca Instalar.
 
-## 5. Qué está terminado, qué se probó y qué queda pendiente
+## 5. Cambios de la versión 1.1.0
+
+- **Cortes, plano vigente.** La huella del plano incluye todos los datos que cambian el resultado, también el sobrante mínimo. Si cambia cualquiera, el plano guardado se marca desactualizado.
+- **Cortes, unidades.** Cambiar de unidad convierte todas las longitudes, con confirmación. No toca cantidades, conserva lo pendiente y deja el plano desactualizado. Ida y vuelta no pierde precisión.
+- **Cortes, precisión.** El motor y el verificador calculan con enteros exactos (0,1 µm), sin tolerancias.
+- **Ambas, restauración atómica.** «Reemplazar todo» y «Deshacer» son una sola transacción de IndexedDB: si algo falla, quedan los datos anteriores.
+- **Ambas, «Agregar lo nuevo».** Explica que no actualiza lo que existe y muestra cuántos registros se agregan y cuántos se omiten. En Fichero no agrega nada que quede sin su relación.
+- **Fichero, copias sin el ejemplo.** Incluyen igual el cliente o el proyecto que necesita un registro real.
+- **Compilación.** Sin contraseña en el código; comprueba que la firma sea la misma de las versiones anteriores.
+
+## 6. Qué está terminado, qué se probó y qué queda pendiente
 
 ### Terminado
 - Las dos apps completas en su alcance inicial, con su contenedor Android y el script de compilación.
-- Los dos APK firmados en `dist/`.
+- Los APK firmados en `dist/`: 1.1.0 (actual) y 1.0.0 (anterior, para probar la actualización encima).
 - Ejemplos del taller: «Entre Hilos» (cortinas) y «Papel y Forma» (cartón). Los datos de ejemplo quedan separados de los reales.
 - Guías, prompts, secuencias de 90 minutos y presentaciones en `docs/`, como borrador.
 
 ### Probado automáticamente
 Las pruebas están en `tests/` y pasan todas.
+
+- **Nuevo en 1.1.0** (`tests/unit/cortes-units.test.mjs`, `tests/unit/fichero-merge.test.mjs`, `tests/e2e/regresiones.test.mjs`):
+  - el caso 100 × 100, pieza de 60 × 60, separación 0,3 y sobrante 5 → 50, en motor e interfaz;
+  - conversión 100 cm → 1000 mm y 25,4 mm → 1 pulg; ida y vuelta ×10; datos pendientes y cantidades;
+  - una pieza que cabe justo sigue cabiendo en mm y en pulgadas, con 500 proyectos al azar en las tres unidades;
+  - fallos inducidos (error y cancelación) en «Reemplazar todo» y «Deshacer» de ambas apps, sin pérdida de datos;
+  - vista previa de «Agregar lo nuevo» con el texto exacto y los conteos; combinación sin registros sueltos;
+  - datos de la 1.0.0 abiertos por la 1.1.0 en el mismo origen, y copias ZIP reales de la 1.0.0 recuperadas.
 
 - **Unitarias (32):**
   - ZIP: ida y vuelta, detección de daño y entradas comprimidas con *deflate*.
@@ -143,6 +173,8 @@ Las pruebas están en `tests/` y pasan todas.
 - **APK:** `apksigner verify` es correcto, `zipalign -c` también, y `aapt dump badging` muestra el paquete, las versiones y los íconos.
 
 ### Pendiente (no comprobado aún)
+- [ ] **Actualizar en un teléfono real** de 1.0.0 a 1.1.0 instalando encima, y comprobar que siguen fichas, fotos y proyectos. La firma y el versionCode se verificaron con `apksigner` y `aapt`, pero la instalación no se probó en un dispositivo.
+- [ ] El diálogo de conversión de unidades y la vista previa de «Agregar lo nuevo» en una pantalla de teléfono.
 - [ ] **Instalar los APK en un Android real (7 a 15) y probar:**
   - que los datos sigan al cerrar la app y al reiniciar el teléfono;
   - que los datos sigan al instalar una versión nueva encima;

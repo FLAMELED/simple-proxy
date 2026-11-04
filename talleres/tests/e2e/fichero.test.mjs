@@ -137,7 +137,7 @@ test('recuperar la copia en otro teléfono (perfil vacío) restaura fichas, foto
   await page.locator('[data-restore-input]').setInputFiles(backupPath);
   await page.waitForSelector('dialog:has-text("2 fichas con 3 versiones")');
   assert.match(await page.locator('dialog').innerText(), /1 foto/);
-  await page.click('dialog button:has-text("Recuperar")');
+  await page.click('dialog button:has-text("Agregar lo nuevo")');
   await page.waitForSelector('.toast:has-text("Copia recuperada")');
   await page.click('.tabs a[data-tab="inicio"]');
   await page.fill('#q', 'marta sala');
@@ -156,7 +156,7 @@ test('recuperar sin sobrescribir: «Agregar lo nuevo» conserva lo del teléfono
   const { ctx, page, errors } = await openApp(dir, `${URL_APP}#/copias`);
   // Primero se recupera la copia, luego se cambia la sala a versión 3 en este teléfono.
   await page.locator('[data-restore-input]').setInputFiles(backupPath);
-  await page.click('dialog button:has-text("Recuperar")');
+  await page.click('dialog button:has-text("Agregar lo nuevo")');
   await page.waitForSelector('.toast:has-text("Copia recuperada")');
   await page.click('.tabs a[data-tab="inicio"]');
   await page.fill('#q', 'sala');
@@ -178,7 +178,7 @@ test('recuperar sin sobrescribir: «Agregar lo nuevo» conserva lo del teléfono
   // Combinar: la sala sigue en versión 3
   await page.goto(`${URL_APP}#/copias`);
   await page.locator('[data-restore-input]').setInputFiles(backupPath);
-  await page.waitForSelector('dialog:has-text("ya existen aquí")');
+  await page.waitForSelector('dialog:has-text("No actualiza los que ya existen")');
   await page.click('dialog button:has-text("Agregar lo nuevo")');
   await page.waitForSelector('.toast:has-text("se agregaron 0 fichas")');
   await page.goto(`${URL_APP}#/ficha/${salaId}`);

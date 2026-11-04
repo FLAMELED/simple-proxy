@@ -9,7 +9,7 @@ import { preparePhoto } from './shared/images.js';
 import { saveFile, printPage } from './shared/native.js';
 import { askPersistence } from './shared/db.js';
 
-export const APP_VERSION = '1.0.0';
+export const APP_VERSION = '1.1.0';
 const view = document.getElementById('view');
 const settings = { business: '', sep: '.' };
 
@@ -614,6 +614,15 @@ async function doSaveBackup() {
   } catch (e) { toast(`No se pudo guardar la copia. ${e.message}`, 'error'); }
 }
 
+const MERGE_TEXT = 'Agrega registros que no existen en este teléfono. No actualiza los que ya existen, aunque la copia contenga cambios más recientes.';
+const KIND_NAMES = { clients: ['cliente', 'clientes'], projects: ['proyecto', 'proyectos'], sheets: ['ficha', 'fichas'], photos: ['foto', 'fotos'], templates: ['plantilla', 'plantillas'] };
+
+function mergeTable(plan) {
+  return html`<table class="merge-table"><thead><tr><th>Registro</th><th>Se agregan</th><th>Se omiten: ya existen</th>${plan.totals.orphan ? html`<th>Se omiten: sin relación</th>` : ''}</tr></thead><tbody>
+    ${Object.entries(KIND_NAMES).map(([k, [, many]]) => html`<tr><th scope="row">${many[0].toUpperCase() + many.slice(1)}</th><td>${plan[k].add.length}</td><td>${plan[k].existing.length}</td>${plan.totals.orphan ? html`<td>${plan[k].orphan.length}</td>` : ''}</tr>`)}
+  </tbody></table>`;
+}
+
 async function doRestore(file) {
   let parsed;
   try { parsed = await backup.readBackup(new Uint8Array(await file.arrayBuffer())); }
@@ -622,15 +631,18 @@ async function doRestore(file) {
   const local = await store.everything();
   const k = parsed.counts;
   const localEmpty = !local.clients.length && !local.projects.length && !local.sheets.length;
-  const kept = plan.clients.kept + plan.projects.kept + plan.sheets.kept;
-  const body = String(html`<p>Copia del <strong>${fmtDate(parsed.manifest.createdAt)}</strong>:</p>
-    <ul><li>${plural(k.clients, 'cliente', 'clientes')}, ${plural(k.projects, 'proyecto', 'proyectos')}</li><li>${plural(k.sheets, 'ficha', 'fichas')} con ${plural(k.versions, 'versión', 'versiones')}</li><li>${plural(k.photos, 'foto', 'fotos')}</li></ul>
+  const canReplace = parsed.relations.errors.length === 0;
+  const body = String(html`<p>Copia del <strong>${fmtDate(parsed.manifest.createdAt)}</strong>: ${plural(k.clients, 'cliente', 'clientes')}, ${plural(k.projects, 'proyecto', 'proyectos')}, ${plural(k.sheets, 'ficha', 'fichas')} con ${plural(k.versions, 'versión', 'versiones')} y ${plural(k.photos, 'foto', 'fotos')}.</p>
     ${parsed.missingPhotos ? html`<p class="err">${plural(parsed.missingPhotos, 'foto citada no viene', 'fotos citadas no vienen')} en el archivo.</p>` : ''}
-    ${localEmpty ? html`<p>Este teléfono no tiene fichas, así que no se borra nada.</p>`
-      : html`<p><strong>Si eliges «Agregar lo nuevo»</strong>: se suman ${plural(plan.sheets.add.length, 'ficha nueva', 'fichas nuevas')} y ${plural(plan.projects.add.length, 'proyecto nuevo', 'proyectos nuevos')}. ${kept ? `${plural(kept, 'registro ya existe', 'registros ya existen')} aquí y se conserva${kept === 1 ? '' : 'n'} como está${kept === 1 ? '' : 'n'} en este teléfono.` : 'Nada de lo que ya tienes se modifica.'}</p>`}`);
-  const options = localEmpty
-    ? [{ label: 'Cancelar', value: null }, { label: 'Recuperar', value: 'merge', kind: 'primary' }]
-    : [{ label: 'Cancelar', value: null }, { label: 'Reemplazar todo', value: 'replace', kind: 'danger' }, { label: 'Agregar lo nuevo', value: 'merge', kind: 'primary' }];
+    ${!canReplace ? html`<p class="err">La copia tiene registros sin su relación (${parsed.relations.errors[0]}). Solo se puede agregar lo que esté completo.</p>` : ''}
+    <p><strong>«Agregar lo nuevo»:</strong> ${MERGE_TEXT}</p>
+    ${mergeTable(plan)}
+    ${plan.totals.orphan ? html`<p class="hint">«Sin relación»: proyectos sin su cliente, fichas sin su proyecto o fotos que ninguna ficha usa. No se agregan para no dejar datos sueltos.</p>` : ''}
+    ${localEmpty ? html`<p>Este teléfono no tiene fichas: no se borra nada.</p>` : canReplace ? html`<p><strong>«Reemplazar todo»:</strong> deja este teléfono igual que la copia. Pide confirmación y se puede deshacer.</p>` : ''}`);
+  const merge = { label: 'Agregar lo nuevo', value: 'merge', kind: 'primary' };
+  const options = localEmpty || !canReplace
+    ? [{ label: 'Cancelar', value: null }, merge]
+    : [{ label: 'Cancelar', value: null }, { label: 'Reemplazar todo', value: 'replace', kind: 'danger' }, merge];
   const choice = await ask({ title: 'Recuperar una copia', body, options });
   if (!choice) { toast('No se cambió nada.', 'info'); return; }
   try {
@@ -641,11 +653,12 @@ async function doRestore(file) {
       toast(`Copia recuperada: ${plural(k.sheets, 'ficha', 'fichas')} y ${plural(k.photos, 'foto', 'fotos')}.`);
     } else {
       const res = await backup.applyMerge(parsed);
-      toast(`Copia recuperada: se agregaron ${plural(res.sheets.add.length, 'ficha', 'fichas')} y ${plural(res.photos.add.length, 'foto', 'fotos')}.`);
+      const omitted = res.totals.existing + res.totals.orphan;
+      toast(`Copia recuperada: se agregaron ${plural(res.sheets.add.length, 'ficha', 'fichas')} y ${plural(res.photos.add.length, 'foto', 'fotos')}.${omitted ? ` Se omitieron ${plural(omitted, 'registro', 'registros')}.` : ''}`);
     }
     photoUrls.clear();
     render();
-  } catch (e) { toast(`No se pudo recuperar la copia. ${e.message}`, 'error'); }
+  } catch (e) { toast(`No se pudo recuperar la copia. No se cambió nada. ${e.message}`, 'error'); }
 }
 
 // ══════════════ EVENTOS ══════════════
@@ -742,7 +755,10 @@ document.addEventListener('click', async (ev) => {
       case 'load-demo': { const p = await loadDemo(); toast('Ejemplo «Entre Hilos» cargado. Está marcado como EJEMPLO.'); go(`#/proyecto/${p.id}`); break; }
       case 'remove-demo': if (await confirmAction('¿Quitar el ejemplo?', '<p>Se borran solo los clientes, proyectos y fichas marcados como ejemplo. Tus trabajos no se tocan.</p>', 'Quitar ejemplo', true)) { await store.removeDemo(); toast('Ejemplo quitado. Tus trabajos siguen igual.'); render(); } break;
       case 'save-backup': await doSaveBackup(); break;
-      case 'undo-restore': if (await confirmAction('¿Deshacer la recuperación?', '<p>Los datos volverán a como estaban justo antes de reemplazarlos.</p>', 'Deshacer')) { await backup.undoReplace(); photoUrls.clear(); toast('Se volvió al estado anterior.'); render(); } break;
+      case 'undo-restore': if (await confirmAction('¿Deshacer la recuperación?', '<p>Los datos volverán a como estaban justo antes de reemplazarlos.</p>', 'Deshacer')) {
+        try { await backup.undoReplace(); } catch (e) { toast(`No se pudo deshacer. No se cambió nada y el estado guardado se conserva. ${e.message}`, 'error'); break; }
+        photoUrls.clear(); toast('Se volvió al estado anterior.'); render();
+      } break;
       case 'print': printPage(b.dataset.title); break;
       case 'zoom-photo': zoomPhoto(id); break;
       case 'fields-mode': ed.fieldsMode = b.checked; await rerenderEditor(); break;

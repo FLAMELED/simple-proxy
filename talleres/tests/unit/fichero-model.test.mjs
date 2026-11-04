@@ -81,8 +81,9 @@ test('copias: valida formato y versión', () => {
 });
 
 test('copias: combinar nunca sobrescribe lo existente', () => {
-  const local = { clients: [{ id: 'a' }], projects: [], sheets: [{ id: 's1' }], photos: [], templates: [] };
-  const inc = { clients: [{ id: 'a' }, { id: 'b' }], projects: [{ id: 'p' }], sheets: [{ id: 's1' }, { id: 's2' }], photos: [{ id: 'f' }], templates: [] };
+  const v = (photos = []) => [{ n: 1, data: { measures: [], specs: [], notes: '', photos } }];
+  const local = { clients: [{ id: 'a' }], projects: [{ id: 'p0', clientId: 'a' }], sheets: [{ id: 's1', projectId: 'p0', versions: v() }], photos: [], templates: [] };
+  const inc = { clients: [{ id: 'a' }, { id: 'b' }], projects: [{ id: 'p', clientId: 'b' }], sheets: [{ id: 's1', projectId: 'p0', versions: v() }, { id: 's2', projectId: 'p', versions: v([{ id: 'f' }]) }], photos: [{ id: 'f', sheetId: 's2' }], templates: [] };
   const plan = planMerge(local, inc);
   assert.deepEqual(plan.clients.add.map((x) => x.id), ['b']);
   assert.equal(plan.clients.kept, 1);

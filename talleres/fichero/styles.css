@@ -158,3 +158,9 @@ body[data-route="hoja"] .tabs { display: none; }
   .tabs, .savebar { display: none !important; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* Vista previa de «Recuperar una copia» */
+.merge-table { width: 100%; border-collapse: collapse; margin: 8px 0 10px; font-size: 15px; }
+.merge-table th, .merge-table td { border-bottom: 1px solid var(--rule); padding: 6px 4px; text-align: right; }
+.merge-table th[scope="row"], .merge-table thead th:first-child { text-align: left; }
+.merge-table thead th { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); vertical-align: bottom; }

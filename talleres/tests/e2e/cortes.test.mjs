@@ -115,14 +115,14 @@ test('ejemplo «Papel y Forma»: 23 piezas en 2 planchas; con 1 plancha marca la
   const dir2 = profile();
   ({ ctx, page, errors } = await openApp(dir2, `${URL_APP}#/copias`));
   await page.locator('[data-restore-input]').setInputFiles(backupPath);
-  await page.click('dialog button:has-text("Recuperar")');
+  await page.click('dialog button:has-text("Agregar lo nuevo")');
   await page.waitForSelector('.toast:has-text("se agregaron 1 proyecto")');
   await page.goto(`${URL_APP}#/plano/${id}`);
   await page.waitForSelector('.alert:has-text("No alcanzó el material")');
   // Combinar otra vez no duplica ni sobrescribe
   await page.goto(`${URL_APP}#/copias`);
   await page.locator('[data-restore-input]').setInputFiles(backupPath);
-  await page.waitForSelector('dialog:has-text("ya existe aquí")');
+  await page.waitForSelector('dialog:has-text("No actualiza los que ya existen")');
   await page.click('dialog button:has-text("Agregar lo nuevo")');
   await page.waitForSelector('.toast:has-text("se agregaron 0 proyectos")');
   await page.goto(URL_APP);

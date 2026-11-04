@@ -302,7 +302,7 @@ export default {
           '4. «Agregar lo nuevo»: vuelve la ficha; lo demás no se toca.' ] },
       ],
       notes: {
-        say: 'Hacemos la prueba que casi nadie hace: comprobar que la copia sirve. Como nuestro proyecto es de práctica, hay que marcar «Incluir también los datos de ejemplo»; si no, la copia sale sin él. Guardamos, borramos a propósito la ficha del comedor y recuperamos. La app primero muestra qué contiene la copia. «Agregar lo nuevo» suma solo lo que falta y no modifica nada de lo que ya está. «Reemplazar todo» deja el teléfono igual que la copia, pide confirmación y se puede deshacer.',
+        say: 'Hacemos la prueba que casi nadie hace: comprobar que la copia sirve. Como nuestro proyecto es de práctica, hay que marcar «Incluir también los datos de ejemplo»; si no, la copia sale sin él. Guardamos, borramos a propósito la ficha del comedor y recuperamos. La app primero muestra qué contiene la copia. «Agregar lo nuevo» agrega registros que no existen en este teléfono y no actualiza los que ya existen, aunque la copia tenga cambios más recientes; la vista previa dice cuántos se agregan y cuántos se omiten. «Reemplazar todo» deja el teléfono igual que la copia, pide confirmación y se puede deshacer.',
         answer: 'Aviso esperado: «Copia recuperada: se agregaron 1 ficha y 0 fotos». La ficha del comedor vuelve con su versión 1.',
         check: 'El selector de Android al guardar (Descargas o Drive) y al recuperar; recuperar la copia en un segundo teléfono. En Chromium se comprobó guardar, borrar y recuperar con fichas, fotos e historial.',
         next: 'Ahora te toca a ti, con otros datos.',

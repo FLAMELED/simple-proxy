@@ -129,17 +129,71 @@ export function validateManifest(m) {
   return m;
 }
 
+const KINDS = ['clients', 'projects', 'sheets', 'photos', 'templates'];
+
 /**
- * Qué pasaría al recuperar una copia en modo «combinar».
- * Nunca se sobrescribe algo que ya existe en el teléfono.
+ * Revisa que una copia sea coherente antes de escribir nada:
+ * identificadores presentes y únicos, y cada proyecto, ficha y foto con su registro padre.
+ * Devuelve { errors, warnings }. Con errores, la copia no se recupera.
+ */
+export function checkRelations(data) {
+  const errors = []; const warnings = [];
+  const ids = {};
+  for (const k of KINDS) {
+    ids[k] = new Set();
+    for (const r of data[k] || []) {
+      if (!r || typeof r.id !== 'string' || !r.id) { errors.push(`Hay un registro sin identificador (${k}).`); continue; }
+      if (ids[k].has(r.id)) errors.push(`El identificador ${r.id} está repetido (${k}).`);
+      ids[k].add(r.id);
+    }
+  }
+  for (const p of data.projects || []) if (!ids.clients.has(p.clientId)) errors.push(`El proyecto «${p.name}» no tiene su cliente en la copia.`);
+  for (const s of data.sheets || []) {
+    if (!ids.projects.has(s.projectId)) errors.push(`La ficha «${s.title}» no tiene su proyecto en la copia.`);
+    if (!Array.isArray(s.versions)) errors.push(`La ficha «${s.title}» no tiene historial.`);
+  }
+  for (const ph of data.photos || []) if (!ids.sheets.has(ph.sheetId)) errors.push(`Una foto (${ph.id}) no tiene su ficha en la copia.`);
+  let missing = 0;
+  for (const s of data.sheets || []) if (Array.isArray(s.versions)) for (const id of photoIdsOf(s)) if (!ids.photos.has(id)) missing++;
+  if (missing) warnings.push(missing === 1 ? '1 foto citada en las fichas no viene en la copia.' : `${missing} fotos citadas en las fichas no vienen en la copia.`);
+  return { errors, warnings };
+}
+
+/**
+ * Qué pasaría al recuperar una copia con «Agregar lo nuevo».
+ * Agrega solo registros que no existen en este teléfono. No actualiza los que ya existen,
+ * aunque la copia tenga cambios más recientes. Nunca deja un registro sin su relación:
+ * - un proyecto se agrega solo si su cliente existe o también se agrega;
+ * - una ficha, solo si su proyecto existe o también se agrega;
+ * - una foto, solo si su ficha existe al final y alguna versión o borrador de esa ficha la usa.
+ * Para cada tipo: { add, existing, orphan } (registros), y totales.
  */
 export function planMerge(local, incoming) {
   const res = {};
-  for (const k of ['clients', 'projects', 'sheets', 'photos', 'templates']) {
-    const have = new Set(local[k].map((x) => x.id));
-    const add = incoming[k].filter((x) => !have.has(x.id));
-    res[k] = { add, kept: incoming[k].length - add.length };
-  }
+  const have = Object.fromEntries(KINDS.map((k) => [k, new Set((local[k] || []).map((x) => x.id))]));
+  const split = (k, related) => {
+    const add = []; const existing = []; const orphan = [];
+    for (const r of incoming[k] || []) {
+      if (have[k].has(r.id)) existing.push(r);
+      else if (related && !related(r)) orphan.push(r);
+      else add.push(r);
+    }
+    return { add, existing, orphan };
+  };
+  res.clients = split('clients');
+  const clientIds = new Set([...have.clients, ...res.clients.add.map((x) => x.id)]);
+  res.projects = split('projects', (p) => clientIds.has(p.clientId));
+  const projectIds = new Set([...have.projects, ...res.projects.add.map((x) => x.id)]);
+  res.sheets = split('sheets', (s) => projectIds.has(s.projectId));
+  const finalSheets = new Map([...(local.sheets || []), ...res.sheets.add].map((s) => [s.id, s]));
+  res.photos = split('photos', (ph) => { const s = finalSheets.get(ph.sheetId); return !!s && photoIdsOf(s).has(ph.id); });
+  res.templates = split('templates');
+  for (const k of KINDS) res[k].kept = res[k].existing.length; // compatibilidad con la vista anterior
+  res.totals = {
+    add: KINDS.reduce((n, k) => n + res[k].add.length, 0),
+    existing: KINDS.reduce((n, k) => n + res[k].existing.length, 0),
+    orphan: KINDS.reduce((n, k) => n + res[k].orphan.length, 0),
+  };
   return res;
 }
 

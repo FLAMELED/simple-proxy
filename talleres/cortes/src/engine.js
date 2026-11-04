@@ -13,10 +13,11 @@
 //     acomoda más piezas con menos planchas. No se garantiza que sea el mejor
 //     resultado posible.
 
-export const ALGO_VERSION = 'guillotina-1';
-const SCALE = 1000; // se calcula en milésimas de la unidad para evitar errores de redondeo
-const toI = (v) => Math.round(Number(v) * SCALE);
-const toU = (i) => Math.round(i) / SCALE;
+import { toGrid, gridPerUnit } from './units.js';
+
+// guillotina-2: mismas reglas que guillotina-1, calculadas en una rejilla entera de 0,1 µm
+// (ver units.js) y con una huella de entrada que incluye todos los parámetros.
+export const ALGO_VERSION = 'guillotina-2';
 
 export const UNIT_LABEL = { mm: 'mm', cm: 'cm', in: 'pulg' };
 
@@ -53,10 +54,17 @@ export function validate(p) {
   return e;
 }
 
-/** Huella de las entradas: sirve para saber si el plano guardado sigue vigente. */
+/**
+ * Huella de todo lo que cambia el resultado de pack(): método, unidad, material,
+ * cantidad, separación, margen, sobrante mínimo y cada pieza (nombre, medidas,
+ * cantidad y giro). Si cambia, el plano guardado ya no está vigente.
+ * Las longitudes entran como enteros de la rejilla exacta.
+ */
 export function inputKey(p) {
-  return JSON.stringify([ALGO_VERSION, p.unit, p.material.width, p.material.height, p.material.quantity, p.kerf, p.margin,
-    p.pieces.map((x) => [x.id, x.label, x.width, x.height, x.qty, !!x.rotate])]);
+  const g = (path) => toGrid(p, path);
+  return JSON.stringify([ALGO_VERSION, p.unit, p.material.quantity,
+    g('material.width'), g('material.height'), g('kerf'), g('margin'), g('minLeftover'),
+    p.pieces.map((x) => [x.id, (x.label || '').trim(), g(`pieces.${x.id}.width`), g(`pieces.${x.id}.height`), x.qty, !!x.rotate])]);
 }
 
 const SORTS = {
@@ -95,7 +103,7 @@ function packOnce(items, ctx, sortName, rule) {
     const consider = (si, ri, r) => {
       for (const [w, h, rot] of orients) {
         if (!fitsIn(r, w, h)) continue;
-        const area = r.w * r.h - w * h;
+        const area = BigInt(r.w) * BigInt(r.h) - BigInt(w) * BigInt(h);
         const side = Math.min(r.w - w, r.h - h);
         if (!best || area < best.area || (area === best.area && side < best.side)) best = { si, ri, w, h, rot, area, side };
       }
@@ -112,8 +120,10 @@ function packOnce(items, ctx, sortName, rule) {
     s.placed.push({ it, x: r.x, y: r.y, w: best.w - k, h: best.h - k, rotated: best.rot });
   }
   const placedCount = sheets.reduce((n, s) => n + s.placed.length, 0);
-  const placedArea = sheets.reduce((n, s) => n + s.placed.reduce((a, p) => a + p.w * p.h, 0), 0);
-  const biggestFree = Math.max(0, ...sheets.flatMap((s) => s.free.map((f) => (f.w - k) * (f.h - k))));
+  // Áreas exactas con BigInt: la suma de productos de enteros grandes pasaría del rango
+  // exacto de Number, y dos estrategias con las mismas piezas deben dar exactamente el mismo total.
+  const placedArea = sheets.reduce((n, s) => n + s.placed.reduce((a, p) => a + BigInt(p.w) * BigInt(p.h), 0n), 0n);
+  const biggestFree = sheets.flatMap((s) => s.free.map((f) => BigInt(Math.max(0, f.w - k)) * BigInt(Math.max(0, f.h - k)))).reduce((a, b) => (b > a ? b : a), 0n);
   return { sheets, pending, placedCount, placedArea, biggestFree, sortName, rule };
 }
 
@@ -131,14 +141,17 @@ function better(a, b) {
 export function pack(p) {
   const errors = validate(p);
   if (errors.length) return { ok: false, errors };
-  const k = toI(p.kerf); const m = toI(p.margin);
-  const W = toI(p.material.width); const H = toI(p.material.height);
-  const minUseful = toI(p.minLeftover || 0);
+  const G = gridPerUnit(p.unit);
+  const toU = (i) => i / G;
+  const k = toGrid(p, 'kerf'); const m = toGrid(p, 'margin');
+  const W = toGrid(p, 'material.width'); const H = toGrid(p, 'material.height');
+  const minUseful = toGrid(p, 'minLeftover') || 0;
   const ctx = { binW: W - 2 * m + k, binH: H - 2 * m + k, k, maxSheets: p.material.quantity };
   const items = [];
   p.pieces.forEach((pc, idx) => {
     const code = pieceCode(idx);
-    for (let n = 1; n <= pc.qty; n++) items.push({ code: `${code}${n}`, type: code, pieceId: pc.id, label: pc.label?.trim() || `Pieza ${code}`, w: toI(pc.width), h: toI(pc.height), rotate: !!pc.rotate });
+    const w = toGrid(p, `pieces.${pc.id}.width`); const h = toGrid(p, `pieces.${pc.id}.height`);
+    for (let n = 1; n <= pc.qty; n++) items.push({ code: `${code}${n}`, type: code, pieceId: pc.id, label: pc.label?.trim() || `Pieza ${code}`, w, h, rotate: !!pc.rotate });
   });
   let best = null; let attempts = 0;
   for (const s of Object.keys(SORTS)) for (const r of SPLITS) {
@@ -150,7 +163,7 @@ export function pack(p) {
     'size-norotate': 'No cabe en esa orientación y está marcada «no girar».',
     material: 'No alcanzó el material: faltan planchas.',
   };
-  const sheetArea = (W - 2 * m) * (H - 2 * m);
+  const sheetArea = ((W - 2 * m) / G) * ((H - 2 * m) / G);
   const sheets = best.sheets.map((s, i) => {
     const leftovers = s.free
       .map((f) => ({ x: f.x + m, y: f.y + m, w: f.w - k, h: f.h - k }))
@@ -163,24 +176,24 @@ export function pack(p) {
       placements: s.placed.slice().sort((a, b) => a.it.type.localeCompare(b.it.type) || Number(a.it.code.slice(a.it.type.length)) - Number(b.it.code.slice(b.it.type.length)))
         .map((pl) => ({ code: pl.it.code, type: pl.it.type, pieceId: pl.it.pieceId, label: pl.it.label, x: toU(pl.x + m), y: toU(pl.y + m), w: toU(pl.w), h: toU(pl.h), rotated: pl.rotated })),
       leftovers: useful.sort(order).map((f, j) => ({ code: `S${i + 1}.${j + 1}`, x: toU(f.x), y: toU(f.y), w: toU(f.w), h: toU(f.h) })),
-      piecesArea: toU(toU(s.placed.reduce((a, pl) => a + pl.w * pl.h, 0))),
-      usefulLeftoverArea: toU(toU(useful.reduce((a, f) => a + f.w * f.h, 0))),
+      piecesArea: s.placed.reduce((a, pl) => a + (pl.w / G) * (pl.h / G), 0),
+      usefulLeftoverArea: useful.reduce((a, f) => a + (f.w / G) * (f.h / G), 0),
     };
   });
   const pending = best.pending.map(({ it, reason }) => ({ code: it.code, type: it.type, pieceId: it.pieceId, label: it.label, w: toU(it.w), h: toU(it.h), reason, reasonText: REASON[reason] }))
     .sort((a, b) => a.code.localeCompare(b.code, 'es', { numeric: true }));
   const piecesArea = sheets.reduce((a, s) => a + s.piecesArea, 0);
-  const usedMaterial = toU(toU(W * H)) * sheets.length;
+  const usedMaterial = (W / G) * (H / G) * sheets.length;
   return {
     ok: true, algo: ALGO_VERSION, attempts, chosen: { order: best.sortName, split: best.rule },
-    unit: p.unit, material: { ...p.material }, kerf: p.kerf, margin: p.margin, minLeftover: p.minLeftover || 0,
+    unit: p.unit, material: { ...p.material }, kerf: p.kerf, margin: p.margin, minLeftover: p.minLeftover || 0, key: inputKey(p),
     sheets, pending,
     stats: {
       total: items.length, placed: best.placedCount, pending: pending.length,
       sheetsUsed: sheets.length, sheetsAvailable: p.material.quantity,
       piecesArea: round2(piecesArea), usedMaterialArea: round2(usedMaterial),
       usePct: usedMaterial ? Math.round((piecesArea / usedMaterial) * 1000) / 10 : 0,
-      usableAreaPerSheet: round2(toU(toU(sheetArea))),
+      usableAreaPerSheet: round2(sheetArea),
     },
   };
 }

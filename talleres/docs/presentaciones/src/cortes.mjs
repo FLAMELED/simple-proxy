@@ -108,7 +108,7 @@ export default {
         { t: 'box', x: 5.4, y: 4.6, w: 7.3, h: 1.9, tone: 'accent', label: 'Piezas que dependen del grosor', head: 'Lateral corto = 20 − 2 × 0,2 = 19,6 cm', text: 'Va entre los dos laterales largos, y el cartón mide 2 mm.', size: 16, headSize: 22 },
       ],
       notes: {
-        say: 'La app dibuja el material con el ancho hacia la derecha y el largo hacia abajo, y así hay que escribir las piezas. Todo el proyecto usa una sola unidad; si la cambias, la app no convierte los números: hay que revisarlos. Algunas medidas salen de una cuenta: el lateral corto de la caja va entre los dos largos, así que mide 20 menos dos grosores de 0,2 cm: 19,6 cm.',
+        say: 'La app dibuja el material con el ancho hacia la derecha y el largo hacia abajo, y así hay que escribir las piezas. Todo el proyecto usa una sola unidad. Si la cambias, la app pide confirmación y convierte todas las medidas (1 pulgada = 25,4 mm); las cantidades no cambian y el plano guardado queda desactualizado. Algunas medidas salen de una cuenta: el lateral corto de la caja va entre los dos largos, así que mide 20 menos dos grosores de 0,2 cm: 19,6 cm.',
         ask: 'Si tu cartón mide 3 mm, ¿cuánto mide el lateral corto de una caja de 20 cm? ',
         answer: '20 − 2 × 0,3 = 19,4 cm.',
         next: 'Cortar también se come material.',
@@ -296,7 +296,7 @@ export default {
         { t: 'box', x: 9.45, y: 1.95, w: 3.25, h: 4.55, tone: 'dark', label: 'Guardado ≠ copia', text: ['La app guarda en el teléfono. Si lo pierdes o la desinstalas, se pierde.', 'La copia es un .zip que tú guardas en Drive o en el correo.', 'Marca «Incluir también el ejemplo» para respaldar la práctica.'], list: true, size: 14 },
       ],
       notes: {
-        say: 'La app guarda los proyectos en el teléfono, sin internet. Eso no es una copia de seguridad: si desinstalas la app, borras sus datos o pierdes el teléfono, se va todo, y la app no usa el respaldo automático de Google. Hagamos la prueba completa: Copias, marca «Incluir también el ejemplo», «Guardar una copia». Luego eliminamos un proyecto a propósito y lo recuperamos: la app muestra qué contiene la copia; «Agregar lo nuevo» suma lo que falta y no toca lo demás. «Reemplazar todo» pide confirmación y se puede deshacer.',
+        say: 'La app guarda los proyectos en el teléfono, sin internet. Eso no es una copia de seguridad: si desinstalas la app, borras sus datos o pierdes el teléfono, se va todo, y la app no usa el respaldo automático de Google. Hagamos la prueba completa: Copias, marca «Incluir también el ejemplo», «Guardar una copia». Luego eliminamos un proyecto a propósito y lo recuperamos: la app muestra qué contiene la copia; «Agregar lo nuevo» agrega lo que no existe en el teléfono y no actualiza lo que ya existe, aunque la copia tenga cambios más recientes; la vista previa dice cuántos se agregan y cuántos se omiten. «Reemplazar todo» pide confirmación y se puede deshacer.',
         do: 'En la demostración puedes eliminar el ejemplo y recuperarlo. En el ejercicio, cada participante lo hace con su propio proyecto de práctica.',
         answer: 'Aviso: «Copia recuperada: se agregaron 1 proyecto». El plano vuelve con él.',
         check: 'Selector de Android al guardar (Descargas o Drive) y al recuperar; recuperar en un segundo teléfono; conservar los datos al instalar una versión nueva encima. En Chromium se comprobó guardar, eliminar y recuperar.',

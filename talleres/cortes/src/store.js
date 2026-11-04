@@ -27,6 +27,18 @@ export function blankProject(over = {}) {
 }
 export const newPiece = () => ({ id: uid('pz-'), label: '', width: null, height: null, qty: 1, rotate: true });
 export async function save(p) { p.updatedAt = nowIso(); await db.put('projects', p); return p; }
-export async function wipe() { await db.tx(['projects'], (s) => s.projects.clear()); }
+/** Agrega proyectos en una sola transacción. */
 export async function insert(list) { await db.tx(['projects'], (s) => { for (const p of list) s.projects.put(p); }); }
+/**
+ * Reemplaza todos los proyectos en UNA transacción, junto con las entradas de `meta`
+ * indicadas. Si algo falla, no cambia nada.
+ */
+export async function replaceAll(list, { metaPut = [], metaDelete = [] } = {}) {
+  await db.tx(['projects', 'meta'], (s) => {
+    s.projects.clear();
+    for (const p of list) s.projects.put(p);
+    for (const m of metaPut) s.meta.put(m);
+    for (const key of metaDelete) s.meta.delete(key);
+  });
+}
 export const uidPiece = () => uid('pz-');

@@ -119,7 +119,7 @@ textarea.input { min-height: 96px; resize: vertical; }
 .toast.is-on { transform: none; opacity: 1; pointer-events: auto; }
 
 /* ——— Diálogo ——— */
-.dlg { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); padding: 20px; width: min(92vw, 520px); box-shadow: 8px 8px 0 var(--ink); }
+.dlg { max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); padding: 20px; width: min(92vw, 520px); box-shadow: 8px 8px 0 var(--ink); }
 .dlg::backdrop { background: rgba(20, 20, 20, .55); }
 .dlg-title { font-family: var(--display); font-weight: 900; font-size: 26px; line-height: 1.05; margin-bottom: 10px; }
 .dlg-body { font-size: 16px; }
